@@ -5688,6 +5688,43 @@
           checkoutShare: point.proportion,
           exitShare: item.lossBucketSeries[index]?.proportion ?? 0
         }));
+        const checkoutMarkLines = [];
+        if (item.t1Sec != null) {
+          checkoutMarkLines.push({
+            xAxis: bucketCenterSec(item.t1Sec),
+            label: {
+              show: true,
+              formatter: `T1 ${item.t1Sec}s`,
+              color: '#ef4444',
+              fontWeight: 700,
+              position: 'insideEndTop'
+            },
+            lineStyle: {
+              color: '#ef4444',
+              width: 1.5,
+              type: 'dashed',
+              opacity: 0.9
+            }
+          });
+        }
+        if (item.historyCheckoutPeakSec != null) {
+          checkoutMarkLines.push({
+            xAxis: bucketCenterSec(item.historyCheckoutPeakSec),
+            label: {
+              show: true,
+              formatter: `去结算峰值 ${item.historyCheckoutPeakSec}s`,
+              color: '#b91c1c',
+              fontWeight: 700,
+              position: item.t1Sec != null ? 'insideStartTop' : 'insideEndTop'
+            },
+            lineStyle: {
+              color: '#b91c1c',
+              width: 1.5,
+              type: 'dashed',
+              opacity: 0.9
+            }
+          });
+        }
         return {
         backgroundColor: 'transparent',
         color: [palette[item.key], '#f43f5e'],
@@ -5774,22 +5811,9 @@
           itemStyle: { color: '#ef4444' },
           lineStyle: { width: 3, color: '#ef4444', opacity: 0.96 },
           emphasis: { disabled: true },
-          markLine: item.t1Sec != null ? {
+          markLine: checkoutMarkLines.length ? {
             symbol: 'none',
-            label: {
-              show: true,
-              formatter: `T1 ${item.t1Sec}s`,
-              color: '#ef4444',
-              fontWeight: 700,
-              position: 'insideEndTop'
-            },
-            lineStyle: {
-              color: '#ef4444',
-              width: 1.5,
-              type: 'dashed',
-              opacity: 0.9
-            },
-            data: [{ xAxis: bucketCenterSec(item.t1Sec) }]
+            data: checkoutMarkLines
           } : undefined,
           z: 2,
           data: historyBucketSeries.map(point => ({ value: [point.sec, point.checkoutShare] }))
