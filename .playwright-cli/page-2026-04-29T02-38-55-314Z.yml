@@ -1,0 +1,53 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - heading "优鲜购物流程Markov chain分析V1.0" [level=1] [ref=e6]
+        - paragraph [ref=e7]:
+          - text: 数据源：
+          - code [ref=e8]: 关键场景转移矩阵_*.xlsx
+          - text: +
+          - code [ref=e9]: 关键场景吸收概率_*.xlsx
+          - text: +
+          - code [ref=e10]: 关键场景移除效应_*.xlsx
+          - text: （APP / 微信小程序 / 支付宝小程序，共9份原始表）
+      - generic [ref=e11]:
+        - generic [ref=e12]: 当前模块：全局markov
+        - generic [ref=e13]: 当前端：APP
+        - generic [ref=e14]: "* 全局markov统一展示为小数点后两位"
+    - generic [ref=e15]:
+      - button "全局markov" [ref=e16] [cursor=pointer]
+      - button "购物车markov" [ref=e17] [cursor=pointer]
+      - button "结算页markov" [ref=e18] [cursor=pointer]
+      - button "MUBBK一期落地方案" [ref=e19] [cursor=pointer]
+      - button "阈值分析&干预UX草案" [ref=e20] [cursor=pointer]
+    - generic [ref=e22]:
+      - button "APP" [ref=e23] [cursor=pointer]
+      - button "微信小程序" [ref=e24] [cursor=pointer]
+      - button "支付宝小程序" [ref=e25] [cursor=pointer]
+  - generic [ref=e26]:
+    - generic [ref=e27]:
+      - heading "一、过程诊断：流量是如何流转的？" [level=2] [ref=e29]
+      - generic [ref=e30]:
+        - generic [ref=e31]: 状态流转说明
+        - generic [ref=e32]: 状态流转的含义是：用户只要站在当前页面，下一步会去哪里的概率； 衡量的是相邻节点之间的直接导流概率。 例如，首页到搜索页的状态转移概率是 25.02%， 代表只要此刻在首页的用户，下一步去搜索页的概率是 25.02%。
+      - generic [ref=e33]:
+        - generic [ref=e34]:
+          - generic [ref=e35]: 全链路流转拓扑图（Network Graph）
+          - generic [ref=e36]: 过滤低频干扰杂线，直击主干道与异常回流。
+        - generic [ref=e40]:
+          - generic [ref=e41]: 完整状态转移热力矩阵（12x12 Heatmap）
+          - generic [ref=e42]: 横轴到达，纵轴起点。严格映射原表数值。
+    - generic [ref=e46]:
+      - heading "二、效能评估：业务价值与干预" [level=2] [ref=e47]
+      - generic [ref=e48]: "* 模型基准点：以【首页】为初始节点进行计算，已剔除首页自身的移除效应"
+      - generic [ref=e49]: 备注：吸收概率与移除效应工作表仅提供10个非吸收状态（首页~结算页），本屏按原表原样展示。
+      - generic [ref=e50]:
+        - generic [ref=e51]:
+          - generic [ref=e52]: 完整场景吸收概率（Absorption Probability）
+          - generic [ref=e53]: 进入节点后最终支付成功的数学期望。
+          - generic [ref=e54]: 吸收概率代表只要用户进入过这个页面，无论他之后在 App 里绕多少弯路，最终能成功下单的概率。它剥离了用户中间反复横跳的过程，直接评估各个状态的“终极变现期望值”。 举例，搜索页的吸收概率是 14.91%，代表用户只要进入过搜索页，他最终下单的概率是 14.91%； 只要进入过购物车，下单概率就是 19.35%。我们据此可以定义出犹豫区间（比如黄色的搜索、商详、购物车），重点进行精准干预。
+        - generic [ref=e58]:
+          - generic [ref=e59]: 完整场景移除效应（Removal Effect）
+          - generic [ref=e60]: 按降幅从大到小排序，剔除“首页”节点。
+          - generic [ref=e61]: 移除效应的意义是比较各个节点的价值以决定资源分配，即对首页到支付成功的吸收概率（视为大盘吸收概率）的影响； 在 Markov 算法中模拟移除某个节点后，大盘吸收概率的下降值就是该节点的移除效应。 比如会员中心的移除效应显示下降 0.90%，代表它是价值较低的场景； 而除了不可移除的购物车、结算和提交订单，搜索场景的移除效应为 8.04%，当前端最高可移除价值节点为 搜索页。

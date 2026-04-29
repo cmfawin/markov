@@ -1,0 +1,337 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - heading "优鲜购物流程Markov chain分析V1.0" [level=1] [ref=e6]
+    - generic [ref=e15]:
+      - button "全局markov" [ref=e16] [cursor=pointer]
+      - button "购物车markov" [ref=e17] [cursor=pointer]
+      - button "结算页markov" [ref=e18] [cursor=pointer]
+      - button "MUBBK一期落地方案" [ref=e19] [cursor=pointer]
+      - button "阈值分析&干预UX草案" [active] [ref=e20] [cursor=pointer]
+  - generic [ref=e65]:
+    - generic [ref=e66]:
+      - generic [ref=e67]:
+        - img [ref=e69]
+        - heading "购物车提醒阈值概率分析" [level=2] [ref=e74]
+      - paragraph [ref=e75]: 这部分直接看用户停留到某一秒后，下一步更可能去结算，还是更可能离开。提醒阈值就放在这样一个时点：去结算概率已经进入相对稳定区间，而仍留在购物车里的可干预人群还足够大。
+    - generic [ref=e76]:
+      - generic [ref=e77]:
+        - generic [ref=e78]:
+          - img [ref=e80]
+          - heading "方法速读：我们怎么用当秒概率找购物车提醒阈值" [level=3] [ref=e84]
+        - paragraph [ref=e85]: 核心思路很直接：每到一秒，先看还有多少人仍留在购物车，再看这批人里有多少人在这一秒去结算、多少人在这一秒离开。这样就能直接判断这一刻更像是自然成交窗口，还是更像是流失窗口。
+      - generic [ref=e86]:
+        - generic [ref=e87]:
+          - generic [ref=e88]: 01 看还在场的人
+          - generic [ref=e89]: 只看发生过购物车编辑行为的样本
+          - generic [ref=e90]: 每到一秒，先统计还有多少人仍留在购物车。只有这批仍在场的人，才是真正还来得及被提醒的人。
+        - generic [ref=e91]:
+          - generic [ref=e92]: 02 算当秒概率
+          - generic [ref=e93]: 分母是这一秒开始时仍在购物车的人
+          - generic [ref=e94]: 用“这一秒去结算人数 ÷ 这一秒开始时仍在购物车人数”，得到当秒去结算概率；流失同理。
+        - generic [ref=e95]:
+          - generic [ref=e96]: 03 看下一步更可能去哪
+          - generic [ref=e97]: 关键不是历史动作落在哪，而是这一刻更可能发生什么
+          - generic [ref=e98]: 如果用户已经停留到第 T 秒，我们更关心的是：他下一步更可能去结算，还是更可能离开。
+        - generic [ref=e99]:
+          - generic [ref=e100]: 04 用它来定提醒时点
+          - generic [ref=e101]: 提醒既不能太早，也不能太晚
+          - generic [ref=e102]: 阈值要落在一个兼顾两点的时段：此时去结算概率已经不低，而仍留在购物车的人还没有明显缩小。
+    - generic [ref=e103]:
+      - generic [ref=e104]:
+        - article [ref=e105]:
+          - generic [ref=e106]:
+            - generic [ref=e107]:
+              - img [ref=e109]
+              - generic [ref=e112]: APP 购物车提醒阈值
+            - generic [ref=e113]: 默认展示当秒概率，补充视角保留历史分布
+          - generic [ref=e114]:
+            - generic [ref=e115]:
+              - generic [ref=e116]: 建议阈值
+              - generic [ref=e117]: 22s
+            - generic [ref=e118]:
+              - generic [ref=e119]: 去结算明显上升区间结束
+              - generic [ref=e120]: 21s
+            - generic [ref=e121]:
+              - generic [ref=e122]: 22s 仍可覆盖流失用户
+              - generic [ref=e123]: 46.7%
+            - generic [ref=e124]:
+              - generic [ref=e125]: 22s 仍在购物车样本
+              - generic [ref=e126]: 57.1%
+          - generic [ref=e127]:
+            - button "当秒概率" [ref=e128] [cursor=pointer]
+            - button "补充视角" [ref=e129] [cursor=pointer]
+          - generic [ref=e130]: 横轴为停留时间（秒）。实线分别表示当秒去结算概率和当秒流失概率；浅色线表示这一秒开始时仍留在购物车的人占比，竖线表示建议阈值 22s。
+        - article [ref=e134]:
+          - generic [ref=e135]:
+            - img [ref=e137]
+            - generic [ref=e140]: APP 阈值解读
+          - generic [ref=e142]:
+            - generic [ref=e143]:
+              - generic [ref=e144]:
+                - img [ref=e146]
+                - generic [ref=e149]: APP
+              - generic [ref=e150]: 建议阈值 = 22s
+            - generic [ref=e151]: 先看去结算概率，APP 这条线从 20 秒后开始持续抬升，随后进入相对平滑的高位区间，没有一个可以直接拿来定阈值的尖锐拐点，因此不能只靠这条线读出秒数。再看流失概率，10 秒出头就已迅速冲到高位；但如果仅按这个高点定阈值，提醒会落得过早，容易打断仍在正常浏览、改单和准备结算的用户。最后再把仍在购物车的样本规模叠加进来：阈值既要避开前段明显上升区间，又要尽量靠近后面的高位平台，同时不能拖到可触达人群明显缩小之后。按这三个条件一起看，22 秒是更合适的启动时点。
+            - generic [ref=e152]: 到 22s 这一刻，仍有 57.1% 的样本留在购物车。对流失侧来说，这一刻的流失概率虽然已经过了最早的高点，但 仍保留峰值的 87.3%；补充视角下，仍可覆盖约 46.7% 的流失样本，说明提醒放在这里并没有错过主要的流失窗口。
+            - generic [ref=e153]: 对去结算侧来说，22s 时，去结算概率已经接近后段的平稳高位，说明提醒放在这里，基本避开了前段还在明显上升的区间。此时启动提醒，更接近对一批规模仍然不小、且离开风险已经明显高于去结算的人群进行干预。
+      - generic [ref=e154]:
+        - article [ref=e155]:
+          - generic [ref=e156]:
+            - generic [ref=e157]:
+              - img [ref=e159]
+              - generic [ref=e162]: 微信小程序购物车提醒阈值
+            - generic [ref=e163]: 默认展示当秒概率，补充视角保留历史分布
+          - generic [ref=e164]:
+            - generic [ref=e165]:
+              - generic [ref=e166]: 建议阈值
+              - generic [ref=e167]: 30s
+            - generic [ref=e168]:
+              - generic [ref=e169]: 去结算明显上升区间结束
+              - generic [ref=e170]: 29s
+            - generic [ref=e171]:
+              - generic [ref=e172]: 30s 仍可覆盖流失用户
+              - generic [ref=e173]: 50.3%
+            - generic [ref=e174]:
+              - generic [ref=e175]: 30s 仍在购物车样本
+              - generic [ref=e176]: 61.7%
+          - generic [ref=e177]:
+            - button "当秒概率" [ref=e178] [cursor=pointer]
+            - button "补充视角" [ref=e179] [cursor=pointer]
+          - generic [ref=e180]: 横轴为停留时间（秒）。实线分别表示当秒去结算概率和当秒流失概率；浅色线表示这一秒开始时仍留在购物车的人占比，竖线表示建议阈值 30s。
+        - article [ref=e184]:
+          - generic [ref=e185]:
+            - img [ref=e187]
+            - generic [ref=e190]: 微信小程序阈值解读
+          - generic [ref=e192]:
+            - generic [ref=e193]:
+              - generic [ref=e194]:
+                - img [ref=e196]
+                - generic [ref=e199]: 微信小程序
+              - generic [ref=e200]: 建议阈值 = 30s
+            - generic [ref=e201]: 先看去结算概率，微信小程序同样没有一个可以直接读秒数的单一拐点，而是随停留时间逐步抬升并进入较平滑区间。再看流失概率，20 多秒开始已经进入高位；但如果只按流失高点来定，提醒会偏早，容易过多打断仍在正常决策中的用户。最后再叠加仍在购物车的样本规模：阈值既要尽量避开前段明显抬升区间，又要保留足够大的可触达人群。按这三个条件一起看，30 秒更适合作为启动时点。
+            - generic [ref=e202]: 到 30s 这一刻，仍有 61.7% 的样本留在购物车。对流失侧来说，这一刻的流失概率虽然已经过了最早的高点，但 仍保留峰值的 97.6%；补充视角下，仍可覆盖约 50.3% 的流失样本，说明提醒放在这里并没有错过主要的流失窗口。
+            - generic [ref=e203]: 对去结算侧来说，30s 时，去结算概率已经接近后段的平稳高位，说明提醒放在这里，基本避开了前段还在明显上升的区间。此时启动提醒，更接近对一批规模仍然不小、且离开风险已经明显高于去结算的人群进行干预。
+      - generic [ref=e204]:
+        - article [ref=e205]:
+          - generic [ref=e206]:
+            - generic [ref=e207]:
+              - img [ref=e209]
+              - generic [ref=e212]: 支付宝小程序购物车提醒阈值
+            - generic [ref=e213]: 默认展示当秒概率，补充视角保留历史分布
+          - generic [ref=e214]:
+            - generic [ref=e215]:
+              - generic [ref=e216]: 建议阈值
+              - generic [ref=e217]: 32s
+            - generic [ref=e218]:
+              - generic [ref=e219]: 去结算明显上升区间结束
+              - generic [ref=e220]: 31s
+            - generic [ref=e221]:
+              - generic [ref=e222]: 32s 仍可覆盖流失用户
+              - generic [ref=e223]: 47.8%
+            - generic [ref=e224]:
+              - generic [ref=e225]: 32s 仍在购物车样本
+              - generic [ref=e226]: 58.5%
+          - generic [ref=e227]:
+            - button "当秒概率" [ref=e228] [cursor=pointer]
+            - button "补充视角" [ref=e229] [cursor=pointer]
+          - generic [ref=e230]: 横轴为停留时间（秒）。实线分别表示当秒去结算概率和当秒流失概率；浅色线表示这一秒开始时仍留在购物车的人占比，竖线表示建议阈值 32s。
+        - article [ref=e234]:
+          - generic [ref=e235]:
+            - img [ref=e237]
+            - generic [ref=e240]: 支付宝小程序阈值解读
+          - generic [ref=e242]:
+            - generic [ref=e243]:
+              - generic [ref=e244]:
+                - img [ref=e246]
+                - generic [ref=e249]: 支付宝小程序
+              - generic [ref=e250]: 建议阈值 = 32s
+            - generic [ref=e251]: 支付宝小程序的去结算概率同样不是单点跳升，而是逐步进入较高区间；同时由于样本量更小，局部波动更明显，不适合追逐某个尖点。流失概率则在更早阶段就已经进入高位，因此只按流失高点定阈值同样会偏早。最后结合仍在购物车的样本规模来看，阈值既要靠近较高概率区间，又要避免拖到可触达人群明显缩小之后。按这三个条件一起看，32 秒更适合作为稳定门槛。
+            - generic [ref=e252]: 到 32s 这一刻，仍有 58.5% 的样本留在购物车。对流失侧来说，这一刻的流失概率虽然已经过了最早的高点，但 与高点基本持平；补充视角下，仍可覆盖约 47.8% 的流失样本，说明提醒放在这里并没有错过主要的流失窗口。
+            - generic [ref=e253]: 对去结算侧来说，32s 时，去结算概率已经接近后段的平稳高位，说明提醒放在这里，基本避开了前段还在明显上升的区间。此时启动提醒，更接近对一批规模仍然不小、且离开风险已经明显高于去结算的人群进行干预。
+    - generic [ref=e254]:
+      - generic [ref=e255]:
+        - generic [ref=e256]:
+          - img [ref=e258]
+          - heading "购物车毛利高中低档分析" [level=3] [ref=e262]
+        - paragraph [ref=e263]: 这块要回答的不是“哪一档毛利看起来最高”，而是“一期如果要把购物车毛利分成低、中、高三档，边界大致应该放在哪”。现在这份表更像冷启动参考：它用 3 组订单样本帮我们判断 P30 / P70 这两个分位点是否合理，进而决定固定 ¥2 应该避开哪些低毛利单。真正线上执行时，还是要回到触发当下的当前购物车毛利来判断。
+      - generic [ref=e264]:
+        - generic [ref=e265]:
+          - generic [ref=e266]:
+            - img [ref=e268]
+            - heading "方法速读：毛利阈值 g1 / g2 怎么算" [level=4] [ref=e270]
+          - paragraph [ref=e271]: 可以把这件事理解成一句话：先在历史订单里算出毛利分布的低位和高位金额，再把它们当成低毛利和高毛利的分界线，避免固定 ¥2 一上来就补到不该补的单上。
+        - generic [ref=e272]:
+          - generic [ref=e273]:
+            - generic [ref=e274]:
+              - img [ref=e276]
+              - generic [ref=e279]: 01 样本
+            - generic [ref=e280]: 先用 3 组订单样本看分布
+            - generic [ref=e281]: 当前表里给的是 3 组人群的毛利分位金额：过去30天有订单的全量人群、T1 人群、以及 T1 且访问购物车 session 当日有下单的人群。三组一起看，是为了判断哪组最贴近一期真实干预场景。
+          - generic [ref=e282]:
+            - generic [ref=e283]:
+              - img [ref=e285]
+              - generic [ref=e288]: 02 公式
+            - generic [ref=e289]: 先算每单毛利，再按从低到高排序
+            - generic [ref=e290]:
+              - text: 单个订单毛利 =
+              - generic [ref=e291]: 订单金额 - 商品成本 × 商品数量
+              - text: 。先过滤负毛利订单，再把剩下样本按毛利从低到高排好，才能去取分位点。
+          - generic [ref=e292]:
+            - generic [ref=e293]:
+              - img [ref=e295]
+              - generic [ref=e297]: 03 分档
+            - generic [ref=e298]: P30 和 P70 就是两条金额边界
+            - generic [ref=e299]: PRD 的定义很直接：P30 就是低毛利和中毛利的分界金额，P70 就是中毛利和高毛利的分界金额。算出这两个数之后，就能得到 g1 和 g2。
+          - generic [ref=e300]:
+            - generic [ref=e301]:
+              - img [ref=e303]
+              - generic [ref=e307]: 04 解图
+            - generic [ref=e308]: 图里的三根柱子，本质就是 P30 / P50 / P70 金额
+            - generic [ref=e309]:
+              - text: 这里的
+              - generic [ref=e310]: profit30 / profit50 / profit70
+              - text: ，按我们现在确认的口径，讲的就是毛利分布的 30 分位 / 50 分位 / 70 分位金额。所以重点不是“哪根柱子最高”，而是要选哪组样本来定 g1 / g2 更合理。
+      - article [ref=e311]:
+        - generic [ref=e312]:
+          - generic [ref=e313]:
+            - img [ref=e315]
+            - generic [ref=e319]: 三组样本的 P30 / P50 / P70 金额对比
+          - generic [ref=e320]: 3 个人群 × 3 个阈值
+        - generic [ref=e321]: "横轴为人群口径，柱子颜色分别代表 `P30`、`P50`、`P70` 的金额。页面展示单位统一为元，重点看哪组样本最适合拿来定义 g1 / g2。"
+      - article [ref=e325]:
+        - generic [ref=e326]:
+          - img [ref=e328]
+          - generic [ref=e331]: 毛利额分析
+        - generic [ref=e332]:
+          - generic [ref=e333]:
+            - generic [ref=e334]:
+              - img [ref=e336]
+              - generic [ref=e339]: 关键结论 1：如果一期要先选一组样本来定 g1 / g2，最该看的是 “T1 且访问购物车 session 当日有下单”
+            - generic [ref=e340]:
+              - generic [ref=e341]:
+                - generic [ref=e342]: 过去30天有订单的全量人群
+                - generic [ref=e343]:
+                  - generic [ref=e344]: P30 金额
+                  - generic [ref=e345]: ¥4.93
+                - generic [ref=e346]:
+                  - generic [ref=e347]: P70 金额
+                  - generic [ref=e348]: ¥17.44
+              - generic [ref=e349]:
+                - generic [ref=e350]: 犹豫人群（T1：有结算页回购物车）
+                - generic [ref=e351]:
+                  - generic [ref=e352]: P30 金额
+                  - generic [ref=e353]: ¥4.96
+                - generic [ref=e354]:
+                  - generic [ref=e355]: P70 金额
+                  - generic [ref=e356]: ¥17.15
+              - generic [ref=e357]:
+                - generic [ref=e358]: T1 且访问购物车 session 当日有下单
+                - generic [ref=e359]:
+                  - generic [ref=e360]: P30 金额
+                  - generic [ref=e361]: ¥3.47
+                - generic [ref=e362]:
+                  - generic [ref=e363]: P70 金额
+                  - generic [ref=e364]: ¥16.35
+            - generic [ref=e365]: 这 3 组里，T1 且访问购物车 session 当日有下单 最贴近一期真实干预链路，因为它同时满足“发生过犹豫”以及“最终完成下单”两个条件。用这组来定边界，比直接看全量订单或只看宽口径 T1 更贴场景，也更保守。
+          - generic [ref=e366]:
+            - generic [ref=e367]:
+              - img [ref=e369]
+              - generic [ref=e371]: 关键结论 2：按最贴近场景的样本，一期可以先取 G1=¥4、G2=¥16
+            - generic [ref=e372]:
+              - generic [ref=e373]:
+                - generic [ref=e374]: G1
+                - generic [ref=e375]: ¥4
+                - generic [ref=e376]: 低毛利 / 中毛利分界
+              - generic [ref=e377]:
+                - generic [ref=e378]: G2
+                - generic [ref=e379]: ¥16
+                - generic [ref=e380]: 中毛利 / 高毛利分界
+            - generic [ref=e381]:
+              - text: 按我们已经确认的口径，表里的
+              - generic [ref=e382]: profit30 / profit70
+              - text: 就是对应样本的 P30 / P70 金额。 因此对 T1 且访问购物车 session 当日有下单 这组来说， 原始分位金额大约是 ¥3.47 和 ¥16.35。 这里把它们简化成 ¥4 和 ¥16，是为了让业务执行、报表复盘和实验分层都更直接。其中 G1 向上取整到 ¥4，能更稳地把低毛利单挡在外侧；G2 取 ¥16，则是在贴近原始 ¥16.35 的同时保持口径简单。
+          - generic [ref=e383]:
+            - generic [ref=e384]:
+              - img [ref=e386]
+              - generic [ref=e387]: 关键结论 3：为什么不是直接看“哪组最高”，而是要看 P30 / P70 这两个边界
+            - generic [ref=e388]: 因为 P70 本来就比 P30 更高，所以“P70 金额更高”本身几乎是必然结果，单看这个并不能告诉我们边界该怎么定。 真正有用的信息是：低位边界落在什么地方可以把低毛利单拦住，高位边界落在什么地方可以把真正厚毛利的单识别出来。这才是 g1 / g2 的作用。
+          - generic [ref=e389]:
+            - generic [ref=e390]:
+              - img [ref=e392]
+              - generic [ref=e395]: 关键结论 4：线上真正执行时，仍然应该用当前购物车毛利去落档
+            - generic [ref=e396]:
+              - text: 这页算出来的是“边界金额应该大致放在哪”，真正上线时，还是要用触发当下的
+              - generic [ref=e397]: current_cart_gp
+              - text: 去判断当前 session 是低毛利、中毛利还是高毛利。 也就是说，这页给的是 g1 / g2 的参考边界，而不是替代线上实时毛利判断本身。
+      - generic [ref=e398]:
+        - generic [ref=e399]:
+          - generic [ref=e400]:
+            - img [ref=e402]
+            - heading "一期购物车干预UX" [level=3] [ref=e407]
+          - paragraph [ref=e408]: 基于一期干预 UX 规则，购物车干预分为运费、固定 2 元券、优惠券、商品优惠、时间片五种情况。免费提醒默认优先级为运费 > 优惠券 > 商品优惠 > 时间片；固定 2 元券作为付费实验模板单独承接。
+        - generic [ref=e409]:
+          - article [ref=e410]:
+            - generic [ref=e411]:
+              - generic [ref=e412]:
+                - generic [ref=e413]:
+                  - generic [ref=e414]: 免费情况 1
+                  - heading "运费提醒" [level=4] [ref=e415]
+                - generic [ref=e416]:
+                  - generic [ref=e417]: 触发机制：用户从结算页返回购物车前后，或在购物车长时间停留时，A1 前最后一次点击为配送费说明。
+                  - generic [ref=e418]: 判断范围：仅判断小时达、半日达；多包裹优先看未免邮包裹，都未免邮时用小时达。
+                  - generic [ref=e419]: 展示文案：未免邮时展示“再买 ¥XX 可减免配送费 ¥XX”，按钮为“去凑单”；已免邮时展示“已免配送费，尽快下单吧”，按钮为“去结算”。
+                  - generic [ref=e420]: 点击动作：“去凑单”拉起凑单助手浮层；“去结算”跳转结算页并关闭浮层。
+              - generic [ref=e421]:
+                - img "一期购物车干预UX - 运费提醒"
+          - article [ref=e422]:
+            - generic [ref=e423]:
+              - generic [ref=e424]:
+                - generic [ref=e425]:
+                  - generic [ref=e426]: 付费模板
+                  - heading "固定 2 元券" [level=4] [ref=e427]
+                - generic [ref=e428]:
+                  - generic [ref=e429]: 触发机制：作为 A2 付费实验臂使用，优惠券由 PD 指定，线上使用 2 元无门槛抵用券。
+                  - generic [ref=e430]: 发券规则：策略浮层出现时券需要发到账；若因限领、领完、不在有效期等原因无法发放，则回退按 A1 出，A1 也不满足时走 A0 静默。
+                  - generic [ref=e431]: 展示文案：倒计时展示“限时福利：X 分 X 秒后失效”，主文案为“送您一张 X 元无门槛优惠券”。
+                  - generic [ref=e432]: 点击动作：点击“去结算”跳转结算页并关闭浮层；倒计时结束后浮层自动关闭。
+              - generic [ref=e433]:
+                - img "一期购物车干预UX - 固定2元券"
+          - article [ref=e434]:
+            - generic [ref=e435]:
+              - generic [ref=e436]:
+                - generic [ref=e437]:
+                  - generic [ref=e438]: 免费情况 2
+                  - heading "优惠券提醒" [level=4] [ref=e439]
+                - generic [ref=e440]:
+                  - generic [ref=e441]: 触发机制：用户从结算页返回购物车前后，或在购物车长时间停留时，A1 前最后一次点击为结算页优惠券 / 抵用券 / 单品券栏位，或购物车优惠券入口。
+                  - generic [ref=e442]: 判断范围：仅判断小时达、半日达包裹；凭证可用券不参与判断。
+                  - generic [ref=e443]: 展示文案：若勾选商品已有自动抵扣券且已是最优，展示“已享优惠券最优抵扣 XX 元”；若有可领券，展示“XX 元优惠券可领”。
+                  - generic [ref=e444]: 点击动作：最优抵扣场景点击“去结算”；可领券场景点击“去领券”打开优惠券浮层。
+              - generic [ref=e445]:
+                - img "一期购物车干预UX - 优惠券提醒"
+          - article [ref=e446]:
+            - generic [ref=e447]:
+              - generic [ref=e448]:
+                - generic [ref=e449]:
+                  - generic [ref=e450]: 免费情况 3
+                  - heading "商品优惠提醒" [level=4] [ref=e451]
+                - generic [ref=e452]:
+                  - generic [ref=e453]: 触发机制：用户从结算页返回购物车前后，或在购物车长时间停留时，A1 前最后一次动作为查看商品、进入商详、加减商品、更换加工或款色码服务。
+                  - generic [ref=e454]: 判断范围：仅判断小时达、半日达包裹；购物车主商品、全场换购、常买、失效商品、推荐商品，以及券 / 凑单 / 换购浮层商品均可纳入触发范围。
+                  - generic [ref=e455]: 展示文案：勾选商品存在划线价商品或商品池营销活动时，展示“本单已享 XX 元商品优惠”。
+                  - generic [ref=e456]: 优惠金额：XX 取勾选商品划线价与售价之差总计，加营销活动优惠金额总计；为 0 则不满足此条件。
+              - generic [ref=e457]:
+                - img "一期购物车干预UX - 商品优惠提醒"
+          - article [ref=e458]:
+            - generic [ref=e459]:
+              - generic [ref=e460]:
+                - generic [ref=e461]:
+                  - generic [ref=e462]: 免费情况 4
+                  - heading "时间片提醒" [level=4] [ref=e463]
+                - generic [ref=e464]:
+                  - generic [ref=e465]: 触发机制：用户从结算页返回购物车前后，或在购物车长时间停留时，A1 前最后一次点击为结算页切换地址、结算页切换时间片，或购物车切换地址。
+                  - generic [ref=e466]: 判断范围：仅判断小时达、半日达包裹，其他包裹不参与。
+                  - generic [ref=e467]: 展示文案：购物车勾选商品存在未约满且可用的时间片时，展示“现在下单，最快 XX 配送”。
+                  - generic [ref=e468]: 时间取值：XX 取可选时间片的开始时间，例如 17:00、明日 17:00、4.30 17:00；多包裹取最快的一个。
+              - generic [ref=e469]:
+                - img "一期购物车干预UX - 时间片提醒"
