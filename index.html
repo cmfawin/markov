@@ -375,6 +375,34 @@
       position: relative;
     }
 
+    .scope-tab-btn,
+    .tab-btn,
+    .cart-tab-btn,
+    .checkout-tab-btn {
+      appearance: none;
+      -webkit-appearance: none;
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .scope-tab-btn:focus,
+    .tab-btn:focus,
+    .cart-tab-btn:focus,
+    .checkout-tab-btn:focus {
+      outline: none;
+    }
+
+    .scope-tab-btn:focus-visible,
+    .tab-btn:focus-visible,
+    .cart-tab-btn:focus-visible,
+    .checkout-tab-btn:focus-visible {
+      outline: 2px solid color-mix(in oklab, var(--primary) 42%, transparent 58%);
+      outline-offset: 0.2rem;
+      border-radius: calc(var(--radius) - 0.1rem);
+    }
+
     .tab-active::after {
       content: "";
       position: absolute;
@@ -860,6 +888,431 @@
     #mubbkView .text-xs.font-bold.uppercase,
     #mubbkView .text-xs.font-bold.text-foreground\/60 {
       letter-spacing: 0.08em;
+    }
+
+    #reviewPlanView {
+      position: relative;
+      isolation: isolate;
+      --review-line: color-mix(in oklab, var(--primary) 18%, var(--border) 82%);
+      --review-soft: color-mix(in oklab, var(--accent) 62%, var(--card) 38%);
+      --review-soft-2: color-mix(in oklab, var(--primary) 8%, var(--card) 92%);
+      --review-ink: color-mix(in oklab, var(--foreground) 86%, var(--primary) 14%);
+      --review-blue: var(--chart-2);
+      --review-green: var(--chart-5);
+    }
+
+    #reviewPlanView [id^="review-"] {
+      scroll-margin-top: 1.6rem;
+    }
+
+    #reviewPlanView .review-panel {
+      position: relative;
+      overflow: hidden;
+      border-color: var(--review-line);
+      background:
+        linear-gradient(180deg,
+          color-mix(in oklab, var(--card) 94%, var(--accent) 6%) 0%,
+          var(--card) 100%);
+    }
+
+    #reviewPlanView .review-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 0.28rem;
+      background: linear-gradient(90deg,
+          var(--primary) 0%,
+          color-mix(in oklab, var(--primary) 62%, var(--chart-2) 38%) 46%,
+          color-mix(in oklab, var(--chart-5) 68%, var(--accent) 32%) 100%);
+      pointer-events: none;
+    }
+
+    #reviewPlanView .review-hero {
+      background:
+        linear-gradient(135deg,
+          color-mix(in oklab, var(--accent) 56%, var(--card) 44%) 0%,
+          color-mix(in oklab, var(--primary) 7%, var(--card) 93%) 48%,
+          var(--card) 100%);
+    }
+
+    #reviewPlanView .review-kicker,
+    #reviewPlanView .review-chip,
+    #reviewPlanView .review-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--review-line);
+      background: var(--review-soft);
+      color: var(--primary);
+      font-weight: 900;
+    }
+
+    #reviewPlanView .review-kicker {
+      padding: 0.28rem 0.58rem;
+      border-radius: var(--radius);
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+    }
+
+    #reviewPlanView .review-chip {
+      padding: 0.32rem 0.58rem;
+      border-radius: 9999px;
+      font-size: 0.74rem;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    #reviewPlanView .review-number {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--primary-foreground);
+      border-color: var(--primary);
+      flex: none;
+      font-size: 0.9rem;
+    }
+
+    #reviewPlanView .review-anchor {
+      transition: transform .18s ease, border-color .18s ease, background-color .18s ease;
+    }
+
+    #reviewPlanView .review-anchor:hover {
+      transform: translateY(-1px);
+      border-color: color-mix(in oklab, var(--primary) 34%, var(--border) 66%);
+      background: color-mix(in oklab, var(--accent) 78%, var(--card) 22%);
+    }
+
+    #reviewPlanView .review-node {
+      border: 1px solid var(--review-line);
+      border-radius: var(--radius);
+      background: var(--card);
+      padding: 0.78rem;
+      min-height: 4.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.25rem;
+    }
+
+    #reviewPlanView .review-node-primary {
+      border-color: color-mix(in oklab, var(--primary) 42%, var(--border) 58%);
+      background:
+        linear-gradient(180deg,
+          color-mix(in oklab, var(--primary) 14%, var(--card) 86%) 0%,
+          var(--card) 100%);
+    }
+
+    #reviewPlanView .review-node-blue {
+      border-color: color-mix(in oklab, var(--review-blue) 42%, var(--border) 58%);
+      background:
+        linear-gradient(180deg,
+          color-mix(in oklab, var(--review-blue) 16%, var(--card) 84%) 0%,
+          var(--card) 100%);
+    }
+
+    #reviewPlanView .review-node-green {
+      border-color: color-mix(in oklab, var(--review-green) 46%, var(--border) 54%);
+      background:
+        linear-gradient(180deg,
+          color-mix(in oklab, var(--review-green) 16%, var(--card) 84%) 0%,
+          var(--card) 100%);
+    }
+
+    #reviewPlanView .review-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-weight: 900;
+      min-width: 1.2rem;
+    }
+
+    #reviewPlanView .review-split-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 3.2rem;
+      padding: 0.18rem 0.42rem;
+      border: 1px solid var(--review-line);
+      border-radius: 9999px;
+      background: var(--review-soft);
+      color: var(--primary);
+      font-weight: 900;
+      font-size: 0.8rem;
+    }
+
+    #reviewPlanView .review-flow-svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      min-height: 24rem;
+    }
+
+    #reviewPlanView .review-flow-svg text {
+      font-family: Inter, ui-sans-serif, sans-serif, system-ui;
+      fill: var(--foreground);
+    }
+
+    #reviewPlanView .review-flow-line {
+      fill: none;
+      stroke: color-mix(in oklab, var(--foreground) 78%, var(--border) 22%);
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    #reviewPlanView .review-flow-line-primary {
+      stroke: var(--primary);
+    }
+
+    #reviewPlanView .review-flow-box {
+      fill: var(--card);
+      stroke: var(--border);
+      stroke-width: 2;
+    }
+
+    #reviewPlanView .review-flow-box-primary {
+      fill: color-mix(in oklab, var(--primary) 7%, var(--card) 93%);
+      stroke: color-mix(in oklab, var(--primary) 32%, var(--border) 68%);
+    }
+
+    #reviewPlanView .review-flow-box-blue {
+      fill: color-mix(in oklab, var(--chart-2) 9%, var(--card) 91%);
+      stroke: color-mix(in oklab, var(--chart-2) 42%, var(--border) 58%);
+    }
+
+    #reviewPlanView .review-flow-box-green {
+      fill: color-mix(in oklab, var(--chart-5) 10%, var(--card) 90%);
+      stroke: color-mix(in oklab, var(--chart-5) 46%, var(--border) 54%);
+    }
+
+    #reviewPlanView .review-flow-label-primary {
+      fill: var(--primary);
+      font-weight: 900;
+    }
+
+    #reviewPlanView .review-flow-label-blue {
+      fill: var(--chart-2);
+      font-weight: 900;
+    }
+
+    #reviewPlanView .review-flow-label-green {
+      fill: var(--chart-5);
+      font-weight: 900;
+    }
+
+    #reviewPlanView .review-flow-chart {
+      position: relative;
+      height: 32rem;
+      min-width: 42rem;
+      margin-top: 1.35rem;
+    }
+
+    #reviewPlanView .review-flow-card {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.22rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card);
+      color: var(--foreground);
+      text-align: center;
+      padding: 0.62rem;
+      z-index: 2;
+      box-shadow: 0 0.6rem 1.4rem rgba(15, 23, 42, 0.06);
+    }
+
+    #reviewPlanView .review-flow-card.primary {
+      border-color: color-mix(in oklab, var(--primary) 34%, var(--border) 66%);
+      background: color-mix(in oklab, var(--primary) 7%, var(--card) 93%);
+    }
+
+    #reviewPlanView .review-flow-card.blue {
+      border-color: color-mix(in oklab, var(--chart-2) 44%, var(--border) 56%);
+      background: color-mix(in oklab, var(--chart-2) 9%, var(--card) 91%);
+    }
+
+    #reviewPlanView .review-flow-card.green {
+      border-color: color-mix(in oklab, var(--chart-5) 46%, var(--border) 54%);
+      background: color-mix(in oklab, var(--chart-5) 10%, var(--card) 90%);
+    }
+
+    #reviewPlanView .review-flow-title {
+      font-size: 1.03rem;
+      line-height: 1.2;
+      font-weight: 900;
+    }
+
+    #reviewPlanView .review-flow-sub {
+      font-size: 0.78rem;
+      line-height: 1.3;
+      font-weight: 700;
+      color: color-mix(in oklab, var(--foreground) 76%, var(--muted-foreground) 24%);
+    }
+
+    #reviewPlanView .review-flow-card.primary .review-flow-title,
+    #reviewPlanView .review-flow-percent.primary {
+      color: var(--primary);
+    }
+
+    #reviewPlanView .review-flow-card.blue .review-flow-title,
+    #reviewPlanView .review-flow-percent.blue {
+      color: var(--chart-2);
+    }
+
+    #reviewPlanView .review-flow-card.green .review-flow-title,
+    #reviewPlanView .review-flow-percent.green {
+      color: var(--chart-5);
+    }
+
+    #reviewPlanView .review-flow-icon {
+      display: grid;
+      place-items: center;
+      width: 2.6rem;
+      height: 2.6rem;
+      border-radius: 50%;
+      background: color-mix(in oklab, var(--border) 62%, var(--card) 38%);
+      color: var(--muted-foreground);
+    }
+
+    #reviewPlanView .review-flow-percent {
+      position: absolute;
+      z-index: 3;
+      font-size: 1.08rem;
+      font-weight: 900;
+      line-height: 1;
+      padding: 0.08rem 0.16rem;
+      background: var(--card);
+    }
+
+    #reviewPlanView .review-flow-line {
+      position: absolute;
+      z-index: 1;
+      background: color-mix(in oklab, var(--foreground) 80%, var(--border) 20%);
+      pointer-events: none;
+    }
+
+    #reviewPlanView .review-flow-line.h {
+      height: 0.16rem;
+    }
+
+    #reviewPlanView .review-flow-line.v {
+      width: 0.16rem;
+    }
+
+    #reviewPlanView .review-flow-line.arrow-right::after {
+      content: "";
+      position: absolute;
+      right: -0.48rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-top: 0.4rem solid transparent;
+      border-bottom: 0.4rem solid transparent;
+      border-left: 0.58rem solid color-mix(in oklab, var(--foreground) 80%, var(--border) 20%);
+    }
+
+    #reviewPlanView .review-flow-line.arrow-down::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -0.48rem;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 0.4rem solid transparent;
+      border-right: 0.4rem solid transparent;
+      border-top: 0.58rem solid color-mix(in oklab, var(--foreground) 80%, var(--border) 20%);
+    }
+
+    #reviewPlanView .review-timeline {
+      position: relative;
+      padding-left: 1.25rem;
+    }
+
+    #reviewPlanView .review-timeline-fill {
+      display: grid;
+      grid-template-rows: repeat(4, minmax(0, 1fr));
+      gap: 0.8rem;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    #reviewPlanView .review-timeline::before {
+      content: "";
+      position: absolute;
+      left: 0.33rem;
+      top: 0.3rem;
+      bottom: 0.3rem;
+      width: 0.16rem;
+      background: var(--primary);
+      border-radius: 9999px;
+    }
+
+    #reviewPlanView .review-timeline-item {
+      position: relative;
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 0.8rem;
+    }
+
+    #reviewPlanView .review-timeline-fill .review-timeline-item {
+      display: flex;
+      align-items: center;
+    }
+
+    #reviewPlanView .review-timeline-fill .review-timeline-item > div {
+      width: 100%;
+    }
+
+    #reviewPlanView .review-timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -1.13rem;
+      top: 1.05rem;
+      width: 0.72rem;
+      height: 0.72rem;
+      border: 2px solid var(--primary);
+      border-radius: 50%;
+      background: var(--card);
+    }
+
+    #reviewPlanView .review-formula {
+      border: 1px solid var(--review-line);
+      border-radius: var(--radius);
+      background: color-mix(in oklab, var(--accent) 52%, var(--card) 48%);
+      padding: 0.6rem 0.72rem;
+      font-family: JetBrains Mono, ui-monospace, monospace;
+      color: var(--review-ink);
+      font-size: 0.82rem;
+      line-height: 1.7;
+    }
+
+    #reviewPlanView table {
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    #reviewPlanView table thead th {
+      background:
+        linear-gradient(180deg,
+          color-mix(in oklab, var(--accent) 48%, var(--card) 52%) 0%,
+          color-mix(in oklab, var(--primary) 6%, var(--card) 94%) 100%);
+      border-bottom: 1px solid var(--review-line);
+    }
+
+    #reviewPlanView table tbody tr:nth-child(odd) {
+      background: color-mix(in oklab, var(--accent) 26%, var(--card) 74%);
+    }
+
+    #reviewPlanView table tbody tr:nth-child(even) {
+      background: color-mix(in oklab, var(--primary) 4%, var(--card) 96%);
     }
 
   </style>
@@ -2448,6 +2901,436 @@
         </div>
       </section>
     </section>
+
+    <section id="reviewPlanView" class="hidden space-y-6">
+      <section class="panel review-panel review-hero bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div>
+          <div>
+            <div class="review-kicker">AB REVIEW BLUEPRINT</div>
+            <h2 class="mt-3 text-3xl md:text-4xl font-black text-foreground">一期上线 AB 方案总览</h2>
+            <p class="mt-3 text-sm md:text-base leading-7 text-foreground xl:whitespace-nowrap">
+              一个 MUBBK 主实验 + 四个 UX 独立实验，并行运行、双标签记录、拆分复盘。上方看完整结构，下方按 MUBBK、UX、交叉分析和指标逐层拆解。
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 xl:grid-cols-[1.16fr_0.84fr] gap-5">
+          <div class="rounded-2xl border border-border bg-card p-4 md:p-5 flex flex-col">
+            <div class="flex items-center gap-3">
+              <span class="review-number">01</span>
+              <div>
+                <h3 class="text-xl font-black text-foreground">A. MUBBK 主实验流量结构</h3>
+                <p class="text-xs text-foreground mt-1">先切空白强控，再让 90% 策略池按 Cell 矩阵进入免费或付费模板实验。</p>
+              </div>
+            </div>
+
+            <div class="overflow-x-auto">
+              <div class="review-flow-chart" role="img" aria-label="MUBBK 主实验流量结构：触发 T1/T2 后进入实验 1，全局分流 10% 空白强控和 90% 策略实验池，再按 Cell 矩阵进入实验 2 免费模板实验或实验 3 付费模板实验。">
+                <div class="review-flow-card" style="left: 3%; top: 30%; width: 18%; height: 32%;">
+                  <div class="review-flow-icon">
+                    <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                      <circle cx="12" cy="8" r="4" fill="currentColor"></circle>
+                      <path d="M4 21c1.2-5.2 14.8-5.2 16 0" fill="currentColor"></path>
+                    </svg>
+                  </div>
+                  <div class="review-flow-title">触发</div>
+                  <div class="review-flow-title">T1 / T2 的</div>
+                  <div class="review-flow-title">新版本用户</div>
+                </div>
+
+                <div class="review-flow-line h arrow-right" style="left: 21%; top: 47%; width: 9%;"></div>
+                <div class="review-flow-card" style="left: 32%; top: 36%; width: 27%; height: 17%;">
+                  <div class="review-flow-title">实验 1：全局分流</div>
+                  <div class="review-flow-sub">（ AB260511001 ）</div>
+                </div>
+
+                <div class="review-flow-line h" style="left: 59%; top: 44%; width: 7%;"></div>
+                <div class="review-flow-line v" style="left: 66%; top: 16%; height: 28%;"></div>
+                <div class="review-flow-line h arrow-right" style="left: 66%; top: 16%; width: 9%;"></div>
+                <div class="review-flow-percent primary" style="left: 70%; top: 9%;">10%</div>
+                <div class="review-flow-card primary" style="left: 77%; top: 6%; width: 20%; height: 15%;">
+                  <div class="review-flow-title">MUBBK 强控 A0</div>
+                  <div class="review-flow-sub">不进入任何后续干预</div>
+                </div>
+
+                <div class="review-flow-line h arrow-right" style="left: 59%; top: 44%; width: 16%;"></div>
+                <div class="review-flow-percent primary" style="left: 69.5%; top: 37%;">90%</div>
+                <div class="review-flow-card primary" style="left: 77%; top: 36%; width: 20%; height: 13%;">
+                  <div class="review-flow-title">MUBBK 策略实验池</div>
+                </div>
+
+                <div class="review-flow-line v" style="left: 87%; top: 49%; height: 6%;"></div>
+                <div class="review-flow-line h arrow-right" style="left: 73%; top: 55%; width: 14%; transform: scaleX(-1); transform-origin: center;"></div>
+                <div class="review-flow-card" style="left: 60%; top: 52%; width: 24%; height: 9%;">
+                  <div class="review-flow-title">按 Cell 矩阵判断</div>
+                </div>
+
+                <div class="review-flow-line v" style="left: 72%; top: 61%; height: 6%;"></div>
+                <div class="review-flow-line h" style="left: 26%; top: 67%; width: 46%;"></div>
+                <div class="review-flow-line v arrow-down" style="left: 26%; top: 67%; height: 3%;"></div>
+                <div class="review-flow-line v arrow-down" style="left: 72%; top: 67%; height: 3%;"></div>
+
+                <div class="review-flow-card blue" style="left: 7%; top: 70%; width: 38%; height: 9%;">
+                  <div class="review-flow-title">实验 2：免费模板实验</div>
+                  <div class="review-flow-sub">（ AB260511003 ）</div>
+                </div>
+                <div class="review-flow-card green" style="left: 55%; top: 70%; width: 42%; height: 9%;">
+                  <div class="review-flow-title">实验 3：付费模板实验</div>
+                  <div class="review-flow-sub">（ AB260511004 ）</div>
+                </div>
+
+                <div class="review-flow-line v" style="left: 26.5%; top: 81%; height: 4%;"></div>
+                <div class="review-flow-line h" style="left: 13%; top: 83.5%; width: 27%;"></div>
+                <div class="review-flow-line v arrow-down" style="left: 13%; top: 83.5%; height: 4%;"></div>
+                <div class="review-flow-line v arrow-down" style="left: 40%; top: 83.5%; height: 4%;"></div>
+                <div class="review-flow-percent blue" style="left: 9%; top: 82.5%;">50%</div>
+                <div class="review-flow-percent blue" style="left: 40%; top: 82.5%;">50%</div>
+                <div class="review-flow-card blue" style="left: 2%; top: 88.5%; width: 22%; height: 11.5%;">
+                  <div class="review-flow-title">A0</div>
+                  <div class="review-flow-sub">静默模板</div>
+                </div>
+                <div class="review-flow-card blue" style="left: 30%; top: 88.5%; width: 22%; height: 11.5%;">
+                  <div class="review-flow-title">A1</div>
+                  <div class="review-flow-sub">免费模板</div>
+                </div>
+
+                <div class="review-flow-line v" style="left: 76%; top: 81%; height: 4%;"></div>
+                <div class="review-flow-line h" style="left: 61%; top: 83.5%; width: 32%;"></div>
+                <div class="review-flow-line v arrow-down" style="left: 62%; top: 83.5%; height: 4%;"></div>
+                <div class="review-flow-line v arrow-down" style="left: 76%; top: 83.5%; height: 4%;"></div>
+                <div class="review-flow-line v arrow-down" style="left: 93%; top: 83.5%; height: 4%;"></div>
+                <div class="review-flow-percent green" style="left: 58%; top: 82.5%;">35%</div>
+                <div class="review-flow-percent green" style="left: 72%; top: 82.5%;">35%</div>
+                <div class="review-flow-percent green" style="left: 90%; top: 82.5%;">30%</div>
+                <div class="review-flow-card green" style="left: 55%; top: 88.5%; width: 14%; height: 11.5%;">
+                  <div class="review-flow-title">A0</div>
+                  <div class="review-flow-sub">静默模板</div>
+                </div>
+                <div class="review-flow-card green" style="left: 70%; top: 88.5%; width: 14%; height: 11.5%;">
+                  <div class="review-flow-title">A1</div>
+                  <div class="review-flow-sub">免费模板</div>
+                </div>
+                <div class="review-flow-card green" style="left: 85%; top: 88.5%; width: 14%; height: 11.5%;">
+                  <div class="review-flow-title">A2</div>
+                  <div class="review-flow-sub">付费模板<br>2元无门槛券</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-border bg-card p-4 md:p-5 flex flex-col h-full">
+            <div class="flex items-center gap-3">
+              <span class="review-number">02</span>
+              <div>
+                <h3 class="text-xl font-black text-foreground">B. UX 四个独立实验排期</h3>
+                <p class="text-xs text-foreground mt-1">按时间顺序一个一个测，50% 对照组、50% 实验组，不把四个 UX 改动混在一起。</p>
+              </div>
+            </div>
+
+            <div class="review-timeline review-timeline-fill mt-5">
+              <div class="review-timeline-item">
+                <div class="grid grid-cols-1 md:grid-cols-[8rem_1fr_8rem] gap-3 items-center">
+                  <div class="review-chip">5/20 - 5/30</div>
+                  <div class="font-black text-foreground">结算页交互实验</div>
+                  <div class="text-xs leading-5 text-foreground">50% 老结算页<br>50% 新结算页</div>
+                </div>
+              </div>
+              <div class="review-timeline-item">
+                <div class="grid grid-cols-1 md:grid-cols-[8rem_1fr_8rem] gap-3 items-center">
+                  <div class="review-chip">6/1 - 6/10</div>
+                  <div class="font-black text-foreground">购物车地址栏交互实验</div>
+                  <div class="text-xs leading-5 text-foreground">50% 无地址栏<br>50% 有地址栏</div>
+                </div>
+              </div>
+              <div class="review-timeline-item">
+                <div class="grid grid-cols-1 md:grid-cols-[8rem_1fr_8rem] gap-3 items-center">
+                  <div class="review-chip">6/11 - 6/20</div>
+                  <div class="font-black text-foreground">购物车优惠券入口实验</div>
+                  <div class="text-xs leading-5 text-foreground">50% 老入口<br>50% 新入口</div>
+                </div>
+              </div>
+              <div class="review-timeline-item">
+                <div class="grid grid-cols-1 md:grid-cols-[8rem_1fr_8rem] gap-3 items-center">
+                  <div class="review-chip">6/21 - 6/30</div>
+                  <div class="font-black text-foreground">购物车商品区域实验</div>
+                  <div class="text-xs leading-5 text-foreground">50% 老商品区<br>50% 新商品区</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="mt-5 rounded-2xl border border-border bg-card p-4">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div class="review-node review-node-primary">
+              <div class="text-xs font-bold text-foreground/60">复盘主线 1</div>
+              <div class="text-lg font-black text-foreground">MUBBK 看 MUBBK</div>
+              <div class="text-xs text-foreground">整体看 90% 策略池 vs 10% 空白；模板内看 A1 vs A0、A2 vs A1。</div>
+            </div>
+            <div class="review-node review-node-blue">
+              <div class="text-xs font-bold text-foreground/60">复盘主线 2</div>
+              <div class="text-lg font-black text-foreground">UX 看 UX</div>
+              <div class="text-xs text-foreground">每个 UX 用全量新版本有效 UV，50/50 看新版 vs 老版。</div>
+            </div>
+            <div class="review-node review-node-green">
+              <div class="text-xs font-bold text-foreground/60">复盘主线 3</div>
+              <div class="text-lg font-black text-foreground">叠加看异常</div>
+              <div class="text-xs text-foreground">拆 MUBBK 标签看 UX 是否仍然正向，拆 UX 标签看 MUBBK 是否仍然有效。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="review-mubbk" class="panel review-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div class="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <div class="review-kicker">MUBBK RECAP</div>
+            <h3 class="mt-3 text-3xl font-black text-foreground">MUBBK 复盘：先问三层问题</h3>
+            <p class="mt-3 max-w-4xl text-sm md:text-base leading-7 text-foreground">MUBBK 的 90% 不是一个统一实验组。它先进入策略池，再按 Cell 矩阵拆到免费模板实验或付费模板实验。复盘时必须按这三层分别看，不能把所有 A0 混成一个对照组。</p>
+          </div>
+          <div class="review-formula">增量 = 实验组指标 - 对照组指标</div>
+        </div>
+
+        <div class="mt-6 overflow-x-auto rounded-2xl border border-border">
+          <table class="min-w-full text-sm text-left">
+            <thead>
+              <tr>
+                <th class="px-4 py-3 font-black text-foreground">要回答的问题</th>
+                <th class="px-4 py-3 font-black text-foreground">实验组</th>
+                <th class="px-4 py-3 font-black text-foreground">对照组</th>
+                <th class="px-4 py-3 font-black text-foreground">结论用途</th>
+              </tr>
+            </thead>
+            <tbody class="text-foreground">
+              <tr>
+                <td class="px-4 py-3 font-bold">MUBBK 整体有没有用</td>
+                <td class="px-4 py-3">实验 1 的 90% 策略实验池</td>
+                <td class="px-4 py-3">实验 1 的 10% 空白 A0</td>
+                <td class="px-4 py-3">判断整套 MUBBK 是否值得上线</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-bold">免费模板有没有用</td>
+                <td class="px-4 py-3">实验 2 的 A1 免费模板</td>
+                <td class="px-4 py-3">实验 2 的 A0 静默模板</td>
+                <td class="px-4 py-3">判断免费提醒是否有效</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-bold">付费模板有没有额外价值</td>
+                <td class="px-4 py-3">实验 3 的 A2 付费模板</td>
+                <td class="px-4 py-3">优先看实验 3 的 A1 免费模板，同时看 A0 静默模板</td>
+                <td class="px-4 py-3">判断 2 元券是否值得放量</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-5 grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div class="rounded-xl border border-border bg-muted p-4">
+            <div class="text-lg font-black text-foreground">主分析按初始分组</div>
+            <p class="mt-2 text-sm leading-7 text-foreground">用户最开始被分到 A0 / A1 / A2，就按这个分组进主分析。这样能保住随机实验的因果口径。</p>
+          </div>
+          <div class="rounded-xl border border-border bg-muted p-4">
+            <div class="text-lg font-black text-foreground">实际动作做辅助解释</div>
+            <p class="mt-2 text-sm leading-7 text-foreground">如果 A2 因券发放失败回落到 A1，仍保留 actual_action 字段，用来解释为什么效果不达预期。</p>
+          </div>
+          <div class="rounded-xl border border-border bg-muted p-4">
+            <div class="text-lg font-black text-foreground">分母用触发用户</div>
+            <p class="mt-2 text-sm leading-7 text-foreground">核心指标优先用触发 T1 / T2 的用户数做分母，不只看实际曝光用户，避免高估效果。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="review-ux" class="panel review-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+          <div class="xl:col-span-4">
+            <div class="review-kicker">UX RECAP</div>
+            <h3 class="mt-3 text-3xl font-black text-foreground">UX 复盘：用全量新版本有效 UV</h3>
+            <p class="mt-3 text-sm md:text-base leading-7 text-foreground">
+              UX 不只放在 MUBBK 10% 空白组里测，否则样本量不够。每个 UX 实验都用对应页面的新版本有效 UV 做 50/50，结论再按 MUBBK 标签拆开看。
+            </p>
+            <div class="mt-4 review-formula">UX 效果 = UX 新版指标 - UX 老版指标</div>
+          </div>
+          <div class="xl:col-span-8 overflow-x-auto rounded-2xl border border-border">
+            <table class="min-w-full text-sm text-left">
+              <thead>
+                <tr>
+                  <th class="px-4 py-3 font-black text-foreground">UX 实验</th>
+                  <th class="px-4 py-3 font-black text-foreground">实验对象</th>
+                  <th class="px-4 py-3 font-black text-foreground">主指标</th>
+                  <th class="px-4 py-3 font-black text-foreground">辅助指标</th>
+                </tr>
+              </thead>
+              <tbody class="text-foreground">
+                <tr>
+                  <td class="px-4 py-3 font-bold">结算页交互</td>
+                  <td class="px-4 py-3">新版本结算页 UV</td>
+                  <td class="px-4 py-3">提交订单率、支付成功率</td>
+                  <td class="px-4 py-3">结算页转化率、吸收概率</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 font-bold">购物车地址栏</td>
+                  <td class="px-4 py-3">新版本购物车 UV</td>
+                  <td class="px-4 py-3">购物车到结算转化率</td>
+                  <td class="px-4 py-3">购物车转化率、吸收概率、结算页地址切换率</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 font-bold">购物车优惠券入口</td>
+                  <td class="px-4 py-3">新版本购物车 UV</td>
+                  <td class="px-4 py-3">领券率、用券率、支付转化率</td>
+                  <td class="px-4 py-3">购物车转化率、吸收概率、结算页券模块操作率</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 font-bold">购物车商品区域</td>
+                  <td class="px-4 py-3">新版本购物车 UV</td>
+                  <td class="px-4 py-3">去结算点击率、支付转化率</td>
+                  <td class="px-4 py-3">购物车转化率、吸收概率、结算页商品模块操作率</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="review-cross" class="panel review-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div class="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <div class="review-kicker">CROSS ANALYSIS</div>
+            <h3 class="mt-3 text-3xl font-black text-foreground">叠加复盘：不是隔离流量，而是拆开标签</h3>
+            <p class="mt-3 max-w-4xl text-sm md:text-base leading-7 text-foreground">
+              用户可以同时进入 MUBBK 和 UX 实验。关键不是强行把流量完全分开，而是每条样本都记录两个标签：MUBBK 标签和 UX 标签，最后按标签切开看。
+            </p>
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-xs text-foreground">
+            <div class="rounded-xl border border-border bg-muted p-3">
+              <div class="font-black text-foreground">MUBBK 标签</div>
+              <div class="mt-1">空白 / 免费模板 / 付费模板</div>
+            </div>
+            <div class="rounded-xl border border-border bg-muted p-3">
+              <div class="font-black text-foreground">UX 标签</div>
+              <div class="mt-1">对照组 / 实验组</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-5 gap-4">
+          <div class="lg:col-span-2 rounded-2xl border border-border bg-muted p-4">
+            <div class="text-xl font-black text-foreground">复盘矩阵</div>
+            <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
+              <div class="review-node review-node-primary">
+                <div class="font-black text-foreground">MUBBK 空白</div>
+                <div class="text-xs text-foreground">UX 老版</div>
+              </div>
+              <div class="review-node review-node-blue">
+                <div class="font-black text-foreground">MUBBK 空白</div>
+                <div class="text-xs text-foreground">UX 新版</div>
+              </div>
+              <div class="review-node review-node-primary">
+                <div class="font-black text-foreground">MUBBK 策略池</div>
+                <div class="text-xs text-foreground">UX 老版</div>
+              </div>
+              <div class="review-node review-node-green">
+                <div class="font-black text-foreground">MUBBK 策略池</div>
+                <div class="text-xs text-foreground">UX 新版</div>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-3 overflow-x-auto rounded-2xl border border-border">
+            <table class="min-w-full text-sm text-left">
+              <thead>
+                <tr>
+                  <th class="px-4 py-3 font-black text-foreground">分析视角</th>
+                  <th class="px-4 py-3 font-black text-foreground">目的</th>
+                </tr>
+              </thead>
+              <tbody class="text-foreground">
+                <tr>
+                  <td class="px-4 py-3 font-bold">全量新版本 UV：UX 新版 vs UX 老版</td>
+                  <td class="px-4 py-3">判断 UX 本身是否有效</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 font-bold">MUBBK 空白组：UX 新版 vs UX 老版</td>
+                  <td class="px-4 py-3">看没有 MUBBK 干预时，UX 是否仍然正向</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 font-bold">MUBBK 策略池内：UX 新版 vs UX 老版</td>
+                  <td class="px-4 py-3">看叠加 MUBBK 后，UX 是否仍然正向</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 font-bold">UX 老版内：MUBBK 实验 vs MUBBK 空白</td>
+                  <td class="px-4 py-3">看没有 UX 新版时，MUBBK 是否有效</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 font-bold">UX 新版内：MUBBK 实验 vs MUBBK 空白</td>
+                  <td class="px-4 py-3">看叠加 UX 新版后，MUBBK 是否仍然有效</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="review-metric" class="panel review-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div class="review-kicker">METRICS</div>
+        <h3 class="mt-3 text-3xl font-black text-foreground">关键指标：核心只看增量</h3>
+        <p class="mt-3 max-w-4xl text-sm md:text-base leading-7 text-foreground">指标不用堆太多。先看能不能把犹豫用户拉回支付，再看多带来多少订单、GMV 和补贴后毛利；A2 付费券单独看付费动作效率。</p>
+
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4">
+          <div class="rounded-xl border border-border bg-muted p-4">
+            <div class="text-sm font-black text-foreground">触发后支付转化率增量</div>
+            <div class="mt-3 review-formula">触发后支付用户数 / 触发 T1/T2 用户数</div>
+            <p class="mt-3 text-xs leading-6 text-foreground">回答：有没有把犹豫用户拉回支付。</p>
+          </div>
+          <div class="rounded-xl border border-border bg-muted p-4">
+            <div class="text-sm font-black text-foreground">增量订单 / 触发 UV</div>
+            <div class="mt-3 review-formula">触发后支付订单数 / 触发 UV</div>
+            <p class="mt-3 text-xs leading-6 text-foreground">回答：每 100 个触发用户，多带来几单。</p>
+          </div>
+          <div class="rounded-xl border border-border bg-muted p-4">
+            <div class="text-sm font-black text-foreground">增量 GMV / 触发 UV</div>
+            <div class="mt-3 review-formula">触发后支付 GMV / 触发 UV</div>
+            <p class="mt-3 text-xs leading-6 text-foreground">回答：交易规模有没有增长。</p>
+          </div>
+          <div class="rounded-xl border border-border bg-muted p-4">
+            <div class="text-sm font-black text-foreground">增量补贴后毛利 / 触发 UV</div>
+            <div class="mt-3 review-formula">商品毛利 - 券成本 - 其他补贴</div>
+            <p class="mt-3 text-xs leading-6 text-foreground">回答：扣掉补贴后到底有没有多赚钱。</p>
+          </div>
+          <div class="rounded-xl border border-border bg-muted p-4">
+            <div class="text-sm font-black text-foreground">付费动作效率</div>
+            <div class="mt-3 review-formula">ROI = A2 增量毛利 / A2 券成本</div>
+            <p class="mt-3 text-xs leading-6 text-foreground">回答：2 元券是否值得继续放量。</p>
+          </div>
+        </div>
+
+        <div class="mt-5 rounded-2xl border border-border bg-card p-4">
+          <div class="text-lg font-black text-foreground">最终放量判断</div>
+          <div class="mt-3 grid grid-cols-1 md:grid-cols-3 gap-3 text-sm leading-7 text-foreground">
+            <div class="rounded-xl border border-border bg-muted p-4">转化率提升，但补贴后毛利为负：谨慎，不要只为转化率放量。</div>
+            <div class="rounded-xl border border-border bg-muted p-4">免费模板有效：优先放免费提醒，先用低成本动作解决犹豫。</div>
+            <div class="rounded-xl border border-border bg-muted p-4">A2 相比 A1 仍有正向增量，且 ROI 能覆盖券成本：再考虑扩大付费模板。</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel review-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+          <div class="xl:col-span-5">
+            <div class="review-kicker">LAUNCH CHECK</div>
+            <h3 class="mt-3 text-3xl font-black text-foreground">上线前检查项</h3>
+            <p class="mt-3 text-sm md:text-base leading-7 text-foreground">这部分是上线验收最容易出问题的地方。只要有一项没记录清楚，后续复盘就会从“因果分析”退化成“猜原因”。</p>
+          </div>
+          <div class="xl:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-3 text-sm leading-7 text-foreground">
+            <div class="rounded-xl border border-border bg-muted p-4"><span class="font-black text-foreground">01</span> 实验 1 的 10% 空白用户不会进入实验 2 / 实验 3。</div>
+            <div class="rounded-xl border border-border bg-muted p-4"><span class="font-black text-foreground">02</span> 实验 2 和实验 3 互斥，同一次触发只能进一个。</div>
+            <div class="rounded-xl border border-border bg-muted p-4"><span class="font-black text-foreground">03</span> A1 / A2 资格不满足时，有清晰回落逻辑。</div>
+            <div class="rounded-xl border border-border bg-muted p-4"><span class="font-black text-foreground">04</span> UX 分桶和 MUBBK 分桶相互独立。</div>
+            <div class="rounded-xl border border-border bg-muted p-4"><span class="font-black text-foreground">05</span> 主分析只看新版本 APP 用户。</div>
+            <div class="rounded-xl border border-border bg-muted p-4"><span class="font-black text-foreground">06</span> 日志同时有 MUBBK 标签和 UX 标签。</div>
+          </div>
+        </div>
+      </section>
+    </section>
   </div>
 
   <script id="cartDbJson" type="application/json">{"app":{"endpointName":"APP","states":["S01_访问购物车事件","S02_点击删除","S03_点击省钱卡栏位","S04_操作全场换购","S05_点击商品","S06_操作加减商品","S07_操作更换服务","S08_失效商品清空","S09_失效商品查看","S10_失效商品找相似","S11_点击查看常买","S12_点击推荐商品","S13_点击凑单助手","S14_点击去结算","S15_去首页","S16_去分类","S17_去聚合分类","S18_去会员中心","S19_去个人中心","S20_去商详","S21_去搜索","S22_去活动页","S23_流失"],"transitionMatrix":[["0","0.00598584037576527","0.00335506060480123","0.0148592401318152","0.130835314262282","0.187451442872058","0.000777480333881446","0.00789708983004568","0.0054053020112966","0.00248876762241304","0.0119469214336507","0.0282813387133516","0.0167490650683368","0.168850210940264","0.207388828539143","0.00994320992695749","0.00797586661781079","0.00337903341321857","0.0675615088938647","0.0113381631096671","0.0434135920097937","0.00206789067883411","0.0620488326107461"],["0","0","0.0029517554148096","0.0037483384158261","0.0752208929548831","0.0477900930487137","0.000205254515599343","0.076897138165611","0.0146121667057627","0.00231155680663069","0.0153501055594651","0.0304265384314645","0.00375811244037845","0.031614082414575","0.362362186253811","0.0152425912893893","0.0146121667057627","0.00349910078974118","0.0782117444679021","0.0220453123778246","0.0793504183282508","0.00637266400813198","0.113417780905465"],["0","0.000128832775057974","0","0.000128832775057974","0.000193249162586962","6.44163875289873e-05","0","0","0","0","0","0","0","0.000193249162586962","0.775895387786652","6.44163875289873e-05","0","0.000450914712702911","0.000322081937644936","0.0696341149188353","0.00103066220046379","0.000322081937644936","0.151571759855707"],["0","0.00161033963526852","0.00010456750878367","0","0.0655847415091182","0.0800150577212648","0.000418270035134682","0.00393173833026602","0.00119206960013384","0.000648318554458758","0.0123598795382298","0.0228584574201104","0.039882047850092","0.272189225363894","0.14363393006525","0.00658775305337125","0.0104985778818805","0.000752886063242429","0.0183202275388991","0.216078300150577","0.0371842061234733","0.00246779320729462","0.0636816128492554"],["0","3.59123379829835e-06","3.99025977588705e-07","3.99025977588705e-06","0","0.000196320780973643","3.99025977588705e-07","1.99512988794352e-07","1.39659092156047e-06","0","2.79318184312094e-06","1.59610391035482e-06","1.59610391035482e-06","1.73576300251087e-05","0.00020170763167109","2.19464287673788e-06","1.39659092156047e-06","5.78587667503623e-06","1.37663962268103e-05","0.996389812467766","1.83551949690804e-05","0.000156218670225978","0.00298112307856522"],["0","0.00355074302089176","0.00325310589521601","0.0093214373765056","0.229119487192313","0","0.000881656191602559","0.0110922532166605","0.00317449825097991","0.00190659268019909","0.0145949383823261","0.0234745650674775","0.0294314166169413","0.297969778933865","0.185183888291391","0.0107004655716383","0.0126569026444326","0.00101725437790982","0.0300288347131356","0.0164348932186614","0.0652586370149104","0.0030015614336605","0.0479470899092796"],["0","0.00310517078439314","0.00220512128167049","0.00661536384501147","0.246028531569236","0.158813734755411","0","0.00634534899419468","0.00382521038657126","0.00112506187840331","0.00765042077314252","0.0155258539219657","0.0121506682867557","0.229197605868322","0.146573061518383","0.00949552225372395","0.0127807029386616","0.00112506187840331","0.0253813959767787","0.0184060123306781","0.043157373655551","0.00189010395571756","0.048602673147023"],["0","0.0254288365685421","0.00269148959917852","0.00740159639774093","0.062038197467321","0.0977450802185081","0.000344408621695829","0","0.00702848705757045","0.00407869099212005","0.056483013958116","0.0862137693291366","0.0124274110995245","0.0760441480829514","0.336161948587446","0.0209515244864963","0.013170440811146","0.0021908215102318","0.0488741345936137","0.0105746202735497","0.0517282615974819","0.00447731208204578","0.0739458066655824"],["0","8.04841929045135e-06","0","0","2.4145257871354e-05","1.60968385809027e-05","0","4.82905157427081e-05","0","8.04841929045135e-06","1.60968385809027e-05","8.04841929045135e-06","0","0","0.000659970381817011","0","0","3.21936771618054e-05","8.04841929045135e-06","0.985359925310669","5.63389350331594e-05","0.000185113643680381","0.0135696349237009"],["0","0","0","0","0","1.68191603875134e-05","0","5.04574811625403e-05","5.04574811625403e-05","0","1.68191603875134e-05","0","0","3.36383207750269e-05","0.00131189451022604","8.40958019375672e-05","0","5.04574811625403e-05","5.04574811625403e-05","0.984156350914962","0","6.72766415500538e-05","0.0141112755651237"],["0","0.000700100488561504","0.00104411538380293","0.00349748476828786","0.0164493438066757","0.0680847725126063","9.05302355898497e-05","0.00108032747803887","0.000443598154390263","0.000476792574106542","0","0.042962632136423","0.00772524677033384","0.0637876039966081","0.108669477127535","0.0049580392358041","0.00340393685817835","0.00204900099885026","0.0187850238848938","0.609005947836478","0.018676387602186","0.000860037238103572","0.0272496009125447"],["0","0.000480940995410448","0","0.00135900184131695","0.011884739055157","0.0226358314782752","3.57270453733476e-05","0.000178635226866738","0.000114051721768763","6.18352708384862e-05","0.00218484623629318","0","0.00490834638744606","0.0635968889988182","0.0544383983290735","0.00447549949157666","0.00289114244098166","0.000435595130128892","0.00750130541127325","0.796276142578393","0.0123794212218649","0.000516668040783796","0.0136449830983593"],["0","0.000974716797223245","0","0.00901315867676251","0.0554429612371771","0.095516302732773","0.000202075433570672","0.00178004683395342","0.000739952690574964","0.000386320681826286","0.00673683835153993","0.0132389125964315","0","0.152736339106351","0.18169553175556","0.00821971543024237","0.0131586767625138","0.000716179110154884","0.0220232505616508","0.320467864062667","0.0637845162670724","0.00204155621857429","0.0511250846933802"],["0","0","0","0","0","0","0","0","0","0","0","0","0","1","0","0","0","0","0","0","0","0","0"],["0","0","0","0","0","0","0","0","0","0","0","0","0","0","1","0","0","0","0","0","0","0","0"],["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","1","0","0","0","0","0","0","0"],["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","1","0","0","0","0","0","0"],["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","1","0","0","0","0","0"],["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","1","0","0","0","0"],["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","1","0","0","0"],["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","1","0","0"],["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","1","0"],["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","1"]],"baselineCheckoutRate":"0.239614112958119","absorptionProbability":[{"node":"S01_访问购物车事件","value":"0.239614112958119","lossProb":"0.0775077816823256","homeProb":"0.263316424994628","categoryProb":"0.0129114638961148","aggregatedCategoryProb":"0.0113419894567679","memberCenterProb":"0.00370727495121281","profileProb":"0.0759054443186473","productDetailProb":"0.252644755069364","searchProb":"0.0601510043068327","campaignProb":"0.00289974919932648"},{"node":"S02_点击删除","value":"0.0615467126788984","lossProb":"0.125101902210292","homeProb":"0.40937302859977","categoryProb":"0.0179130058091877","aggregatedCategoryProb":"0.0167509753149873","memberCenterProb":"0.0038092140396145","profileProb":"0.0849062013085532","productDetailProb":"0.184665956640467","searchProb":"0.0889359413797387","campaignProb":"0.00699705998006133"},{"node":"S03_点击省钱卡栏位","value":"0.000260928653972403","lossProb":"0.151601184553177","homeProb":"0.775983716957473","categoryProb":"6.85297389265086e-05","aggregatedCategoryProb":"4.63265677124789e-06","memberCenterProb":"0.000451600654927734","profileProb":"0.000338052497814604","productDetailProb":"0.0699151376702133","searchProb":"0.00105262098702512","campaignProb":"0.00032359642968748"},{"node":"S04_操作全场换购","value":"0.308042514941842","lossProb":"0.0718638661434012","homeProb":"0.17354605245358","categoryProb":"0.00820936708918331","aggregatedCategoryProb":"0.0124015924015616","memberCenterProb":"0.00093352584824324","profileProb":"0.0227849492425714","productDetailProb":"0.352658471991642","searchProb":"0.046663600387191","campaignProb":"0.00289606142278155"},{"node":"S05_点击商品","value":"8.07167255390146e-05","lossProb":"0.00299276550719976","homeProb":"0.000245295119521885","categoryProb":"4.61785500786415e-06","aggregatedCategoryProb":"4.22714315490188e-06","memberCenterProb":"6.03665606627195e-06","profileProb":"2.06786945154279e-05","productDetailProb":"0.996455991771634","searchProb":"3.27660444733259e-05","campaignProb":"0.000156904817700701"},{"node":"S06_操作加减商品","value":"0.311236992192149","lossProb":"0.0538762396170644","homeProb":"0.204642613799296","categoryProb":"0.0115967806805466","aggregatedCategoryProb":"0.0135994424313402","memberCenterProb":"0.00114050058702099","profileProb":"0.0324812885944371","productDetailProb":"0.298579680725595","searchProb":"0.069593446006539","campaignProb":"0.00325301442912647"},{"node":"S07_操作更换服务","value":"0.285753582642255","lossProb":"0.0609092004357038","homeProb":"0.190141759962155","categoryProb":"0.011835372268286","aggregatedCategoryProb":"0.0154411092697714","memberCenterProb":"0.00137764036471857","profileProb":"0.0319314423692904","productDetailProb":"0.343542770058602","searchProb":"0.0564989442874025","campaignProb":"0.00256817925712674"},{"node":"S08_失效商品清空","value":"0.124098661301921","lossProb":"0.0875880347875265","homeProb":"0.385125487984496","categoryProb":"0.0234852784683435","aggregatedCategoryProb":"0.0157541577413311","memberCenterProb":"0.00258235350592299","profileProb":"0.0566722519046189","productDetailProb":"0.234833703136717","searchProb":"0.0647042963022744","campaignProb":"0.0051557755429766"},{"node":"S09_失效商品查看","value":"1.35435504139423e-05","lossProb":"0.013576575031859","homeProb":"0.00068773906947554","categoryProb":"1.60270977229662e-06","aggregatedCategoryProb":"1.21624772037653e-06","memberCenterProb":"3.24066082434665e-05","profileProb":"1.24109955579882e-05","productDetailProb":"0.985427188453728","searchProb":"6.18175589273988e-05","campaignProb":"0.000185499454298785"},{"node":"S10_失效商品找相似","value":"4.66627931974731e-05","lossProb":"0.0141178364340605","homeProb":"0.00133697290301625","categoryProb":"8.55784778669326e-05","aggregatedCategoryProb":"1.1020714946654e-06","memberCenterProb":"5.06449989176911e-05","profileProb":"5.42300383003618e-05","productDetailProb":"0.984234496128735","searchProb":"4.85708359088226e-06","campaignProb":"6.76201708226311e-05"},{"node":"S11_点击查看常买","value":"0.0908095748940637","lossProb":"0.032686781251016","homeProb":"0.128948288989145","categoryProb":"0.00609660306468872","aggregatedCategoryProb":"0.0046591377397045","memberCenterProb":"0.00216314401144872","profileProb":"0.0217645686446794","productDetailProb":"0.686830731066533","searchProb":"0.0248906793222916","campaignProb":"0.0011504910560421"},{"node":"S12_点击推荐商品","value":"0.072240581964936","lossProb":"0.0154333497648943","homeProb":"0.0608730333998877","categoryProb":"0.00482273635181034","aggregatedCategoryProb":"0.00330959770401982","memberCenterProb":"0.000474064668785121","profileProb":"0.00849395712926616","productDetailProb":"0.819257920192223","searchProb":"0.0144798595350312","campaignProb":"0.000614896578289077"},{"node":"S13_点击凑单助手","value":"0.18715227714636","lossProb":"0.0578149768260004","homeProb":"0.20561864509649","categoryProb":"0.0095682554802168","aggregatedCategoryProb":"0.0146923528751513","memberCenterProb":"0.000863344505873999","profileProb":"0.0257814510639393","productDetailProb":"0.424662114263643","searchProb":"0.0714269385519857","campaignProb":"0.00241964510070421"}],"removalEffect":[{"node":"S01_访问购物车事件","baseAfterCheckoutRate":"0.239614112958119","drop":"0.239614112958119"},{"node":"S02_点击删除","baseAfterCheckoutRate":"0.239182247468596","drop":"0.000431865489522259"},{"node":"S03_点击省钱卡栏位","baseAfterCheckoutRate":"0.239613053863105","drop":"1.05909501388334e-06"},{"node":"S04_操作全场换购","baseAfterCheckoutRate":"0.234352668024096","drop":"0.00526144493402225"},{"node":"S05_点击商品","baseAfterCheckoutRate":"0.239599587917953","drop":"1.45250401652752e-05"},{"node":"S06_操作加减商品","baseAfterCheckoutRate":"0.17947976771253","drop":"0.0601343452455884"},{"node":"S07_操作更换服务","baseAfterCheckoutRate":"0.239337304983823","drop":"0.000276807974295911"},{"node":"S08_失效商品清空","baseAfterCheckoutRate":"0.23828632712268","drop":"0.00132778583543854"},{"node":"S09_失效商品查看","baseAfterCheckoutRate":"0.239614028066333","drop":"8.48917853513153e-08"},{"node":"S10_失效商品找相似","baseAfterCheckoutRate":"0.239613975074213","drop":"1.37883905515501e-07"},{"node":"S11_点击查看常买","baseAfterCheckoutRate":"0.238167116591455","drop":"0.00144699636666351"},{"node":"S12_点击推荐商品","baseAfterCheckoutRate":"0.2370595120445","drop":"0.00255460091361819"},{"node":"S13_点击凑单助手","baseAfterCheckoutRate":"0.235207857942751","drop":"0.0044062550153674"}]},"wechat":{"endpointName":"微信小程序","states":["S01_访问购物车事件","S02_点击删除","S03_点击省钱卡栏位","S04_操作全场换购","S05_点击商品","S06_操作加减商品","S07_操作更换服务","S08_失效商品清空","S09_失效商品查看","S10_失效商品找相似","S11_点击查看常买","S12_点击推荐商品","S13_点击凑单助手","S14_点击去结算","S15_去首页","S16_去分类","S17_去聚合分类","S18_去会员中心","S19_去个人中心","S20_去商详","S21_去搜索","S22_去活动页","S23_流失"],"transitionMatrix":[["0","0.0765843505291811","0.00857378610547895","0.0131592017582887","0.134434712345667","未采集","0.000837031911137303","0.0130122881543394","未采集","0.00123958353332225","0.00905960268217495","0.0253989413873151","0.0229174787956089","0.23623895330735","0.0699156415408232","0.0141521206895256","0.024171461531591","0.013913386083108","0.0776947586067581","0.0494648087660676","0.118706609359231","0.00795002934098397","0.0825752535720456"],["0","0","0.00796381029281476","0.016786943893057","0.163868609045744","未采集","0.000726149222263342","0.0396858773789097","未采集","0.00191350132893718","0.0149140957059067","0.0469123237896578","0.0326304545301618","0.177300967825141","0.0176000067287958","0.0173729098677791","0.0422554363063396","0.00310085343561103","0.0469712007536251","0.0696935033475759","0.196064495508528","0.0120922069329026","0.0921466541062476"],["0","0.0241407968711806","0","0.0249621119530677","0.0694304571009533","未采集","0.000449767782938156","0.00459545343436812","未采集","0.000615986311415301","0.00883891469078465","0.0204839892446834","0.0263700806648741","0.340298215595209","0.0304864336348081","0.0158298704473233","0.0245318992911268","0.00888780249327792","0.0939819115130774","0.0494940112441945","0.142341725739428","0.0133561476411635","0.100904424346125"],["0","0.0706503054505064","0.0207402216169042","0","0.0871856239917488","未采集","0.000370243038108587","0.00684288472218549","未采集","0.00119006690820617","0.0104725887922143","0.0477613519160077","0.0404424404305397","0.292280432655435","0.0201121307486843","0.0154047549784465","0.0329185729775474","0.00383466003755322","0.0363962129426387","0.0822732922539867","0.144408007827995","0.0151138497342183","0.0716023589770713"],["0","0.00565577470430123","0.000452965271089753","0.00086608637481513","0","未采集","5.71449242462767e-05","0.00066214714975273","未采集","9.90861530508836e-05","0.000358597506279388","0.00182496771836045","0.00155130120041039","0.0155345068838663","0.00238698018434218","0.000768048752484362","0.00161316451289719","0.000274190783310117","0.00317547528586879","0.947303991599171","0.00770565226212638","0.0010270358403528","0.00868288289327372"],["未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集"],["0","0.0697202166064982","0.00755866425992779","0.0136507220216606","0.2721119133574","未采集","0","0.00722021660649819","未采集","0.00112815884476534","0.00620487364620938","0.0239169675090252","0.0177120938628158","0.255415162454873","0.0200812274368231","0.0108303249097472","0.0219990974729241","0.00225631768953068","0.0338447653429602","0.0604693140794223","0.108190433212996","0.0046254512635379","0.0630640794223826"],["0","0.0983320254196864","0.00842450260813368","0.0125867454492298","0.0942774931142193","未采集","0.000369293265014079","0","未采集","0.00142331779224176","0.026466017326009","0.0988859653172075","0.0190724584160396","0.112026650663958","0.0305820985089784","0.026389081229131","0.0517164443213466","0.00475465078705627","0.0531320685039006","0.0616104263798489","0.170013386880856","0.017718383110988","0.112218990906153"],["未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集"],["0","0.00267809319764327","0.000160685591858596","0.000642742367434386","0.00573111944295661","未采集","0","0.00337439742903053","未采集","0","0.00144617032672737","0.00369576861274772","0.000535618639528655","0.00487412961971076","0.00326727370112479","0.00112479914301017","0.00235672201392608","5.35618639528655e-05","0.00385645420460632","0.947027316550616","0.0080878414568827","0.00144617032672737","0.0096411355115158"],["0","0.00911563432181084","0.00375504474469205","0.00461484470959817","0.018424284962274","未采集","0.000105281628355851","0.00100894893841024","未采集","0.000412353044393753","0","0.0313914721881031","0.00750131602035444","0.0599842077557466","0.00978241796806457","0.0143095279873662","0.0182488155816809","0.00136866116862607","0.0370503597122302","0.661326548517283","0.0710826460782593","0.00592209159501667","0.0445955430777329"],["0","0.0126450366920164","0.00176742133445772","0.00349988748801146","0.0194918827515844","未采集","3.93245785169827e-05","0.000345182411426848","未采集","0.000128897229583443","0.00211478844469107","0","0.00930244751807292","0.116608298796886","0.00536343556995514","0.00717018148292985","0.00964326053188677","0.00117318325908998","0.0123260706662675","0.725328742552907","0.0451271385470442","0.00322024604077958","0.0247045741038911"],["0","0.0257792855717421","0.00770704450209539","0.0151825982837756","0.0607064458191977","未采集","0.000199560965875074","0.00317701057673119","未采集","0.00034723608062263","0.00546397924565954","0.0255837158251845","0","0.17525444023149","0.0177649171821991","0.0149790460985831","0.0469726601476751","0.00346038714827379","0.0378367591299141","0.291079624825384","0.183867491518658","0.0118339652763919","0.0728038315705448"],["0","0","0","0","0","未采集","0","0","未采集","0","0","0","0","1","0","0","0","0","0","0","0","0","0"],["0","0","0","0","0","未采集","0","0","未采集","0","0","0","0","0","1","0","0","0","0","0","0","0","0"],["0","0","0","0","0","未采集","0","0","未采集","0","0","0","0","0","0","1","0","0","0","0","0","0","0"],["0","0","0","0","0","未采集","0","0","未采集","0","0","0","0","0","0","0","1","0","0","0","0","0","0"],["0","0","0","0","0","未采集","0","0","未采集","0","0","0","0","0","0","0","0","1","0","0","0","0","0"],["0","0","0","0","0","未采集","0","0","未采集","0","0","0","0","0","0","0","0","0","1","0","0","0","0"],["0","0","0","0","0","未采集","0","0","未采集","0","0","0","0","0","0","0","0","0","0","1","0","0","0"],["0","0","0","0","0","未采集","0","0","未采集","0","0","0","0","0","0","0","0","0","0","0","1","0","0"],["0","0","0","0","0","未采集","0","0","未采集","0","0","0","0","0","0","0","0","0","0","0","0","1","0"],["0","0","0","0","0","未采集","0","0","未采集","0","0","0","0","0","0","0","0","0","0","0","0","0","1"]],"baselineCheckoutRate":"0.272621505909239","absorptionProbability":[{"node":"S01_访问购物车事件","value":"0.272621505909239","lossProb":"0.0988508206047915","homeProb":"0.073654257521147","categoryProb":"0.0173536221993665","aggregatedCategoryProb":"0.0313387883234473","memberCenterProb":"0.0145896807799605","profileProb":"0.0863300314782812","productDetailProb":"0.245077253791923","searchProb":"0.149915169536634","campaignProb":"0.010268872092785"},{"node":"S02_点击删除","value":"0.208401863676145","lossProb":"0.10599098285603","homeProb":"0.0211686474971525","categoryProb":"0.0203258850075818","aggregatedCategoryProb":"0.048345335125981","memberCenterProb":"0.00373248681714552","profileProb":"0.0542879175176422","productDetailProb":"0.303332606270213","searchProb":"0.220217610811645","campaignProb":"0.0141966646918445"},{"node":"S03_点击省钱卡栏位","value":"0.363975886350646","lossProb":"0.110076470087921","homeProb":"0.0326787492989957","categoryProb":"0.0177244191632168","aggregatedCategoryProb":"0.0288522769076523","memberCenterProb":"0.00928097914879884","profileProb":"0.0987367742109996","productDetailProb":"0.163206135047589","searchProb":"0.160684973224518","campaignProb":"0.014783336730502"},{"node":"S04_操作全场换购","value":"0.331780616379259","lossProb":"0.0882061743321742","homeProb":"0.0239488737046004","categoryProb":"0.0186966707262834","aggregatedCategoryProb":"0.0402845462326494","memberCenterProb":"0.00458836369989545","profileProb":"0.0458179746823643","productDetailProb":"0.252415175790332","searchProb":"0.176831003586034","campaignProb":"0.0174306020778769"},{"node":"S05_点击商品","value":"0.0178391506943811","lossProb":"0.00969235951019962","homeProb":"0.00261191067031022","categoryProb":"0.000973147503625582","aggregatedCategoryProb":"0.00208058805250323","memberCenterProb":"0.000316097485960583","profileProb":"0.00371583551828268","productDetailProb":"0.951849884583223","searchProb":"0.00974898579765415","campaignProb":"0.00117204128965343"},{"node":"S06_操作加减商品","value":"未采集","lossProb":"未采集","homeProb":"未采集","categoryProb":"未采集","aggregatedCategoryProb":"未采集","memberCenterProb":"未采集","profileProb":"未采集","productDetailProb":"未采集","searchProb":"未采集","campaignProb":"未采集"},{"node":"S07_操作更换服务","value":"0.29005783818863","lossProb":"0.0784581339558437","homeProb":"0.0236509222939154","categoryProb":"0.0136904565572096","aggregatedCategoryProb":"0.0284080384400798","memberCenterProb":"0.00288291174344741","profileProb":"0.0417892099647222","productDetailProb":"0.377757686806529","searchProb":"0.136517421731764","campaignProb":"0.00678737969824364"},{"node":"S08_失效商品清空","value":"0.159327357436187","lossProb":"0.131164419399081","homeProb":"0.0347492927798537","categoryProb":"0.0303471065138346","aggregatedCategoryProb":"0.0599936205754661","memberCenterProb":"0.00552989356072647","profileProb":"0.0634546806104826","productDetailProb":"0.287990403638456","searchProb":"0.207093190821615","campaignProb":"0.0203500339510313"},{"node":"S09_失效商品查看","value":"未采集","lossProb":"未采集","homeProb":"未采集","categoryProb":"未采集","aggregatedCategoryProb":"未采集","memberCenterProb":"未采集","profileProb":"未采集","productDetailProb":"未采集","searchProb":"未采集","campaignProb":"未采集"},{"node":"S10_失效商品找相似","value":"0.0070058405940221","lossProb":"0.0107119972119665","homeProb":"0.00352493179900222","categoryProb":"0.00136122673238806","aggregatedCategoryProb":"0.00282709471095758","memberCenterProb":"9.75217710887025e-05","profileProb":"0.00441275650614089","productDetailProb":"0.958477226031585","searchProb":"0.00997856263801889","campaignProb":"0.00160284191624733"},{"node":"S11_点击查看常买","value":"0.0706315055917401","lossProb":"0.048171053595356","homeProb":"0.0106309744214241","categoryProb":"0.0150638537412999","aggregatedCategoryProb":"0.0198058482991623","memberCenterProb":"0.00153957915969298","profileProb":"0.039015726515687","productDetailProb":"0.710705809716351","searchProb":"0.077993751101201","campaignProb":"0.00644189991495473"},{"node":"S12_点击推荐商品","value":"0.123413969151984","lossProb":"0.0276302082283026","homeProb":"0.00604005644249243","categoryProb":"0.00773819081753383","aggregatedCategoryProb":"0.011014155465823","memberCenterProb":"0.00129942826671507","profileProb":"0.0139143685353316","productDetailProb":"0.754223726173468","searchProb":"0.0510755458621291","campaignProb":"0.00365035170022523"},{"node":"S13_点击凑单助手","value":"0.193662131622648","lossProb":"0.0797183323576577","homeProb":"0.0194136093254898","categoryProb":"0.0163624741569281","aggregatedCategoryProb":"0.049766516157496","memberCenterProb":"0.00377682335001659","profileProb":"0.0416990729190703","productDetailProb":"0.386275181209335","searchProb":"0.196481035704748","campaignProb":"0.0128448243157382"}],"removalEffect":[{"node":"S01_访问购物车事件","baseAfterCheckoutRate":"0.272621505909239","drop":"0.272621505909239"},{"node":"S02_点击删除","baseAfterCheckoutRate":"0.255726197263226","drop":"0.0168953086460136"},{"node":"S03_点击省钱卡栏位","baseAfterCheckoutRate":"0.268956626281327","drop":"0.00366487962791223"},{"node":"S04_操作全场换购","baseAfterCheckoutRate":"0.267419768157638","drop":"0.00520173775160143"},{"node":"S05_点击商品","baseAfterCheckoutRate":"0.269873545606889","drop":"0.00274796030235013"},{"node":"S06_操作加减商品","baseAfterCheckoutRate":"未采集","drop":"未采集"},{"node":"S07_操作更换服务","baseAfterCheckoutRate":"0.272351870554672","drop":"0.00026963535456681"},{"node":"S08_失效商品清空","baseAfterCheckoutRate":"0.269983025728337","drop":"0.00263848018090201"},{"node":"S09_失效商品查看","baseAfterCheckoutRate":"未采集","drop":"未采集"},{"node":"S10_失效商品找相似","baseAfterCheckoutRate":"0.272611141125787","drop":"1.03647834527875e-05"},{"node":"S11_点击查看常买","baseAfterCheckoutRate":"0.271826788793248","drop":"0.000794717115990939"},{"node":"S12_点击推荐商品","baseAfterCheckoutRate":"0.268529501122661","drop":"0.00409200478657789"},{"node":"S13_点击凑单助手","baseAfterCheckoutRate":"0.267317040725943","drop":"0.00530446518329658"}]},"alipay":{"endpointName":"支付宝小程序","states":["S01_访问购物车事件","S02_点击删除","S03_点击省钱卡栏位","S04_操作全场换购","S05_点击商品","S06_操作加减商品","S07_操作更换服务","S08_失效商品清空","S09_失效商品查看","S10_失效商品找相似","S11_点击查看常买","S12_点击推荐商品","S13_点击凑单助手","S14_点击去结算","S15_去首页","S16_去分类","S17_去聚合分类","S18_去会员中心","S19_去个人中心","S20_去商详","S21_去搜索","S22_去活动页","S23_流失"],"transitionMatrix":[["0","0.0713418508600735","0.00873122134979349","0.0137123859665047","0.122798756410838","未采集","0.000771569917850496","0.0132358280760677","未采集","0.00122543457540961","0.0118912540280488","0.0249795760904098","0.0260518313438932","0.253716016883765","0.0423001860845096","0.0138996051377479","0.0232832569327826","0.0181375663777061","0.0812474470113012","0.0519958698316162","0.109216856533381","0.00559955521263559","0.105863931375663"],["0","0","0.00712092785263517","0.0183353232133719","0.142887600204673","未采集","0.000682244584683609","0.0364574449940303","未采集","0.00230257547330718","0.0173545966228893","0.0466911137642844","0.0391864233327647","0.178023196315879","0.0121524816646767","0.0165444311785775","0.0405935527886747","0.00460515094661436","0.0520211495821251","0.0774774006481323","0.189877195974756","0.00929558246631417","0.108391608391608"],["0","0.02527181898325","0","0.0202762268586541","0.0578900969732588","未采集","0.000587716720540699","0.00528945048486629","未采集","0.000881575080811049","0.0102850426094622","0.0208639435791948","0.0249779606229797","0.31942403761387","0.0173376432559506","0.012635909491625","0.0199823684983837","0.0146929180135174","0.101968851013811","0.0570085218924478","0.133705553923009","0.00881575080811049","0.148104613576256"],["0","0.0919407578380457","0.0217349490286593","0","0.0769378726678207","未采集","0.000384689363339103","0.0051933064050779","未采集","0.000769378726678207","0.0115406809001731","0.0467397576457011","0.0442392767839969","0.281015579919215","0.0151952298518945","0.0136564723985381","0.026158876707059","0.00653971917676476","0.035583766108867","0.0807847663012117","0.136180034622042","0.0101942681284862","0.0952106174264281"],["0","0.0053954061970094","0.000291180651902094","0.000907798502988883","0","未采集","6.85130945651987e-05","0.00054810475652159","未采集","5.1384820923899e-05","0.000411078567391192","0.00154154462771697","0.00138739016494527","0.0143021084904852","0.00142164671222787","0.000753644040217186","0.00161005772228217","0.000462463388315091","0.00315160234999914","0.947433328194851","0.00673141154103078","0.000770772313858486","0.0127605638627682"],["未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集"],["0","0.0743494423791821","0.0260223048327137","0.00743494423791821","0.230483271375464","未采集","0","0.0111524163568773","未采集","0","0.0037174721189591","0.0483271375464684","0.0223048327137546","0.260223048327137","0.0111524163568773","0.0185873605947955","0.0223048327137546","0.0037174721189591","0.037174721189591","0.0669144981412639","0.0780669144981412","0.00743494423791821","0.070631970260223"],["0","0.100324374420759","0.0067191844300278","0.0108897126969416","0.0919833178869323","未采集","0.000231696014828544","0","未采集","0.00162187210379981","0.0280352177942539","0.0908248378127896","0.0236329935125115","0.133920296570899","0.0222428174235403","0.0271084337349397","0.0537534754402224","0.00810936051899907","0.0539851714550509","0.0667284522706209","0.147822057460611","0.013206672845227","0.118860055607043"],["未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集","未采集"],["0","0","0","0","0.00487012987012987","未采集","0","0.00324675324675324","未采集","0","0.00162337662337662","0.00162337662337662","0.00162337662337662","0.00487012987012987","0.00324675324675324","0.00162337662337662","0.00162337662337662","0.00162337662337662","0.00324675324675324","0.959415584415584","0.00649350649350649","0","0.00487012987012987"],["0","0.00837808807733619","0.00386680988184747","0.00644468313641246","0.0208378088077336","未采集","0","0.00128893662728249","未采集","0.000429645542427497","0","0.0305048335123523","0.00988184747583243","0.0618689581095596","0.00859291084854994","0.0204081632653061","0.0225563909774436","0.00236305048335123","0.0373791621911922","0.625778732545649","0.0773361976369495","0.00515574650912996","0.0569280343716433"],["0","0.0127583567236539","0.00191375350854809","0.00344475631538657","0.0183082418984434","未采集","6.37917836182699e-05","0.000382750701709619","未采集","6.37917836182699e-05","0.00293442204644041","0","0.00982393467721357","0.123054350599642","0.0033809645317683","0.00752743046695585","0.0104618525133962","0.00114825210512885","0.0125031895891809","0.712873181934166","0.0441439142638428","0.00236029599387598","0.032852768563409"],["0","0.0261917234154007","0.00890518596123625","0.017391304347826","0.0538501833420639","未采集","0","0.00335254059717129","未采集","0.000419067574646411","0.00513357778941854","0.0246202200104766","0","0.17454164484023","0.0126767941330539","0.0166579360921948","0.0426401257202723","0.00429544264012572","0.0405447878470403","0.308328968046097","0.168255631220534","0.00942902042954426","0.0827658459926663"],["0","0","0","0","0","未采集","0","0","未采集","0","0","0","0","1","0","0","0","0","0","0","0","0","0"],["0","0","0","0","0","未采集","0","0","未采集","0","0","0","0","0","1","0","0","0","0","0","0","0","0"],["0","0","0","0","0","未采集","0","0","未采集","0","0","0","0","0","0","1","0","0","0","0","0","0","0"],["0","0","0","0","0","未采集","0","0","未采集","0","0","0","0","0","0","0","1","0","0","0","0","0","0"],["0","0","0","0","0","未采集","0","0","未采集","0","0","0","0","0","0","0","0","1","0","0","0","0","0"],["0","0","0","0","0","未采集","0","0","未采集","0","0","0","0","0","0","0","0","0","1","0","0","0","0"],["0","0","0","0","0","未采集","0","0","未采集","0","0","0","0","0","0","0","0","0","0","1","0","0","0"],["0","0","0","0","0","未采集","0","0","未采集","0","0","0","0","0","0","0","0","0","0","0","1","0","0"],["0","0","0","0","0","未采集","0","0","未采集","0","0","0","0","0","0","0","0","0","0","0","0","1","0"],["0","0","0","0","0","未采集","0","0","未采集","0","0","0","0","0","0","0","0","0","0","0","0","0","1"]],"baselineCheckoutRate":"0.290014470756787","absorptionProbability":[{"node":"S01_访问购物车事件","value":"0.290014470756787","lossProb":"0.125531989744829","homeProb":"0.0448660870710277","categoryProb":"0.0171479882596199","aggregatedCategoryProb":"0.0301558233904206","memberCenterProb":"0.0191569166825839","profileProb":"0.0904376204363573","productDetailProb":"0.236707134550348","searchProb":"0.138635798354653","campaignProb":"0.00734616998808078"},{"node":"S02_点击删除","value":"0.210538665847165","lossProb":"0.125331830896224","homeProb":"0.0146597043701007","categoryProb":"0.0197176200140801","aggregatedCategoryProb":"0.046717837776151","memberCenterProb":"0.00557111688860483","profileProb":"0.0596978842854785","productDetailProb":"0.293846115377119","searchProb":"0.213020477724102","campaignProb":"0.0108987471269979"},{"node":"S03_点击省钱卡栏位","value":"0.341751382150889","lossProb":"0.158988409405523","homeProb":"0.0188319042660917","categoryProb":"0.0145621421053085","aggregatedCategoryProb":"0.0239521605494601","memberCenterProb":"0.0152501533442286","profileProb":"0.106848468268197","productDetailProb":"0.159422837196532","searchProb":"0.150548581285909","campaignProb":"0.0098439625654299"},{"node":"S04_操作全场换购","value":"0.325628737751445","lossProb":"0.11852882538711","homeProb":"0.0181116922413836","categoryProb":"0.0174555047007385","aggregatedCategoryProb":"0.0343051137578278","memberCenterProb":"0.00778076666691609","profileProb":"0.0471468799502271","productDetailProb":"0.246824207965671","searchProb":"0.172015912434003","campaignProb":"0.0122023594115885"},{"node":"S05_点击商品","value":"0.0164530608160305","lossProb":"0.0138847994536758","homeProb":"0.00156655642199233","categoryProb":"0.000945179376427006","aggregatedCategoryProb":"0.00202747181405207","memberCenterProb":"0.000519343327720781","profileProb":"0.00368728117946412","productDetailProb":"0.951490790736975","searchProb":"0.00855239107931174","campaignProb":"0.000873126701444065"},{"node":"S06_操作加减商品","value":"未采集","lossProb":"未采集","homeProb":"未采集","categoryProb":"未采集","aggregatedCategoryProb":"未采集","memberCenterProb":"未采集","profileProb":"未采集","productDetailProb":"未采集","searchProb":"未采集","campaignProb":"未采集"},{"node":"S07_操作更换服务","value":"0.303881210186907","lossProb":"0.0938047502300742","homeProb":"0.0140387022241643","categoryProb":"0.0220035352870384","aggregatedCategoryProb":"0.0294883790429481","memberCenterProb":"0.00499106769580013","profileProb":"0.0481574227291423","productDetailProb":"0.364401222721019","searchProb":"0.109891639712466","campaignProb":"0.00934206857265762"},{"node":"S08_失效商品清空","value":"0.180930123672428","lossProb":"0.142329727363059","homeProb":"0.0251276780002522","categoryProb":"0.0312308960539773","aggregatedCategoryProb":"0.0619946867794096","memberCenterProb":"0.00921680445291563","profileProb":"0.0650305337659896","productDetailProb":"0.284825185884802","searchProb":"0.184089673556318","campaignProb":"0.0152246908700529"},{"node":"S09_失效商品查看","value":"未采集","lossProb":"未采集","homeProb":"未采集","categoryProb":"未采集","aggregatedCategoryProb":"未采集","memberCenterProb":"未采集","profileProb":"未采集","productDetailProb":"未采集","searchProb":"未采集","campaignProb":"未采集"},{"node":"S10_失效商品找相似","value":"0.00618278548679743","lossProb":"0.00570893717748024","homeProb":"0.00337971867086218","categoryProb":"0.00180639323009385","aggregatedCategoryProb":"0.00196667747732892","memberCenterProb":"0.00167010587513356","profileProb":"0.00363619767094438","productDetailProb":"0.967920523524354","searchProb":"0.00764495984073732","campaignProb":"8.37020582836994e-05"},{"node":"S11_点击查看常买","value":"0.0735135363101995","lossProb":"0.061856201688476","homeProb":"0.00922670645114361","categoryProb":"0.0212297238820754","aggregatedCategoryProb":"0.0241932118543963","memberCenterProb":"0.00263086934309127","profileProb":"0.0396375169671635","productDetailProb":"0.677583927883173","searchProb":"0.084543478915964","campaignProb":"0.00558482781445032"},{"node":"S12_点击推荐商品","value":"0.130026430548298","lossProb":"0.0365644226766531","homeProb":"0.00386903474610296","categoryProb":"0.00813761793852924","aggregatedCategoryProb":"0.0118018229358118","memberCenterProb":"0.00134383721191107","profileProb":"0.0142843773739064","productDetailProb":"0.741270884307789","searchProb":"0.0500022749345563","campaignProb":"0.00269929995483476"},{"node":"S13_点击凑单助手","value":"0.193836317209607","lossProb":"0.0919707202280982","homeProb":"0.0138560842286371","categoryProb":"0.0180733193452221","aggregatedCategoryProb":"0.0454062606193307","memberCenterProb":"0.0048186409576291","profileProb":"0.044853098564161","productDetailProb":"0.396064736943808","searchProb":"0.18091324580405","campaignProb":"0.0102075762432631"}],"removalEffect":[{"node":"S01_访问购物车事件","baseAfterCheckoutRate":"0.290014470756787","drop":"0.290014470756787"},{"node":"S02_点击删除","baseAfterCheckoutRate":"0.273958768300119","drop":"0.0160557024566683"},{"node":"S03_点击省钱卡栏位","baseAfterCheckoutRate":"0.286531483877922","drop":"0.00348298687886461"},{"node":"S04_操作全场换购","baseAfterCheckoutRate":"0.284697484196954","drop":"0.00531698655983314"},{"node":"S05_点击商品","baseAfterCheckoutRate":"0.287714957297432","drop":"0.0022995134593553"},{"node":"S06_操作加减商品","baseAfterCheckoutRate":"未采集","drop":"未采集"},{"node":"S07_操作更换服务","baseAfterCheckoutRate":"0.289755647849875","drop":"0.00025882290691187"},{"node":"S08_失效商品清空","baseAfterCheckoutRate":"0.287058675694874","drop":"0.00295579506191284"},{"node":"S09_失效商品查看","baseAfterCheckoutRate":"未采集","drop":"未采集"},{"node":"S10_失效商品找相似","baseAfterCheckoutRate":"0.290005325521888","drop":"9.1452348993104e-06"},{"node":"S11_点击查看常买","baseAfterCheckoutRate":"0.288963891036899","drop":"0.00105057971988775"},{"node":"S12_点击推荐商品","baseAfterCheckoutRate":"0.285794211552553","drop":"0.00422025920423413"},{"node":"S13_点击凑单助手","baseAfterCheckoutRate":"0.284000767742824","drop":"0.00601370301396275"}]}}</script>
@@ -3638,6 +4521,7 @@
       { key: 'cart', label: '购物车markov' },
       { key: 'checkout', label: '结算页markov' },
       { key: 'mubbk', label: 'MUBBK一期落地方案' },
+      { key: 'reviewPlan', label: '一期复盘方案' },
       { key: 'threshold', label: '阈值分析&干预UX草案' }
     ];
     const cartTabs = [
@@ -4022,11 +4906,13 @@
 	      const isCheckout = currentScope === 'checkout';
 	      const isThreshold = currentScope === 'threshold';
 	      const isMubbk = currentScope === 'mubbk';
+	      const isReviewPlan = currentScope === 'reviewPlan';
 	      toggleHidden('globalView', !isGlobal);
 	      toggleHidden('cartView', !isCart);
 	      toggleHidden('checkoutView', !isCheckout);
 	      toggleHidden('thresholdView', !isThreshold);
 	      toggleHidden('mubbkView', !isMubbk);
+	      toggleHidden('reviewPlanView', !isReviewPlan);
 	      toggleHidden('tabsWrap', !isGlobal);
 
       // Visibility control for explanation sections in Global Markov
@@ -4034,7 +4920,7 @@
       document.getElementById('markovPrimer').classList.toggle('hidden', !showExplanations);
       document.getElementById('dataExtraction').classList.toggle('hidden', !showExplanations);
 
-      document.getElementById('currentScopeText').textContent = `当前模块：${isGlobal ? '全局markov' : isCart ? '购物车markov' : isCheckout ? '结算页markov' : isThreshold ? '阈值分析&干预UX草案' : 'MUBBK一期落地方案'}`;
+      document.getElementById('currentScopeText').textContent = `当前模块：${isGlobal ? '全局markov' : isCart ? '购物车markov' : isCheckout ? '结算页markov' : isThreshold ? '阈值分析&干预UX草案' : isReviewPlan ? '一期复盘方案' : 'MUBBK一期落地方案'}`;
       document.getElementById('dataSourceText').innerHTML = isGlobal
         ? '数据源：<code>关键场景转移矩阵_*.xlsx</code> + <code>关键场景吸收概率_*.xlsx</code> + <code>关键场景移除效应_*.xlsx</code>（APP / 微信小程序 / 支付宝小程序，共9份原始表）'
         : isCart
@@ -4043,13 +4929,17 @@
             ? '数据源：<code>结算页转移矩阵_*.xlsx</code> + <code>结算页吸收概率_*.xlsx</code> + <code>结算页移除效应_*.xlsx</code>（APP / 微信小程序 / 支付宝小程序，共9份原始表）'
             : isThreshold
             ? '数据源：<code>购物车阈值分析概率版.csv</code> + 历史动作分布补充表（同样要求有购物车编辑行为；概率分母为每秒开始时仍留在购物车的人数）'
+            : isReviewPlan
+            ? '数据源：<code>一期上线 AB 方案.md</code>（MUBBK 主实验 + 四个 UX 独立实验 + 复盘指标口径）'
             : '数据源：<code>MUBBK一期落地方案草案.md</code>';
       document.getElementById('dataSourceText').classList.toggle('hidden', isThreshold);
       document.getElementById('headerMetaBlock').classList.toggle('hidden', isThreshold);
       document.getElementById('precisionText').textContent = isGlobal
         ? '* 全局markov统一展示为小数点后两位'
-        : isThreshold
+          : isThreshold
           ? '* 阈值页默认展示当秒概率，辅助视角保留历史分布；建议阈值以当秒概率和可干预样本规模共同判断'
+          : isReviewPlan
+            ? '* 复盘页按最终 AB 方案展示；核心原则：并行实验、双标签记录、按增量拆分复盘'
           : '* 子场景markov统一展示为百分比两位小数，0值留空';
 
       if (isGlobal) {
@@ -4063,6 +4953,8 @@
         document.getElementById('currentTabText').textContent = `当前端：${tab ? tab.label : currentCheckout}`;
       } else if (isThreshold) {
         document.getElementById('currentTabText').textContent = '当前分析：转化分布 + 流失分布双维度交叉';
+      } else if (isReviewPlan) {
+        document.getElementById('currentTabText').textContent = '当前方案：一期上线 AB 复盘蓝图';
       } else {
         document.getElementById('currentTabText').textContent = `当前方案：购物车犹豫干预试点`;
       }
