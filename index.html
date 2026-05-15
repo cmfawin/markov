@@ -1367,6 +1367,372 @@
       background: color-mix(in oklab, var(--primary) 4%, var(--card) 96%);
     }
 
+    #annualPlanView {
+      position: relative;
+      isolation: isolate;
+      --annual-line: color-mix(in oklab, var(--primary) 18%, var(--border) 82%);
+      --annual-soft: color-mix(in oklab, var(--accent) 62%, var(--card) 38%);
+      --annual-blue: var(--chart-2);
+      --annual-pink: var(--chart-3);
+      --annual-green: var(--chart-5);
+      --annual-yellow: var(--chart-4);
+    }
+
+    #annualPlanView .annual-panel {
+      position: relative;
+      overflow: hidden;
+      border-color: var(--annual-line);
+      background:
+        linear-gradient(180deg,
+          color-mix(in oklab, var(--card) 94%, var(--accent) 6%) 0%,
+          var(--card) 100%);
+    }
+
+    #annualPlanView .annual-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 0.28rem;
+      background: linear-gradient(90deg,
+          var(--primary) 0%,
+          color-mix(in oklab, var(--annual-blue) 58%, var(--primary) 42%) 34%,
+          color-mix(in oklab, var(--annual-green) 62%, var(--accent) 38%) 68%,
+          color-mix(in oklab, var(--annual-pink) 64%, var(--primary) 36%) 100%);
+      pointer-events: none;
+    }
+
+    #annualPlanView .annual-hero {
+      background:
+        linear-gradient(135deg,
+          color-mix(in oklab, var(--accent) 58%, var(--card) 42%) 0%,
+          color-mix(in oklab, var(--primary) 7%, var(--card) 93%) 48%,
+          var(--card) 100%);
+    }
+
+    #annualPlanView .annual-kicker,
+    #annualPlanView .annual-chip,
+    #annualPlanView .annual-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--annual-line);
+      background: var(--annual-soft);
+      color: var(--primary);
+      font-weight: 900;
+    }
+
+    #annualPlanView .annual-kicker {
+      padding: 0.28rem 0.58rem;
+      border-radius: var(--radius);
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+    }
+
+    #annualPlanView .annual-chip {
+      padding: 0.32rem 0.58rem;
+      border-radius: 9999px;
+      font-size: 0.74rem;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    #annualPlanView .annual-number {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--primary-foreground);
+      border-color: var(--primary);
+      flex: none;
+      font-size: 0.9rem;
+    }
+
+    #annualPlanView .annual-roadmap {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(12rem, 1fr));
+      gap: 0.8rem;
+      min-width: 72rem;
+      padding-top: 2.4rem;
+    }
+
+    #annualPlanView .annual-roadmap::before {
+      content: "";
+      position: absolute;
+      left: 6rem;
+      right: 6rem;
+      top: 1.12rem;
+      height: 0.16rem;
+      background: linear-gradient(90deg,
+          var(--primary) 0%,
+          var(--annual-blue) 28%,
+          var(--annual-green) 52%,
+          var(--annual-yellow) 76%,
+          var(--annual-pink) 100%);
+      border-radius: 9999px;
+    }
+
+    #annualPlanView .annual-step {
+      position: relative;
+      border: 1px solid var(--annual-line);
+      border-radius: var(--radius);
+      background: var(--card);
+      padding: 0.85rem;
+      min-height: 15.4rem;
+    }
+
+    #annualPlanView .annual-step::before {
+      content: "";
+      position: absolute;
+      top: -1.68rem;
+      left: 50%;
+      width: 0.86rem;
+      height: 0.86rem;
+      border: 2px solid var(--primary);
+      border-radius: 50%;
+      background: var(--card);
+      transform: translateX(-50%);
+    }
+
+    #annualPlanView .annual-stage {
+      display: flex;
+      min-height: 2.4rem;
+      align-items: center;
+      gap: 0.45rem;
+      font-weight: 900;
+      color: var(--foreground);
+    }
+
+    #annualPlanView .annual-layer {
+      border: 1px solid var(--annual-line);
+      border-radius: var(--radius);
+      background: color-mix(in oklab, var(--accent) 42%, var(--card) 58%);
+      padding: 0.5rem;
+      min-height: 5rem;
+    }
+
+    #annualPlanView .annual-stack-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: var(--radius);
+      border: 1px solid color-mix(in oklab, var(--primary) 34%, var(--border) 66%);
+      background: color-mix(in oklab, var(--primary) 10%, var(--card) 90%);
+      color: var(--primary);
+      font-size: 1.2rem;
+      font-weight: 900;
+    }
+
+    #annualPlanView .annual-card {
+      border: 1px solid var(--annual-line);
+      border-radius: var(--radius);
+      background: var(--card);
+      padding: 0.85rem;
+    }
+
+    #annualPlanView .annual-card-primary {
+      border-color: color-mix(in oklab, var(--primary) 42%, var(--border) 58%);
+      background:
+        linear-gradient(180deg,
+          color-mix(in oklab, var(--primary) 12%, var(--card) 88%) 0%,
+          var(--card) 100%);
+    }
+
+    #annualPlanView .annual-card-blue {
+      border-color: color-mix(in oklab, var(--annual-blue) 42%, var(--border) 58%);
+      background:
+        linear-gradient(180deg,
+          color-mix(in oklab, var(--annual-blue) 14%, var(--card) 86%) 0%,
+          var(--card) 100%);
+    }
+
+    #annualPlanView .annual-card-green {
+      border-color: color-mix(in oklab, var(--annual-green) 46%, var(--border) 54%);
+      background:
+        linear-gradient(180deg,
+          color-mix(in oklab, var(--annual-green) 14%, var(--card) 86%) 0%,
+          var(--card) 100%);
+    }
+
+    #annualPlanView .annual-formula {
+      border: 1px solid var(--annual-line);
+      border-radius: var(--radius);
+      background: color-mix(in oklab, var(--accent) 52%, var(--card) 48%);
+      padding: 0.6rem 0.72rem;
+      font-family: JetBrains Mono, ui-monospace, monospace;
+      color: color-mix(in oklab, var(--foreground) 86%, var(--primary) 14%);
+      font-size: 0.82rem;
+      line-height: 1.7;
+    }
+
+    #phase2PlanView {
+      position: relative;
+      isolation: isolate;
+      --phase2-line: color-mix(in oklab, var(--primary) 18%, var(--border) 82%);
+      --phase2-soft: color-mix(in oklab, var(--accent) 62%, var(--card) 38%);
+      --phase2-blue: var(--chart-2);
+      --phase2-green: var(--chart-5);
+      --phase2-pink: var(--chart-3);
+    }
+
+    #phase2PlanView .phase2-panel {
+      position: relative;
+      overflow: hidden;
+      border-color: var(--phase2-line);
+      background:
+        linear-gradient(180deg,
+          color-mix(in oklab, var(--card) 94%, var(--accent) 6%) 0%,
+          var(--card) 100%);
+    }
+
+    #phase2PlanView .phase2-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 0.28rem;
+      background: linear-gradient(90deg,
+          var(--primary) 0%,
+          color-mix(in oklab, var(--phase2-blue) 58%, var(--primary) 42%) 48%,
+          color-mix(in oklab, var(--phase2-green) 62%, var(--accent) 38%) 100%);
+      pointer-events: none;
+    }
+
+    #phase2PlanView .phase2-hero {
+      background:
+        linear-gradient(135deg,
+          color-mix(in oklab, var(--accent) 58%, var(--card) 42%) 0%,
+          color-mix(in oklab, var(--primary) 7%, var(--card) 93%) 48%,
+          var(--card) 100%);
+    }
+
+    #phase2PlanView .phase2-kicker,
+    #phase2PlanView .phase2-chip,
+    #phase2PlanView .phase2-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--phase2-line);
+      background: var(--phase2-soft);
+      color: var(--primary);
+      font-weight: 900;
+    }
+
+    #phase2PlanView .phase2-kicker {
+      padding: 0.28rem 0.58rem;
+      border-radius: var(--radius);
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+    }
+
+    #phase2PlanView .phase2-chip {
+      padding: 0.32rem 0.58rem;
+      border-radius: 9999px;
+      font-size: 0.74rem;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    #phase2PlanView .phase2-number {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--primary-foreground);
+      border-color: var(--primary);
+      flex: none;
+      font-size: 0.9rem;
+    }
+
+    #phase2PlanView .phase2-card {
+      border: 1px solid var(--phase2-line);
+      border-radius: var(--radius);
+      background: var(--card);
+      padding: 0.85rem;
+    }
+
+    #phase2PlanView .phase2-card-primary {
+      border-color: color-mix(in oklab, var(--primary) 42%, var(--border) 58%);
+      background:
+        linear-gradient(180deg,
+          color-mix(in oklab, var(--primary) 12%, var(--card) 88%) 0%,
+          var(--card) 100%);
+    }
+
+    #phase2PlanView .phase2-card-blue {
+      border-color: color-mix(in oklab, var(--phase2-blue) 42%, var(--border) 58%);
+      background:
+        linear-gradient(180deg,
+          color-mix(in oklab, var(--phase2-blue) 14%, var(--card) 86%) 0%,
+          var(--card) 100%);
+    }
+
+    #phase2PlanView .phase2-card-green {
+      border-color: color-mix(in oklab, var(--phase2-green) 46%, var(--border) 54%);
+      background:
+        linear-gradient(180deg,
+          color-mix(in oklab, var(--phase2-green) 14%, var(--card) 86%) 0%,
+          var(--card) 100%);
+    }
+
+    #phase2PlanView .phase2-flow {
+      min-width: 70rem;
+    }
+
+    #phase2PlanView .phase2-flow-row {
+      display: grid;
+      grid-template-columns: 1.05fr 1.05fr 1.15fr 1.05fr 1.35fr;
+      gap: 0.7rem;
+      align-items: stretch;
+    }
+
+    #phase2PlanView .phase2-flow-step {
+      position: relative;
+      min-height: 8.8rem;
+      border: 1px solid var(--phase2-line);
+      border-radius: var(--radius);
+      background: var(--card);
+      padding: 0.8rem;
+    }
+
+    #phase2PlanView .phase2-flow-step:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -0.82rem;
+      width: 0.82rem;
+      height: 0.16rem;
+      background: color-mix(in oklab, var(--foreground) 78%, var(--border) 22%);
+      transform: translateY(-50%);
+    }
+
+    #phase2PlanView .phase2-branch {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.7rem;
+      margin-top: 0.75rem;
+    }
+
+    #phase2PlanView .phase2-branch-card {
+      border: 1px solid var(--phase2-line);
+      border-radius: var(--radius);
+      background: color-mix(in oklab, var(--accent) 42%, var(--card) 58%);
+      padding: 0.7rem;
+      min-height: 7.2rem;
+    }
+
+    #phase2PlanView .phase2-formula {
+      border: 1px solid var(--phase2-line);
+      border-radius: var(--radius);
+      background: color-mix(in oklab, var(--accent) 52%, var(--card) 48%);
+      padding: 0.6rem 0.72rem;
+      font-family: JetBrains Mono, ui-monospace, monospace;
+      color: color-mix(in oklab, var(--foreground) 86%, var(--primary) 14%);
+      font-size: 0.82rem;
+      line-height: 1.7;
+    }
+
   </style>
 </head>
 
@@ -3388,6 +3754,468 @@
         </div>
       </section>
     </section>
+
+    <section id="phase2PlanView" class="hidden space-y-6">
+      <section class="panel phase2-panel phase2-hero bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div>
+          <div class="phase2-kicker">PHASE 2 UPLIFT BLUEPRINT</div>
+          <h2 class="mt-3 text-3xl md:text-4xl font-black text-foreground">二期落地方案</h2>
+          <p class="mt-3 text-sm md:text-base leading-7 text-foreground">
+            二期只回答一个问题：对每一个触发 T1/T2 的 session，到底该不该出手；如果出手，是免费提示，还是进入固定 2 元券付费池。多券型最优选择留给三期。
+          </p>
+        </div>
+
+        <div class="mt-6 overflow-x-auto">
+          <div class="phase2-flow" role="img" aria-label="二期 uplift 在线决策流程：触发 T1/T2 后频控检查，拼装特征，模型打分，决策引擎按 uplift 分数分为静默、免费提示或固定 2 元券，并记录结果用于周更和三期数据沉淀。">
+            <div class="phase2-flow-row">
+              <article class="phase2-flow-step phase2-card-primary">
+                <div class="phase2-chip">入口</div>
+                <h3 class="mt-3 text-xl font-black text-foreground">触发 T1 / T2</h3>
+                <p class="mt-2 text-xs leading-6 text-foreground">前端上报 trigger_detected，携带购物车快照和触发上下文。</p>
+              </article>
+              <article class="phase2-flow-step">
+                <div class="phase2-chip">护栏</div>
+                <h3 class="mt-3 text-xl font-black text-foreground">频控检查</h3>
+                <p class="mt-2 text-xs leading-6 text-foreground">沿用一期频控；不通过直接静默，避免过度打扰。</p>
+              </article>
+              <article class="phase2-flow-step phase2-card-blue">
+                <div class="phase2-chip">特征</div>
+                <h3 class="mt-3 text-xl font-black text-foreground">拼装特征向量</h3>
+                <p class="mt-2 text-xs leading-6 text-foreground">实时特征 + 离线画像 + Markov 吸收概率和回路特征。</p>
+              </article>
+              <article class="phase2-flow-step phase2-card-green">
+                <div class="phase2-chip">模型</div>
+                <h3 class="mt-3 text-xl font-black text-foreground">Uplift 打分</h3>
+                <p class="mt-2 text-xs leading-6 text-foreground">X-Learner 输出 τ(x)，表示干预后支付概率提升量。</p>
+              </article>
+              <article class="phase2-flow-step phase2-card-primary">
+                <div class="phase2-chip">决策</div>
+                <h3 class="mt-3 text-xl font-black text-foreground">决策引擎分流</h3>
+                <p class="mt-2 text-xs leading-6 text-foreground">把模型分数翻译成前端可执行的干预指令。</p>
+              </article>
+            </div>
+
+            <div class="phase2-branch">
+              <article class="phase2-branch-card">
+                <div class="text-xs font-black text-foreground/60">τ(x) ≤ 0</div>
+                <div class="mt-2 text-lg font-black text-foreground">静默</div>
+                <p class="mt-2 text-xs leading-6 text-foreground">干预无效甚至有害，不展示任何组件。</p>
+              </article>
+              <article class="phase2-branch-card phase2-card-blue">
+                <div class="text-xs font-black text-foreground/60">0 &lt; τ(x) ≤ threshold</div>
+                <div class="mt-2 text-lg font-black text-foreground">免费提示</div>
+                <p class="mt-2 text-xs leading-6 text-foreground">有轻微增量，优先用低成本提醒拉回。</p>
+              </article>
+              <article class="phase2-branch-card phase2-card-green">
+                <div class="text-xs font-black text-foreground/60">τ(x) &gt; threshold</div>
+                <div class="mt-2 text-lg font-black text-foreground">固定 2 元券</div>
+                <p class="mt-2 text-xs leading-6 text-foreground">进入付费池，二期仍沿用固定券，不做多券选择。</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel phase2-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+          <div class="xl:col-span-4">
+            <div class="phase2-kicker">GOAL</div>
+            <h3 class="mt-3 text-3xl font-black text-foreground">二期成功标准</h3>
+            <p class="mt-3 text-sm md:text-base leading-7 text-foreground">
+              二期不是为了证明“发券有效”，而是要用个体级模型替代 12-cell 规则，让每一次干预都更像是对摇摆客出手。
+            </p>
+          </div>
+          <div class="xl:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div class="phase2-card phase2-card-primary">
+              <div class="phase2-number">01</div>
+              <div class="mt-3 text-xl font-black text-foreground">模型替代规则</div>
+              <p class="mt-2 text-sm leading-7 text-foreground">上线个体级 uplift 模型，替代一期 12-cell 规则分层。</p>
+            </div>
+            <div class="phase2-card phase2-card-green">
+              <div class="phase2-number">02</div>
+              <div class="mt-3 text-xl font-black text-foreground">增量毛利提升</div>
+              <p class="mt-2 text-sm leading-7 text-foreground">相同补贴预算下，增量毛利相比一期规则版有所提升。</p>
+            </div>
+            <div class="phase2-card phase2-card-blue">
+              <div class="phase2-number">03</div>
+              <div class="mt-3 text-xl font-black text-foreground">减少补贴浪费</div>
+              <p class="mt-2 text-sm leading-7 text-foreground">补贴浪费率，也就是发给本来就会买的人的比例，有所下降。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel phase2-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div class="phase2-kicker">PHASE 1 HANDOFF</div>
+        <h3 class="mt-3 text-3xl font-black text-foreground">一期交付物如何接到二期</h3>
+        <div class="mt-5 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
+          <div class="phase2-card phase2-card-primary">
+            <div class="text-lg font-black text-foreground">触发识别链路</div>
+            <p class="mt-2 text-sm leading-7 text-foreground">T1/T2 在线识别和埋点继续作为二期入口。</p>
+          </div>
+          <div class="phase2-card phase2-card-blue">
+            <div class="text-lg font-black text-foreground">会话级样本表</div>
+            <p class="mt-2 text-sm leading-7 text-foreground">每条样本包含特征、动作和结果，是 uplift 模型训练主数据。</p>
+          </div>
+          <div class="phase2-card phase2-card-green">
+            <div class="text-lg font-black text-foreground">经验规则表</div>
+            <p class="mt-2 text-sm leading-7 text-foreground">用于冷启动兜底，也用于校验模型是否跑偏。</p>
+          </div>
+          <div class="phase2-card">
+            <div class="text-lg font-black text-foreground">Markov 基线</div>
+            <p class="mt-2 text-sm leading-7 text-foreground">持续监控全局、购物车、结算页吸收概率和路径质量。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel phase2-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+          <div class="xl:col-span-4">
+            <div class="phase2-kicker">MODEL DESIGN</div>
+            <h3 class="mt-3 text-3xl font-black text-foreground">Uplift 模型设计</h3>
+            <p class="mt-3 text-sm md:text-base leading-7 text-foreground">
+              模型估计的是 CATE：同一个 session 被干预后，相比不干预，支付概率多提升多少。
+            </p>
+            <div class="mt-4 phase2-formula">τ(x) = E[Y(1) - Y(0) | X=x]</div>
+          </div>
+          <div class="xl:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="phase2-card phase2-card-blue">
+              <div class="text-lg font-black text-foreground">训练数据</div>
+              <p class="mt-2 text-sm leading-7 text-foreground">来源是一期开出的 RCT 样本表。处理组是 A1/A2 且实际曝光的 session；对照组是 A0 静默 session。</p>
+            </div>
+            <div class="phase2-card phase2-card-primary">
+              <div class="text-lg font-black text-foreground">标签定义</div>
+              <p class="mt-2 text-sm leading-7 text-foreground">主标签是触发后 15 分钟内是否支付，辅助标签是触发后 24 小时内是否支付。</p>
+            </div>
+            <div class="phase2-card md:col-span-2">
+              <div class="flex flex-wrap items-center gap-2">
+                <div class="text-lg font-black text-foreground">特征工程</div>
+                <span class="phase2-chip">仅供参考，朋辉主导</span>
+              </div>
+              <div class="mt-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-3">
+                <div class="rounded-xl border border-border bg-muted p-3 text-xs leading-6 text-foreground">
+                  <div class="font-black text-foreground">A. 触发上下文</div>
+                  trigger_type、from_page / to_page、stay_duration_sec、cart_edit_count、hour_of_day / day_of_week
+                </div>
+                <div class="rounded-xl border border-border bg-muted p-3 text-xs leading-6 text-foreground">
+                  <div class="font-black text-foreground">B. 购物车状态</div>
+                  cart_amount、cart_gp、cart_item_count、shipping_fee、gap_to_free_shipping、可领券、促销命中
+                </div>
+                <div class="rounded-xl border border-border bg-muted p-3 text-xs leading-6 text-foreground">
+                  <div class="font-black text-foreground">C. 用户画像</div>
+                  生命周期、R 分层、首单、距上次下单天数、历史购买间隔、客单价偏离、券敏感度
+                </div>
+                <div class="rounded-xl border border-border bg-muted p-3 text-xs leading-6 text-foreground">
+                  <div class="font-black text-foreground">D. 路径行为</div>
+                  checkout_visit_count、cart_to_checkout_count、page_depth、search_count
+                </div>
+                <div class="rounded-xl border border-border bg-muted p-3 text-xs leading-6 text-foreground">
+                  <div class="font-black text-foreground">E. Markov 特征</div>
+                  global/cart/checkout 吸收概率、cart_checkout_loop_count、关键状态停留时长
+                </div>
+              </div>
+            </div>
+            <div class="phase2-card phase2-card-green md:col-span-2">
+              <div class="flex flex-wrap items-center gap-2">
+                <div class="text-lg font-black text-foreground">模型选择</div>
+                <span class="phase2-chip">仅供参考，朋辉主导</span>
+              </div>
+              <p class="mt-2 text-sm leading-7 text-foreground">推荐 X-Learner，基学习器用 LightGBM。原因是一期开出来的数据里处理组和对照组样本量不对称，X-Learner 在这种场景下通常比 S-Learner、T-Learner 更稳定；LightGBM 训练快、可解释性好，也能较好处理特征缺失。</p>
+              <div class="mt-3 grid grid-cols-1 md:grid-cols-4 gap-3 text-xs leading-6 text-foreground">
+                <div class="rounded-xl border border-border bg-card p-3"><span class="font-black text-foreground">Step 1</span><br>分别训练 μ1(x)=E[Y|X,T=1] 和 μ0(x)=E[Y|X,T=0]</div>
+                <div class="rounded-xl border border-border bg-card p-3"><span class="font-black text-foreground">Step 2</span><br>处理组算 D1=Y1-μ0(x)，对照组算 D0=μ1(x)-Y0</div>
+                <div class="rounded-xl border border-border bg-card p-3"><span class="font-black text-foreground">Step 3</span><br>分别拟合 τ1(x)=E[D1|X] 和 τ0(x)=E[D0|X]</div>
+                <div class="rounded-xl border border-border bg-card p-3"><span class="font-black text-foreground">Step 4</span><br>用倾向性得分 g(x) 加权合并得到最终 τ(x)</div>
+              </div>
+              <p class="mt-3 text-xs leading-6 text-foreground">备选：如果样本量足够大，比如超过 50 万 session，可以尝试 Causal Forest 作为对比模型。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel phase2-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+          <div class="xl:col-span-4">
+            <div class="phase2-kicker">LAUNCH PLAN</div>
+            <h3 class="mt-3 text-3xl font-black text-foreground">上线分阶段</h3>
+            <p class="mt-3 text-sm md:text-base leading-7 text-foreground">
+              二期不直接全量切模型，而是先影子观察，再小流量验证，最后按结果放量。
+            </p>
+          </div>
+          <div class="xl:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div class="phase2-card phase2-card-primary">
+              <div class="phase2-chip">阶段 A / 1-2 周</div>
+              <div class="mt-3 text-xl font-black text-foreground">Shadow Mode</div>
+              <p class="mt-2 text-sm leading-7 text-foreground">模型在线打分但不决策，所有用户仍走一期规则，对比模型推荐和规则差异。</p>
+            </div>
+            <div class="phase2-card phase2-card-blue">
+              <div class="phase2-chip">阶段 B / 3-4 周</div>
+              <div class="mt-3 text-xl font-black text-foreground">小流量验证</div>
+              <p class="mt-2 text-sm leading-7 text-foreground">触发用户 50% 走一期规则、50% 走 uplift 决策，核心看增量毛利/触发 UV。</p>
+            </div>
+            <div class="phase2-card phase2-card-green">
+              <div class="phase2-chip">阶段 C</div>
+              <div class="mt-3 text-xl font-black text-foreground">逐步放量</div>
+              <p class="mt-2 text-sm leading-7 text-foreground">模型组显著优于规则组后，从 50% 放到 80%，再放到 100%。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel phase2-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div class="phase2-kicker">METRICS & GUARDRAILS</div>
+        <h3 class="mt-3 text-3xl font-black text-foreground">核心指标与止损</h3>
+        <div class="mt-5 grid grid-cols-1 xl:grid-cols-2 gap-4">
+          <div class="phase2-card phase2-card-green">
+            <div class="text-lg font-black text-foreground">北极星指标：增量毛利 / 触发 UV</div>
+            <div class="mt-3 phase2-formula">模型组(支付订单毛利 - 补贴成本) / 模型组触发 UV<br>- 对照组(支付订单毛利) / 对照组触发 UV</div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="phase2-card"><div class="font-black text-foreground">精准干预率</div><p class="mt-2 text-xs leading-6 text-foreground">模型判定值得干预且实际转化的比例。</p></div>
+            <div class="phase2-card"><div class="font-black text-foreground">补贴浪费率</div><p class="mt-2 text-xs leading-6 text-foreground">发券后用户本来就会买的比例，用强控组估计。</p></div>
+            <div class="phase2-card"><div class="font-black text-foreground">静默误杀率</div><p class="mt-2 text-xs leading-6 text-foreground">模型判定不干预但实际有增量的比例。</p></div>
+            <div class="phase2-card"><div class="font-black text-foreground">模型覆盖率</div><p class="mt-2 text-xs leading-6 text-foreground">模型判定值得干预的 session 占比。</p></div>
+          </div>
+        </div>
+        <div class="mt-4 grid grid-cols-1 md:grid-cols-4 gap-3">
+          <div class="phase2-card phase2-card-primary"><div class="font-black text-foreground">连续 3 天增量毛利为负</div><p class="mt-2 text-xs leading-6 text-foreground">回退到一期规则。</p></div>
+          <div class="phase2-card phase2-card-primary"><div class="font-black text-foreground">补贴超预算 150%</div><p class="mt-2 text-xs leading-6 text-foreground">当日剩余触发全部静默。</p></div>
+          <div class="phase2-card phase2-card-blue"><div class="font-black text-foreground">覆盖率下降 &gt; 50%</div><p class="mt-2 text-xs leading-6 text-foreground">检查特征服务异常。</p></div>
+          <div class="phase2-card phase2-card-blue"><div class="font-black text-foreground">吸收概率连续下降</div><p class="mt-2 text-xs leading-6 text-foreground">排查券依赖和路径劣化。</p></div>
+        </div>
+      </section>
+
+      <section class="panel phase2-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+          <div class="xl:col-span-4">
+            <div class="phase2-kicker">HANDOFF TO PHASE 3</div>
+            <h3 class="mt-3 text-3xl font-black text-foreground">二期结束交给三期什么</h3>
+            <p class="mt-3 text-sm md:text-base leading-7 text-foreground">
+              二期的在线链路和探索数据，是三期多动作 uplift 的地基。
+            </p>
+          </div>
+          <div class="xl:col-span-8 grid grid-cols-1 md:grid-cols-4 gap-3">
+            <div class="phase2-card phase2-card-primary"><div class="font-black text-foreground">个体级 uplift 分数历史</div><p class="mt-2 text-xs leading-6 text-foreground">作为多动作 uplift 的基线对比。</p></div>
+            <div class="phase2-card phase2-card-blue"><div class="font-black text-foreground">20% 多券探索数据</div><p class="mt-2 text-xs leading-6 text-foreground">为三期券型选择提前攒训练样本。</p></div>
+            <div class="phase2-card phase2-card-green"><div class="font-black text-foreground">用户级干预响应序列</div><p class="mt-2 text-xs leading-6 text-foreground">给五期 Bellman 长期价值建模使用。</p></div>
+            <div class="phase2-card"><div class="font-black text-foreground">稳定在线决策链路</div><p class="mt-2 text-xs leading-6 text-foreground">三期只需在付费池里加一层选券逻辑。</p></div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section id="annualPlanView" class="hidden space-y-6">
+      <section class="panel annual-panel annual-hero bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div>
+          <div class="annual-kicker">FULL YEAR ROADMAP</div>
+          <h2 class="mt-3 text-3xl md:text-4xl font-black text-foreground">全年实施计划</h2>
+          <p class="mt-3 text-sm md:text-base leading-7 text-foreground">
+            2026.5 到 2027.3 之前，MUBBK 从购物车规则 MVP 起步，逐步升级到 uplift、Kelly、Bandit 和 Bellman 长期优化，最终形成可复制到搜索、商详等场景的干预决策系统。
+          </p>
+        </div>
+
+        <div class="mt-6 overflow-x-auto">
+          <div class="annual-roadmap" role="img" aria-label="MUBBK 全年五期路线图：一期规则 MVP 和 RCT 数据收集，二期干预策略 uplift，三期多动作优化和 Kelly，四期场景拓展和 Bandit，五期 Bellman 长期优化。">
+            <article class="annual-step">
+              <div class="annual-chip">2026.5</div>
+              <div class="mt-3 annual-stage"><span class="annual-number">01</span> 一期：规则 MVP</div>
+              <div class="mt-3 text-xl font-black text-foreground">先把数据闭环跑通</div>
+              <p class="mt-2 text-xs leading-6 text-foreground">识别 T1/T2 犹豫信号，用 A0 静默、A1 免费提示、A2 固定 2 元券做 RCT。</p>
+              <div class="mt-3 annual-layer text-xs leading-6 text-foreground">
+                <span class="font-black text-foreground">M + U：</span>规则识别、规则分层、会话级样本表。
+              </div>
+            </article>
+            <article class="annual-step">
+              <div class="annual-chip">2026.7</div>
+              <div class="mt-3 annual-stage"><span class="annual-number">02</span> 二期：Uplift</div>
+              <div class="mt-3 text-xl font-black text-foreground">判断该不该出手</div>
+              <p class="mt-2 text-xs leading-6 text-foreground">用一期 RCT 训练 X-Learner，估计每个 session 的干预增量。</p>
+              <div class="mt-3 annual-layer text-xs leading-6 text-foreground">
+                <span class="font-black text-foreground">U 模型化：</span>τ(x) 决定静默、免费提示或 2 元券。
+              </div>
+            </article>
+            <article class="annual-step">
+              <div class="annual-chip">2026.9-10</div>
+              <div class="mt-3 annual-stage"><span class="annual-number">03</span> 三期：多动作</div>
+              <div class="mt-3 text-xl font-black text-foreground">决定给什么券</div>
+              <p class="mt-2 text-xs leading-6 text-foreground">在值得花钱的人里比较多种券型，选择最赚钱的动作。</p>
+              <div class="mt-3 annual-layer text-xs leading-6 text-foreground">
+                <span class="font-black text-foreground">U + K：</span>多动作 uplift + 半 Kelly 预算护栏。
+              </div>
+            </article>
+            <article class="annual-step">
+              <div class="annual-chip">2026.11-12</div>
+              <div class="mt-3 annual-stage"><span class="annual-number">04</span> 四期：拓场景</div>
+              <div class="mt-3 text-xl font-black text-foreground">复制到搜索和商详</div>
+              <p class="mt-2 text-xs leading-6 text-foreground">复用购物车基础设施，用 Thompson Sampling 做新场景冷启动。</p>
+              <div class="mt-3 annual-layer text-xs leading-6 text-foreground">
+                <span class="font-black text-foreground">M + B：</span>新触发规则 + Bandit 自适应探索。
+              </div>
+            </article>
+            <article class="annual-step">
+              <div class="annual-chip">2027.3 前</div>
+              <div class="mt-3 annual-stage"><span class="annual-number">05</span> 五期：Bellman</div>
+              <div class="mt-3 text-xl font-black text-foreground">看长期价值</div>
+              <p class="mt-2 text-xs leading-6 text-foreground">用 5-6 个月用户级干预序列，约束过度发券带来的券依赖。</p>
+              <div class="mt-3 annual-layer text-xs leading-6 text-foreground">
+                <span class="font-black text-foreground">B 长期：</span>频次衰减版 Bellman-lite。
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel annual-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+          <div class="xl:col-span-4">
+            <div class="annual-kicker">DECISION STACK</div>
+            <h3 class="mt-3 text-3xl font-black text-foreground">MUBBK 五层决策栈</h3>
+            <p class="mt-3 text-sm md:text-base leading-7 text-foreground">
+              全年计划不是一次性做完大模型，而是按数据成熟度一层一层叠上去：先知道谁在犹豫，再知道该不该干预，最后才处理预算、自适应和长期价值。
+            </p>
+          </div>
+          <div class="xl:col-span-8 grid grid-cols-1 md:grid-cols-5 gap-3">
+            <div class="annual-card annual-card-primary">
+              <div class="annual-stack-letter">M</div>
+              <div class="mt-3 text-lg font-black text-foreground">状态识别</div>
+              <p class="mt-2 text-xs leading-6 text-foreground">识别 T1/T2 和未来搜索、商详的犹豫信号。</p>
+            </div>
+            <div class="annual-card annual-card-blue">
+              <div class="annual-stack-letter">U</div>
+              <div class="mt-3 text-lg font-black text-foreground">增量判断</div>
+              <p class="mt-2 text-xs leading-6 text-foreground">判断干预后是不是比静默多带来真实支付。</p>
+            </div>
+            <div class="annual-card annual-card-green">
+              <div class="annual-stack-letter">B</div>
+              <div class="mt-3 text-lg font-black text-foreground">长期优化</div>
+              <p class="mt-2 text-xs leading-6 text-foreground">控制连续干预对未来自然转化的伤害。</p>
+            </div>
+            <div class="annual-card annual-card-blue">
+              <div class="annual-stack-letter">B</div>
+              <div class="mt-3 text-lg font-black text-foreground">自适应实验</div>
+              <p class="mt-2 text-xs leading-6 text-foreground">新场景用 Bandit 边探索边利用。</p>
+            </div>
+            <div class="annual-card annual-card-primary">
+              <div class="annual-stack-letter">K</div>
+              <div class="mt-3 text-lg font-black text-foreground">预算控制</div>
+              <p class="mt-2 text-xs leading-6 text-foreground">用 Kelly 和日预算上限约束补贴风险。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel annual-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div class="annual-kicker">PHASE BREAKDOWN</div>
+        <h3 class="mt-3 text-3xl font-black text-foreground">五期具体交付</h3>
+        <div class="mt-5 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+          <article class="annual-card annual-card-primary">
+            <div class="annual-chip">一期 / 2026.5</div>
+            <h4 class="mt-3 text-xl font-black text-foreground">规则 MVP + RCT 数据收集</h4>
+            <ul class="mt-3 space-y-2 text-sm leading-7 text-foreground">
+              <li>只拦截 T1 结算页退回购物车、T2 购物车长停留持续编辑。</li>
+              <li>只测试 A0 静默、A1 免费提示、A2 固定 2 元券。</li>
+              <li>用 12-cell 矩阵分层，并冻结实验桶保证数据纯度。</li>
+            </ul>
+          </article>
+          <article class="annual-card annual-card-blue">
+            <div class="annual-chip">二期 / 2026.7</div>
+            <h4 class="mt-3 text-xl font-black text-foreground">干预策略 Uplift</h4>
+            <ul class="mt-3 space-y-2 text-sm leading-7 text-foreground">
+              <li>用一期 RCT 数据训练 X-Learner uplift 模型。</li>
+              <li>模型输出 τ(x)，判断干预带来的支付概率提升。</li>
+              <li>同等预算下，增量毛利要高于一期规则版。</li>
+            </ul>
+          </article>
+          <article class="annual-card annual-card-green">
+            <div class="annual-chip">三期 / 2026.9-10</div>
+            <h4 class="mt-3 text-xl font-black text-foreground">多动作优化 + Kelly</h4>
+            <ul class="mt-3 space-y-2 text-sm leading-7 text-foreground">
+              <li>候选动作扩展到 1/2/3 元券、免配送费券、满减券。</li>
+              <li>多动作 uplift 以免费提示作为基准，比较各券型增量。</li>
+              <li>预期增量毛利 / 券成本 ≥ 2.0 才允许发券。</li>
+            </ul>
+          </article>
+          <article class="annual-card annual-card-blue">
+            <div class="annual-chip">四期 / 2026.11-12</div>
+            <h4 class="mt-3 text-xl font-black text-foreground">场景拓展 + Bandit</h4>
+            <ul class="mt-3 space-y-2 text-sm leading-7 text-foreground">
+              <li>从购物车扩展到搜索页和商详页。</li>
+              <li>基础设施、用户画像、Kelly、频控、止损机制复用。</li>
+              <li>新场景用 Thompson Sampling 做冷启动探索。</li>
+            </ul>
+          </article>
+          <article class="annual-card annual-card-primary">
+            <div class="annual-chip">五期 / 2027.3 前</div>
+            <h4 class="mt-3 text-xl font-black text-foreground">Bellman 长期优化</h4>
+            <ul class="mt-3 space-y-2 text-sm leading-7 text-foreground">
+              <li>用二到四期积累的用户级干预序列。</li>
+              <li>定义券依赖指标，估计连续领券后的自然转化衰减。</li>
+              <li>用频次衰减系数修正本次 uplift 分数。</li>
+            </ul>
+          </article>
+          <article class="annual-card">
+            <div class="annual-chip">最终目标</div>
+            <h4 class="mt-3 text-xl font-black text-foreground">2027.3 前完整成型</h4>
+            <p class="mt-3 text-sm leading-7 text-foreground">
+              完成 MUBBK 模型闭环，并从购物车拓展到搜索、商详等高潜场景，让干预从单点策略变成可迁移的决策系统。
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel annual-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+          <div class="xl:col-span-5">
+            <div class="annual-kicker">WHY THIS ORDER</div>
+            <h3 class="mt-3 text-3xl font-black text-foreground">为什么按这个顺序做</h3>
+            <p class="mt-3 text-sm md:text-base leading-7 text-foreground">
+              每一期都在为下一期准备数据或能力。前面不是“低配版”，而是在为后面的模型创造可学习、可验证、可上线的条件。
+            </p>
+          </div>
+          <div class="xl:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="annual-card annual-card-primary">
+              <div class="text-lg font-black text-foreground">二期先做“要不要干预”</div>
+              <p class="mt-2 text-sm leading-7 text-foreground">这是最大杠杆。若用户本来就会买，干预就是打扰和浪费；一期 RCT 数据可以直接训练，不需要额外实验。</p>
+            </div>
+            <div class="annual-card annual-card-green">
+              <div class="text-lg font-black text-foreground">三期再做“给什么券”</div>
+              <p class="mt-2 text-sm leading-7 text-foreground">多券选择需要二期上线后的多动作探索数据；Kelly 也只有在动作池变多后才真正有价值。</p>
+            </div>
+            <div class="annual-card annual-card-blue">
+              <div class="text-lg font-black text-foreground">四期用 Bandit 拓新场景</div>
+              <p class="mt-2 text-sm leading-7 text-foreground">搜索和商详没有历史 RCT，适合用 Thompson Sampling 边探索边利用，压缩固定 AB 冷启动周期。</p>
+            </div>
+            <div class="annual-card">
+              <div class="text-lg font-black text-foreground">五期最后做长期价值</div>
+              <p class="mt-2 text-sm leading-7 text-foreground">Bellman 需要同一用户多次干预后的长期效果。等二到四期积累 5-6 个月序列后，估计才更稳。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel annual-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+          <div class="xl:col-span-4">
+            <div class="annual-kicker">KEY MECHANICS</div>
+            <h3 class="mt-3 text-3xl font-black text-foreground">关键机制补充</h3>
+          </div>
+          <div class="xl:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div class="annual-card annual-card-primary">
+              <div class="text-lg font-black text-foreground">二期决策规则</div>
+              <div class="mt-3 annual-formula">τ(x) ≤ 0：静默<br>0 < τ(x) ≤ threshold：免费提示<br>τ(x) > threshold：2元券</div>
+            </div>
+            <div class="annual-card annual-card-blue">
+              <div class="text-lg font-black text-foreground">四期 Bandit</div>
+              <p class="mt-3 text-sm leading-7 text-foreground">每个新场景维护 A0/A1/A2 三个 Beta 分布；每次触发采样，执行采样值最高的动作，再用支付结果更新。</p>
+            </div>
+            <div class="annual-card annual-card-green">
+              <div class="text-lg font-black text-foreground">五期 Bellman-lite</div>
+              <p class="mt-3 text-sm leading-7 text-foreground">不做完整 MDP，而是用“近 N 次领券越多，本次 uplift 分数越折扣”的方式控制券依赖。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
     </main>
   </div>
 
@@ -4578,8 +5406,10 @@
       { key: 'global', label: '全局 Markov', group: '数据诊断' },
       { key: 'cart', label: '购物车 Markov', group: '数据诊断' },
       { key: 'checkout', label: '结算页 Markov', group: '数据诊断' },
+      { key: 'annualPlan', label: '全年实施计划', group: '策略方案' },
       { key: 'mubbk', label: 'MUBBK 一期落地方案', group: '策略方案' },
       { key: 'reviewPlan', label: '一期复盘方案', group: '策略方案' },
+      { key: 'phase2Plan', label: '二期落地方案', group: '策略方案' },
       { key: 'threshold', label: '阈值分析 & 干预 UX 草案', group: '实验工具' }
     ];
     const cartTabs = [
@@ -4979,12 +5809,16 @@
 	      const isThreshold = currentScope === 'threshold';
 	      const isMubbk = currentScope === 'mubbk';
 	      const isReviewPlan = currentScope === 'reviewPlan';
+	      const isAnnualPlan = currentScope === 'annualPlan';
+	      const isPhase2Plan = currentScope === 'phase2Plan';
 	      toggleHidden('globalView', !isGlobal);
 	      toggleHidden('cartView', !isCart);
 	      toggleHidden('checkoutView', !isCheckout);
 	      toggleHidden('thresholdView', !isThreshold);
 	      toggleHidden('mubbkView', !isMubbk);
 	      toggleHidden('reviewPlanView', !isReviewPlan);
+	      toggleHidden('annualPlanView', !isAnnualPlan);
+	      toggleHidden('phase2PlanView', !isPhase2Plan);
 	      toggleHidden('tabsWrap', !isGlobal);
 
       // Visibility control for explanation sections in Global Markov
@@ -4992,7 +5826,7 @@
       document.getElementById('markovPrimer').classList.toggle('hidden', !showExplanations);
       document.getElementById('dataExtraction').classList.toggle('hidden', !showExplanations);
 
-      document.getElementById('currentScopeText').textContent = `当前模块：${isGlobal ? '全局markov' : isCart ? '购物车markov' : isCheckout ? '结算页markov' : isThreshold ? '阈值分析&干预UX草案' : isReviewPlan ? '一期复盘方案' : 'MUBBK一期落地方案'}`;
+      document.getElementById('currentScopeText').textContent = `当前模块：${isGlobal ? '全局markov' : isCart ? '购物车markov' : isCheckout ? '结算页markov' : isThreshold ? '阈值分析&干预UX草案' : isReviewPlan ? '一期复盘方案' : isAnnualPlan ? '全年实施计划' : isPhase2Plan ? '二期落地方案' : 'MUBBK一期落地方案'}`;
       document.getElementById('dataSourceText').innerHTML = isGlobal
         ? '数据源：<code>关键场景转移矩阵_*.xlsx</code> + <code>关键场景吸收概率_*.xlsx</code> + <code>关键场景移除效应_*.xlsx</code>（APP / 微信小程序 / 支付宝小程序，共9份原始表）'
         : isCart
@@ -5003,6 +5837,10 @@
             ? '数据源：<code>购物车阈值分析概率版.csv</code> + 历史动作分布补充表（同样要求有购物车编辑行为；概率分母为每秒开始时仍留在购物车的人数）'
             : isReviewPlan
             ? '数据源：<code>一期上线 AB 方案.md</code>（MUBBK 主实验 + 四个 UX 独立实验 + 复盘指标口径）'
+            : isAnnualPlan
+            ? '数据源：<code>MUBBK全财年实施计划.md</code>（五期路线图 + MUBBK 决策栈 + 场景拓展节奏）'
+            : isPhase2Plan
+            ? '数据源：<code>二期方案.md</code>（Uplift 模型 + 在线决策链路 + 实验节奏 + 止损护栏）'
             : '数据源：<code>MUBBK一期落地方案草案.md</code>';
       document.getElementById('dataSourceText').classList.toggle('hidden', isThreshold);
       document.getElementById('headerMetaBlock').classList.toggle('hidden', isThreshold);
@@ -5012,6 +5850,10 @@
           ? '* 阈值页默认展示当秒概率，辅助视角保留历史分布；建议阈值以当秒概率和可干预样本规模共同判断'
           : isReviewPlan
             ? '* 复盘页按最终 AB 方案展示；核心原则：并行实验、双标签记录、按增量拆分复盘'
+          : isAnnualPlan
+            ? '* 全年计划按五期推进：先数据闭环，再模型化，再预算和长期价值约束'
+          : isPhase2Plan
+            ? '* 二期只回答该不该干预、免费还是付费；多券型最优选择留给三期'
           : '* 子场景markov统一展示为百分比两位小数，0值留空';
 
       if (isGlobal) {
@@ -5027,6 +5869,10 @@
         document.getElementById('currentTabText').textContent = '当前分析：转化分布 + 流失分布双维度交叉';
       } else if (isReviewPlan) {
         document.getElementById('currentTabText').textContent = '当前方案：一期上线 AB 复盘蓝图';
+      } else if (isAnnualPlan) {
+        document.getElementById('currentTabText').textContent = '当前方案：MUBBK 全财年实施路线图';
+      } else if (isPhase2Plan) {
+        document.getElementById('currentTabText').textContent = '当前方案：二期干预策略 Uplift 落地蓝图';
       } else {
         document.getElementById('currentTabText').textContent = `当前方案：购物车犹豫干预试点`;
       }
