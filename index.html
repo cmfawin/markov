@@ -3997,7 +3997,7 @@
           <div class="xl:col-span-8 grid grid-cols-1 md:grid-cols-4 gap-3">
             <div class="phase2-card phase2-card-primary"><div class="font-black text-foreground">个体级 uplift 分数历史</div><p class="mt-2 text-xs leading-6 text-foreground">作为多动作 uplift 的基线对比。</p></div>
             <div class="phase2-card phase2-card-blue"><div class="font-black text-foreground">20% 多券探索数据</div><p class="mt-2 text-xs leading-6 text-foreground">为三期券型选择提前攒训练样本。</p></div>
-            <div class="phase2-card phase2-card-green"><div class="font-black text-foreground">用户级干预响应序列</div><p class="mt-2 text-xs leading-6 text-foreground">给五期 Bellman 长期价值建模使用。</p></div>
+            <div class="phase2-card phase2-card-green"><div class="font-black text-foreground">用户级干预响应序列</div><p class="mt-2 text-xs leading-6 text-foreground">给三期 Bellman-lite + Bandit 使用。</p></div>
             <div class="phase2-card"><div class="font-black text-foreground">稳定在线决策链路</div><p class="mt-2 text-xs leading-6 text-foreground">三期只需在付费池里加一层选券逻辑。</p></div>
           </div>
         </div>
@@ -4010,12 +4010,12 @@
           <div class="annual-kicker">FULL YEAR ROADMAP</div>
           <h2 class="mt-3 text-3xl md:text-4xl font-black text-foreground">全年实施计划</h2>
           <p class="mt-3 text-sm md:text-base leading-7 text-foreground">
-            2026.5 到 2027.3 之前，MUBBK 从购物车规则 MVP 起步，逐步升级到 uplift、Kelly、Bandit 和 Bellman 长期优化，最终形成可复制到搜索、商详等场景的干预决策系统。
+            2026.5 到 2027.3，MUBBK 从购物车规则 MVP 起步，先拿干净 RCT 数据，再做单券 Uplift、Bellman-lite + Bandit、动态 Kelly，最后扩展到多券多动作和商详、搜索等多场景。
           </p>
         </div>
 
         <div class="mt-6 overflow-x-auto">
-          <div class="annual-roadmap" role="img" aria-label="MUBBK 全年五期路线图：一期规则 MVP 和 RCT 数据收集，二期干预策略 uplift，三期多动作优化和 Kelly，四期场景拓展和 Bandit，五期 Bellman 长期优化。">
+          <div class="annual-roadmap" role="img" aria-label="MUBBK 全年五期路线图：一期规则 MVP 和 RCT 数据收集，二期单券 Uplift，三期 Bellman-lite 和 Bandit，四期动态 Kelly，五期多券多动作优化和多场景拓展。">
             <article class="annual-step">
               <div class="annual-chip">2026.5</div>
               <div class="mt-3 annual-stage"><span class="annual-number">01</span> 一期：规则 MVP</div>
@@ -4027,38 +4027,38 @@
             </article>
             <article class="annual-step">
               <div class="annual-chip">2026.7</div>
-              <div class="mt-3 annual-stage"><span class="annual-number">02</span> 二期：Uplift</div>
+              <div class="mt-3 annual-stage"><span class="annual-number">02</span> 二期：单券 Uplift</div>
               <div class="mt-3 text-xl font-black text-foreground">判断该不该出手</div>
               <p class="mt-2 text-xs leading-6 text-foreground">用一期 RCT 训练 X-Learner，估计每个 session 的干预增量。</p>
               <div class="mt-3 annual-layer text-xs leading-6 text-foreground">
-                <span class="font-black text-foreground">U 模型化：</span>τ(x) 决定静默、免费提示或 2 元券。
+                <span class="font-black text-foreground">U 单券：</span>τ(x) 决定静默、免费提示或固定 2 元券。
               </div>
             </article>
             <article class="annual-step">
-              <div class="annual-chip">2026.9-10</div>
-              <div class="mt-3 annual-stage"><span class="annual-number">03</span> 三期：多动作</div>
-              <div class="mt-3 text-xl font-black text-foreground">决定给什么券</div>
-              <p class="mt-2 text-xs leading-6 text-foreground">在值得花钱的人里比较多种券型，选择最赚钱的动作。</p>
+              <div class="annual-chip">2026.9</div>
+              <div class="mt-3 annual-stage"><span class="annual-number">03</span> 三期：Bellman-lite + Bandit</div>
+              <div class="mt-3 text-xl font-black text-foreground">补长期约束和动态概率</div>
+              <p class="mt-2 text-xs leading-6 text-foreground">用 Bellman-lite 控制券依赖，用 Bandit 持续学习 A0/A1/A2 的真实效果概率。</p>
               <div class="mt-3 annual-layer text-xs leading-6 text-foreground">
-                <span class="font-black text-foreground">U + K：</span>多动作 uplift + 半 Kelly 预算护栏。
+                <span class="font-black text-foreground">B + B：</span>长期价值约束 + 自适应实验。
               </div>
             </article>
             <article class="annual-step">
-              <div class="annual-chip">2026.11-12</div>
-              <div class="mt-3 annual-stage"><span class="annual-number">04</span> 四期：拓场景</div>
-              <div class="mt-3 text-xl font-black text-foreground">复制到搜索和商详</div>
-              <p class="mt-2 text-xs leading-6 text-foreground">复用购物车基础设施，用 Thompson Sampling 做新场景冷启动。</p>
+              <div class="annual-chip">2026.10-11</div>
+              <div class="mt-3 annual-stage"><span class="annual-number">04</span> 四期：动态 Kelly</div>
+              <div class="mt-3 text-xl font-black text-foreground">把预算管起来</div>
+              <p class="mt-2 text-xs leading-6 text-foreground">接入 Bandit 输出的动态 P，结合毛利、券成本和长期折扣控制预算力度。</p>
               <div class="mt-3 annual-layer text-xs leading-6 text-foreground">
-                <span class="font-black text-foreground">M + B：</span>新触发规则 + Bandit 自适应探索。
+                <span class="font-black text-foreground">K 动态：</span>用动态概率做预算控制，而不是写死阈值。
               </div>
             </article>
             <article class="annual-step">
-              <div class="annual-chip">2027.3 前</div>
-              <div class="mt-3 annual-stage"><span class="annual-number">05</span> 五期：Bellman</div>
-              <div class="mt-3 text-xl font-black text-foreground">看长期价值</div>
-              <p class="mt-2 text-xs leading-6 text-foreground">用 5-6 个月用户级干预序列，约束过度发券带来的券依赖。</p>
+              <div class="annual-chip">2026.12 - 2027.3</div>
+              <div class="mt-3 annual-stage"><span class="annual-number">05</span> 五期：多券多场景</div>
+              <div class="mt-3 text-xl font-black text-foreground">扩到多动作和更多场景</div>
+              <p class="mt-2 text-xs leading-6 text-foreground">升级到多券多动作，并把能力复制到商详、搜索等高潜场景。</p>
               <div class="mt-3 annual-layer text-xs leading-6 text-foreground">
-                <span class="font-black text-foreground">B 长期：</span>频次衰减版 Bellman-lite。
+                <span class="font-black text-foreground">U + B/B/K + M：</span>多动作优化 + 多场景拓展。
               </div>
             </article>
           </div>
@@ -4071,7 +4071,7 @@
             <div class="annual-kicker">DECISION STACK</div>
             <h3 class="mt-3 text-3xl font-black text-foreground">MUBBK 五层决策栈</h3>
             <p class="mt-3 text-sm md:text-base leading-7 text-foreground">
-              全年计划不是一次性做完大模型，而是按数据成熟度一层一层叠上去：先知道谁在犹豫，再知道该不该干预，最后才处理预算、自适应和长期价值。
+              全年计划不是一次性做完大模型，而是按数据成熟度一层一层叠上去：先知道谁在犹豫，再知道该不该干预，再补长期约束、动态概率和预算控制，最后扩到多动作和多场景。
             </p>
           </div>
           <div class="xl:col-span-8 grid grid-cols-1 md:grid-cols-5 gap-3">
@@ -4093,12 +4093,12 @@
             <div class="annual-card annual-card-blue">
               <div class="annual-stack-letter">B</div>
               <div class="mt-3 text-lg font-black text-foreground">自适应实验</div>
-              <p class="mt-2 text-xs leading-6 text-foreground">新场景用 Bandit 边探索边利用。</p>
+              <p class="mt-2 text-xs leading-6 text-foreground">用在线反馈持续学习动作效果。</p>
             </div>
             <div class="annual-card annual-card-primary">
               <div class="annual-stack-letter">K</div>
               <div class="mt-3 text-lg font-black text-foreground">预算控制</div>
-              <p class="mt-2 text-xs leading-6 text-foreground">用 Kelly 和日预算上限约束补贴风险。</p>
+              <p class="mt-2 text-xs leading-6 text-foreground">基于动态概率、收益和成本约束补贴风险。</p>
             </div>
           </div>
         </div>
@@ -4119,45 +4119,45 @@
           </article>
           <article class="annual-card annual-card-blue">
             <div class="annual-chip">二期 / 2026.7</div>
-            <h4 class="mt-3 text-xl font-black text-foreground">干预策略 Uplift</h4>
+            <h4 class="mt-3 text-xl font-black text-foreground">单券 Uplift</h4>
             <ul class="mt-3 space-y-2 text-sm leading-7 text-foreground">
               <li>用一期 RCT 数据训练 X-Learner uplift 模型。</li>
               <li>模型输出 τ(x)，判断干预带来的支付概率提升。</li>
-              <li>同等预算下，增量毛利要高于一期规则版。</li>
+              <li>相同补贴预算下，增量毛利相比一期规则版有所提升。</li>
             </ul>
           </article>
           <article class="annual-card annual-card-green">
-            <div class="annual-chip">三期 / 2026.9-10</div>
-            <h4 class="mt-3 text-xl font-black text-foreground">多动作优化 + Kelly</h4>
+            <div class="annual-chip">三期 / 2026.9</div>
+            <h4 class="mt-3 text-xl font-black text-foreground">Bellman-lite + Bandit</h4>
             <ul class="mt-3 space-y-2 text-sm leading-7 text-foreground">
-              <li>候选动作扩展到 1/2/3 元券、免配送费券、满减券。</li>
-              <li>多动作 uplift 以免费提示作为基准，比较各券型增量。</li>
-              <li>预期增量毛利 / 券成本 ≥ 2.0 才允许发券。</li>
+              <li>用频次衰减系数修正 uplift 分数，避免培养等券习惯。</li>
+              <li>维护 A0 静默、A1 免费提示、A2 2 元券的动态效果概率。</li>
+              <li>为四期动态 Kelly 提供可持续校准的 P。</li>
             </ul>
           </article>
           <article class="annual-card annual-card-blue">
-            <div class="annual-chip">四期 / 2026.11-12</div>
-            <h4 class="mt-3 text-xl font-black text-foreground">场景拓展 + Bandit</h4>
+            <div class="annual-chip">四期 / 2026.10-11</div>
+            <h4 class="mt-3 text-xl font-black text-foreground">动态 Kelly</h4>
             <ul class="mt-3 space-y-2 text-sm leading-7 text-foreground">
-              <li>从购物车扩展到搜索页和商详页。</li>
-              <li>基础设施、用户画像、Kelly、频控、止损机制复用。</li>
-              <li>新场景用 Thompson Sampling 做冷启动探索。</li>
+              <li>接入 Bandit 输出的动态 P。</li>
+              <li>结合订单毛利、券成本和长期价值折扣计算期望收益。</li>
+              <li>上线半 Kelly 护栏，同时保留日预算上限和异常止损。</li>
             </ul>
           </article>
           <article class="annual-card annual-card-primary">
-            <div class="annual-chip">五期 / 2027.3 前</div>
-            <h4 class="mt-3 text-xl font-black text-foreground">Bellman 长期优化</h4>
+            <div class="annual-chip">五期 / 2026.12-2027.3</div>
+            <h4 class="mt-3 text-xl font-black text-foreground">多券多动作 + 多场景拓展</h4>
             <ul class="mt-3 space-y-2 text-sm leading-7 text-foreground">
-              <li>用二到四期积累的用户级干预序列。</li>
-              <li>定义券依赖指标，估计连续领券后的自然转化衰减。</li>
-              <li>用频次衰减系数修正本次 uplift 分数。</li>
+              <li>把动作池扩展到 1/2/3 元券、免配送费券、满减券。</li>
+              <li>把 Uplift、Bandit、Bellman-lite、Kelly 升级到多动作版本。</li>
+              <li>推进商详、搜索等场景的触发规则、特征和回传口径。</li>
             </ul>
           </article>
           <article class="annual-card">
             <div class="annual-chip">最终目标</div>
-            <h4 class="mt-3 text-xl font-black text-foreground">2027.3 前完整成型</h4>
+            <h4 class="mt-3 text-xl font-black text-foreground">2027.3 完整成型</h4>
             <p class="mt-3 text-sm leading-7 text-foreground">
-              完成 MUBBK 模型闭环，并从购物车拓展到搜索、商详等高潜场景，让干预从单点策略变成可迁移的决策系统。
+              完成 MUBBK 模型闭环，让单券能力升级为多券多动作能力，并从购物车拓展到搜索、商详等高潜场景。
             </p>
           </article>
         </div>
@@ -4178,16 +4178,16 @@
               <p class="mt-2 text-sm leading-7 text-foreground">这是最大杠杆。若用户本来就会买，干预就是打扰和浪费；一期 RCT 数据可以直接训练，不需要额外实验。</p>
             </div>
             <div class="annual-card annual-card-green">
-              <div class="text-lg font-black text-foreground">三期再做“给什么券”</div>
-              <p class="mt-2 text-sm leading-7 text-foreground">多券选择需要二期上线后的多动作探索数据；Kelly 也只有在动作池变多后才真正有价值。</p>
+              <div class="text-lg font-black text-foreground">三期补长期和动态概率</div>
+              <p class="mt-2 text-sm leading-7 text-foreground">Bellman-lite 防止短期转化伤害长期自然购买；Bandit 用真实反馈动态学习动作成功概率。</p>
             </div>
             <div class="annual-card annual-card-blue">
-              <div class="text-lg font-black text-foreground">四期用 Bandit 拓新场景</div>
-              <p class="mt-2 text-sm leading-7 text-foreground">搜索和商详没有历史 RCT，适合用 Thompson Sampling 边探索边利用，压缩固定 AB 冷启动周期。</p>
+              <div class="text-lg font-black text-foreground">四期再做动态 Kelly</div>
+              <p class="mt-2 text-sm leading-7 text-foreground">Kelly 最依赖动作成功概率 P；有了 Bandit 动态 P，预算控制才不是写死护栏。</p>
             </div>
             <div class="annual-card">
-              <div class="text-lg font-black text-foreground">五期最后做长期价值</div>
-              <p class="mt-2 text-sm leading-7 text-foreground">Bellman 需要同一用户多次干预后的长期效果。等二到四期积累 5-6 个月序列后，估计才更稳。</p>
+              <div class="text-lg font-black text-foreground">五期扩多券和多场景</div>
+              <p class="mt-2 text-sm leading-7 text-foreground">多券和商详、搜索都会显著增加复杂度，适合放在单券、动态概率和预算体系稳定之后集中推进。</p>
             </div>
           </div>
         </div>
@@ -4199,18 +4199,22 @@
             <div class="annual-kicker">KEY MECHANICS</div>
             <h3 class="mt-3 text-3xl font-black text-foreground">关键机制补充</h3>
           </div>
-          <div class="xl:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div class="xl:col-span-8 grid grid-cols-1 md:grid-cols-4 gap-3">
             <div class="annual-card annual-card-primary">
               <div class="text-lg font-black text-foreground">二期决策规则</div>
               <div class="mt-3 annual-formula">τ(x) ≤ 0：静默<br>0 < τ(x) ≤ threshold：免费提示<br>τ(x) > threshold：2元券</div>
             </div>
+            <div class="annual-card annual-card-green">
+              <div class="text-lg font-black text-foreground">三期 Bellman-lite</div>
+              <p class="mt-3 text-sm leading-7 text-foreground">近 N 次领券越多，本次 uplift 分数越折扣，用轻量方式控制券依赖。</p>
+            </div>
             <div class="annual-card annual-card-blue">
-              <div class="text-lg font-black text-foreground">四期 Bandit</div>
-              <p class="mt-3 text-sm leading-7 text-foreground">每个新场景维护 A0/A1/A2 三个 Beta 分布；每次触发采样，执行采样值最高的动作，再用支付结果更新。</p>
+              <div class="text-lg font-black text-foreground">三期 Bandit</div>
+              <p class="mt-3 text-sm leading-7 text-foreground">维护 A0/A1/A2 三个动作的概率分布，一边探索、一边用真实支付反馈更新成功概率 P。</p>
             </div>
             <div class="annual-card annual-card-green">
-              <div class="text-lg font-black text-foreground">五期 Bellman-lite</div>
-              <p class="mt-3 text-sm leading-7 text-foreground">不做完整 MDP，而是用“近 N 次领券越多，本次 uplift 分数越折扣”的方式控制券依赖。</p>
+              <div class="text-lg font-black text-foreground">四期动态 Kelly</div>
+              <p class="mt-3 text-sm leading-7 text-foreground">基于 Bandit 的动态 P、订单毛利、券成本和长期折扣，判断这次机会的预算力度。</p>
             </div>
           </div>
         </div>
@@ -5838,7 +5842,7 @@
             : isReviewPlan
             ? '数据源：<code>一期上线 AB 方案.md</code>（MUBBK 主实验 + 四个 UX 独立实验 + 复盘指标口径）'
             : isAnnualPlan
-            ? '数据源：<code>MUBBK全财年实施计划.md</code>（五期路线图 + MUBBK 决策栈 + 场景拓展节奏）'
+            ? '数据源：<code>MUBBK全财年实施计划.md</code>（五期路线图 + MUBBK 决策栈 + 多券多动作与多场景拓展节奏）'
             : isPhase2Plan
             ? '数据源：<code>二期方案.md</code>（Uplift 模型 + 在线决策链路 + 实验节奏 + 止损护栏）'
             : '数据源：<code>MUBBK一期落地方案草案.md</code>';
@@ -5851,7 +5855,7 @@
           : isReviewPlan
             ? '* 复盘页按最终 AB 方案展示；核心原则：并行实验、双标签记录、按增量拆分复盘'
           : isAnnualPlan
-            ? '* 全年计划按五期推进：先数据闭环，再模型化，再预算和长期价值约束'
+            ? '* 全年计划按五期推进：先单券增量，再动态概率与长期约束，再预算控制，最后扩多券多场景'
           : isPhase2Plan
             ? '* 二期只回答该不该干预、免费还是付费；多券型最优选择留给三期'
           : '* 子场景markov统一展示为百分比两位小数，0值留空';
