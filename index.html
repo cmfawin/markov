@@ -1178,6 +1178,22 @@
       box-shadow: 0 0.6rem 1.4rem rgba(15, 23, 42, 0.06);
     }
 
+    #reviewPlanView .review-flow-note {
+      position: absolute;
+      left: 3%;
+      top: 4%;
+      z-index: 4;
+      border: 1px solid color-mix(in oklab, var(--primary) 38%, var(--border) 62%);
+      border-radius: var(--radius);
+      background: color-mix(in oklab, var(--primary) 8%, var(--card) 92%);
+      color: var(--primary);
+      padding: 0.5rem 0.68rem;
+      font-size: 0.82rem;
+      line-height: 1.35;
+      font-weight: 900;
+      box-shadow: 0 0.5rem 1.2rem rgba(15, 23, 42, 0.06);
+    }
+
     #reviewPlanView .review-flow-card.primary {
       border-color: color-mix(in oklab, var(--primary) 34%, var(--border) 66%);
       background: color-mix(in oklab, var(--primary) 7%, var(--card) 93%);
@@ -1326,13 +1342,15 @@
     #reviewPlanView .review-timeline-item::before {
       content: "";
       position: absolute;
-      left: -1.13rem;
-      top: 1.05rem;
+      left: -1.2rem;
+      top: 50%;
+      transform: translateY(-50%);
       width: 0.72rem;
       height: 0.72rem;
       border: 2px solid var(--primary);
       border-radius: 50%;
       background: var(--card);
+      box-sizing: border-box;
     }
 
     #reviewPlanView .review-formula {
@@ -3347,11 +3365,12 @@
               </div>
             </div>
 
-            <div class="overflow-x-auto">
-              <div class="review-flow-chart" role="img" aria-label="MUBBK 主实验流量结构：触发 T1/T2 后进入实验 1，全局分流 10% 空白强控和 90% 策略实验池，再按 Cell 矩阵进入实验 2 免费模板实验或实验 3 付费模板实验。">
-                <div class="review-flow-card" style="left: 3%; top: 30%; width: 18%; height: 32%;">
-                  <div class="review-flow-icon">
-                    <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+	            <div class="overflow-x-auto">
+	              <div class="review-flow-chart" role="img" aria-label="MUBBK 主实验流量结构：触发 T1/T2 后进入实验 1，全局分流 10% 空白强控和 90% 策略实验池，再按 Cell 矩阵进入实验 2 免费模板实验或实验 3 付费模板实验。">
+	                <div class="review-flow-note">AB 已于 5.21 日启动</div>
+	                <div class="review-flow-card" style="left: 3%; top: 30%; width: 18%; height: 32%;">
+	                  <div class="review-flow-icon">
+	                    <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
                       <circle cx="12" cy="8" r="4" fill="currentColor"></circle>
                       <path d="M4 21c1.2-5.2 14.8-5.2 16 0" fill="currentColor"></path>
                     </svg>
@@ -3450,60 +3469,41 @@
               </div>
             </div>
 
-            <div class="review-timeline review-timeline-fill mt-5">
-              <div class="review-timeline-item">
-                <div class="grid grid-cols-1 md:grid-cols-[8rem_1fr_8rem] gap-3 items-center">
-                  <div class="review-chip">5/20 - 5/30</div>
-                  <div class="font-black text-foreground">结算页交互实验</div>
-                  <div class="text-xs leading-5 text-foreground">50% 老结算页<br>50% 新结算页</div>
-                </div>
-              </div>
-              <div class="review-timeline-item">
-                <div class="grid grid-cols-1 md:grid-cols-[8rem_1fr_8rem] gap-3 items-center">
-                  <div class="review-chip">6/1 - 6/10</div>
-                  <div class="font-black text-foreground">购物车地址栏交互实验</div>
-                  <div class="text-xs leading-5 text-foreground">50% 无地址栏<br>50% 有地址栏</div>
-                </div>
-              </div>
-              <div class="review-timeline-item">
-                <div class="grid grid-cols-1 md:grid-cols-[8rem_1fr_8rem] gap-3 items-center">
-                  <div class="review-chip">6/11 - 6/20</div>
-                  <div class="font-black text-foreground">购物车优惠券入口实验</div>
-                  <div class="text-xs leading-5 text-foreground">50% 老入口<br>50% 新入口</div>
-                </div>
-              </div>
-              <div class="review-timeline-item">
-                <div class="grid grid-cols-1 md:grid-cols-[8rem_1fr_8rem] gap-3 items-center">
-                  <div class="review-chip">6/21 - 6/30</div>
-                  <div class="font-black text-foreground">购物车商品区域实验</div>
-                  <div class="text-xs leading-5 text-foreground">50% 老商品区<br>50% 新商品区</div>
-                </div>
+	            <div class="review-timeline review-timeline-fill mt-5">
+	              <div class="review-timeline-item">
+	                <div class="grid grid-cols-1 md:grid-cols-[8rem_1fr_8rem] gap-3 items-center">
+	                  <div class="review-chip">5/19 - 5/26</div>
+	                  <div class="font-black text-foreground">结算页交互实验</div>
+	                  <div class="text-xs leading-5 text-foreground">50% 老结算页<br>50% 新结算页</div>
+	                </div>
+	              </div>
+	              <div class="review-timeline-item">
+	                <div class="grid grid-cols-1 md:grid-cols-[8rem_1fr_8rem] gap-3 items-center">
+	                  <div class="review-chip">5/27 - 6/2</div>
+	                  <div class="font-black text-foreground">购物车地址栏交互实验</div>
+	                  <div class="text-xs leading-5 text-foreground">50% 无地址栏<br>50% 有地址栏</div>
+	                </div>
+	              </div>
+	              <div class="review-timeline-item">
+	                <div class="grid grid-cols-1 md:grid-cols-[8rem_1fr_8rem] gap-3 items-center">
+	                  <div class="review-chip">6/3 - 6/9</div>
+	                  <div class="font-black text-foreground">购物车优惠券入口实验</div>
+	                  <div class="text-xs leading-5 text-foreground">50% 老入口<br>50% 新入口</div>
+	                </div>
+	              </div>
+	              <div class="review-timeline-item">
+	                <div class="grid grid-cols-1 md:grid-cols-[8rem_1fr_8rem] gap-3 items-center">
+	                  <div class="review-chip">6/10 - 6/16</div>
+	                  <div class="font-black text-foreground">购物车商品区域实验</div>
+	                  <div class="text-xs leading-5 text-foreground">50% 老商品区<br>50% 新商品区</div>
+	                </div>
               </div>
             </div>
 
           </div>
         </div>
 
-        <div class="mt-5 rounded-2xl border border-border bg-card p-4">
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <div class="review-node review-node-primary">
-              <div class="text-xs font-bold text-foreground/60">复盘主线 1</div>
-              <div class="text-lg font-black text-foreground">MUBBK 看 MUBBK</div>
-              <div class="text-xs text-foreground">整体看 90% 策略池 vs 10% 空白；模板内看 A1 vs A0、A2 vs A1。</div>
-            </div>
-            <div class="review-node review-node-blue">
-              <div class="text-xs font-bold text-foreground/60">复盘主线 2</div>
-              <div class="text-lg font-black text-foreground">UX 看 UX</div>
-              <div class="text-xs text-foreground">每个 UX 用全量新版本有效 UV，50/50 看新版 vs 老版。</div>
-            </div>
-            <div class="review-node review-node-green">
-              <div class="text-xs font-bold text-foreground/60">复盘主线 3</div>
-              <div class="text-lg font-black text-foreground">叠加看异常</div>
-              <div class="text-xs text-foreground">拆 MUBBK 标签看 UX 是否仍然正向，拆 UX 标签看 MUBBK 是否仍然有效。</div>
-            </div>
-          </div>
-        </div>
-      </section>
+	      </section>
 
       <section id="review-mubbk" class="panel review-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
         <div class="flex flex-wrap items-start justify-between gap-4">
