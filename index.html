@@ -1071,6 +1071,342 @@
           var(--card) 100%);
     }
 
+    #reviewPlanView .review-conclusion-card {
+      border: 1px solid var(--review-line);
+      border-radius: var(--radius);
+      background: var(--card);
+      padding: 0.95rem;
+      min-height: 9.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.7rem;
+    }
+
+    #reviewPlanView .review-conclusion-card.primary {
+      background:
+        linear-gradient(180deg,
+          color-mix(in oklab, var(--primary) 14%, var(--card) 86%) 0%,
+          var(--card) 100%);
+    }
+
+    #reviewPlanView .review-conclusion-card.blue {
+      background:
+        linear-gradient(180deg,
+          color-mix(in oklab, var(--review-blue) 14%, var(--card) 86%) 0%,
+          var(--card) 100%);
+      border-color: color-mix(in oklab, var(--review-blue) 36%, var(--border) 64%);
+    }
+
+    #reviewPlanView .review-conclusion-card.green {
+      background:
+        linear-gradient(180deg,
+          color-mix(in oklab, var(--review-green) 16%, var(--card) 84%) 0%,
+          var(--card) 100%);
+      border-color: color-mix(in oklab, var(--review-green) 42%, var(--border) 58%);
+    }
+
+    #reviewPlanView .review-conclusion-card.warning {
+      background:
+        linear-gradient(180deg,
+          color-mix(in oklab, var(--accent) 68%, var(--card) 32%) 0%,
+          var(--card) 100%);
+    }
+
+    #reviewPlanView .review-big-number {
+      font-size: clamp(1.7rem, 2.6vw, 2.45rem);
+      line-height: 1;
+      font-weight: 900;
+      color: var(--foreground);
+      letter-spacing: 0;
+    }
+
+    #reviewPlanView .review-client-tabs {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: color-mix(in oklab, var(--muted) 72%, var(--card) 28%);
+      padding: 0.28rem;
+    }
+
+    #reviewPlanView .review-client-tab {
+      border: 1px solid transparent;
+      border-radius: calc(var(--radius) - 0.15rem);
+      padding: 0.45rem 0.7rem;
+      color: var(--foreground);
+      font-size: 0.82rem;
+      font-weight: 900;
+      transition: background-color .18s ease, border-color .18s ease, color .18s ease;
+    }
+
+    #reviewPlanView .review-client-tab.is-active {
+      border-color: var(--review-line);
+      background: var(--review-soft);
+      color: var(--primary);
+    }
+
+    #reviewPlanView .review-client-panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card);
+      padding: 1rem;
+    }
+
+    #reviewPlanView .review-client-verdict {
+      border: 1px solid var(--review-line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg,
+          color-mix(in oklab, var(--primary) 10%, var(--card) 90%) 0%,
+          color-mix(in oklab, var(--accent) 58%, var(--card) 42%) 100%);
+      padding: 1rem;
+    }
+
+    #reviewPlanView .review-metric-mini {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: color-mix(in oklab, var(--muted) 54%, var(--card) 46%);
+      padding: 0.82rem;
+    }
+
+    #reviewPlanView .review-bar {
+      height: 0.46rem;
+      border-radius: 9999px;
+      background: color-mix(in oklab, var(--border) 72%, var(--card) 28%);
+      overflow: hidden;
+    }
+
+    #reviewPlanView .review-bar-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: var(--primary);
+    }
+
+    #reviewPlanView .review-bar-fill.blue {
+      background: var(--review-blue);
+    }
+
+    #reviewPlanView .review-bar-fill.green {
+      background: var(--review-green);
+    }
+
+    #reviewPlanView .review-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--review-line);
+      border-radius: 9999px;
+      background: var(--review-soft);
+      color: var(--primary);
+      padding: 0.2rem 0.48rem;
+      font-size: 0.72rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    #reviewPlanView .review-result-map {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.9rem;
+    }
+
+    #reviewPlanView .review-result-branch {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: color-mix(in oklab, var(--muted) 48%, var(--card) 52%);
+      padding: 0.9rem;
+    }
+
+    #reviewPlanView .review-result-branch.blue {
+      border-color: color-mix(in oklab, var(--review-blue) 38%, var(--border) 62%);
+      background:
+        linear-gradient(180deg,
+          color-mix(in oklab, var(--review-blue) 8%, var(--card) 92%) 0%,
+          var(--card) 100%);
+    }
+
+    #reviewPlanView .review-result-branch.green {
+      border-color: color-mix(in oklab, var(--review-green) 40%, var(--border) 60%);
+      background:
+        linear-gradient(180deg,
+          color-mix(in oklab, var(--review-green) 9%, var(--card) 91%) 0%,
+          var(--card) 100%);
+    }
+
+    #reviewPlanView .review-result-branch.primary {
+      border-color: color-mix(in oklab, var(--primary) 38%, var(--border) 62%);
+      background:
+        linear-gradient(180deg,
+          color-mix(in oklab, var(--primary) 7%, var(--card) 93%) 0%,
+          var(--card) 100%);
+    }
+
+    #reviewPlanView .review-result-lane {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      gap: 0.72rem;
+      align-items: stretch;
+    }
+
+    #reviewPlanView .review-result-lane.three {
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+    }
+
+    #reviewPlanView .review-result-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card);
+      padding: 0.82rem;
+      min-height: 8.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.6rem;
+      box-shadow: 0 0.45rem 1rem rgba(15, 23, 42, 0.04);
+    }
+
+    #reviewPlanView .review-result-card.blue {
+      border-color: color-mix(in oklab, var(--review-blue) 44%, var(--border) 56%);
+    }
+
+    #reviewPlanView .review-result-card.green {
+      border-color: color-mix(in oklab, var(--review-green) 44%, var(--border) 56%);
+    }
+
+    #reviewPlanView .review-result-card.primary {
+      border-color: color-mix(in oklab, var(--primary) 44%, var(--border) 56%);
+    }
+
+    #reviewPlanView .review-result-metrics {
+      display: grid;
+      gap: 0.42rem;
+    }
+
+    #reviewPlanView .review-metric-line {
+      display: grid;
+      grid-template-columns: minmax(4.8rem, 1fr) 4.8rem 5.2rem;
+      gap: 0.45rem;
+      align-items: center;
+      border-top: 1px solid color-mix(in oklab, var(--border) 72%, var(--card) 28%);
+      min-height: 2.25rem;
+      padding-top: 0.4rem;
+      font-size: 0.76rem;
+      line-height: 1.35;
+      color: var(--foreground);
+    }
+
+    #reviewPlanView .review-metric-name {
+      color: color-mix(in oklab, var(--foreground) 72%, var(--muted-foreground) 28%);
+      font-weight: 800;
+    }
+
+    #reviewPlanView .review-metric-value {
+      font-family: JetBrains Mono, ui-monospace, monospace;
+      font-size: 0.92rem;
+      font-weight: 900;
+      color: var(--foreground);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    #reviewPlanView .review-metric-delta {
+      justify-self: end;
+      border: 1px solid var(--primary);
+      border-radius: 9999px;
+      background: var(--primary);
+      color: var(--primary-foreground);
+      padding: 0.14rem 0.4rem;
+      font-size: 0.68rem;
+      line-height: 1;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    #reviewPlanView .review-metric-delta.down {
+      border-color: var(--review-green);
+      background: var(--review-green);
+      color: var(--primary-foreground);
+    }
+
+    #reviewPlanView .review-result-note {
+      color: color-mix(in oklab, var(--foreground) 72%, var(--muted-foreground) 28%);
+      font-size: 0.72rem;
+      line-height: 1.45;
+    }
+
+    #reviewPlanView .review-result-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 2.2rem;
+      color: var(--primary);
+      font-size: 1.4rem;
+      font-weight: 900;
+    }
+
+    @media (max-width: 720px) {
+      #reviewPlanView .review-result-lane,
+      #reviewPlanView .review-result-lane.three {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      #reviewPlanView .review-result-arrow {
+        min-width: 0;
+        min-height: 1.3rem;
+        transform: rotate(90deg);
+      }
+
+      #reviewPlanView .review-metric-line {
+        grid-template-columns: minmax(0, 1fr) auto;
+      }
+
+      #reviewPlanView .review-metric-delta {
+        grid-column: 1 / -1;
+        justify-self: start;
+      }
+    }
+
+    #reviewPlanView .review-delta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      padding: 0.18rem 0.46rem;
+      font-size: 0.72rem;
+      line-height: 1;
+      font-weight: 900;
+      background: var(--primary);
+      color: var(--primary-foreground);
+      border: 1px solid var(--primary);
+      white-space: nowrap;
+    }
+
+    #reviewPlanView .review-delta.down {
+      background: var(--review-green);
+      color: var(--primary-foreground);
+      border-color: var(--review-green);
+    }
+
+    #reviewPlanView .review-delta.neutral {
+      background: color-mix(in oklab, var(--accent) 58%, var(--card) 42%);
+      color: var(--foreground);
+      border-color: var(--border);
+    }
+
+    @media (max-width: 767px) {
+      #reviewPlanView .review-result-lane,
+      #reviewPlanView .review-result-lane.three {
+        grid-template-columns: 1fr;
+      }
+
+      #reviewPlanView .review-result-arrow {
+        min-height: 1.6rem;
+        transform: rotate(90deg);
+      }
+    }
+
     #reviewPlanView .review-arrow {
       display: flex;
       align-items: center;
@@ -1156,7 +1492,7 @@
 
     #reviewPlanView .review-flow-chart {
       position: relative;
-      height: 32rem;
+      height: 36rem;
       min-width: 42rem;
       margin-top: 1.35rem;
     }
@@ -1187,11 +1523,26 @@
       border-radius: var(--radius);
       background: color-mix(in oklab, var(--primary) 8%, var(--card) 92%);
       color: var(--primary);
-      padding: 0.5rem 0.68rem;
+      padding: 0.58rem 0.74rem;
       font-size: 0.82rem;
       line-height: 1.35;
       font-weight: 900;
       box-shadow: 0 0.5rem 1.2rem rgba(15, 23, 42, 0.06);
+    }
+
+    #reviewPlanView .review-flow-mini-note {
+      position: absolute;
+      z-index: 4;
+      border: 1px solid color-mix(in oklab, var(--primary) 44%, var(--border) 56%);
+      border-radius: 9999px;
+      background: color-mix(in oklab, var(--primary) 10%, var(--card) 90%);
+      color: var(--primary);
+      padding: 0.22rem 0.44rem;
+      font-size: 0.62rem;
+      line-height: 1;
+      font-weight: 900;
+      white-space: nowrap;
+      box-shadow: 0 0.4rem 0.9rem rgba(15, 23, 42, 0.05);
     }
 
     #reviewPlanView .review-flow-card.primary {
@@ -3361,13 +3712,16 @@
               <span class="review-number">01</span>
               <div>
                 <h3 class="text-xl font-black text-foreground">A. MUBBK 主实验流量结构</h3>
-                <p class="text-xs text-foreground mt-1">先切空白强控，再让 90% 策略池按 Cell 矩阵进入免费或付费模板实验。</p>
+	                <p class="text-xs text-foreground mt-1">先切空白强控，再让 90% 策略池 50/50 进入实验 2 和实验 3；A2 后置 Cell 资格判断。</p>
               </div>
             </div>
 
 	            <div class="overflow-x-auto">
-	              <div class="review-flow-chart" role="img" aria-label="MUBBK 主实验流量结构：触发 T1/T2 后进入实验 1，全局分流 10% 空白强控和 90% 策略实验池，再按 Cell 矩阵进入实验 2 免费模板实验或实验 3 付费模板实验。">
-	                <div class="review-flow-note">AB 已于 5.21 日启动</div>
+		              <div class="review-flow-chart" role="img" aria-label="MUBBK 主实验流量结构：触发 T1/T2 后进入实验 1，全局分流 10% 空白强控和 90% 策略实验池；90% 策略池先 50/50 进入实验 2 免费模板实验和实验 3 付费模板实验；实验 3 内部 A2 后置 Cell 资格判断，不符合 C2C3 回落 A1。">
+		                <div class="review-flow-note">
+		                  <div>AB 已于 5.21 日启动</div>
+		                  <div class="mt-1 text-[0.68rem] leading-5 text-foreground">免费提醒每天最多触发一次，2 元券每周最多触发一次</div>
+		                </div>
 	                <div class="review-flow-card" style="left: 3%; top: 30%; width: 18%; height: 32%;">
 	                  <div class="review-flow-icon">
 	                    <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
@@ -3401,16 +3755,12 @@
                   <div class="review-flow-title">MUBBK 策略实验池</div>
                 </div>
 
-                <div class="review-flow-line v" style="left: 87%; top: 49%; height: 6%;"></div>
-                <div class="review-flow-line h arrow-right" style="left: 73%; top: 55%; width: 14%; transform: scaleX(-1); transform-origin: center;"></div>
-                <div class="review-flow-card" style="left: 60%; top: 52%; width: 24%; height: 9%;">
-                  <div class="review-flow-title">按 Cell 矩阵判断</div>
-                </div>
-
-                <div class="review-flow-line v" style="left: 72%; top: 61%; height: 6%;"></div>
-                <div class="review-flow-line h" style="left: 26%; top: 67%; width: 46%;"></div>
-                <div class="review-flow-line v arrow-down" style="left: 26%; top: 67%; height: 3%;"></div>
-                <div class="review-flow-line v arrow-down" style="left: 72%; top: 67%; height: 3%;"></div>
+	                <div class="review-flow-line v" style="left: 87%; top: 49%; height: 18%;"></div>
+	                <div class="review-flow-line h" style="left: 26%; top: 67%; width: 61%;"></div>
+	                <div class="review-flow-line v arrow-down" style="left: 26%; top: 67%; height: 3%;"></div>
+	                <div class="review-flow-line v arrow-down" style="left: 76%; top: 67%; height: 3%;"></div>
+	                <div class="review-flow-percent blue" style="left: 34%; top: 63.2%;">50%</div>
+	                <div class="review-flow-percent green" style="left: 74%; top: 63.2%;">50%</div>
 
                 <div class="review-flow-card blue" style="left: 7%; top: 70%; width: 38%; height: 9%;">
                   <div class="review-flow-title">实验 2：免费模板实验</div>
@@ -3421,41 +3771,45 @@
                   <div class="review-flow-sub">（ AB260511004 ）</div>
                 </div>
 
-                <div class="review-flow-line v" style="left: 26.5%; top: 81%; height: 4%;"></div>
-                <div class="review-flow-line h" style="left: 13%; top: 83.5%; width: 27%;"></div>
-                <div class="review-flow-line v arrow-down" style="left: 13%; top: 83.5%; height: 4%;"></div>
-                <div class="review-flow-line v arrow-down" style="left: 40%; top: 83.5%; height: 4%;"></div>
-                <div class="review-flow-percent blue" style="left: 9%; top: 82.5%;">50%</div>
-                <div class="review-flow-percent blue" style="left: 40%; top: 82.5%;">50%</div>
-                <div class="review-flow-card blue" style="left: 2%; top: 88.5%; width: 22%; height: 11.5%;">
-                  <div class="review-flow-title">A0</div>
-                  <div class="review-flow-sub">静默模板</div>
+	                <div class="review-flow-line v" style="left: 26.5%; top: 79%; height: 4%;"></div>
+	                <div class="review-flow-line h" style="left: 13%; top: 82%; width: 27%;"></div>
+	                <div class="review-flow-line v arrow-down" style="left: 13%; top: 82%; height: 5%;"></div>
+	                <div class="review-flow-line v arrow-down" style="left: 40%; top: 82%; height: 5%;"></div>
+		                <div class="review-flow-percent blue" style="left: 9%; top: 81%;">50%</div>
+		                <div class="review-flow-percent blue" style="left: 40%; top: 81%;">50%</div>
+			                <div class="review-flow-line h arrow-right" style="left: 20%; top: 85.6%; width: 5%; transform: scaleX(-1); transform-origin: center;"></div>
+			                <div class="review-flow-mini-note" style="left: 18%; top: 83.8%;">不满足免费策略 Cell 回落 A0</div>
+		                <div class="review-flow-card blue" style="left: 2%; top: 89%; width: 22%; height: 9.5%;">
+	                  <div class="review-flow-title">A0</div>
+	                  <div class="review-flow-sub">静默模板</div>
                 </div>
-                <div class="review-flow-card blue" style="left: 30%; top: 88.5%; width: 22%; height: 11.5%;">
+	                <div class="review-flow-card blue" style="left: 30%; top: 89%; width: 22%; height: 9.5%;">
                   <div class="review-flow-title">A1</div>
                   <div class="review-flow-sub">免费模板</div>
                 </div>
 
-                <div class="review-flow-line v" style="left: 76%; top: 81%; height: 4%;"></div>
-                <div class="review-flow-line h" style="left: 61%; top: 83.5%; width: 32%;"></div>
-                <div class="review-flow-line v arrow-down" style="left: 62%; top: 83.5%; height: 4%;"></div>
-                <div class="review-flow-line v arrow-down" style="left: 76%; top: 83.5%; height: 4%;"></div>
-                <div class="review-flow-line v arrow-down" style="left: 93%; top: 83.5%; height: 4%;"></div>
-                <div class="review-flow-percent green" style="left: 58%; top: 82.5%;">35%</div>
-                <div class="review-flow-percent green" style="left: 72%; top: 82.5%;">35%</div>
-                <div class="review-flow-percent green" style="left: 90%; top: 82.5%;">30%</div>
-                <div class="review-flow-card green" style="left: 55%; top: 88.5%; width: 14%; height: 11.5%;">
+	                <div class="review-flow-line v" style="left: 76%; top: 79%; height: 4%;"></div>
+	                <div class="review-flow-line h" style="left: 61%; top: 82%; width: 32%;"></div>
+	                <div class="review-flow-line v arrow-down" style="left: 62%; top: 82%; height: 5%;"></div>
+	                <div class="review-flow-line v arrow-down" style="left: 76%; top: 82%; height: 5%;"></div>
+		                <div class="review-flow-line v arrow-down" style="left: 93%; top: 82%; height: 5%;"></div>
+		                <div class="review-flow-percent green" style="left: 58%; top: 81%;">35%</div>
+		                <div class="review-flow-percent green" style="left: 72%; top: 81%;">35%</div>
+		                <div class="review-flow-percent green" style="left: 90%; top: 81%;">30%</div>
+			                <div class="review-flow-line h arrow-right" style="left: 80%; top: 85.6%; width: 5.8%; transform: scaleX(-1); transform-origin: center;"></div>
+			                <div class="review-flow-mini-note" style="left: 78.2%; top: 83.8%;">非 C2/C3 回落 A1</div>
+	                <div class="review-flow-card green" style="left: 55%; top: 89%; width: 14%; height: 9.5%;">
                   <div class="review-flow-title">A0</div>
                   <div class="review-flow-sub">静默模板</div>
                 </div>
-                <div class="review-flow-card green" style="left: 70%; top: 88.5%; width: 14%; height: 11.5%;">
+	                <div class="review-flow-card green" style="left: 70%; top: 89%; width: 14%; height: 9.5%;">
                   <div class="review-flow-title">A1</div>
                   <div class="review-flow-sub">免费模板</div>
                 </div>
-                <div class="review-flow-card green" style="left: 85%; top: 88.5%; width: 14%; height: 11.5%;">
-                  <div class="review-flow-title">A2</div>
-                  <div class="review-flow-sub">付费模板<br>2元无门槛券</div>
-                </div>
+		                <div class="review-flow-card green" style="left: 85%; top: 89%; width: 14%; height: 9.5%;">
+	                  <div class="review-flow-title">A2</div>
+	                  <div class="review-flow-sub">付费模板<br>2元券<br>仅 C2/C3</div>
+	                </div>
               </div>
             </div>
           </div>
@@ -3505,64 +3859,392 @@
 
 	      </section>
 
-      <section id="review-mubbk" class="panel review-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
-        <div class="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <div class="review-kicker">MUBBK RECAP</div>
-            <h3 class="mt-3 text-3xl font-black text-foreground">MUBBK 复盘：先问三层问题</h3>
-            <p class="mt-3 max-w-4xl text-sm md:text-base leading-7 text-foreground">MUBBK 的 90% 不是一个统一实验组。它先进入策略池，再按 Cell 矩阵拆到免费模板实验或付费模板实验。复盘时必须按这三层分别看，不能把所有 A0 混成一个对照组。</p>
-          </div>
-          <div class="review-formula">增量 = 实验组指标 - 对照组指标</div>
-        </div>
+	      <section id="review-mubbk" class="panel review-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+	        <div class="flex flex-wrap items-start justify-between gap-4">
+	          <div>
+	            <div class="review-kicker">MUBBK RECAP</div>
+		            <h3 class="mt-3 text-3xl font-black text-foreground">MUBBK 5 天复盘：三端数据分析</h3>
+		            <p class="mt-3 max-w-none overflow-x-auto whitespace-nowrap text-sm md:text-base leading-7 text-foreground">统计周期 20260522-20260526，按 mem_guid + session_id 统计。核心指标看“访问购物车到提交订单”的最终转化，分别评估 APP、微信小程序、支付宝小程序的策略效果。</p>
+		          </div>
+		          <div class="review-formula">主指标 = 提交订单数 / 访问购物车数</div>
+		        </div>
 
-        <div class="mt-6 overflow-x-auto rounded-2xl border border-border">
-          <table class="min-w-full text-sm text-left">
-            <thead>
-              <tr>
-                <th class="px-4 py-3 font-black text-foreground">要回答的问题</th>
-                <th class="px-4 py-3 font-black text-foreground">实验组</th>
-                <th class="px-4 py-3 font-black text-foreground">对照组</th>
-                <th class="px-4 py-3 font-black text-foreground">结论用途</th>
-              </tr>
-            </thead>
-            <tbody class="text-foreground">
-              <tr>
-                <td class="px-4 py-3 font-bold">MUBBK 整体有没有用</td>
-                <td class="px-4 py-3">实验 1 的 90% 策略实验池</td>
-                <td class="px-4 py-3">实验 1 的 10% 空白 A0</td>
-                <td class="px-4 py-3">判断整套 MUBBK 是否值得上线</td>
-              </tr>
-              <tr>
-                <td class="px-4 py-3 font-bold">免费模板有没有用</td>
-                <td class="px-4 py-3">实验 2 的 A1 免费模板</td>
-                <td class="px-4 py-3">实验 2 的 A0 静默模板</td>
-                <td class="px-4 py-3">判断免费提醒是否有效</td>
-              </tr>
-              <tr>
-                <td class="px-4 py-3 font-bold">付费模板有没有额外价值</td>
-                <td class="px-4 py-3">实验 3 的 A2 付费模板</td>
-                <td class="px-4 py-3">优先看实验 3 的 A1 免费模板，同时看 A0 静默模板</td>
-                <td class="px-4 py-3">判断 2 元券是否值得放量</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+	        <div class="mt-6 review-client-panel">
+	          <div class="flex flex-wrap items-center justify-between gap-3">
+	            <div>
+	              <div class="text-xl font-black text-foreground">三端数据分析</div>
+	              <p class="mt-1 text-sm leading-6 text-foreground">点击切换客户端，查看该端的分组结果、关键结论和后续判断。</p>
+	            </div>
+	            <div class="review-client-tabs" role="tablist" aria-label="MUBBK 5 天复盘客户端切换">
+	              <button type="button" class="review-client-tab is-active" data-review-client-tab="app">APP</button>
+	              <button type="button" class="review-client-tab" data-review-client-tab="wechat">微信小程序</button>
+	              <button type="button" class="review-client-tab" data-review-client-tab="alipay">支付宝小程序</button>
+	            </div>
+	          </div>
 
-        <div class="mt-5 grid grid-cols-1 lg:grid-cols-3 gap-4">
-          <div class="rounded-xl border border-border bg-muted p-4">
-            <div class="text-lg font-black text-foreground">主分析按初始分组</div>
-            <p class="mt-2 text-sm leading-7 text-foreground">用户最开始被分到 A0 / A1 / A2，就按这个分组进主分析。这样能保住随机实验的因果口径。</p>
-          </div>
-          <div class="rounded-xl border border-border bg-muted p-4">
-            <div class="text-lg font-black text-foreground">实际动作做辅助解释</div>
-            <p class="mt-2 text-sm leading-7 text-foreground">如果 A2 因券发放失败回落到 A1，仍保留 actual_action 字段，用来解释为什么效果不达预期。</p>
-          </div>
-          <div class="rounded-xl border border-border bg-muted p-4">
-            <div class="text-lg font-black text-foreground">分母用触发用户</div>
-            <p class="mt-2 text-sm leading-7 text-foreground">核心指标优先用触发 T1 / T2 的用户数做分母，不只看实际曝光用户，避免高估效果。</p>
-          </div>
-        </div>
-      </section>
+	          <div class="mt-5" data-review-client-panel="app">
+	            <div class="review-client-verdict">
+	              <div class="review-pill">APP 关键结论</div>
+	              <h4 class="mt-3 text-2xl font-black leading-tight text-foreground">APP 端主实验整体正向：策略实验池综合转化较强控 +2.16pp，免费提醒和 2 元券也都呈现正向。</h4>
+		              <p class="mt-3 text-sm leading-7 text-foreground">90% MUBBK 策略实验池相比 10% 强控 A0，购物车到结算、结算到提单、综合转化三项都提升；A2 成功发券后的最终转化达到 56.58%，但 A2 只有 988 个样本，放量前仍需确认分流、曝光、发券、核销链路是否完整。</p>
+		              <p class="mt-2 text-sm leading-7 text-foreground">付费组样本量太少，不足以支撑后续模型训练。后续策略是在 C2/C3 的基础上，放量 C8/C9 人群进入付费组。</p>
+	            </div>
+
+	            <div class="mt-4 review-result-map">
+	              <div class="review-result-branch primary">
+	                <div class="flex flex-wrap items-center justify-between gap-2">
+	                  <div class="font-black text-foreground">实验 1：主实验整体效果（AB260511001）</div>
+	                  <div class="review-delta">策略池较强控 +2.16pp</div>
+	                </div>
+	                <div class="mt-3 review-result-lane">
+	                  <div class="review-result-card">
+	                    <div class="text-xs font-black text-foreground/60">10% 强控 A0</div>
+	                    <div class="review-result-metrics">
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">74.32%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">66.23%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">49.25%</span></div>
+	                    </div>
+	                    <div class="review-result-note">访问购物车 21,054；提交订单 10,369</div>
+	                  </div>
+	                  <div class="review-result-arrow">→</div>
+	                  <div class="review-result-card primary">
+	                    <div class="text-xs font-black text-foreground/60">90% MUBBK 策略实验池</div>
+	                    <div class="review-result-metrics">
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">76.25%</span><span class="review-metric-delta">较强控 +1.93pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">67.39%</span><span class="review-metric-delta">较强控 +1.16pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">51.41%</span><span class="review-metric-delta">较强控 +2.16pp</span></div>
+	                    </div>
+	                    <div class="review-result-note">访问购物车 279,866；提交订单 143,877</div>
+	                  </div>
+	                </div>
+	              </div>
+
+	              <div class="review-result-branch blue">
+	                <div class="flex flex-wrap items-center justify-between gap-2">
+	                  <div class="font-black text-foreground">实验 2：免费模板实验（AB260511003）</div>
+	                  <div class="review-delta">A1 较 A0 +2.76pp</div>
+	                </div>
+	                <div class="mt-3 review-result-lane">
+	                  <div class="review-result-card">
+	                    <div class="text-xs font-black text-foreground/60">A0 静默模板</div>
+	                    <div class="review-result-metrics">
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">74.62%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">65.68%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">49.04%</span></div>
+	                    </div>
+	                    <div class="review-result-note">访问购物车 46,764；提交订单 22,935</div>
+	                  </div>
+	                  <div class="review-result-arrow">→</div>
+	                  <div class="review-result-card blue">
+	                    <div class="text-xs font-black text-foreground/60">A1 免费提醒</div>
+	                    <div class="review-result-metrics">
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">76.27%</span><span class="review-metric-delta">较 A0 +1.65pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">67.87%</span><span class="review-metric-delta">较 A0 +2.19pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">51.80%</span><span class="review-metric-delta">较 A0 +2.76pp</span></div>
+	                    </div>
+	                    <div class="review-result-note">访问购物车 36,360；提交订单 18,836</div>
+	                  </div>
+	                </div>
+	              </div>
+
+	              <div class="review-result-branch green">
+	                <div class="flex flex-wrap items-center justify-between gap-2">
+	                  <div class="font-black text-foreground">实验 3：付费模板实验（AB260511004）</div>
+	                  <div class="review-delta">A2 较 A1 +5.59pp</div>
+	                </div>
+	                <div class="mt-3 review-result-lane three">
+	                  <div class="review-result-card">
+	                    <div class="text-xs font-black text-foreground/60">A0 静默模板</div>
+	                    <div class="review-result-metrics">
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">74.35%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">65.84%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">48.99%</span></div>
+	                    </div>
+	                    <div class="review-result-note">访问购物车 31,059；提交订单 15,215</div>
+	                  </div>
+	                  <div class="review-result-arrow">→</div>
+	                  <div class="review-result-card blue">
+	                    <div class="text-xs font-black text-foreground/60">A1 免费提醒</div>
+	                    <div class="review-result-metrics">
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">76.00%</span><span class="review-metric-delta">较 A0 +1.66pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">67.06%</span><span class="review-metric-delta">较 A0 +1.23pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">50.99%</span><span class="review-metric-delta">较 A0 +2.00pp</span></div>
+	                    </div>
+	                    <div class="review-result-note">访问购物车 28,856；提交订单 14,714</div>
+	                  </div>
+	                  <div class="review-result-arrow">→</div>
+	                  <div class="review-result-card green">
+	                    <div class="text-xs font-black text-foreground/60">A2 2 元券</div>
+	                    <div class="review-result-metrics">
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">99.60%</span><span class="review-metric-delta">较 A1 +23.59pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">56.81%</span><span class="review-metric-delta down">较 A1 -10.26pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">56.58%</span><span class="review-metric-delta">较 A1 +5.59pp</span></div>
+	                    </div>
+	                    <div class="review-result-note">成功发券 988；提交订单 559</div>
+	                  </div>
+	                </div>
+	              </div>
+	            </div>
+	            <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+	              <table class="min-w-full text-sm text-left">
+	                <thead>
+	                  <tr>
+	                    <th class="px-4 py-3 font-black text-foreground">APP 要点</th>
+	                    <th class="px-4 py-3 font-black text-foreground">数据</th>
+	                    <th class="px-4 py-3 font-black text-foreground">怎么解读</th>
+	                  </tr>
+	                </thead>
+	                <tbody class="text-foreground">
+	                  <tr><td class="px-4 py-3 font-bold">整体是否有正向效益</td><td class="px-4 py-3">策略池较强控 +2.16pp；免费提醒 +2.76pp；2 元券相对免费 +5.59pp</td><td class="px-4 py-3">APP 端方向清楚，主实验和拆分实验都支持继续复盘和谨慎扩样。</td></tr>
+	                  <tr><td class="px-4 py-3 font-bold">主要作用点</td><td class="px-4 py-3">A2 购物车去结算 99.60%</td><td class="px-4 py-3">2 元券主要把用户从购物车推向结算页，不是提高结算页提单率。</td></tr>
+	                  <tr><td class="px-4 py-3 font-bold">当前风险</td><td class="px-4 py-3">A2 只有 988，且统计口径为 exposed + coupon_id 有值</td><td class="px-4 py-3">先查 A2 原始分流和发券链路，再判断是否扩大 C2/C3 范围。</td></tr>
+	                </tbody>
+	              </table>
+	            </div>
+	          </div>
+
+	          <div class="mt-5 hidden" data-review-client-panel="wechat">
+	            <div class="review-client-verdict">
+	              <div class="review-pill">微信小程序关键结论</div>
+	              <h4 class="mt-3 text-2xl font-black leading-tight text-foreground">微信端主实验整体小幅正向：策略实验池综合转化较强控 +1.04pp，提升主要来自购物车到结算。</h4>
+	              <p class="mt-3 text-sm leading-7 text-foreground">微信端基础转化率较高，90% MUBBK 策略实验池整体高于强控，但免费提醒单独看没有 APP 明确；A2 成功发券后的转化达到 63.77%，但样本只有 494 且购物车去结算为 100%，需要确认是否存在后置筛选。</p>
+	            </div>
+
+	            <div class="mt-4 review-result-map">
+	              <div class="review-result-branch primary">
+	                <div class="flex flex-wrap items-center justify-between gap-2">
+	                  <div class="font-black text-foreground">实验 1：主实验整体效果（AB260511001）</div>
+	                  <div class="review-delta">策略池较强控 +1.04pp</div>
+	                </div>
+	                <div class="mt-3 review-result-lane">
+	                  <div class="review-result-card">
+	                    <div class="text-xs font-black text-foreground/60">10% 强控 A0</div>
+	                    <div class="review-result-metrics">
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">78.01%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">71.06%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">55.46%</span></div>
+	                    </div>
+	                    <div class="review-result-note">访问购物车 14,054；提交订单 7,794</div>
+	                  </div>
+	                  <div class="review-result-arrow">→</div>
+	                  <div class="review-result-card primary">
+	                    <div class="text-xs font-black text-foreground/60">90% MUBBK 策略实验池</div>
+	                    <div class="review-result-metrics">
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">79.15%</span><span class="review-metric-delta">较强控 +1.14pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">71.36%</span><span class="review-metric-delta">较强控 +0.30pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">56.49%</span><span class="review-metric-delta">较强控 +1.04pp</span></div>
+	                    </div>
+	                    <div class="review-result-note">访问购物车 122,460；提交订单 69,183</div>
+	                  </div>
+	                </div>
+	              </div>
+
+	              <div class="review-result-branch blue">
+	                <div class="flex flex-wrap items-center justify-between gap-2">
+	                  <div class="font-black text-foreground">实验 2：免费模板实验（AB260511003）</div>
+	                  <div class="review-delta neutral">A1 较 A0 +0.57pp</div>
+	                </div>
+	                <div class="mt-3 review-result-lane">
+	                  <div class="review-result-card">
+	                    <div class="text-xs font-black text-foreground/60">A0 静默模板</div>
+	                    <div class="review-result-metrics">
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">78.27%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">69.95%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">54.77%</span></div>
+	                    </div>
+	                    <div class="review-result-note">访问购物车 31,149；提交订单 17,059</div>
+	                  </div>
+	                  <div class="review-result-arrow">→</div>
+	                  <div class="review-result-card blue">
+	                    <div class="text-xs font-black text-foreground/60">A1 免费提醒</div>
+	                    <div class="review-result-metrics">
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">78.44%</span><span class="review-metric-delta">较 A0 +0.18pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">70.54%</span><span class="review-metric-delta">较 A0 +0.59pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">55.33%</span><span class="review-metric-delta">较 A0 +0.57pp</span></div>
+	                    </div>
+	                    <div class="review-result-note">访问购物车 22,191；提交订单 12,279</div>
+	                  </div>
+	                </div>
+	              </div>
+
+	              <div class="review-result-branch green">
+	                <div class="flex flex-wrap items-center justify-between gap-2">
+	                  <div class="font-black text-foreground">实验 3：付费模板实验（AB260511004）</div>
+	                  <div class="review-delta">A2 较 A1 +8.41pp</div>
+	                </div>
+	                <div class="mt-3 review-result-lane three">
+	                  <div class="review-result-card">
+	                    <div class="text-xs font-black text-foreground/60">A0 静默模板</div>
+	                    <div class="review-result-metrics">
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">78.44%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">71.11%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">55.79%</span></div>
+	                    </div>
+	                    <div class="review-result-note">访问购物车 20,840；提交订单 11,627</div>
+	                  </div>
+	                  <div class="review-result-arrow">→</div>
+	                  <div class="review-result-card blue">
+	                    <div class="text-xs font-black text-foreground/60">A1 免费提醒</div>
+	                    <div class="review-result-metrics">
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">78.16%</span><span class="review-metric-delta down">较 A0 -0.27pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">70.81%</span><span class="review-metric-delta down">较 A0 -0.30pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">55.36%</span><span class="review-metric-delta down">较 A0 -0.43pp</span></div>
+	                    </div>
+	                    <div class="review-result-note">访问购物车 17,910；提交订单 9,915</div>
+	                  </div>
+	                  <div class="review-result-arrow">→</div>
+	                  <div class="review-result-card green">
+	                    <div class="text-xs font-black text-foreground/60">A2 2 元券</div>
+	                    <div class="review-result-metrics">
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">100.00%</span><span class="review-metric-delta">较 A1 +21.84pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">63.77%</span><span class="review-metric-delta down">较 A1 -7.05pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">63.77%</span><span class="review-metric-delta">较 A1 +8.41pp</span></div>
+	                    </div>
+	                    <div class="review-result-note">成功发券 494；提交订单 315</div>
+	                  </div>
+	                </div>
+	              </div>
+	            </div>
+	            <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+	              <table class="min-w-full text-sm text-left">
+	                <thead>
+	                  <tr>
+	                    <th class="px-4 py-3 font-black text-foreground">微信小程序要点</th>
+	                    <th class="px-4 py-3 font-black text-foreground">数据</th>
+	                    <th class="px-4 py-3 font-black text-foreground">怎么解读</th>
+	                  </tr>
+	                </thead>
+	                <tbody class="text-foreground">
+	                  <tr><td class="px-4 py-3 font-bold">整体是否有正向效益</td><td class="px-4 py-3">策略池较强控 +1.04pp；免费提醒单组不明显；A2 相对免费 +8.41pp</td><td class="px-4 py-3">微信端整体方向偏正，但免费提醒和 2 元券要拆开判断，不直接外推 APP 结论。</td></tr>
+	                  <tr><td class="px-4 py-3 font-bold">2 元券信号</td><td class="px-4 py-3">A2 相对付费池 A1 +8.41pp</td><td class="px-4 py-3">方向很强，但样本和口径都偏窄，只能叫强信号。</td></tr>
+	                  <tr><td class="px-4 py-3 font-bold">当前风险</td><td class="px-4 py-3">A2 只有 494，购物车去结算 100%</td><td class="px-4 py-3">先查触发和发券是否只覆盖到“本来就很可能结算”的人。</td></tr>
+	                </tbody>
+	              </table>
+	            </div>
+	          </div>
+
+	          <div class="mt-5 hidden" data-review-client-panel="alipay">
+	            <div class="review-client-verdict">
+	              <div class="review-pill">支付宝小程序关键结论</div>
+	              <h4 class="mt-3 text-2xl font-black leading-tight text-foreground">支付宝端方向为正，但强控样本较小，暂作为观察信号。</h4>
+	              <p class="mt-3 text-sm leading-7 text-foreground">90% MUBBK 策略实验池综合转化较强控 +2.39pp，但强控 A0 只有 482 个购物车访问，A2 成功发券也只有 15 个。当前不建议据此调整策略范围，先继续累积样本。</p>
+	            </div>
+
+	            <div class="mt-4 review-result-map">
+	              <div class="review-result-branch primary">
+	                <div class="flex flex-wrap items-center justify-between gap-2">
+	                  <div class="font-black text-foreground">实验 1：主实验整体效果（AB260511001）</div>
+		                  <div class="review-delta">策略池较强控 +2.39pp</div>
+	                </div>
+	                <div class="mt-3 review-result-lane">
+	                  <div class="review-result-card">
+	                    <div class="text-xs font-black text-foreground/60">10% 强控 A0</div>
+	                    <div class="review-result-metrics">
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">78.01%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">64.10%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">50.00%</span></div>
+	                    </div>
+	                    <div class="review-result-note">访问购物车 482；提交订单 241</div>
+	                  </div>
+	                  <div class="review-result-arrow">→</div>
+	                  <div class="review-result-card primary">
+	                    <div class="text-xs font-black text-foreground/60">90% MUBBK 策略实验池</div>
+	                    <div class="review-result-metrics">
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">80.02%</span><span class="review-metric-delta">较强控 +2.02pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">65.45%</span><span class="review-metric-delta">较强控 +1.35pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">52.39%</span><span class="review-metric-delta">较强控 +2.39pp</span></div>
+	                    </div>
+	                    <div class="review-result-note">访问购物车 4,245；提交订单 2,224；样本观察</div>
+	                  </div>
+	                </div>
+	              </div>
+
+	              <div class="review-result-branch blue">
+	                <div class="flex flex-wrap items-center justify-between gap-2">
+	                  <div class="font-black text-foreground">实验 2：免费模板实验（AB260511003）</div>
+	                  <div class="review-delta down">A1 较 A0 -1.06pp</div>
+	                </div>
+	                <div class="mt-3 review-result-lane">
+	                  <div class="review-result-card">
+	                    <div class="text-xs font-black text-foreground/60">A0 静默模板</div>
+	                    <div class="review-result-metrics">
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">81.35%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">62.60%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">50.93%</span></div>
+	                    </div>
+	                    <div class="review-result-note">访问购物车 1,078；提交订单 549</div>
+	                  </div>
+	                  <div class="review-result-arrow">→</div>
+	                  <div class="review-result-card blue">
+	                    <div class="text-xs font-black text-foreground/60">A1 免费提醒</div>
+	                    <div class="review-result-metrics">
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">76.93%</span><span class="review-metric-delta down">较 A0 -4.42pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">64.82%</span><span class="review-metric-delta">较 A0 +2.22pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">49.87%</span><span class="review-metric-delta down">较 A0 -1.06pp</span></div>
+	                    </div>
+	                    <div class="review-result-note">访问购物车 776；提交订单 387</div>
+	                  </div>
+	                </div>
+	              </div>
+
+	              <div class="review-result-branch green">
+	                <div class="flex flex-wrap items-center justify-between gap-2">
+	                  <div class="font-black text-foreground">实验 3：付费模板实验（AB260511004）</div>
+	                  <div class="review-delta down">A2 样本仅 15</div>
+	                </div>
+	                <div class="mt-3 review-result-lane three">
+	                  <div class="review-result-card">
+	                    <div class="text-xs font-black text-foreground/60">A0 静默模板</div>
+	                    <div class="review-result-metrics">
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">77.81%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">65.15%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">50.78%</span></div>
+	                    </div>
+	                    <div class="review-result-note">访问购物车 703；提交订单 357</div>
+	                  </div>
+	                  <div class="review-result-arrow">→</div>
+	                  <div class="review-result-card blue">
+	                    <div class="text-xs font-black text-foreground/60">A1 免费提醒</div>
+	                    <div class="review-result-metrics">
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">79.57%</span><span class="review-metric-delta">较 A0 +1.76pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">68.08%</span><span class="review-metric-delta">较 A0 +2.93pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">54.17%</span><span class="review-metric-delta">较 A0 +3.39pp</span></div>
+	                    </div>
+	                    <div class="review-result-note">访问购物车 563；提交订单 305</div>
+	                  </div>
+	                  <div class="review-result-arrow">→</div>
+	                  <div class="review-result-card green">
+	                    <div class="text-xs font-black text-foreground/60">A2 2 元券</div>
+	                    <div class="review-result-metrics">
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">100.00%</span><span class="review-metric-delta">较 A1 +20.43pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">33.33%</span><span class="review-metric-delta down">较 A1 -34.75pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">33.33%</span><span class="review-metric-delta down">较 A1 -20.84pp</span></div>
+	                    </div>
+	                    <div class="review-result-note">成功发券 15；提交订单 5；样本不足</div>
+	                  </div>
+	                </div>
+	              </div>
+	            </div>
+	            <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+	              <table class="min-w-full text-sm text-left">
+	                <thead>
+	                  <tr>
+	                    <th class="px-4 py-3 font-black text-foreground">支付宝小程序要点</th>
+	                    <th class="px-4 py-3 font-black text-foreground">数据</th>
+	                    <th class="px-4 py-3 font-black text-foreground">怎么解读</th>
+	                  </tr>
+	                </thead>
+	                <tbody class="text-foreground">
+	                  <tr><td class="px-4 py-3 font-bold">整体是否有正向效益</td><td class="px-4 py-3">策略池较强控 +2.39pp；免费提醒单组方向不一致；A2 样本仅 15</td><td class="px-4 py-3">整体方向偏正，但样本太小，暂不作为扩量决策依据。</td></tr>
+	                  <tr><td class="px-4 py-3 font-bold">2 元券信号</td><td class="px-4 py-3">A2 只有 15 个，提交订单 5 个</td><td class="px-4 py-3">不能把 33.33% 解读为负向，只能说样本不足。</td></tr>
+	                  <tr><td class="px-4 py-3 font-bold">下一步</td><td class="px-4 py-3">继续观察，不参与扩量决策</td><td class="px-4 py-3">支付宝端先作为监控项，等样本累积后再单独判断。</td></tr>
+	                </tbody>
+	              </table>
+	            </div>
+	          </div>
+	        </div>
+
+	      </section>
 
       <section id="review-ux" class="panel review-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
         <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
@@ -5773,20 +6455,32 @@
       });
     }
 
-    function bindThresholdModeTabs() {
-      document.querySelectorAll('.threshold-mode-btn').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const endpoint = btn.dataset.endpoint;
+	    function bindThresholdModeTabs() {
+	      document.querySelectorAll('.threshold-mode-btn').forEach((btn) => {
+	        btn.addEventListener('click', () => {
+	          const endpoint = btn.dataset.endpoint;
           const mode = btn.dataset.mode;
           if (!endpoint || !mode || currentThresholdModes[endpoint] === mode) return;
           currentThresholdModes[endpoint] = mode;
           renderThresholdView();
           activeTabStyle();
-        });
-      });
-    }
+	        });
+	      });
+	    }
 
-	    function activeTabStyle() {
+	    function bindReviewClientTabs() {
+	      const tabs = [...document.querySelectorAll('[data-review-client-tab]')];
+	      const panels = [...document.querySelectorAll('[data-review-client-panel]')];
+	      tabs.forEach((btn) => {
+	        btn.addEventListener('click', () => {
+	          const key = btn.dataset.reviewClientTab;
+	          tabs.forEach(item => item.classList.toggle('is-active', item.dataset.reviewClientTab === key));
+	          panels.forEach(panel => panel.classList.toggle('hidden', panel.dataset.reviewClientPanel !== key));
+	        });
+	      });
+	    }
+
+		    function activeTabStyle() {
 	      const toggleHidden = (id, hidden) => {
 	        const el = document.getElementById(id);
 	        if (el) el.classList.toggle('hidden', hidden);
@@ -7755,10 +8449,11 @@
 
     buildScopeTabs();
     buildTabs();
-    buildCartTabs();
-    buildCheckoutTabs();
-    bindThresholdModeTabs();
-    render();
+	    buildCartTabs();
+	    buildCheckoutTabs();
+	    bindThresholdModeTabs();
+	    bindReviewClientTabs();
+	    render();
 
     window.addEventListener('resize', () => {
       graphChart.resize();
