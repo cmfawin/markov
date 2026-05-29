@@ -1297,6 +1297,19 @@
       color: var(--foreground);
     }
 
+    #reviewPlanView .review-metric-line.final {
+      border-top-color: color-mix(in oklab, var(--primary) 36%, var(--border) 64%);
+      margin-top: 0.12rem;
+      font-weight: 900;
+    }
+
+    #reviewPlanView .review-metric-line.final .review-metric-name,
+    #reviewPlanView .review-metric-line.final .review-metric-value {
+      color: var(--foreground);
+      font-weight: 900;
+      font-size: 0.98rem;
+    }
+
     #reviewPlanView .review-metric-name {
       color: color-mix(in oklab, var(--foreground) 72%, var(--muted-foreground) 28%);
       font-weight: 800;
@@ -3863,10 +3876,10 @@
 	        <div class="flex flex-wrap items-start justify-between gap-4">
 	          <div>
 	            <div class="review-kicker">MUBBK RECAP</div>
-		            <h3 class="mt-3 text-3xl font-black text-foreground">MUBBK 5 天复盘：三端数据分析</h3>
-		            <p class="mt-3 max-w-none overflow-x-auto whitespace-nowrap text-sm md:text-base leading-7 text-foreground">统计周期 20260522-20260526，按 mem_guid + session_id 统计。核心指标看“访问购物车到提交订单”的最终转化，分别评估 APP、微信小程序、支付宝小程序的策略效果。</p>
+		            <h3 class="mt-3 text-3xl font-black text-foreground">MUBBK 7 天复盘：三端数据分析</h3>
+		            <p class="mt-3 max-w-none overflow-x-auto whitespace-nowrap text-sm md:text-base leading-7 text-foreground">统计周期 20260522-20260528，按 mem_guid + session_id 统计。核心链路看购物车到结算、结算页提单、提单付款，最终结论看购物车到支付成功。</p>
 		          </div>
-		          <div class="review-formula">主指标 = 提交订单数 / 访问购物车数</div>
+		          <div class="review-formula">最终综合转化 = 支付成功数 / 访问购物车数<br>购物车→支付 = 购物车→结算 × 结算→提单 × 提单→支付</div>
 		        </div>
 
 	        <div class="mt-6 review-client-panel">
@@ -3875,7 +3888,7 @@
 	              <div class="text-xl font-black text-foreground">三端数据分析</div>
 	              <p class="mt-1 text-sm leading-6 text-foreground">点击切换客户端，查看该端的分组结果、关键结论和后续判断。</p>
 	            </div>
-	            <div class="review-client-tabs" role="tablist" aria-label="MUBBK 5 天复盘客户端切换">
+	            <div class="review-client-tabs" role="tablist" aria-label="MUBBK 7 天复盘客户端切换">
 	              <button type="button" class="review-client-tab is-active" data-review-client-tab="app">APP</button>
 	              <button type="button" class="review-client-tab" data-review-client-tab="wechat">微信小程序</button>
 	              <button type="button" class="review-client-tab" data-review-client-tab="alipay">支付宝小程序</button>
@@ -3885,36 +3898,38 @@
 	          <div class="mt-5" data-review-client-panel="app">
 	            <div class="review-client-verdict">
 	              <div class="review-pill">APP 关键结论</div>
-	              <h4 class="mt-3 text-2xl font-black leading-tight text-foreground">APP 端主实验整体正向：策略实验池综合转化较强控 +2.16pp，免费提醒和 2 元券也都呈现正向。</h4>
-		              <p class="mt-3 text-sm leading-7 text-foreground">90% MUBBK 策略实验池相比 10% 强控 A0，购物车到结算、结算到提单、综合转化三项都提升；A2 成功发券后的最终转化达到 56.58%，但 A2 只有 988 个样本，放量前仍需确认分流、曝光、发券、核销链路是否完整。</p>
-		              <p class="mt-2 text-sm leading-7 text-foreground">付费组样本量太少，不足以支撑后续模型训练。后续策略是在 C2/C3 的基础上，放量 C8/C9 人群进入付费组。</p>
+	              <h4 class="mt-3 text-2xl font-black leading-tight text-foreground">APP 端整体仍是正向，但加上支付成功后，主实验提升收敛到 +0.24pp。</h4>
+		              <p class="mt-3 text-sm leading-7 text-foreground">免费提醒在 APP 上最稳：实验 2 A1 相比 A0，购物车到支付成功 +2.82pp；实验 3 A1 相比 A0，购物车到支付成功 +2.30pp。</p>
+		              <p class="mt-2 text-sm leading-7 text-foreground">2 元券把用户从购物车强力推到结算页，但结算页提单率和提单后付款率都低于免费提醒和静默。A2 样本仍少，放量前需要继续确认分流、曝光、发券、核销和支付链路。</p>
 	            </div>
 
 	            <div class="mt-4 review-result-map">
 	              <div class="review-result-branch primary">
 	                <div class="flex flex-wrap items-center justify-between gap-2">
 	                  <div class="font-black text-foreground">实验 1：主实验整体效果（AB260511001）</div>
-	                  <div class="review-delta">策略池较强控 +2.16pp</div>
+	                  <div class="review-delta">策略池较强控 +0.24pp</div>
 	                </div>
 	                <div class="mt-3 review-result-lane">
 	                  <div class="review-result-card">
 	                    <div class="text-xs font-black text-foreground/60">10% 强控 A0</div>
 	                    <div class="review-result-metrics">
-	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">74.32%</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">66.23%</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">49.25%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">74.34%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">65.76%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">提单→支付</span><span class="review-metric-value">97.11%</span></div>
+	                      <div class="review-metric-line final"><span class="review-metric-name">购物车→支付</span><span class="review-metric-value">47.47%</span></div>
 	                    </div>
-	                    <div class="review-result-note">访问购物车 21,054；提交订单 10,369</div>
+	                    <div class="review-result-note">访问购物车 28,825；支付成功 13,696</div>
 	                  </div>
 	                  <div class="review-result-arrow">→</div>
 	                  <div class="review-result-card primary">
 	                    <div class="text-xs font-black text-foreground/60">90% MUBBK 策略实验池</div>
 	                    <div class="review-result-metrics">
-	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">76.25%</span><span class="review-metric-delta">较强控 +1.93pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">67.39%</span><span class="review-metric-delta">较强控 +1.16pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">51.41%</span><span class="review-metric-delta">较强控 +2.16pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">75.00%</span><span class="review-metric-delta">较强控 +0.66pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">65.56%</span><span class="review-metric-delta down">较强控 -0.20pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">提单→支付</span><span class="review-metric-value">97.04%</span><span class="review-metric-delta down">较强控 -0.07pp</span></div>
+	                      <div class="review-metric-line final"><span class="review-metric-name">购物车→支付</span><span class="review-metric-value">47.72%</span><span class="review-metric-delta">较强控 +0.25pp</span></div>
 	                    </div>
-	                    <div class="review-result-note">访问购物车 279,866；提交订单 143,877</div>
+	                    <div class="review-result-note">访问购物车 253,106；支付成功 120,895</div>
 	                  </div>
 	                </div>
 	              </div>
@@ -3922,27 +3937,29 @@
 	              <div class="review-result-branch blue">
 	                <div class="flex flex-wrap items-center justify-between gap-2">
 	                  <div class="font-black text-foreground">实验 2：免费模板实验（AB260511003）</div>
-	                  <div class="review-delta">A1 较 A0 +2.76pp</div>
+	                  <div class="review-delta">A1 较 A0 +2.82pp</div>
 	                </div>
 	                <div class="mt-3 review-result-lane">
 	                  <div class="review-result-card">
 	                    <div class="text-xs font-black text-foreground/60">A0 静默模板</div>
 	                    <div class="review-result-metrics">
-	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">74.62%</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">65.68%</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">49.04%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">74.47%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">65.28%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">提单→支付</span><span class="review-metric-value">97.09%</span></div>
+	                      <div class="review-metric-line final"><span class="review-metric-name">购物车→支付</span><span class="review-metric-value">47.19%</span></div>
 	                    </div>
-	                    <div class="review-result-note">访问购物车 46,764；提交订单 22,935</div>
+	                    <div class="review-result-note">访问购物车 64,171；支付成功 30,316</div>
 	                  </div>
 	                  <div class="review-result-arrow">→</div>
 	                  <div class="review-result-card blue">
 	                    <div class="text-xs font-black text-foreground/60">A1 免费提醒</div>
 	                    <div class="review-result-metrics">
-	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">76.27%</span><span class="review-metric-delta">较 A0 +1.65pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">67.87%</span><span class="review-metric-delta">较 A0 +2.19pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">51.80%</span><span class="review-metric-delta">较 A0 +2.76pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">76.17%</span><span class="review-metric-delta">较 A0 +1.70pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">67.63%</span><span class="review-metric-delta">较 A0 +2.35pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">提单→支付</span><span class="review-metric-value">97.10%</span><span class="review-metric-delta">较 A0 +0.01pp</span></div>
+	                      <div class="review-metric-line final"><span class="review-metric-name">购物车→支付</span><span class="review-metric-value">50.02%</span><span class="review-metric-delta">较 A0 +2.83pp</span></div>
 	                    </div>
-	                    <div class="review-result-note">访问购物车 36,360；提交订单 18,836</div>
+	                    <div class="review-result-note">访问购物车 49,842；支付成功 24,952</div>
 	                  </div>
 	                </div>
 	              </div>
@@ -3950,37 +3967,40 @@
 	              <div class="review-result-branch green">
 	                <div class="flex flex-wrap items-center justify-between gap-2">
 	                  <div class="font-black text-foreground">实验 3：付费模板实验（AB260511004）</div>
-	                  <div class="review-delta">A2 较 A0 +7.59pp</div>
+	                  <div class="review-delta">A2 较 A0 +5.27pp</div>
 	                </div>
 	                <div class="mt-3 review-result-lane three">
 	                  <div class="review-result-card">
 	                    <div class="text-xs font-black text-foreground/60">A0 静默模板</div>
 	                    <div class="review-result-metrics">
-	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">74.35%</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">65.84%</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">48.99%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">74.32%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">65.40%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">提单→支付</span><span class="review-metric-value">96.93%</span></div>
+	                      <div class="review-metric-line final"><span class="review-metric-name">购物车→支付</span><span class="review-metric-value">47.12%</span></div>
 	                    </div>
-	                    <div class="review-result-note">访问购物车 31,059；提交订单 15,215</div>
+	                    <div class="review-result-note">访问购物车 42,719；支付成功 20,151</div>
 	                  </div>
 	                  <div class="review-result-arrow">→</div>
 	                  <div class="review-result-card blue">
 	                    <div class="text-xs font-black text-foreground/60">A1 免费提醒</div>
 	                    <div class="review-result-metrics">
-	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">76.00%</span><span class="review-metric-delta">较 A0 +1.66pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">67.06%</span><span class="review-metric-delta">较 A0 +1.23pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">50.99%</span><span class="review-metric-delta">较 A0 +2.00pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">75.90%</span><span class="review-metric-delta">较 A0 +1.58pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">66.91%</span><span class="review-metric-delta">较 A0 +1.51pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">提单→支付</span><span class="review-metric-value">97.30%</span><span class="review-metric-delta">较 A0 +0.37pp</span></div>
+	                      <div class="review-metric-line final"><span class="review-metric-name">购物车→支付</span><span class="review-metric-value">49.42%</span><span class="review-metric-delta">较 A0 +2.30pp</span></div>
 	                    </div>
-	                    <div class="review-result-note">访问购物车 28,856；提交订单 14,714</div>
+	                    <div class="review-result-note">访问购物车 39,510；支付成功 19,537</div>
 	                  </div>
 	                  <div class="review-result-arrow">→</div>
 	                  <div class="review-result-card green">
 	                    <div class="text-xs font-black text-foreground/60">A2 2 元券</div>
 	                    <div class="review-result-metrics">
-	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">99.60%</span><span class="review-metric-delta">较 A0 +25.25pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">56.81%</span><span class="review-metric-delta down">较 A0 -9.03pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">56.58%</span><span class="review-metric-delta">较 A0 +7.59pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">98.43%</span><span class="review-metric-delta">较 A0 +24.11pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">56.12%</span><span class="review-metric-delta down">较 A0 -9.28pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">提单→支付</span><span class="review-metric-value">94.84%</span><span class="review-metric-delta down">较 A0 -2.09pp</span></div>
+	                      <div class="review-metric-line final"><span class="review-metric-name">购物车→支付</span><span class="review-metric-value">52.39%</span><span class="review-metric-delta">较 A0 +5.27pp</span></div>
 	                    </div>
-	                    <div class="review-result-note">成功发券 988；提交订单 559</div>
+	                    <div class="review-result-note">成功发券 1,402；支付成功 735；均毛利 12.71 元</div>
 	                  </div>
 	                </div>
 	              </div>
@@ -3995,9 +4015,9 @@
 	                  </tr>
 	                </thead>
 	                <tbody class="text-foreground">
-	                  <tr><td class="px-4 py-3 font-bold">整体是否有正向效益</td><td class="px-4 py-3">策略池较强控 +2.16pp；免费提醒 +2.76pp；2 元券相对 A0 +7.59pp</td><td class="px-4 py-3">APP 端方向清楚，主实验和拆分实验都支持继续复盘和谨慎扩样。</td></tr>
-	                  <tr><td class="px-4 py-3 font-bold">主要作用点</td><td class="px-4 py-3">A2 购物车去结算 99.60%</td><td class="px-4 py-3">2 元券主要把用户从购物车推向结算页，不是提高结算页提单率。</td></tr>
-	                  <tr><td class="px-4 py-3 font-bold">当前风险</td><td class="px-4 py-3">A2 只有 988，且统计口径为 exposed + coupon_id 有值</td><td class="px-4 py-3">先查 A2 原始分流和发券链路，再判断是否扩大 C2/C3 范围。</td></tr>
+	                  <tr><td class="px-4 py-3 font-bold">整体是否有正向效益</td><td class="px-4 py-3">策略池较强控 +0.24pp；免费提醒 +2.82pp；2 元券较 A0 +5.27pp</td><td class="px-4 py-3">APP 仍为正向，但加入支付成功后，主实验整体提升不再像提单口径那么强。</td></tr>
+	                  <tr><td class="px-4 py-3 font-bold">主要作用点</td><td class="px-4 py-3">A2 购物车到结算 98.43%，但结算到提单 56.12%、提单到支付 94.84%</td><td class="px-4 py-3">2 元券主要拉动“去结算”，后续支付质量没有同步提升。</td></tr>
+	                  <tr><td class="px-4 py-3 font-bold">当前风险</td><td class="px-4 py-3">A2 访问购物车 1,402，支付成功 735</td><td class="px-4 py-3">样本仍偏少，先排查触发和核销链路，再扩大 C8/C9。</td></tr>
 	                </tbody>
 	              </table>
 	            </div>
@@ -4006,35 +4026,37 @@
 	          <div class="mt-5 hidden" data-review-client-panel="wechat">
 	            <div class="review-client-verdict">
 	              <div class="review-pill">微信小程序关键结论</div>
-	              <h4 class="mt-3 text-2xl font-black leading-tight text-foreground">微信端主实验整体小幅正向：策略实验池综合转化较强控 +1.04pp，提升主要来自购物车到结算。</h4>
-	              <p class="mt-3 text-sm leading-7 text-foreground">微信端基础转化率较高，90% MUBBK 策略实验池整体高于强控，但免费提醒单独看没有 APP 明确；A2 成功发券后的转化达到 63.77%，但样本只有 494 且购物车去结算为 100%，需要确认是否存在后置筛选。</p>
+	              <h4 class="mt-3 text-2xl font-black leading-tight text-foreground">微信端主实验整体正向更清楚：策略池购物车到支付成功较强控 +1.30pp。</h4>
+	              <p class="mt-3 text-sm leading-7 text-foreground">免费提醒在微信端单独看不稳定，实验 2 小幅正向、实验 3 小幅负向；2 元券最终转化提升明显，但同样主要来自购物车到结算。</p>
 	            </div>
 
 	            <div class="mt-4 review-result-map">
 	              <div class="review-result-branch primary">
 	                <div class="flex flex-wrap items-center justify-between gap-2">
 	                  <div class="font-black text-foreground">实验 1：主实验整体效果（AB260511001）</div>
-	                  <div class="review-delta">策略池较强控 +1.04pp</div>
+	                  <div class="review-delta">策略池较强控 +1.30pp</div>
 	                </div>
 	                <div class="mt-3 review-result-lane">
 	                  <div class="review-result-card">
 	                    <div class="text-xs font-black text-foreground/60">10% 强控 A0</div>
 	                    <div class="review-result-metrics">
-	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">78.01%</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">71.06%</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">55.46%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">78.02%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">70.57%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">提单→支付</span><span class="review-metric-value">96.92%</span></div>
+	                      <div class="review-metric-line final"><span class="review-metric-name">购物车→支付</span><span class="review-metric-value">53.36%</span></div>
 	                    </div>
-	                    <div class="review-result-note">访问购物车 14,054；提交订单 7,794</div>
+	                    <div class="review-result-note">访问购物车 18,948；支付成功 10,120</div>
 	                  </div>
 	                  <div class="review-result-arrow">→</div>
 	                  <div class="review-result-card primary">
 	                    <div class="text-xs font-black text-foreground/60">90% MUBBK 策略实验池</div>
 	                    <div class="review-result-metrics">
-	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">79.15%</span><span class="review-metric-delta">较强控 +1.14pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">71.36%</span><span class="review-metric-delta">较强控 +0.30pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">56.49%</span><span class="review-metric-delta">较强控 +1.04pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">79.02%</span><span class="review-metric-delta">较强控 +1.00pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">71.35%</span><span class="review-metric-delta">较强控 +0.78pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">提单→支付</span><span class="review-metric-value">96.96%</span><span class="review-metric-delta">较强控 +0.04pp</span></div>
+	                      <div class="review-metric-line final"><span class="review-metric-name">购物车→支付</span><span class="review-metric-value">54.66%</span><span class="review-metric-delta">较强控 +1.30pp</span></div>
 	                    </div>
-	                    <div class="review-result-note">访问购物车 122,460；提交订单 69,183</div>
+	                    <div class="review-result-note">访问购物车 165,241；支付成功 90,393</div>
 	                  </div>
 	                </div>
 	              </div>
@@ -4042,27 +4064,29 @@
 	              <div class="review-result-branch blue">
 	                <div class="flex flex-wrap items-center justify-between gap-2">
 	                  <div class="font-black text-foreground">实验 2：免费模板实验（AB260511003）</div>
-	                  <div class="review-delta neutral">A1 较 A0 +0.57pp</div>
+	                  <div class="review-delta neutral">A1 较 A0 +0.34pp</div>
 	                </div>
 	                <div class="mt-3 review-result-lane">
 	                  <div class="review-result-card">
 	                    <div class="text-xs font-black text-foreground/60">A0 静默模板</div>
 	                    <div class="review-result-metrics">
-	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">78.27%</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">69.95%</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">54.77%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">78.36%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">69.85%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">提单→支付</span><span class="review-metric-value">96.88%</span></div>
+	                      <div class="review-metric-line final"><span class="review-metric-name">购物车→支付</span><span class="review-metric-value">53.02%</span></div>
 	                    </div>
-	                    <div class="review-result-note">访问购物车 31,149；提交订单 17,059</div>
+	                    <div class="review-result-note">访问购物车 42,198；支付成功 22,395</div>
 	                  </div>
 	                  <div class="review-result-arrow">→</div>
 	                  <div class="review-result-card blue">
 	                    <div class="text-xs font-black text-foreground/60">A1 免费提醒</div>
 	                    <div class="review-result-metrics">
-	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">78.44%</span><span class="review-metric-delta">较 A0 +0.18pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">70.54%</span><span class="review-metric-delta">较 A0 +0.59pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">55.33%</span><span class="review-metric-delta">较 A0 +0.57pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">78.00%</span><span class="review-metric-delta down">较 A0 -0.36pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">70.48%</span><span class="review-metric-delta">较 A0 +0.63pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">提单→支付</span><span class="review-metric-value">97.07%</span><span class="review-metric-delta">较 A0 +0.19pp</span></div>
+	                      <div class="review-metric-line final"><span class="review-metric-name">购物车→支付</span><span class="review-metric-value">53.37%</span><span class="review-metric-delta">较 A0 +0.35pp</span></div>
 	                    </div>
-	                    <div class="review-result-note">访问购物车 22,191；提交订单 12,279</div>
+	                    <div class="review-result-note">访问购物车 29,716；支付成功 15,866</div>
 	                  </div>
 	                </div>
 	              </div>
@@ -4070,37 +4094,40 @@
 	              <div class="review-result-branch green">
 	                <div class="flex flex-wrap items-center justify-between gap-2">
 	                  <div class="font-black text-foreground">实验 3：付费模板实验（AB260511004）</div>
-	                  <div class="review-delta">A2 较 A0 +7.98pp</div>
+	                  <div class="review-delta">A2 较 A0 +6.84pp</div>
 	                </div>
 	                <div class="mt-3 review-result-lane three">
 	                  <div class="review-result-card">
 	                    <div class="text-xs font-black text-foreground/60">A0 静默模板</div>
 	                    <div class="review-result-metrics">
-	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">78.44%</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">71.11%</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">55.79%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">78.23%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">71.17%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">提单→支付</span><span class="review-metric-value">96.76%</span></div>
+	                      <div class="review-metric-line final"><span class="review-metric-name">购物车→支付</span><span class="review-metric-value">53.87%</span></div>
 	                    </div>
-	                    <div class="review-result-note">访问购物车 20,840；提交订单 11,627</div>
+	                    <div class="review-result-note">访问购物车 28,102；支付成功 15,148</div>
 	                  </div>
 	                  <div class="review-result-arrow">→</div>
 	                  <div class="review-result-card blue">
 	                    <div class="text-xs font-black text-foreground/60">A1 免费提醒</div>
 	                    <div class="review-result-metrics">
-	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">78.16%</span><span class="review-metric-delta down">较 A0 -0.27pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">70.81%</span><span class="review-metric-delta down">较 A0 -0.30pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">55.36%</span><span class="review-metric-delta down">较 A0 -0.43pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">77.98%</span><span class="review-metric-delta down">较 A0 -0.25pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">70.72%</span><span class="review-metric-delta down">较 A0 -0.45pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">提单→支付</span><span class="review-metric-value">97.03%</span><span class="review-metric-delta">较 A0 +0.27pp</span></div>
+	                      <div class="review-metric-line final"><span class="review-metric-name">购物车→支付</span><span class="review-metric-value">53.50%</span><span class="review-metric-delta down">较 A0 -0.37pp</span></div>
 	                    </div>
-	                    <div class="review-result-note">访问购物车 17,910；提交订单 9,915</div>
+	                    <div class="review-result-note">访问购物车 24,017；支付成功 12,860</div>
 	                  </div>
 	                  <div class="review-result-arrow">→</div>
 	                  <div class="review-result-card green">
 	                    <div class="text-xs font-black text-foreground/60">A2 2 元券</div>
 	                    <div class="review-result-metrics">
-	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">100.00%</span><span class="review-metric-delta">较 A0 +21.56pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">63.77%</span><span class="review-metric-delta down">较 A0 -7.34pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">63.77%</span><span class="review-metric-delta">较 A0 +7.98pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">99.44%</span><span class="review-metric-delta">较 A0 +21.21pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">64.87%</span><span class="review-metric-delta down">较 A0 -6.30pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">提单→支付</span><span class="review-metric-value">94.12%</span><span class="review-metric-delta down">较 A0 -2.64pp</span></div>
+	                      <div class="review-metric-line final"><span class="review-metric-name">购物车→支付</span><span class="review-metric-value">60.71%</span><span class="review-metric-delta">较 A0 +6.84pp</span></div>
 	                    </div>
-	                    <div class="review-result-note">成功发券 494；提交订单 315</div>
+	                    <div class="review-result-note">成功发券 710；支付成功 432；均毛利 13.51 元</div>
 	                  </div>
 	                </div>
 	              </div>
@@ -4115,9 +4142,9 @@
 	                  </tr>
 	                </thead>
 	                <tbody class="text-foreground">
-	                  <tr><td class="px-4 py-3 font-bold">整体是否有正向效益</td><td class="px-4 py-3">策略池较强控 +1.04pp；免费提醒单组不明显；A2 相对 A0 +7.98pp</td><td class="px-4 py-3">微信端整体方向偏正，但免费提醒和 2 元券要拆开判断，不直接外推 APP 结论。</td></tr>
-	                  <tr><td class="px-4 py-3 font-bold">2 元券信号</td><td class="px-4 py-3">A2 相对付费池 A0 +7.98pp</td><td class="px-4 py-3">方向很强，但样本和口径都偏窄，只能叫强信号。</td></tr>
-	                  <tr><td class="px-4 py-3 font-bold">当前风险</td><td class="px-4 py-3">A2 只有 494，购物车去结算 100%</td><td class="px-4 py-3">先查触发和发券是否只覆盖到“本来就很可能结算”的人。</td></tr>
+	                  <tr><td class="px-4 py-3 font-bold">整体是否有正向效益</td><td class="px-4 py-3">策略池较强控 +1.30pp；实验 2 免费提醒 +0.34pp；实验 3 免费提醒 -0.37pp</td><td class="px-4 py-3">微信端主实验方向清楚，但免费提醒单独效果不稳定。</td></tr>
+	                  <tr><td class="px-4 py-3 font-bold">2 元券信号</td><td class="px-4 py-3">A2 较 A0 +6.84pp，购物车到结算 99.44%</td><td class="px-4 py-3">最终转化强，但也是靠去结算拉动，支付段低于 A0。</td></tr>
+	                  <tr><td class="px-4 py-3 font-bold">当前风险</td><td class="px-4 py-3">A2 访问购物车 710，支付成功 432</td><td class="px-4 py-3">可继续扩样，但需要同步看 ROI，不只看转化率。</td></tr>
 	                </tbody>
 	              </table>
 	            </div>
@@ -4126,35 +4153,37 @@
 	          <div class="mt-5 hidden" data-review-client-panel="alipay">
 	            <div class="review-client-verdict">
 	              <div class="review-pill">支付宝小程序关键结论</div>
-	              <h4 class="mt-3 text-2xl font-black leading-tight text-foreground">支付宝端方向为正，但强控样本较小，暂作为观察信号。</h4>
-	              <p class="mt-3 text-sm leading-7 text-foreground">90% MUBBK 策略实验池综合转化较强控 +2.39pp，但强控 A0 只有 482 个购物车访问，A2 成功发券也只有 15 个。当前不建议据此调整策略范围，先继续累积样本。</p>
+	              <h4 class="mt-3 text-2xl font-black leading-tight text-foreground">支付宝端主实验方向正向，但样本仍小，2 元券暂不参与策略判断。</h4>
+	              <p class="mt-3 text-sm leading-7 text-foreground">90% MUBBK 策略池购物车到支付成功较强控 +5.04pp；但 A2 只有 23 个购物车访问、9 个支付成功，不能用来判断 2 元券好坏。</p>
 	            </div>
 
 	            <div class="mt-4 review-result-map">
 	              <div class="review-result-branch primary">
 	                <div class="flex flex-wrap items-center justify-between gap-2">
 	                  <div class="font-black text-foreground">实验 1：主实验整体效果（AB260511001）</div>
-		                  <div class="review-delta">策略池较强控 +2.39pp</div>
+		                  <div class="review-delta">策略池较强控 +5.04pp</div>
 	                </div>
 	                <div class="mt-3 review-result-lane">
 	                  <div class="review-result-card">
 	                    <div class="text-xs font-black text-foreground/60">10% 强控 A0</div>
 	                    <div class="review-result-metrics">
-	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">78.01%</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">64.10%</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">50.00%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">77.51%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">62.75%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">提单→支付</span><span class="review-metric-value">92.83%</span></div>
+	                      <div class="review-metric-line final"><span class="review-metric-name">购物车→支付</span><span class="review-metric-value">45.15%</span></div>
 	                    </div>
-	                    <div class="review-result-note">访问购物车 482；提交订单 241</div>
+	                    <div class="review-result-note">访问购物车 658；支付成功 298</div>
 	                  </div>
 	                  <div class="review-result-arrow">→</div>
 	                  <div class="review-result-card primary">
 	                    <div class="text-xs font-black text-foreground/60">90% MUBBK 策略实验池</div>
 	                    <div class="review-result-metrics">
-	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">80.02%</span><span class="review-metric-delta">较强控 +2.02pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">65.45%</span><span class="review-metric-delta">较强控 +1.35pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">52.39%</span><span class="review-metric-delta">较强控 +2.39pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">80.35%</span><span class="review-metric-delta">较强控 +2.84pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">64.86%</span><span class="review-metric-delta">较强控 +2.11pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">提单→支付</span><span class="review-metric-value">96.30%</span><span class="review-metric-delta">较强控 +3.47pp</span></div>
+	                      <div class="review-metric-line final"><span class="review-metric-name">购物车→支付</span><span class="review-metric-value">50.19%</span><span class="review-metric-delta">较强控 +5.04pp</span></div>
 	                    </div>
-	                    <div class="review-result-note">访问购物车 4,245；提交订单 2,224；样本观察</div>
+	                    <div class="review-result-note">访问购物车 5,853；支付成功 2,939；样本观察</div>
 	                  </div>
 	                </div>
 	              </div>
@@ -4162,27 +4191,29 @@
 	              <div class="review-result-branch blue">
 	                <div class="flex flex-wrap items-center justify-between gap-2">
 	                  <div class="font-black text-foreground">实验 2：免费模板实验（AB260511003）</div>
-	                  <div class="review-delta down">A1 较 A0 -1.06pp</div>
+	                  <div class="review-delta">A1 较 A0 +0.98pp</div>
 	                </div>
 	                <div class="mt-3 review-result-lane">
 	                  <div class="review-result-card">
 	                    <div class="text-xs font-black text-foreground/60">A0 静默模板</div>
 	                    <div class="review-result-metrics">
-	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">81.35%</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">62.60%</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">50.93%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">80.99%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">61.90%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">提单→支付</span><span class="review-metric-value">95.88%</span></div>
+	                      <div class="review-metric-line final"><span class="review-metric-name">购物车→支付</span><span class="review-metric-value">48.07%</span></div>
 	                    </div>
-	                    <div class="review-result-note">访问购物车 1,078；提交订单 549</div>
+	                    <div class="review-result-note">访问购物车 1,452；支付成功 698</div>
 	                  </div>
 	                  <div class="review-result-arrow">→</div>
 	                  <div class="review-result-card blue">
 	                    <div class="text-xs font-black text-foreground/60">A1 免费提醒</div>
 	                    <div class="review-result-metrics">
-	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">76.93%</span><span class="review-metric-delta down">较 A0 -4.42pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">64.82%</span><span class="review-metric-delta">较 A0 +2.22pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">49.87%</span><span class="review-metric-delta down">较 A0 -1.06pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">77.32%</span><span class="review-metric-delta down">较 A0 -3.67pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">65.64%</span><span class="review-metric-delta">较 A0 +3.74pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">提单→支付</span><span class="review-metric-value">96.64%</span><span class="review-metric-delta">较 A0 +0.76pp</span></div>
+	                      <div class="review-metric-line final"><span class="review-metric-name">购物车→支付</span><span class="review-metric-value">49.05%</span><span class="review-metric-delta">较 A0 +0.98pp</span></div>
 	                    </div>
-	                    <div class="review-result-note">访问购物车 776；提交订单 387</div>
+	                    <div class="review-result-note">访问购物车 1,054；支付成功 517</div>
 	                  </div>
 	                </div>
 	              </div>
@@ -4190,37 +4221,40 @@
 	              <div class="review-result-branch green">
 	                <div class="flex flex-wrap items-center justify-between gap-2">
 	                  <div class="font-black text-foreground">实验 3：付费模板实验（AB260511004）</div>
-	                  <div class="review-delta down">A2 样本仅 15</div>
+	                  <div class="review-delta down">A2 样本仅 23</div>
 	                </div>
 	                <div class="mt-3 review-result-lane three">
 	                  <div class="review-result-card">
 	                    <div class="text-xs font-black text-foreground/60">A0 静默模板</div>
 	                    <div class="review-result-metrics">
-	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">77.81%</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">65.15%</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">50.78%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">78.30%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">63.71%</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">提单→支付</span><span class="review-metric-value">96.11%</span></div>
+	                      <div class="review-metric-line final"><span class="review-metric-name">购物车→支付</span><span class="review-metric-value">47.94%</span></div>
 	                    </div>
-	                    <div class="review-result-note">访问购物车 703；提交订单 357</div>
+	                    <div class="review-result-note">访问购物车 977；支付成功 469</div>
 	                  </div>
 	                  <div class="review-result-arrow">→</div>
 	                  <div class="review-result-card blue">
 	                    <div class="text-xs font-black text-foreground/60">A1 免费提醒</div>
 	                    <div class="review-result-metrics">
-	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">79.57%</span><span class="review-metric-delta">较 A0 +1.76pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">68.08%</span><span class="review-metric-delta">较 A0 +2.93pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">54.17%</span><span class="review-metric-delta">较 A0 +3.39pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">80.53%</span><span class="review-metric-delta">较 A0 +2.23pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">66.51%</span><span class="review-metric-delta">较 A0 +2.80pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">提单→支付</span><span class="review-metric-value">96.44%</span><span class="review-metric-delta">较 A0 +0.33pp</span></div>
+	                      <div class="review-metric-line final"><span class="review-metric-name">购物车→支付</span><span class="review-metric-value">51.65%</span><span class="review-metric-delta">较 A0 +3.71pp</span></div>
 	                    </div>
-	                    <div class="review-result-note">访问购物车 563；提交订单 305</div>
+	                    <div class="review-result-note">访问购物车 786；支付成功 406</div>
 	                  </div>
 	                  <div class="review-result-arrow">→</div>
 	                  <div class="review-result-card green">
 	                    <div class="text-xs font-black text-foreground/60">A2 2 元券</div>
 	                    <div class="review-result-metrics">
-	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">100.00%</span><span class="review-metric-delta">较 A0 +22.19pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">33.33%</span><span class="review-metric-delta down">较 A0 -31.82pp</span></div>
-	                      <div class="review-metric-line"><span class="review-metric-name">综合转化</span><span class="review-metric-value">33.33%</span><span class="review-metric-delta down">较 A0 -17.45pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">购物车→结算</span><span class="review-metric-value">95.65%</span><span class="review-metric-delta">较 A0 +17.35pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">结算→提单</span><span class="review-metric-value">40.91%</span><span class="review-metric-delta down">较 A0 -22.80pp</span></div>
+	                      <div class="review-metric-line"><span class="review-metric-name">提单→支付</span><span class="review-metric-value">100.00%</span><span class="review-metric-delta">较 A0 +3.89pp</span></div>
+	                      <div class="review-metric-line final"><span class="review-metric-name">购物车→支付</span><span class="review-metric-value">39.13%</span><span class="review-metric-delta down">较 A0 -8.81pp</span></div>
 	                    </div>
-	                    <div class="review-result-note">成功发券 15；提交订单 5；样本不足</div>
+	                    <div class="review-result-note">成功发券 23；支付成功 9；样本不足</div>
 	                  </div>
 	                </div>
 	              </div>
@@ -4235,8 +4269,8 @@
 	                  </tr>
 	                </thead>
 	                <tbody class="text-foreground">
-	                  <tr><td class="px-4 py-3 font-bold">整体是否有正向效益</td><td class="px-4 py-3">策略池较强控 +2.39pp；免费提醒单组方向不一致；A2 样本仅 15</td><td class="px-4 py-3">整体方向偏正，但样本太小，暂不作为扩量决策依据。</td></tr>
-	                  <tr><td class="px-4 py-3 font-bold">2 元券信号</td><td class="px-4 py-3">A2 只有 15 个，提交订单 5 个</td><td class="px-4 py-3">不能把 33.33% 解读为负向，只能说样本不足。</td></tr>
+	                  <tr><td class="px-4 py-3 font-bold">整体是否有正向效益</td><td class="px-4 py-3">策略池较强控 +5.04pp；免费提醒单组方向偏正；A2 样本仅 23</td><td class="px-4 py-3">主实验看起来正向，但支付宝端样本量仍明显小于 APP 和微信。</td></tr>
+	                  <tr><td class="px-4 py-3 font-bold">2 元券信号</td><td class="px-4 py-3">A2 只有 23 个购物车访问，支付成功 9 个</td><td class="px-4 py-3">不能据此判断 2 元券负向或正向，暂不参与扩量决策。</td></tr>
 	                  <tr><td class="px-4 py-3 font-bold">下一步</td><td class="px-4 py-3">继续观察，不参与扩量决策</td><td class="px-4 py-3">支付宝端先作为监控项，等样本累积后再单独判断。</td></tr>
 	                </tbody>
 	              </table>
@@ -4245,6 +4279,186 @@
 	        </div>
 
 	      </section>
+
+      <section id="review-metric" class="panel review-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div class="review-kicker">METRICS</div>
+        <h3 class="mt-3 text-3xl font-black text-foreground">2 元券 ROI 评估方案</h3>
+        <p class="mt-3 max-w-4xl text-sm md:text-base leading-7 text-foreground">这版先用最直观的回本算法：看 2 元券多带来的毛利，能不能覆盖实际核销出去的券成本。A2 要同时和 A1、A0 比，分别回答“加码付费是否值得”和“相对静默是否回本”。</p>
+
+        <div class="mt-6 grid grid-cols-1 xl:grid-cols-2 gap-4">
+          <div class="rounded-2xl border border-border bg-muted p-5">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <div class="text-lg font-black text-foreground">口径一：A2 相对 A1 的 ROI</div>
+                <p class="mt-1 text-xs leading-6 text-foreground">回答：在免费提醒已经存在的情况下，额外加 2 元券能不能回本。</p>
+              </div>
+              <div class="review-pill">加码价值</div>
+            </div>
+            <div class="mt-4 grid gap-3 text-sm leading-7 text-foreground">
+              <div class="review-formula">增量支付订单数 = A2 触发 UV × (A2 购物车到支付成功 - A1 购物车到支付成功)</div>
+              <div class="review-formula">增量毛利 = 增量支付订单数 × A2 平均订单毛利（前毛或综合毛利）</div>
+              <div class="review-formula">券成本 = A2 实际核销券成本</div>
+              <div class="review-formula">ROI vs A1 = 增量毛利 / 券成本</div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-border bg-muted p-5">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <div class="text-lg font-black text-foreground">口径二：A2 相对 A0 的 ROI</div>
+                <p class="mt-1 text-xs leading-6 text-foreground">回答：相比完全静默，2 元券这套动作整体能不能覆盖补贴成本。</p>
+              </div>
+              <div class="review-pill">总体回本</div>
+            </div>
+            <div class="mt-4 grid gap-3 text-sm leading-7 text-foreground">
+              <div class="review-formula">增量支付订单数 = A2 触发 UV × (A2 购物车到支付成功 - A0 购物车到支付成功)</div>
+              <div class="review-formula">增量毛利 = 增量支付订单数 × A2 平均订单毛利（前毛或综合毛利）</div>
+              <div class="review-formula">券成本 = A2 实际核销券成本</div>
+              <div class="review-formula">ROI vs A0 = 增量毛利 / 券成本</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-5 rounded-2xl border border-border bg-card p-4">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <div class="text-lg font-black text-foreground">7 天快速测算结果</div>
+              <p class="mt-1 text-xs leading-6 text-foreground">支付宝小程序 A2 样本太小，本轮 ROI 先只看 APP 和微信小程序。</p>
+            </div>
+            <div class="review-client-tabs" role="tablist" aria-label="2 元券 ROI 客户端切换">
+              <button type="button" class="review-client-tab is-active" data-roi-client-tab="app">APP</button>
+              <button type="button" class="review-client-tab" data-roi-client-tab="wechat">微信小程序</button>
+            </div>
+          </div>
+
+          <div class="mt-4" data-roi-client-panel="app">
+            <div class="grid grid-cols-1 xl:grid-cols-12 gap-4">
+              <div class="xl:col-span-7 overflow-x-auto rounded-xl border border-border">
+                <table class="min-w-full text-sm text-left">
+                  <thead>
+                    <tr>
+                      <th class="px-4 py-3 font-black text-foreground">APP 口径</th>
+                      <th class="px-4 py-3 font-black text-foreground">毛利/单</th>
+                      <th class="px-4 py-3 font-black text-foreground">ROI vs A1</th>
+                      <th class="px-4 py-3 font-black text-foreground">ROI vs A0</th>
+                      <th class="px-4 py-3 font-black text-foreground">结论</th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-foreground">
+                    <tr>
+                      <td class="px-4 py-3 font-bold">前毛版 ROI</td>
+                      <td class="px-4 py-3">12.71 元</td>
+                      <td class="px-4 py-3"><span class="review-delta down">0.43</span></td>
+                      <td class="px-4 py-3"><span class="review-delta down">0.77</span></td>
+                      <td class="px-4 py-3">严格前毛下暂未回本。</td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-3 font-bold">综合毛利版 ROI</td>
+                      <td class="px-4 py-3">19.17 元</td>
+                      <td class="px-4 py-3"><span class="review-delta down">0.65</span></td>
+                      <td class="px-4 py-3"><span class="review-delta">1.16</span></td>
+                      <td class="px-4 py-3">相对静默可回本，相对免费提醒仍未回本。</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="xl:col-span-5 rounded-xl border border-border bg-muted p-4">
+                <div class="text-lg font-black text-foreground">2 元券 ROI 计算方式</div>
+                <div class="mt-3 grid gap-3 text-sm leading-7 text-foreground">
+                  <div class="rounded-xl border border-border bg-card p-3"><span class="font-black text-foreground">基础数据：</span>A2 触发 UV 1,402；券成本 1,226 元；A2 购物车→支付 52.39%；A1 49.42%；A0 47.12%。</div>
+                  <div class="rounded-xl border border-border bg-card p-3"><span class="font-black text-foreground">前毛版：</span>vs A1 增量毛利约 530 元，ROI 0.43；vs A0 增量毛利约 939 元，ROI 0.77。</div>
+                  <div class="rounded-xl border border-border bg-card p-3"><span class="font-black text-foreground">综合毛利版：</span>A2 平均实付 91.30 元 × 21% = 19.17 元/单；vs A1 ROI 0.65，vs A0 ROI 1.16。</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 hidden" data-roi-client-panel="wechat">
+            <div class="grid grid-cols-1 xl:grid-cols-12 gap-4">
+              <div class="xl:col-span-7 overflow-x-auto rounded-xl border border-border">
+                <table class="min-w-full text-sm text-left">
+                  <thead>
+                    <tr>
+                      <th class="px-4 py-3 font-black text-foreground">微信小程序口径</th>
+                      <th class="px-4 py-3 font-black text-foreground">毛利/单</th>
+                      <th class="px-4 py-3 font-black text-foreground">ROI vs A1</th>
+                      <th class="px-4 py-3 font-black text-foreground">ROI vs A0</th>
+                      <th class="px-4 py-3 font-black text-foreground">结论</th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-foreground">
+                    <tr>
+                      <td class="px-4 py-3 font-bold">前毛版 ROI</td>
+                      <td class="px-4 py-3">13.51 元</td>
+                      <td class="px-4 py-3"><span class="review-delta neutral">0.96</span></td>
+                      <td class="px-4 py-3"><span class="review-delta neutral">0.91</span></td>
+                      <td class="px-4 py-3">接近打平，但严格前毛下还未稳定回本。</td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-3 font-bold">综合毛利版 ROI</td>
+                      <td class="px-4 py-3">20.04 元</td>
+                      <td class="px-4 py-3"><span class="review-delta">1.42</span></td>
+                      <td class="px-4 py-3"><span class="review-delta">1.35</span></td>
+                      <td class="px-4 py-3">综合毛利口径下已覆盖券成本，最值得扩样观察。</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="xl:col-span-5 rounded-xl border border-border bg-muted p-4">
+                <div class="text-lg font-black text-foreground">2 元券 ROI 计算方式</div>
+                <div class="mt-3 grid gap-3 text-sm leading-7 text-foreground">
+                  <div class="rounded-xl border border-border bg-card p-3"><span class="font-black text-foreground">基础数据：</span>A2 触发 UV 710；券成本 720 元；A2 购物车→支付 60.71%；A1 53.50%；A0 53.87%。</div>
+                  <div class="rounded-xl border border-border bg-card p-3"><span class="font-black text-foreground">前毛版：</span>vs A1 增量毛利约 691 元，ROI 0.96；vs A0 增量毛利约 656 元，ROI 0.91。</div>
+                  <div class="rounded-xl border border-border bg-card p-3"><span class="font-black text-foreground">综合毛利版：</span>A2 平均实付 95.42 元 × 21% = 20.04 元/单；vs A1 ROI 1.42，vs A0 ROI 1.35。</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="review-paid-optimization" class="panel review-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div class="review-kicker">PHASE 1 OPTIMIZATION</div>
+        <h3 class="mt-3 text-3xl font-black text-foreground">一期优化方向</h3>
+        <p class="mt-3 max-w-5xl text-sm md:text-base leading-7 text-foreground">
+          7 天复盘的核心判断是：2 元券能把用户强力推到结算页，但在结算页的犹豫仍然明显；同时当前 C2/C3 后置筛选会影响 AB 公平性和模型训练完整性。因此一期后续优化分两步：先把发券样本做干净，再补齐结算页承接。
+        </p>
+
+        <div class="mt-6 grid grid-cols-1 xl:grid-cols-2 gap-4">
+          <div class="rounded-2xl border border-border bg-muted p-5">
+            <div class="review-pill">优化方向 1</div>
+            <h4 class="mt-3 text-xl font-black text-foreground">A2 不再用 C2/C3 做硬门槛，改成命中即发券</h4>
+            <p class="mt-3 text-sm leading-7 text-foreground">
+              当前 A2 是随机进入，但真正收券又被 C2/C3 二次筛选，导致 A1 和“真正收券 A2”不完全均匀。后续建议 A2 覆盖 12 个 cell，随机命中 A2 就发 2 元券，12-cell 只作为模型特征和分层复盘维度。
+            </p>
+            <div class="mt-4 grid gap-2 text-sm leading-7 text-foreground">
+              <div class="rounded-xl border border-border bg-card p-3"><span class="font-black text-foreground">AB 收益：</span>A1 和 A2 人群更公平，可以直接比较免费提醒和 2 元券。</div>
+              <div class="rounded-xl border border-border bg-card p-3"><span class="font-black text-foreground">模型收益：</span>Uplift 能学习 12 个 cell 对券的完整响应，而不是只学习 C2/C3。</div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-border bg-muted p-5">
+            <div class="review-pill">优化方向 2</div>
+            <h4 class="mt-3 text-xl font-black text-foreground">结算页增加 2 元券倒计时提醒，补齐支付承接</h4>
+            <p class="mt-3 text-sm leading-7 text-foreground">
+              A2 几乎能把用户推到结算页，但结算页到提单反而低于 A0/A1，说明用户到了结算页仍然在犹豫。当前倒计时只在购物车出现，下一步应在结算页继续承接同一张 2 元券，强化“现在不用就失效”的紧迫感。
+            </p>
+            <div class="mt-4 grid gap-2 text-sm leading-7 text-foreground">
+              <div class="rounded-xl border border-border bg-card p-3"><span class="font-black text-foreground">APP 数据：</span>A2 购物车→结算 98.43%，但结算→提单 56.12%，低于 A1 66.91% 和 A0 65.40%。</div>
+              <div class="rounded-xl border border-border bg-card p-3"><span class="font-black text-foreground">APP 测算：</span>如果结算→提单从 56.12% 提到 <span class="font-black text-primary">60%</span>，购物车→支付会从 52.39% 提到 <span class="font-black text-primary">56.01%</span>；A2 较 A0 的前毛版 ROI 从 0.77 提到 <span class="font-black text-primary">1.29</span>，综合毛利版 ROI 从 1.16 提到 <span class="font-black text-primary">1.95</span>。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-5 rounded-2xl border border-border bg-card p-5">
+          <div class="text-lg font-black text-foreground">落地建议</div>
+          <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3 text-sm leading-7 text-foreground">
+            <div class="rounded-xl border border-border bg-muted p-4"><span class="font-black text-foreground">总量控制：</span>每天最多发放 X 张，超过后落回 A1 免费提醒，避免补贴预算失控。</div>
+            <div class="rounded-xl border border-border bg-muted p-4"><span class="font-black text-foreground">控制打扰：</span>只对 A2 已发券用户展示，倒计时和频控规则与购物车保持一致。</div>
+            <div class="rounded-xl border border-border bg-muted p-4"><span class="font-black text-foreground">验证指标：</span>重点看结算→提单、提单→支付、购物车→支付，以及前毛版/综合毛利版 ROI。</div>
+          </div>
+        </div>
+      </section>
 
       <section id="review-ux" class="panel review-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
         <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
@@ -4371,85 +4585,6 @@
                 </tr>
               </tbody>
             </table>
-          </div>
-        </div>
-      </section>
-
-      <section id="review-metric" class="panel review-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
-        <div class="review-kicker">METRICS</div>
-        <h3 class="mt-3 text-3xl font-black text-foreground">2 元券 ROI 评估方案</h3>
-        <p class="mt-3 max-w-4xl text-sm md:text-base leading-7 text-foreground">这版先用最直观的回本算法：看 2 元券多带来的毛利，能不能覆盖实际核销出去的券成本。A2 要同时和 A1、A0 比，分别回答“加码付费是否值得”和“相对静默是否回本”。</p>
-
-        <div class="mt-6 grid grid-cols-1 xl:grid-cols-2 gap-4">
-          <div class="rounded-2xl border border-border bg-muted p-5">
-            <div class="flex flex-wrap items-center justify-between gap-3">
-              <div>
-                <div class="text-lg font-black text-foreground">口径一：A2 相对 A1 的 ROI</div>
-                <p class="mt-1 text-xs leading-6 text-foreground">回答：在免费提醒已经存在的情况下，额外加 2 元券能不能回本。</p>
-              </div>
-              <div class="review-pill">加码价值</div>
-            </div>
-            <div class="mt-4 grid gap-3 text-sm leading-7 text-foreground">
-              <div class="review-formula">增量订单数 = A2 触发 UV × (A2 综合转化率 - A1 综合转化率)</div>
-              <div class="review-formula">增量毛利 = 增量订单数 × A2 平均订单毛利</div>
-              <div class="review-formula">券成本 = A2 实际核销券数 × 2 元</div>
-              <div class="review-formula">ROI vs A1 = 增量毛利 / 券成本</div>
-            </div>
-          </div>
-
-          <div class="rounded-2xl border border-border bg-muted p-5">
-            <div class="flex flex-wrap items-center justify-between gap-3">
-              <div>
-                <div class="text-lg font-black text-foreground">口径二：A2 相对 A0 的 ROI</div>
-                <p class="mt-1 text-xs leading-6 text-foreground">回答：相比完全静默，2 元券这套动作整体能不能覆盖补贴成本。</p>
-              </div>
-              <div class="review-pill">总体回本</div>
-            </div>
-            <div class="mt-4 grid gap-3 text-sm leading-7 text-foreground">
-              <div class="review-formula">增量订单数 = A2 触发 UV × (A2 综合转化率 - A0 综合转化率)</div>
-              <div class="review-formula">增量毛利 = 增量订单数 × A2 平均订单毛利</div>
-              <div class="review-formula">券成本 = A2 实际核销券数 × 2 元</div>
-              <div class="review-formula">ROI vs A0 = 增量毛利 / 券成本</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-5 grid grid-cols-1 xl:grid-cols-12 gap-4">
-          <div class="xl:col-span-5 rounded-2xl border border-border bg-card p-4">
-            <div class="text-lg font-black text-foreground">需要拉哪些数据</div>
-            <div class="mt-3 grid gap-2 text-sm leading-7 text-foreground">
-              <div class="rounded-xl border border-border bg-muted p-3">A0 / A1 / A2 的触发 UV、提交订单数、综合转化率。</div>
-              <div class="rounded-xl border border-border bg-muted p-3">A2 订单平均毛利，或 A2 支付订单总商品毛利 / A2 支付订单数。</div>
-              <div class="rounded-xl border border-border bg-muted p-3">A2 实际核销券数和核销券成本。快速版优先用“核销券数 × 2 元”，不要用发券数。</div>
-            </div>
-          </div>
-
-          <div class="xl:col-span-7 rounded-2xl border border-border bg-card p-4">
-            <div class="text-lg font-black text-foreground">怎么判断能不能放量</div>
-            <div class="mt-3 grid grid-cols-1 md:grid-cols-3 gap-3 text-sm leading-7 text-foreground">
-              <div class="rounded-xl border border-border bg-muted p-4"><span class="font-black text-foreground">ROI &gt; 1：</span>增量毛利覆盖券成本，说明 2 元券基本能回本。</div>
-              <div class="rounded-xl border border-border bg-muted p-4"><span class="font-black text-foreground">ROI = 1：</span>刚好打平，继续看样本稳定性和毛利波动。</div>
-              <div class="rounded-xl border border-border bg-muted p-4"><span class="font-black text-foreground">ROI &lt; 1：</span>转化率即使提升，也暂时不建议只为了转化放量。</div>
-            </div>
-            <p class="mt-3 text-xs leading-6 text-foreground">汇报时建议同时展示两个数：ROI vs A1 看“2 元券相对免费提醒是否值得加码”；ROI vs A0 看“2 元券相对静默是否整体回本”。</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="panel review-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
-        <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
-          <div class="xl:col-span-5">
-            <div class="review-kicker">LAUNCH CHECK</div>
-            <h3 class="mt-3 text-3xl font-black text-foreground">上线前检查项</h3>
-            <p class="mt-3 text-sm md:text-base leading-7 text-foreground">这部分是上线验收最容易出问题的地方。只要有一项没记录清楚，后续复盘就会从“因果分析”退化成“猜原因”。</p>
-          </div>
-          <div class="xl:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-3 text-sm leading-7 text-foreground">
-            <div class="rounded-xl border border-border bg-muted p-4"><span class="font-black text-foreground">01</span> 实验 1 的 10% 空白用户不会进入实验 2 / 实验 3。</div>
-            <div class="rounded-xl border border-border bg-muted p-4"><span class="font-black text-foreground">02</span> 实验 2 和实验 3 互斥，同一次触发只能进一个。</div>
-            <div class="rounded-xl border border-border bg-muted p-4"><span class="font-black text-foreground">03</span> A1 / A2 资格不满足时，有清晰回落逻辑。</div>
-            <div class="rounded-xl border border-border bg-muted p-4"><span class="font-black text-foreground">04</span> UX 分桶和 MUBBK 分桶相互独立。</div>
-            <div class="rounded-xl border border-border bg-muted p-4"><span class="font-black text-foreground">05</span> 主分析只看新版本 APP 用户。</div>
-            <div class="rounded-xl border border-border bg-muted p-4"><span class="font-black text-foreground">06</span> 日志同时有 MUBBK 标签和 UX 标签。</div>
           </div>
         </div>
       </section>
@@ -6498,6 +6633,18 @@
 	      });
 	    }
 
+	    function bindReviewRoiTabs() {
+	      const tabs = [...document.querySelectorAll('[data-roi-client-tab]')];
+	      const panels = [...document.querySelectorAll('[data-roi-client-panel]')];
+	      tabs.forEach((btn) => {
+	        btn.addEventListener('click', () => {
+	          const key = btn.dataset.roiClientTab;
+	          tabs.forEach(item => item.classList.toggle('is-active', item.dataset.roiClientTab === key));
+	          panels.forEach(panel => panel.classList.toggle('hidden', panel.dataset.roiClientPanel !== key));
+	        });
+	      });
+	    }
+
 		    function activeTabStyle() {
 	      const toggleHidden = (id, hidden) => {
 	        const el = document.getElementById(id);
@@ -6552,7 +6699,7 @@
             : isThreshold
             ? '数据源：<code>购物车阈值分析概率版.csv</code> + 历史动作分布补充表（同样要求有购物车编辑行为；概率分母为每秒开始时仍留在购物车的人数）'
             : isReviewPlan
-            ? '数据源：<code>一期上线 AB 方案.md</code>（MUBBK 主实验 + 四个 UX 独立实验 + 复盘指标口径）'
+            ? '数据源：<code>一期上线 AB 方案.md</code> + <code>MUBBK7 天复盘.xlsx</code>（MUBBK 主实验 + 三端 7 天支付转化 + 2 元券 ROI 口径）'
             : isAnnualPlan
             ? '数据源：<code>MUBBK全财年实施计划.md</code>（五期路线图 + MUBBK 决策栈 + 多券多动作与多场景拓展节奏）'
             : isPhase2Plan
@@ -8471,6 +8618,7 @@
 	    buildCheckoutTabs();
 	    bindThresholdModeTabs();
 	    bindReviewClientTabs();
+	    bindReviewRoiTabs();
 	    render();
 
     window.addEventListener('resize', () => {
