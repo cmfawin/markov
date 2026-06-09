@@ -1219,6 +1219,320 @@
       font-weight: 700;
     }
 
+    /* === 1.1 会员生命周期 === */
+    #memberBaseView {
+      position: relative;
+      isolation: isolate;
+      --life-green: #2e7d32;
+      --life-green-soft: #e8f5e9;
+      --life-green-line: #c8e6c9;
+      --life-blue: #1976d2;
+      --life-blue-soft: #e3f2fd;
+      --life-blue-line: #bbdefb;
+      --life-red: #c62828;
+      --life-red-soft: #ffebee;
+      --life-red-line: #ffcdd2;
+      --life-orange: #f9a825;
+      --life-orange-soft: #fff8e1;
+      --life-gray: #757575;
+      --life-gray-soft: #f5f5f5;
+      --life-gray-line: #e0e0e0;
+      --life-dark: #212121;
+      --life-dark-soft: #eeeeee;
+    }
+
+    #memberBaseView > section.panel {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card);
+    }
+
+    #memberBaseView > section.panel::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 0.32rem;
+      background: #e60012;
+      pointer-events: none;
+    }
+
+    /* 主状态色块 */
+    #memberBaseView .life-state {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 1.1rem 0.7rem 0.95rem;
+      border-radius: var(--radius);
+      color: white;
+      font-weight: 900;
+      text-align: center;
+      min-height: 7.5rem;
+      box-shadow: 0 3px 0 rgba(0, 0, 0, 0.08);
+    }
+
+    #memberBaseView .life-state .life-state-name {
+      font-size: 1.45rem;
+      line-height: 1.1;
+      letter-spacing: 0.05em;
+    }
+
+    #memberBaseView .life-state .life-state-cond {
+      font-size: 0.78rem;
+      line-height: 1.45;
+      font-weight: 700;
+      opacity: 0.95;
+    }
+
+    #memberBaseView .life-state.is-introduce { background: var(--life-green); }
+    #memberBaseView .life-state.is-grow      { background: var(--life-blue); }
+    #memberBaseView .life-state.is-mature    { background: var(--life-red); }
+    #memberBaseView .life-state.is-decay     { background: var(--life-gray); }
+    #memberBaseView .life-state.is-churn     { background: var(--life-dark); }
+
+    /* 子状态色块 */
+    #memberBaseView .life-sub {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+      padding: 0.6rem 0.4rem;
+      border-radius: var(--radius);
+      font-weight: 900;
+      text-align: center;
+      min-height: 4.5rem;
+      color: white;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.06);
+    }
+
+    #memberBaseView .life-sub .life-sub-name {
+      font-size: 0.95rem;
+      line-height: 1.15;
+    }
+
+    #memberBaseView .life-sub .life-sub-cond {
+      font-size: 0.7rem;
+      line-height: 1.4;
+      font-weight: 700;
+      opacity: 0.95;
+    }
+
+    #memberBaseView .life-sub.is-introduce.is-pure  { background: #c8e6c9; color: #1b5e20; }
+    #memberBaseView .life-sub.is-introduce.is-next { background: var(--life-green); }
+
+    #memberBaseView .life-sub.is-mature.is-mid  { background: #b71c1c; }
+    #memberBaseView .life-sub.is-mature.is-high { background: var(--life-orange); color: #3d2400; }
+
+    #memberBaseView .life-sub.is-decay.is-light  { background: #bdbdbd; color: #212121; }
+    #memberBaseView .life-sub.is-decay.is-heavy  { background: #424242; }
+
+    #memberBaseView .life-sub.is-churn.is-mild   { background: #9e9e9e; }
+    #memberBaseView .life-sub.is-churn.is-mid    { background: #616161; }
+    #memberBaseView .life-sub.is-churn.is-heavy  { background: var(--life-dark); }
+
+    /* 主流程布局 */
+    #memberBaseView .life-flow {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0.6rem;
+      align-items: stretch;
+    }
+
+    @media (max-width: 900px) {
+      #memberBaseView .life-flow {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* SVG 弧形箭头层 */
+    #memberBaseView .life-arrows {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* 状态间直行箭头（CSS 实现，1.1 流程用：引入→成长→成熟→衰退→流失） */
+    #memberBaseView .life-arrow-inline {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--foreground);
+      font-size: 1.5rem;
+      line-height: 1;
+      font-weight: 900;
+      user-select: none;
+      z-index: 2;
+    }
+
+    /* 跳转标签（30天未下单 / 90天未下单 / 达成下单频率） */
+    #memberBaseView .life-arrow-label {
+      position: absolute;
+      top: 0.5rem;
+      transform: translateX(-50%);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.18rem 0.6rem;
+      font-size: 0.75rem;
+      font-weight: 900;
+      color: var(--foreground);
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    #memberBaseView .life-arrow-label.is-skip-introduce { color: var(--life-green); border-color: var(--life-green-line); }
+    #memberBaseView .life-arrow-label.is-skip-grow      { color: var(--life-blue); border-color: var(--life-blue-line); }
+    #memberBaseView .life-arrow-label.is-decay         { color: var(--life-gray); }
+    #memberBaseView .life-arrow-label.is-churn         { color: var(--life-dark); }
+    #memberBaseView .life-arrow-label.is-reorder       { color: var(--life-red); border-color: var(--life-red-line); }
+
+    /* 引入/成长 列 */
+    #memberBaseView .life-flow > .life-col:nth-child(1),
+    #memberBaseView .life-flow > .life-col:nth-child(2) {
+      position: relative;
+    }
+
+    /* 子状态行：与主状态列对齐 */
+    #memberBaseView .life-subgrid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0.6rem;
+      margin-top: 0.6rem;
+    }
+
+    @media (max-width: 900px) {
+      #memberBaseView .life-subgrid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    #memberBaseView .life-subcol {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    /* 表格 */
+    #memberBaseView .life-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    #memberBaseView .life-table thead th {
+      background: var(--muted);
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 0.8rem;
+      font-size: 0.85rem;
+      font-weight: 900;
+      text-align: left;
+      color: var(--foreground);
+    }
+
+    #memberBaseView .life-table tbody td {
+      padding: 0.6rem 0.8rem;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: var(--foreground);
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    #memberBaseView .life-table tbody tr:last-child td { border-bottom: 0; }
+
+    #memberBaseView .life-table tbody td:first-child {
+      font-weight: 900;
+      color: var(--foreground);
+    }
+
+    #memberBaseView .life-table .life-color-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 900;
+      color: white;
+    }
+
+    #memberBaseView .life-color-tag.is-introduce { background: var(--life-green); }
+    #memberBaseView .life-color-tag.is-grow      { background: var(--life-blue); }
+    #memberBaseView .life-color-tag.is-mature    { background: var(--life-red); }
+    #memberBaseView .life-color-tag.is-decay     { background: var(--life-gray); }
+    #memberBaseView .life-color-tag.is-churn     { background: var(--life-dark); }
+
+    /* 子状态详情卡 */
+    #memberBaseView .life-sub-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card);
+      overflow: hidden;
+    }
+
+    #memberBaseView .life-sub-card-head {
+      padding: 0.65rem 0.95rem;
+      color: white;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    #memberBaseView .life-sub-card-head .life-sub-card-title {
+      font-size: 1.05rem;
+      line-height: 1.2;
+    }
+
+    #memberBaseView .life-sub-card-head .life-sub-card-tag {
+      font-size: 0.7rem;
+      padding: 0.18rem 0.5rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      letter-spacing: 0.05em;
+    }
+
+    #memberBaseView .life-sub-card-head.is-introduce { background: var(--life-green); }
+    #memberBaseView .life-sub-card-head.is-mature    { background: var(--life-red); }
+    #memberBaseView .life-sub-card-head.is-decay     { background: var(--life-gray); }
+    #memberBaseView .life-sub-card-head.is-churn     { background: var(--life-dark); }
+
+    #memberBaseView .life-sub-card-body {
+      padding: 0.85rem 0.95rem 0.95rem;
+    }
+
+    #memberBaseView .life-sub-card-body .life-sub-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      padding: 0.55rem 0;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    #memberBaseView .life-sub-card-body .life-sub-item:last-child { border-bottom: 0; }
+
+    #memberBaseView .life-sub-card-body .life-sub-item-name {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: var(--foreground);
+    }
+
+    #memberBaseView .life-sub-card-body .life-sub-item-cond {
+      font-size: 0.78rem;
+      color: var(--foreground);
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
     #ubbkHealthView {
       position: relative;
       isolation: isolate;
@@ -2083,6 +2397,16 @@
 
     /* === 三大独立因子概览 === */
     #ubbkHealthView .ubbk-factor-overview {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    @media (max-width: 1024px) {
+      #ubbkHealthView .ubbk-factor-overview {
+        grid-template-columns: 1fr;
+      }
+    }
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1rem;
@@ -3666,7 +3990,282 @@
       </div>
     </header>
 
-    <section id="memberBaseView" class="hidden space-y-6"></section>
+    <section id="memberBaseView" class="hidden space-y-6">
+
+      <!-- 会员生命周期主流程图 -->
+      <section class="panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div class="flex flex-col gap-2">
+          <div class="flex flex-wrap items-end justify-between gap-3">
+            <h3 class="text-3xl font-black text-foreground">会员生命周期：5 主状态 + 10 子状态</h3>
+            <div class="text-sm text-foreground">
+              <span class="font-bold text-[color:var(--life-green)]">▮</span> 引入
+              <span class="ml-2 font-bold text-[color:var(--life-blue)]">▮</span> 成长
+              <span class="ml-2 font-bold text-[color:var(--life-red)]">▮</span> 成熟
+              <span class="ml-2 font-bold text-[color:var(--life-gray)]">▮</span> 衰退
+              <span class="ml-2 font-bold text-[color:var(--life-dark)]">▮</span> 流失
+            </div>
+          </div>
+          <p class="text-sm md:text-base leading-7 text-foreground">
+            主流程向前 = 用户更活跃，向后 = 用户在远离。<span class="font-bold text-foreground">重新下单</span> 可让用户从 衰退 回到 成熟。30 天内没达到 成长 / 成熟 的下单频率，会按 引入 → 衰退 / 成长 → 衰退 跳过中间状态。
+          </p>
+        </div>
+
+        <!-- 主状态行 -->
+        <div class="mt-6">
+          <div class="life-flow">
+            <!-- 1. 引入 -->
+            <div class="life-col relative">
+              <div class="life-state is-introduce">
+                <div class="life-state-name">引 入</div>
+                <div class="life-state-cond">注册 / 办卡未下单且时间 ≤ 30 天<br>或历史订单 = 1 且时间 ≤ 30 天</div>
+              </div>
+            </div>
+
+            <!-- 2. 成长 -->
+            <div class="life-col relative">
+              <div class="life-state is-grow">
+                <div class="life-state-name">成 长</div>
+                <div class="life-state-cond">30 天内下单频率 1-2 单<br>且历史订单 ≥ 2 单</div>
+              </div>
+            </div>
+
+            <!-- 3. 成熟 -->
+            <div class="life-col relative">
+              <div class="life-state is-mature">
+                <div class="life-state-name">成 熟</div>
+                <div class="life-state-cond">30 天内下单频率 ≥ 3 单</div>
+              </div>
+            </div>
+
+            <!-- 4. 衰退 -->
+            <div class="life-col relative">
+              <div class="life-state is-decay">
+                <div class="life-state-name">衰 退</div>
+                <div class="life-state-cond">30 天 &lt; 最近一次下单时间 ≤ 90 天</div>
+              </div>
+            </div>
+
+            <!-- 5. 流失 -->
+            <div class="life-col relative">
+              <div class="life-state is-churn">
+                <div class="life-state-name">流 失</div>
+                <div class="life-state-cond">最近一次下单时间 &gt; 90 天</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 直行箭头：每个状态之间 -->
+          <div class="hidden md:flex items-center justify-center mt-3 gap-0 text-sm font-bold text-foreground">
+            <span class="opacity-0">占位</span>
+            <span class="ml-auto mr-auto flex items-center gap-1">
+              <span class="px-2 py-0.5 rounded bg-[color:var(--life-green-soft)] text-[color:var(--life-green)]">达成下单频率</span>
+              <span>→</span>
+              <span class="px-2 py-0.5 rounded bg-[color:var(--life-blue-soft)] text-[color:var(--life-blue)]">达成下单频率</span>
+              <span>→</span>
+              <span class="px-2 py-0.5 rounded bg-muted text-foreground">30 天未下单</span>
+              <span>→</span>
+              <span class="px-2 py-0.5 rounded bg-muted text-foreground">90 天未下单</span>
+            </span>
+          </div>
+
+          <!-- 重新下单（虚线，衰退 → 成熟） -->
+          <div class="mt-3 flex items-center justify-center gap-2 text-sm">
+            <span class="text-[color:var(--life-red)] font-bold">重新下单</span>
+            <svg width="180" height="22" viewBox="0 0 180 22" fill="none" style="display:inline-block">
+              <path d="M5 11 L 165 11" stroke="#c62828" stroke-width="2" stroke-dasharray="4 3" fill="none" />
+              <path d="M165 11 L 158 6 M165 11 L 158 16" stroke="#c62828" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span class="text-xs text-foreground">衰退 → 成熟（虚线回到成熟）</span>
+          </div>
+
+          <!-- 跳过弧形（30天未下单，引入/成长 → 衰退） -->
+          <div class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="rounded-xl border border-border bg-muted p-3 text-sm leading-6 text-foreground">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-xs font-black bg-[color:var(--life-green-soft)] text-[color:var(--life-green)]">引入 → 衰退</span>
+                <span class="font-bold">30 天未下单</span>
+              </div>
+              <p class="mt-1 text-xs">引入后 30 天内没达到 成长 频率，直接进入衰退；不经过成长 / 成熟。</p>
+            </div>
+            <div class="rounded-xl border border-border bg-muted p-3 text-sm leading-6 text-foreground">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-xs font-black bg-[color:var(--life-blue-soft)] text-[color:var(--life-blue)]">成长 → 衰退</span>
+                <span class="font-bold">30 天未下单</span>
+              </div>
+              <p class="mt-1 text-xs">成长期内 30 天没达到 成熟 频率（≥3 单），直接进入衰退；跳过成熟。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 子状态行：与主状态 5 列对齐 -->
+        <div class="mt-6">
+          <div class="text-xs font-black uppercase tracking-wider text-foreground/60 mb-2">子状态（在主状态列下方对齐）</div>
+          <div class="life-subgrid">
+            <!-- 引入 → 纯新 / 次新 -->
+            <div class="life-subcol">
+              <div class="life-sub is-introduce is-pure">
+                <div class="life-sub-name">纯 新</div>
+                <div class="life-sub-cond">注册 / 办卡<br>未下单且 ≤ 30 天</div>
+              </div>
+              <div class="life-sub is-introduce is-next">
+                <div class="life-sub-name">次 新</div>
+                <div class="life-sub-cond">历史订单 = 1<br>且时间 ≤ 30 天</div>
+              </div>
+            </div>
+            <!-- 成长无子状态 -->
+            <div class="life-subcol">
+              <div class="rounded-xl border border-dashed border-border bg-muted/40 p-3 text-center text-xs text-foreground/60 flex items-center justify-center" style="min-height: 4.5rem">
+                成长不分子状态
+              </div>
+            </div>
+            <!-- 成熟 → 中活 / 高活 -->
+            <div class="life-subcol">
+              <div class="life-sub is-mature is-mid">
+                <div class="life-sub-name">中 活</div>
+                <div class="life-sub-cond">30 天内<br>购频 3-4 单</div>
+              </div>
+              <div class="life-sub is-mature is-high">
+                <div class="life-sub-name">高 活</div>
+                <div class="life-sub-cond">30 天内<br>购频 ≥ 5 单</div>
+              </div>
+            </div>
+            <!-- 衰退 → 轻衰 / 重衰 -->
+            <div class="life-subcol">
+              <div class="life-sub is-decay is-light">
+                <div class="life-sub-name">轻 衰</div>
+                <div class="life-sub-cond">30-60 天<br>不下单</div>
+              </div>
+              <div class="life-sub is-decay is-heavy">
+                <div class="life-sub-name">重 衰</div>
+                <div class="life-sub-cond">60 天以上<br>不下单</div>
+              </div>
+            </div>
+            <!-- 流失 → 轻 / 中 / 重 -->
+            <div class="life-subcol">
+              <div class="life-sub is-churn is-mild">
+                <div class="life-sub-name">轻度流失</div>
+                <div class="life-sub-cond">90 &lt; 最近<br>下单 ≤ 180</div>
+              </div>
+              <div class="life-sub is-churn is-mid">
+                <div class="life-sub-name">中度流失</div>
+                <div class="life-sub-cond">180 &lt; 最近<br>下单 ≤ 365</div>
+              </div>
+              <div class="life-sub is-churn is-heavy">
+                <div class="life-sub-name">重度流失</div>
+                <div class="life-sub-cond">最近下单<br>&gt; 365 天</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 主状态判定规则表 -->
+      <section class="panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div class="flex flex-col gap-2">
+          <h3 class="text-3xl font-black text-foreground">5 个主状态怎么判？</h3>
+          <p class="text-sm md:text-base leading-7 text-foreground">
+            按 <span class="font-bold text-foreground">最近一次下单距今</span> 和 <span class="font-bold text-foreground">30 天内购频</span> 两个维度判定。所有会员每天都按以下规则重新落位。
+          </p>
+        </div>
+        <div class="mt-5 overflow-x-auto rounded-2xl border border-border">
+          <table class="life-table">
+            <thead>
+              <tr>
+                <th>主状态</th>
+                <th>进入条件（按日判定）</th>
+                <th>关键判断</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="life-color-tag is-introduce">引入</span></td>
+                <td>注册 / 办卡未下单且时间 ≤ 30 天<br>或 历史订单 = 1 且时间 ≤ 30 天</td>
+                <td>新注册 / 首次购后短期</td>
+              </tr>
+              <tr>
+                <td><span class="life-color-tag is-grow">成长</span></td>
+                <td>30 天内下单频率 1-2 单<br>且 历史订单 ≥ 2 单</td>
+                <td>已经过引入期，开始有复购节奏</td>
+              </tr>
+              <tr>
+                <td><span class="life-color-tag is-mature">成熟</span></td>
+                <td>30 天内下单频率 ≥ 3 单</td>
+                <td>高频复购，价值经营 / R 分层重点人群</td>
+              </tr>
+              <tr>
+                <td><span class="life-color-tag is-decay">衰退</span></td>
+                <td>30 天 &lt; 最近一次下单时间 ≤ 90 天</td>
+                <td>活跃度下降，需防衰退干预</td>
+              </tr>
+              <tr>
+                <td><span class="life-color-tag is-churn">流失</span></td>
+                <td>最近一次下单时间 &gt; 90 天</td>
+                <td>进入召回治理场景（UBBK）</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 状态间的转移规则 -->
+      <section class="panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div class="flex flex-col gap-2">
+          <h3 class="text-3xl font-black text-foreground">状态间怎么转移？</h3>
+          <p class="text-sm md:text-base leading-7 text-foreground">
+            转移规则支持 <span class="font-bold text-foreground">向前（更活跃）</span>、<span class="font-bold text-foreground">向后（更远）</span>，以及 <span class="font-bold text-foreground">跳过中间态</span> 和 <span class="font-bold text-foreground">召回回流</span>。
+          </p>
+        </div>
+        <div class="mt-5 overflow-x-auto rounded-2xl border border-border">
+          <table class="life-table">
+            <thead>
+              <tr>
+                <th>转移方向</th>
+                <th>触发条件</th>
+                <th>业务含义</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>引入 → 成长</td>
+                <td>30 天内下单频率 1-2 单且历史订单 ≥ 2</td>
+                <td>度过引入期，开始有稳定复购</td>
+              </tr>
+              <tr>
+                <td>成长 → 成熟</td>
+                <td>30 天内下单频率 ≥ 3 单</td>
+                <td>达到高频复购门槛，进入价值经营</td>
+              </tr>
+              <tr>
+                <td>成熟 → 衰退</td>
+                <td>30 天未下单</td>
+                <td>高频用户活跃度开始下降，需防衰退</td>
+              </tr>
+              <tr>
+                <td>衰退 → 流失</td>
+                <td>90 天未下单</td>
+                <td>进入召回治理场景（UBBK）</td>
+              </tr>
+              <tr>
+                <td>衰退 → 成熟 <span class="ml-2 text-xs text-[color:var(--life-red)] font-bold">（回流）</span></td>
+                <td>重新下单并满足成熟判定</td>
+                <td>召回成功 / 自发回流，重新进入高频复购</td>
+              </tr>
+              <tr>
+                <td>引入 → 衰退 <span class="ml-2 text-xs text-[color:var(--life-green)] font-bold">（跳过）</span></td>
+                <td>30 天未达到成长门槛</td>
+                <td>引入期未转化，30 天未达 1-2 单 30 天频率</td>
+              </tr>
+              <tr>
+                <td>成长 → 衰退 <span class="ml-2 text-xs text-[color:var(--life-blue)] font-bold">（跳过）</span></td>
+                <td>30 天未达到成熟门槛</td>
+                <td>成长期未升级到 ≥ 3 单 30 天频率</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </section>
     <section id="memberPanoramaView" class="hidden space-y-6"></section>
     <section id="ubbkIntroView" class="hidden space-y-6">
 
