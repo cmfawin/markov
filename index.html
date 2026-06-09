@@ -377,6 +377,22 @@
           var(--card) 100%);
     }
 
+    .app-sidebar-brand {
+      align-items: center;
+    }
+    .app-sidebar-brand-logo {
+      width: 2.5rem;
+      height: 2.5rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 0.45rem;
+      flex: 0 0 auto;
+    }
+    .app-sidebar-brand-logo svg { display: block; }
+
     .side-nav-group + .side-nav-group {
       margin-top: 1rem;
       padding-top: 1rem;
@@ -393,9 +409,12 @@
     }
 
     .app-sidebar .scope-tab-btn {
-      display: block;
+      display: flex;
+      align-items: baseline;
+      justify-content: flex-start;
+      gap: 0.55rem;
       width: 100%;
-      padding: 0.46rem 0.55rem 0.46rem 0.72rem;
+      padding: 0.46rem 0.55rem 0.46rem 0.95rem;
       border-left: 2px solid transparent;
       border-radius: var(--radius);
       color: color-mix(in oklab, var(--foreground) 72%, var(--muted-foreground) 28%);
@@ -404,6 +423,17 @@
       line-height: 1.38;
       text-align: left;
       white-space: normal;
+    }
+    .app-sidebar .scope-tab-btn .scope-tab-num {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--muted-foreground);
+      flex: 0 0 auto;
+    }
+    .app-sidebar .scope-tab-btn.tab-active .scope-tab-num {
+      color: var(--primary);
     }
 
     .app-sidebar .scope-tab-btn:hover {
@@ -966,6 +996,227 @@
     #mubbkView .text-xs.font-bold.uppercase,
     #mubbkView .text-xs.font-bold.text-foreground\/60 {
       letter-spacing: 0.08em;
+    }
+
+    #ubbkIntroView {
+      position: relative;
+      isolation: isolate;
+      --ubbk-intro-red: #e60012;
+      --ubbk-intro-rose-weak: #fffafa;
+      --ubbk-intro-rose-soft: #fff7f7;
+      --ubbk-intro-rose-mid: #fff0f0;
+      --ubbk-intro-rose-line: #f2c8c8;
+      --ubbk-intro-gray-line: #e6e6e6;
+      --ubbk-intro-gray-soft: #f8f8f8;
+      --ubbk-intro-line: var(--ubbk-intro-gray-line);
+      --ubbk-intro-soft: var(--ubbk-intro-rose-soft);
+      --ubbk-intro-soft-strong: var(--ubbk-intro-rose-mid);
+      --ubbk-intro-table-odd: var(--ubbk-intro-rose-weak);
+      --ubbk-intro-table-even: var(--card);
+    }
+
+    #ubbkIntroView > section.panel {
+      position: relative;
+      overflow: hidden;
+      border-color: var(--ubbk-intro-line);
+      background:
+        linear-gradient(180deg,
+          var(--ubbk-intro-rose-weak) 0%,
+          var(--card) 100%);
+    }
+
+    #ubbkIntroView > section.panel::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 0.32rem;
+      background: var(--ubbk-intro-red);
+      opacity: 1;
+      pointer-events: none;
+    }
+
+    #ubbkIntroView > section:first-child.panel {
+      background:
+        linear-gradient(135deg,
+          var(--card) 0%,
+          var(--ubbk-intro-rose-weak) 42%,
+          var(--ubbk-intro-rose-soft) 100%);
+    }
+
+    #ubbkIntroView h2,
+    #ubbkIntroView h3,
+    #ubbkIntroView h4,
+    #ubbkIntroView .text-lg.font-black,
+    #ubbkIntroView .text-2xl.font-black {
+      text-wrap: balance;
+    }
+
+    #ubbkIntroView p,
+    #ubbkIntroView li,
+    #ubbkIntroView td,
+    #ubbkIntroView th {
+      text-wrap: pretty;
+    }
+
+    #ubbkIntroView .rounded-xl.border.border-border.bg-muted,
+    #ubbkIntroView .rounded-2xl.border.border-border.bg-muted {
+      border-color: var(--ubbk-intro-gray-line);
+      background:
+        linear-gradient(180deg,
+          var(--ubbk-intro-gray-soft) 0%,
+          var(--card) 100%);
+    }
+
+    #ubbkIntroView .rounded-xl.border.border-border.bg-card,
+    #ubbkIntroView .rounded-2xl.border.border-border.bg-card {
+      border-color: var(--ubbk-intro-gray-line);
+      background:
+        linear-gradient(180deg,
+          var(--ubbk-intro-rose-weak) 0%,
+          var(--card) 100%);
+    }
+
+    #ubbkIntroView span.font-bold.text-foreground {
+      color: var(--ubbk-intro-red);
+      font-weight: 800;
+    }
+
+    #ubbkIntroView .font-mono {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--ubbk-intro-rose-line);
+      border-radius: calc(var(--radius) - 0.02rem);
+      background: var(--ubbk-intro-rose-soft);
+      padding: 0 0.32rem;
+    }
+
+    #ubbkIntroView .ubbk-intro-section-title {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      letter-spacing: -0.03em;
+    }
+    #ubbkIntroView .ubbk-intro-section-title::before {
+      content: "";
+      width: 1rem;
+      height: 1rem;
+      flex: none;
+      border-radius: 0.18rem;
+      border: 1px solid var(--ubbk-intro-rose-line);
+      background:
+        linear-gradient(135deg,
+          var(--ubbk-intro-rose-soft) 0%,
+          var(--ubbk-intro-rose-mid) 100%);
+    }
+
+    #ubbkIntroView .ubbk-intro-question {
+      border-left: 0.22rem solid var(--ubbk-intro-red);
+      padding: 0.75rem 1rem;
+      background: var(--ubbk-intro-rose-soft);
+      border-radius: 0 0.6rem 0.6rem 0;
+    }
+
+    #ubbkIntroView .ubbk-intro-compare-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      padding: 1.2rem 1.3rem;
+      border-radius: 1rem;
+      border: 1px solid var(--ubbk-intro-gray-line);
+      background: var(--card);
+    }
+    #ubbkIntroView .ubbk-intro-compare-card.is-mubbk {
+      background: linear-gradient(180deg, #f5f5f5 0%, var(--card) 100%);
+    }
+    #ubbkIntroView .ubbk-intro-compare-card.is-ubbk {
+      background: linear-gradient(180deg, var(--ubbk-intro-rose-weak) 0%, var(--ubbk-intro-rose-soft) 100%);
+      border-color: var(--ubbk-intro-rose-line);
+    }
+
+    #ubbkIntroView .ubbk-intro-layer-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      padding: 1.1rem 1.2rem 1.2rem;
+      border-radius: 1rem;
+      border: 1px solid var(--ubbk-intro-gray-line);
+      background: linear-gradient(180deg, var(--card) 0%, var(--ubbk-intro-gray-soft) 100%);
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+    #ubbkIntroView .ubbk-intro-layer-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--ubbk-intro-rose-line);
+      box-shadow: 0 8px 24px -12px rgba(230, 0, 18, 0.18);
+    }
+    #ubbkIntroView .ubbk-intro-layer-letter {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.9rem;
+      font-family: var(--serif-en);
+      font-style: italic;
+      font-weight: 700;
+      font-size: 2.1rem;
+      line-height: 1;
+      color: var(--ubbk-intro-red);
+      opacity: 0.18;
+      letter-spacing: -0.04em;
+    }
+    #ubbkIntroView .ubbk-intro-layer-ic {
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 0.55rem;
+      background: var(--ubbk-intro-red);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+    }
+    #ubbkIntroView .ubbk-intro-layer-ic svg { width: 1.35rem; height: 1.35rem; stroke-width: 1.6; }
+
+    #ubbkIntroView .ubbk-intro-flow {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+    }
+    #ubbkIntroView .ubbk-intro-flow-node {
+      flex: 1 1 0;
+      min-width: 0;
+      padding: 0.6rem 0.8rem;
+      border-radius: 0.7rem;
+      background: var(--ubbk-intro-rose-soft);
+      border: 1px solid var(--ubbk-intro-rose-line);
+      font-weight: 700;
+      text-align: center;
+      font-size: 0.92rem;
+    }
+    #ubbkIntroView .ubbk-intro-flow-arrow {
+      color: var(--ubbk-intro-red);
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    #ubbkIntroView table {
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+    #ubbkIntroView table thead th {
+      background:
+        linear-gradient(180deg,
+          var(--ubbk-intro-rose-soft) 0%,
+          var(--ubbk-intro-rose-weak) 100%);
+      border-bottom: 1px solid var(--ubbk-intro-rose-line);
+      letter-spacing: 0.01em;
+    }
+    #ubbkIntroView table tbody tr:nth-child(odd) { background: var(--ubbk-intro-table-odd); }
+    #ubbkIntroView table tbody tr:nth-child(even) { background: var(--ubbk-intro-table-even); }
+    #ubbkIntroView table tbody td { vertical-align: top; }
+    #ubbkIntroView table tbody td:first-child {
+      border-left: 0.22rem solid var(--ubbk-intro-rose-line);
+      font-weight: 700;
     }
 
     #ubbkHealthView {
@@ -2525,8 +2776,21 @@
 <body class="bg-muted">
   <div class="min-h-screen p-4 md:p-6 max-w-[1816px] mx-auto lg:flex lg:items-start lg:gap-5">
     <aside class="app-sidebar panel bg-card rounded-2xl border border-border p-4 lg:sticky lg:top-6 lg:w-72 lg:shrink-0">
-      <div class="text-3xl font-black leading-tight text-foreground">目录</div>
-      <nav id="scopeTabs" class="mt-4"></nav>
+      <div class="app-sidebar-brand flex items-center gap-3 pb-3 mb-3 border-b border-border">
+        <div class="app-sidebar-brand-logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="12" width="4" height="9"></rect>
+            <rect x="10" y="6" width="4" height="15"></rect>
+            <rect x="17" y="3" width="4" height="18"></rect>
+          </svg>
+        </div>
+        <div class="leading-tight">
+          <div class="text-[1.35rem] font-black text-foreground">策略工作站</div>
+          <div class="meta-row !mt-0 !text-[0.78rem] !opacity-65">MUBBK&amp;UBBK</div>
+        </div>
+      </div>
+      <div class="text-[0.7rem] font-bold tracking-[0.18em] uppercase text-muted-foreground mb-3">目录</div>
+      <nav id="scopeTabs"></nav>
     </aside>
 
     <main class="min-w-0 w-full max-w-[1536px] flex-1 space-y-6 mt-4 lg:mt-0 mx-auto">
@@ -2534,7 +2798,7 @@
       class="panel bg-card rounded-2xl border border-border  hover: p-4 md:p-6 transition-all">
       <div class="flex flex-wrap gap-4 items-start justify-between">
         <div>
-          <h1 class="text-4xl font-black text-foreground">MUBBK&UBBK 策略工作站</h1>
+          <h1 id="pageTitle" class="text-4xl font-black text-foreground">MUBBK&UBBK 策略工作站</h1>
           <p id="dataSourceText" class="text-sm text-foreground mt-2">数据源：<code>关键场景转移矩阵_*.xlsx</code> + <code>关键场景吸收概率_*.xlsx</code> + <code>关键场景移除效应_*.xlsx</code>（APP / 微信小程序 / 支付宝小程序，共9份原始表）</p>
         </div>
         <div id="headerMetaBlock" class="text-xs text-foreground leading-6 text-right">
@@ -2550,7 +2814,283 @@
 
     <section id="memberBaseView" class="hidden space-y-6"></section>
     <section id="memberPanoramaView" class="hidden space-y-6"></section>
-    <section id="ubbkIntroView" class="hidden space-y-6"></section>
+    <section id="ubbkIntroView" class="hidden space-y-6">
+
+      <!-- ========== Hero ========== -->
+      <section class="panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-6 items-stretch">
+          <div class="xl:col-span-7 flex flex-col justify-between gap-6">
+            <div>
+              <div class="inline-flex rounded-full border border-border bg-muted px-3 py-1 text-xs font-bold text-foreground">
+                3.1 UBBK：流失用户智能召回专项
+              </div>
+              <h2 class="mt-4 text-4xl md:text-5xl font-black leading-tight text-foreground">
+                在统一召回之前，先区分
+                <span class="font-bold text-foreground">谁真沉默</span>
+                、
+                <span class="font-bold text-foreground">谁值得拉回</span>
+                、
+                <span class="font-bold text-foreground">谁用券</span>
+              </h2>
+              <p class="mt-4 text-sm md:text-base leading-7 text-foreground">
+                UBBK（User-Back Bring-Back）不是把同样的券发给所有沉默用户。它是一套先把
+                <span class="font-bold text-foreground">状态识别 + 增量判断</span>
+                做透、再决定召回动作与预算的流失召回决策系统，目标是把召回补贴花在能被拉回来的用户上。
+              </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div class="rounded-xl border border-border bg-muted p-4">
+                <div class="text-xs font-bold uppercase text-foreground/60">核心问题 ①</div>
+                <div class="mt-2 text-base font-black text-foreground">是不是异常沉默？</div>
+                <p class="mt-2 text-sm leading-6 text-foreground">周购/月购/季购用户对同一段时间的"未购"含义完全不同。</p>
+              </div>
+              <div class="rounded-xl border border-border bg-muted p-4">
+                <div class="text-xs font-bold uppercase text-foreground/60">核心问题 ②</div>
+                <div class="mt-2 text-base font-black text-foreground">值不值得召回？</div>
+                <p class="mt-2 text-sm leading-6 text-foreground">已流失/价格敏感/差评用户对应不同召回动作与补贴强度。</p>
+              </div>
+              <div class="rounded-xl border border-border bg-muted p-4">
+                <div class="text-xs font-bold uppercase text-foreground/60">核心问题 ③</div>
+                <div class="mt-2 text-base font-black text-foreground">用提醒、券还是放弃？</div>
+                <p class="mt-2 text-sm leading-6 text-foreground">免费触达、低额券、还是直接不触达，每类用户最优动作不同。</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="xl:col-span-5 rounded-2xl border border-border bg-card p-5 md:p-6 flex flex-col gap-4">
+            <div class="text-sm font-bold text-foreground/60">为什么不能"30 天没买就发券"</div>
+            <ul class="space-y-2.5 text-sm leading-6 text-foreground">
+              <li class="ubbk-intro-question">周购用户 30 天未购 → 已经显著异常</li>
+              <li class="ubbk-intro-question">月购用户 30 天未购 → 可能还在正常周期内</li>
+              <li class="ubbk-intro-question">差评/退货用户 → 体验问题未解决，发券不解决问题</li>
+              <li class="ubbk-intro-question">已搬家/转向竞品用户 → 发券也很难召回</li>
+            </ul>
+            <div class="rounded-xl border border-border bg-muted p-4 mt-auto">
+              <div class="text-xs font-bold uppercase text-foreground/60">UBBK 目标</div>
+              <p class="mt-2 text-sm leading-6 text-foreground">减少<span class="font-bold text-foreground">无效触达</span>和<span class="font-bold text-foreground">无效补贴</span>，把召回资源用在能被拉回来的用户上。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== MUBBK vs UBBK ========== -->
+      <section class="panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <h2 class="ubbk-intro-section-title text-2xl md:text-3xl font-black text-foreground">
+          UBBK 是 MUBBK 的延伸，不是替代
+        </h2>
+        <p class="mt-3 text-sm md:text-base leading-7 text-foreground max-w-3xl">
+          MUBBK 解决"用户还在站内犹豫怎么办"，UBBK 解决"用户已经沉默流失怎么拉回"。两个项目共享同一套 MUBBK 方法论，但目标人群、动作类型、关键约束都不一样。
+        </p>
+
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div class="ubbk-intro-compare-card is-mubbk">
+            <div class="flex items-center justify-between">
+              <div class="text-sm font-black text-foreground">MUBBK · 站内转化干预</div>
+              <div class="text-xs font-bold text-foreground/60">场景：用户还在 App 内</div>
+            </div>
+            <div class="text-2xl font-black text-foreground">让犹豫的当场下单</div>
+            <div class="overflow-x-auto rounded-xl border border-border">
+              <table class="w-full text-sm">
+                <tbody>
+                  <tr><td class="py-2 px-3 w-28">典型场景</td><td class="py-2 px-3">购物车、结算页等关键节点犹豫</td></tr>
+                  <tr><td class="py-2 px-3">典型动作</td><td class="py-2 px-3">弹窗、提醒、小额券</td></tr>
+                  <tr><td class="py-2 px-3">核心目标</td><td class="py-2 px-3">促进当次转化</td></tr>
+                  <tr><td class="py-2 px-3">关键约束</td><td class="py-2 px-3">频控、补贴不依赖化、用户体验</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="ubbk-intro-compare-card is-ubbk">
+            <div class="flex items-center justify-between">
+              <div class="text-sm font-black text-foreground">UBBK · 站外流失召回</div>
+              <div class="text-xs font-bold text-foreground/60">场景：用户已沉默或流失</div>
+            </div>
+            <div class="text-2xl font-black text-foreground">让沉默的重新回来</div>
+            <div class="overflow-x-auto rounded-xl border border-border">
+              <table class="w-full text-sm">
+                <tbody>
+                  <tr><td class="py-2 px-3 w-28">典型场景</td><td class="py-2 px-3">31 天以上未购，按购买周期分桶</td></tr>
+                  <tr><td class="py-2 px-3">典型动作</td><td class="py-2 px-3">短信、企微、Push、召回券</td></tr>
+                  <tr><td class="py-2 px-3">核心目标</td><td class="py-2 px-3">拉回用户并控制补贴</td></tr>
+                  <tr><td class="py-2 px-3">关键约束</td><td class="py-2 px-3">等券依赖、长期伤害、预算效率</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 ubbk-intro-flow">
+          <div class="ubbk-intro-flow-node">MUBBK：站内犹豫</div>
+          <div class="ubbk-intro-flow-arrow">→</div>
+          <div class="ubbk-intro-flow-node">当次转化</div>
+          <div class="ubbk-intro-flow-arrow">→</div>
+          <div class="ubbk-intro-flow-node">时间流逝未回访</div>
+          <div class="ubbk-intro-flow-arrow">→</div>
+          <div class="ubbk-intro-flow-node">UBBK：流失召回</div>
+          <div class="ubbk-intro-flow-arrow">→</div>
+          <div class="ubbk-intro-flow-node">重新回到站内</div>
+        </div>
+      </section>
+
+      <!-- ========== 隐藏 M 层：BG/NBD + 流失原因诊断 ========== -->
+      <section class="panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <h2 class="ubbk-intro-section-title text-2xl md:text-3xl font-black text-foreground">
+          隐藏 M 层：把"30 天"变成"个人化沉默程度"
+        </h2>
+        <p class="mt-3 text-sm md:text-base leading-7 text-foreground max-w-3xl">
+          UBBK 的 M 层不卡上线，但必须建。BG/NBD 把固定天数升级为个人化判断，流失原因诊断把"为什么不来"补齐，二者都作为 Uplift 的特征输入。
+        </p>
+
+        <div class="mt-6 grid grid-cols-1 xl:grid-cols-12 gap-5">
+          <!-- BG/NBD -->
+          <div class="xl:col-span-5 rounded-2xl border border-border bg-card p-5 md:p-6">
+            <div class="flex items-center gap-2">
+              <div class="ubbk-intro-layer-ic">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h3l3-9 6 18 3-9h3"/></svg>
+              </div>
+              <div>
+                <div class="text-xs font-bold uppercase text-foreground/60">隐藏 M 层 · BG/NBD</div>
+                <div class="text-lg font-black text-foreground">Beta-Geometric / NBD</div>
+              </div>
+            </div>
+            <p class="mt-3 text-sm leading-6 text-foreground">
+              根据用户历史购买节奏，估计其当下还"活着"的概率 <code class="font-mono">P(alive)</code>，把"30 天没买"升级为"相对个人节奏已经异常沉默了多少"。
+            </p>
+            <div class="mt-4 rounded-xl border border-border bg-muted p-4">
+              <div class="text-xs font-bold uppercase text-foreground/60">三列输入</div>
+              <ul class="mt-2 space-y-1.5 text-sm text-foreground font-mono">
+                <li>frequency / x：观察期内复购次数</li>
+                <li>recency / t_x：首单到末次购买的时间</li>
+                <li>T：首单到观察截止日的时间</li>
+              </ul>
+            </div>
+            <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+              <table class="w-full text-sm">
+                <thead><tr><th class="py-2 px-3 text-left">用户</th><th class="py-2 px-3 text-left">历史节奏</th><th class="py-2 px-3 text-left">30 天未购意味着</th></tr></thead>
+                <tbody>
+                  <tr><td class="py-2 px-3">周购</td><td class="py-2 px-3">≈ 7 天 / 次</td><td class="py-2 px-3">已超 4 个周期，风险高</td></tr>
+                  <tr><td class="py-2 px-3">月购</td><td class="py-2 px-3">≈ 30 天 / 次</td><td class="py-2 px-3">可能仍在正常周期内</td></tr>
+                  <tr><td class="py-2 px-3">季购</td><td class="py-2 px-3">≈ 90 天 / 次</td><td class="py-2 px-3">不应过早召回</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 流失原因诊断 -->
+          <div class="xl:col-span-7 rounded-2xl border border-border bg-card p-5 md:p-6">
+            <div class="flex items-center gap-2">
+              <div class="ubbk-intro-layer-ic">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg>
+              </div>
+              <div>
+                <div class="text-xs font-bold uppercase text-foreground/60">隐藏 M 层 · 流失原因诊断</div>
+                <div class="text-lg font-black text-foreground">不只是"多久没买"，更是"为什么没买"</div>
+              </div>
+            </div>
+            <p class="mt-3 text-sm leading-6 text-foreground">
+              从最近订单、履约、售后、价格、品类与地址变化中提取特征，解释用户沉默背后的可能原因，并直接喂给 Uplift 模型。
+            </p>
+            <div class="mt-4 overflow-x-auto rounded-xl border border-border">
+              <table class="w-full text-sm">
+                <thead><tr><th class="py-2 px-3 text-left">原因方向</th><th class="py-2 px-3 text-left">可观察信号</th><th class="py-2 px-3 text-left">对召回策略的影响</th></tr></thead>
+                <tbody>
+                  <tr><td class="py-2 px-3">品质失望</td><td class="py-2 px-3">差评、投诉、退款、最近订单评分下降</td><td class="py-2 px-3">优先服务补偿或人工关怀，普通券效果有限</td></tr>
+                  <tr><td class="py-2 px-3">配送体验差</td><td class="py-2 px-3">超时送达、按时率下降、履约投诉</td><td class="py-2 px-3">强调配送保障，或避开履约不稳定区域</td></tr>
+                  <tr><td class="py-2 px-3">价格敏感</td><td class="py-2 px-3">历史用券率高、客单下降、折扣单占比高</td><td class="py-2 px-3">券可有效，但需经济性检查 + 动态 Kelly</td></tr>
+                  <tr><td class="py-2 px-3">品类/需求变化</td><td class="py-2 px-3">常购品类复购周期变长、季节性结束</td><td class="py-2 px-3">不强召回，等待合适品类或周期</td></tr>
+                  <tr><td class="py-2 px-3">服务问题未解决</td><td class="py-2 px-3">投诉未闭环、售后处理时间长</td><td class="py-2 px-3">先解决服务问题，不直接发普通券</td></tr>
+                  <tr><td class="py-2 px-3">场景变化</td><td class="py-2 px-3">地址/城市/配送范围变更</td><td class="py-2 px-3">判断是否仍可服务，不能按未购天数盲召</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="mt-4 rounded-xl border border-border bg-muted p-4">
+              <div class="text-xs font-bold uppercase text-foreground/60">M 层不直接下结论</div>
+              <p class="mt-2 text-sm leading-6 text-foreground">BG/NBD 回答"是不是异常沉默"，原因诊断回答"为什么沉默"。是否干预、发什么券，仍由 Uplift 判断。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== UBBK 五层框架 ========== -->
+      <section class="panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <h2 class="ubbk-intro-section-title text-2xl md:text-3xl font-black text-foreground">
+          UBBK 五层框架：每层只回答一个问题
+        </h2>
+        <p class="mt-3 text-sm md:text-base leading-7 text-foreground max-w-3xl">
+          完整 UBBK 不是单一的投券模型，而是一套召回决策系统：先判断状态（M），再判断增量（U），再决定动作（B1 / B2），最后控制成本（K）。
+        </p>
+
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4">
+
+          <div class="ubbk-intro-layer-card">
+            <span class="ubbk-intro-layer-letter">M</span>
+            <div class="ubbk-intro-layer-ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h3l3-9 6 18 3-9h3"/></svg>
+            </div>
+            <div class="text-xs font-bold uppercase text-foreground/60">用户状态识别</div>
+            <div class="text-lg font-black text-foreground">是不是异常沉默？</div>
+            <p class="text-sm leading-6 text-foreground/85">用生命周期规则 + BG/NBD 影子评分判断召回时机，并补充流失原因诊断。</p>
+          </div>
+
+          <div class="ubbk-intro-layer-card">
+            <span class="ubbk-intro-layer-letter">U</span>
+            <div class="ubbk-intro-layer-ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/></svg>
+            </div>
+            <div class="text-xs font-bold uppercase text-foreground/60">召回增量判断</div>
+            <div class="text-lg font-black text-foreground">发了真的多拉回？</div>
+            <p class="text-sm leading-6 text-foreground/85">区分"本就会回来 / 可说服者 / 无效用户 / 沉睡狗"，只对可说服者出手。</p>
+          </div>
+
+          <div class="ubbk-intro-layer-card">
+            <span class="ubbk-intro-layer-letter">B₁</span>
+            <div class="ubbk-intro-layer-ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            </div>
+            <div class="text-xs font-bold uppercase text-foreground/60">Bellman 长期价值</div>
+            <div class="text-lg font-black text-foreground">会不会伤以后？</div>
+            <p class="text-sm leading-6 text-foreground/85">控制重复发券和等券依赖，避免召回一次、伤害后续 90 / 180 天的自然回访。</p>
+          </div>
+
+          <div class="ubbk-intro-layer-card">
+            <span class="ubbk-intro-layer-letter">B₂</span>
+            <div class="ubbk-intro-layer-ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+            </div>
+            <div class="text-xs font-bold uppercase text-foreground/60">Bandit 动态实验</div>
+            <div class="text-lg font-black text-foreground">哪个动作更有效？</div>
+            <p class="text-sm leading-6 text-foreground/85">在稳定券池中做受控动态分流，输出不同动作在不同人群下的成功概率 P。</p>
+          </div>
+
+          <div class="ubbk-intro-layer-card">
+            <span class="ubbk-intro-layer-letter">K</span>
+            <div class="ubbk-intro-layer-ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="text-xs font-bold uppercase text-foreground/60">动态 Kelly 预算决策</div>
+            <div class="text-lg font-black text-foreground">当前预算发多少？</div>
+            <p class="text-sm leading-6 text-foreground/85">接入 Bandit 的动态 P，控制券成本、预算占用与发券强度，避免补贴打穿。</p>
+          </div>
+
+        </div>
+
+        <div class="mt-6 rounded-2xl border border-border bg-muted p-5">
+          <div class="flex flex-wrap items-baseline gap-3">
+            <div class="text-sm font-black text-foreground">一句话总结</div>
+            <div class="text-xs font-bold uppercase text-foreground/60">M → U → B₁ → B₂ → K</div>
+          </div>
+          <p class="mt-2 text-sm md:text-base leading-7 text-foreground">
+            完整 UBBK = <span class="font-bold text-foreground">M</span> 判断用户是否值得看 +
+            <span class="font-bold text-foreground">U</span> 判断干预是否真的有效 +
+            <span class="font-bold text-foreground">B₁</span> 避免伤未来 +
+            <span class="font-bold text-foreground">B₂</span> 选最有效的动作 +
+            <span class="font-bold text-foreground">K</span> 决定花多少钱。
+          </p>
+        </div>
+      </section>
+
+    </section>
     <section id="ubbkAnnualView" class="hidden space-y-6"></section>
     <section id="ubbkHealthView" class="hidden space-y-6">
       <section class="panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
@@ -7401,20 +7941,20 @@
       { key: 'alipay', label: '支付宝小程序' }
     ];
     const scopeTabs = [
-      { key: 'memberBase', label: '1.1 会员 2.0 基座', group: '1. 项目背景与会员经营基座' },
-      { key: 'memberPanorama', label: '1.2 会员经营全景框架', group: '1. 项目背景与会员经营基座' },
-      { key: 'global', label: '2.1 全局 Markov', group: '2. MUBBK：站内转化干预' },
-      { key: 'cart', label: '2.2 购物车 Markov', group: '2. MUBBK：站内转化干预' },
-      { key: 'checkout', label: '2.3 结算页 Markov', group: '2. MUBBK：站内转化干预' },
-      { key: 'annualPlan', label: '2.4 全年实施计划', group: '2. MUBBK：站内转化干预' },
-      { key: 'mubbk', label: '2.5 一期落地方案', group: '2. MUBBK：站内转化干预' },
-      { key: 'reviewPlan', label: '2.6 一期复盘方案', group: '2. MUBBK：站内转化干预' },
-      { key: 'phase2Plan', label: '2.7 二期落地方案', group: '2. MUBBK：站内转化干预' },
-      { key: 'threshold', label: '2.8 附录：阈值分析', group: '2. MUBBK：站内转化干预' },
-      { key: 'ubbkIntro', label: '3.1 项目背景及框架', group: '3. UBBK：流失召回干预' },
-      { key: 'ubbkAnnual', label: '3.2 全年实施计划', group: '3. UBBK：流失召回干预' },
-      { key: 'ubbkHealth', label: '3.3 用户健康风险预警', group: '3. UBBK：流失召回干预' },
-      { key: 'ubbkUplift', label: '3.4 Uplift 召回增量模型', group: '3. UBBK：流失召回干预' }
+      { key: 'memberBase', num: '1.1', label: '会员 2.0 基座', group: '1. 项目背景与会员经营基座' },
+      { key: 'memberPanorama', num: '1.2', label: '会员经营全景框架', group: '1. 项目背景与会员经营基座' },
+      { key: 'global', num: '2.1', label: '全局 Markov', group: '2. MUBBK：站内转化干预' },
+      { key: 'cart', num: '2.2', label: '购物车 Markov', group: '2. MUBBK：站内转化干预' },
+      { key: 'checkout', num: '2.3', label: '结算页 Markov', group: '2. MUBBK：站内转化干预' },
+      { key: 'annualPlan', num: '2.4', label: '全年实施计划', group: '2. MUBBK：站内转化干预' },
+      { key: 'mubbk', num: '2.5', label: '一期落地方案', group: '2. MUBBK：站内转化干预' },
+      { key: 'reviewPlan', num: '2.6', label: '一期复盘方案', group: '2. MUBBK：站内转化干预' },
+      { key: 'phase2Plan', num: '2.7', label: '二期落地方案', group: '2. MUBBK：站内转化干预' },
+      { key: 'threshold', num: '2.8', label: '附录：阈值分析', group: '2. MUBBK：站内转化干预' },
+      { key: 'ubbkIntro', num: '3.1', label: '项目背景及框架', group: '3. UBBK：流失召回干预' },
+      { key: 'ubbkAnnual', num: '3.2', label: '全年实施计划', group: '3. UBBK：流失召回干预' },
+      { key: 'ubbkHealth', num: '3.3', label: '用户健康风险预警', group: '3. UBBK：流失召回干预' },
+      { key: 'ubbkUplift', num: '3.4', label: 'Uplift 召回增量模型', group: '3. UBBK：流失召回干预' }
     ];
     const cartTabs = [
       { key: 'app', label: 'APP' },
@@ -7720,7 +8260,8 @@
           <div class="space-y-1">
             ${tabs.map(t => `
               <button data-scope="${t.key}" class="scope-tab-btn text-sm font-bold transition-all">
-                <span>${t.label}</span>
+                <span class="scope-tab-num">${t.num}</span>
+                <span class="scope-tab-text">${t.label}</span>
               </button>
             `).join('')}
           </div>
@@ -7821,6 +8362,17 @@
       document.querySelectorAll('.scope-tab-btn').forEach(btn => {
         btn.classList.toggle('tab-active', btn.dataset.scope === currentScope);
       });
+      const activeScope = scopeTabs.find(t => t.key === currentScope);
+      const titleEl = document.getElementById('pageTitle');
+      if (titleEl && activeScope) {
+        const prefixMap = {
+          '1. 项目背景与会员经营基座': '背景',
+          '2. MUBBK：站内转化干预': 'MUBBK',
+          '3. UBBK：流失召回干预': 'UBBK'
+        };
+        const prefix = prefixMap[activeScope.group] || 'MUBBK&UBBK';
+        titleEl.textContent = `${prefix}：${activeScope.label}`;
+      }
       document.querySelectorAll('.cart-tab-btn').forEach(btn => {
         btn.classList.toggle('tab-active', btn.dataset.key === currentCart);
       });
