@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>大润发优鲜 - 马尔可夫链转化效能诊断大屏</title>
+  <title>Markov 策略工作站</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script id="checkoutDbOverrideJson" type="application/json">
 {
@@ -1597,6 +1597,860 @@
       flex: none;
     }
 
+    /* === BG/NBD 三步可视化 === */
+    #ubbkHealthView .ubbk-bgnbd {
+      margin-top: 1.4rem;
+      padding: 1.1rem 1.1rem 1.2rem;
+      border: 1px solid var(--ubbk-rose-line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg,
+          var(--ubbk-rose-weak) 0%,
+          var(--card) 100%);
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-head {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-title {
+      font-size: 1.35rem;
+      font-weight: 900;
+      line-height: 1.3;
+      color: var(--foreground);
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-sub {
+      font-size: 0.85rem;
+      font-weight: 700;
+      line-height: 1.55;
+      color: var(--foreground);
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-flow {
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: stretch;
+      gap: 0.5rem;
+    }
+
+    @media (max-width: 1180px) {
+      #ubbkHealthView .ubbk-bgnbd-flow {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-step {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      padding: 1.4rem 0.95rem 1rem;
+      border: 1px solid var(--ubbk-rose-line);
+      border-radius: var(--radius);
+      background: var(--card);
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-num {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -55%);
+      width: 1.9rem;
+      height: 1.9rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--ubbk-red);
+      color: var(--primary-foreground);
+      border-radius: 50%;
+      font-size: 1rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-step-title {
+      margin-top: 0.5rem;
+      font-size: 1.05rem;
+      font-weight: 900;
+      line-height: 1.25;
+      color: var(--foreground);
+      text-align: center;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--ubbk-red);
+      align-self: center;
+    }
+
+    @media (max-width: 1180px) {
+      #ubbkHealthView .ubbk-bgnbd-arrow {
+        transform: rotate(90deg);
+        padding: 0.2rem 0;
+      }
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-curve-card {
+      border: 1px solid var(--ubbk-rose-line);
+      border-radius: var(--radius);
+      background: var(--ubbk-rose-weak);
+      padding: 0.55rem 0.7rem 0.5rem;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-curve-card + .ubbk-bgnbd-curve-card {
+      margin-top: 0.5rem;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-curve-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: var(--ubbk-red);
+      line-height: 1.2;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-curve-label::before {
+      content: "A";
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.4rem;
+      height: 1.4rem;
+      border-radius: 50%;
+      background: var(--ubbk-red);
+      color: var(--primary-foreground);
+      font-size: 0.78rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-curve-card.is-b .ubbk-bgnbd-curve-label::before {
+      content: "B";
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-curve-desc {
+      font-size: 0.78rem;
+      color: var(--foreground);
+      font-weight: 700;
+      line-height: 1.4;
+      margin-top: 0.3rem;
+      margin-bottom: 0.3rem;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-curve-svg {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 200 / 100;
+      display: block;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-curve-tag {
+      margin-top: 0.3rem;
+      padding: 0.32rem 0.5rem;
+      background: var(--card);
+      border: 1px dashed var(--ubbk-rose-line);
+      border-radius: var(--radius);
+      font-size: 0.74rem;
+      color: var(--foreground);
+      line-height: 1.4;
+      font-weight: 700;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-user-card {
+      flex: 1;
+      border: 1px solid var(--ubbk-rose-line);
+      border-radius: var(--radius);
+      background: var(--ubbk-rose-weak);
+      padding: 0.7rem 0.85rem 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      min-height: 100%;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-user-head {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: var(--foreground);
+      border-bottom: 1px solid var(--ubbk-rose-line);
+      padding-bottom: 0.55rem;
+      margin-bottom: 0.15rem;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-user-head-avatar {
+      width: 1.8rem;
+      height: 1.8rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--ubbk-rose-mid);
+      color: var(--ubbk-red);
+      border-radius: 50%;
+      font-size: 1rem;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-user-stat {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: var(--foreground);
+      border-bottom: 1px dashed var(--ubbk-rose-line);
+      padding-bottom: 0.45rem;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-user-stat:last-of-type {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-user-stat-icon {
+      width: 1.95rem;
+      height: 1.95rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--card);
+      border: 1px solid var(--ubbk-rose-line);
+      border-radius: var(--radius);
+      flex: none;
+      color: var(--ubbk-red);
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-user-stat-icon svg {
+      width: 1.05rem;
+      height: 1.05rem;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-user-stat-body strong {
+      font-family: ui-monospace, SFMono-Regular, monospace;
+      font-weight: 900;
+      color: var(--ubbk-red);
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-user-stat-body small {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--foreground);
+      font-weight: 700;
+      line-height: 1.4;
+      margin-top: 0.1rem;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-user-foot {
+      margin-top: 0.3rem;
+      padding: 0.45rem 0.55rem;
+      background: var(--card);
+      border: 1px dashed var(--ubbk-rose-line);
+      border-radius: var(--radius);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--foreground);
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-formula-card {
+      border: 1px solid var(--ubbk-rose-line);
+      border-left: 0.22rem solid var(--ubbk-red);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg,
+          var(--ubbk-rose-mid) 0%,
+          var(--ubbk-rose-soft) 100%);
+      padding: 0.7rem 0.6rem;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-formula {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding: 0.1rem 0.2rem;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-formula-lhs {
+      font-family: "Times New Roman", Georgia, serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ubbk-red);
+      flex: none;
+      line-height: 1.2;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-formula-frac {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+      flex: none;
+      min-width: 13rem;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-formula-num {
+      padding: 0.15rem 0.4rem 0.35rem;
+      font-family: "Times New Roman", Georgia, serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ubbk-red);
+      line-height: 1.3;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-formula-bar {
+      width: 100%;
+      height: 1.6px;
+      background: var(--ubbk-red);
+      margin: 0.05rem 0;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-formula-den {
+      padding: 0.35rem 0.4rem 0.15rem;
+      font-family: "Times New Roman", Georgia, serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--ubbk-red);
+      line-height: 1.4;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-formula-den sub {
+      font-size: 0.7rem;
+      vertical-align: sub;
+      line-height: 0;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-formula-den sup {
+      font-size: 0.72rem;
+      vertical-align: super;
+      line-height: 0;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-input {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.45rem 0.65rem;
+      background: var(--ubbk-rose-weak);
+      border: 1px solid var(--ubbk-rose-line);
+      border-radius: var(--radius);
+      font-size: 0.8rem;
+      line-height: 1.4;
+      color: var(--foreground);
+      font-weight: 700;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-input-icon {
+      width: 1.7rem;
+      height: 1.7rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--card);
+      border: 1px solid var(--ubbk-rose-line);
+      border-radius: var(--radius);
+      flex: none;
+      color: var(--ubbk-red);
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-input-icon svg {
+      width: 1rem;
+      height: 1rem;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-output {
+      flex: 1;
+      border: 1px solid var(--ubbk-red);
+      border-radius: var(--radius);
+      background: var(--ubbk-rose-mid);
+      padding: 0.7rem 0.85rem 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-output-head {
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--ubbk-red);
+      line-height: 1.2;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-output-desc {
+      font-size: 0.78rem;
+      color: var(--foreground);
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-gauge {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      margin-top: 0.15rem;
+      padding-top: 0.55rem;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-gauge-pointer {
+      position: absolute;
+      top: -0.05rem;
+      left: 78%;
+      transform: translateX(-50%);
+      font-size: 0;
+      line-height: 1;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-gauge-pointer::before {
+      content: "";
+      display: block;
+      width: 0;
+      height: 0;
+      border-left: 0.45rem solid transparent;
+      border-right: 0.45rem solid transparent;
+      border-top: 0.55rem solid #1a1a1a;
+      margin: 0 auto;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-gauge-zone {
+      padding: 0.45rem 0.2rem 0.4rem;
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-gauge-zone.low {
+      background: var(--ubbk-red);
+      color: var(--primary-foreground);
+      border-radius: var(--radius) 0 0 var(--radius);
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-gauge-zone.mid {
+      background: #f0b400;
+      color: #3d2400;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-gauge-zone.high {
+      background: #2f9e44;
+      color: white;
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    #ubbkHealthView .ubbk-bgnbd-output-formula {
+      text-align: center;
+      font-size: 0.82rem;
+      font-weight: 900;
+      color: var(--ubbk-red);
+      padding: 0.4rem 0.55rem;
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--ubbk-red);
+      line-height: 1.4;
+    }
+
+    /* === 三大独立因子概览 === */
+    #ubbkHealthView .ubbk-factor-overview {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    @media (max-width: 1024px) {
+      #ubbkHealthView .ubbk-factor-overview {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    #ubbkHealthView .ubbk-factor-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--ubbk-rose-line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg,
+          var(--ubbk-rose-weak) 0%,
+          var(--card) 100%);
+      padding: 1.2rem 1.2rem 1.1rem;
+    }
+
+    #ubbkHealthView .ubbk-factor-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 0.28rem;
+      background: var(--ubbk-red);
+    }
+
+    #ubbkHealthView .ubbk-factor-letter {
+      position: absolute;
+      top: 0.4rem;
+      right: 0.75rem;
+      font-size: 3.4rem;
+      font-weight: 900;
+      color: var(--ubbk-rose-mid);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.05em;
+    }
+
+    #ubbkHealthView .ubbk-factor-card .ubbk-factor-head {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-bottom: 0.55rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    #ubbkHealthView .ubbk-factor-card h4 {
+      font-size: 1.35rem;
+      font-weight: 900;
+      line-height: 1.2;
+      color: var(--foreground);
+    }
+
+    #ubbkHealthView .ubbk-factor-card .ubbk-factor-q {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--foreground);
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    #ubbkHealthView .ubbk-factor-card .ubbk-factor-output {
+      margin-top: 0.8rem;
+      padding-top: 0.7rem;
+      border-top: 1px dashed var(--ubbk-rose-line);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    #ubbkHealthView .ubbk-factor-card .ubbk-factor-output span {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--ubbk-rose-line);
+      border-radius: var(--radius);
+      background: var(--ubbk-rose-soft);
+      padding: 0.22rem 0.5rem;
+      font-size: 0.74rem;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--foreground);
+    }
+
+    #ubbkHealthView .ubbk-factor-card .ubbk-factor-direction {
+      margin-top: 0.55rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1.5;
+      color: var(--foreground);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* === 阈值三档 === */
+    #ubbkHealthView .ubbk-threshold-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.85rem;
+    }
+
+    @media (max-width: 900px) {
+      #ubbkHealthView .ubbk-threshold-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    #ubbkHealthView .ubbk-threshold-card {
+      border: 1px solid var(--ubbk-gray-line);
+      border-radius: var(--radius);
+      background: var(--card);
+      padding: 0.9rem 1rem;
+    }
+
+    #ubbkHealthView .ubbk-threshold-card.is-high {
+      background: var(--ubbk-rose-mid);
+      border-color: var(--ubbk-red);
+    }
+
+    #ubbkHealthView .ubbk-threshold-card.is-mid {
+      background: var(--ubbk-rose-soft);
+    }
+
+    #ubbkHealthView .ubbk-threshold-card .ubbk-threshold-num {
+      font-size: 1.7rem;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--ubbk-red);
+    }
+
+    #ubbkHealthView .ubbk-threshold-card .ubbk-threshold-name {
+      margin-top: 0.4rem;
+      font-size: 0.96rem;
+      font-weight: 900;
+      line-height: 1.2;
+      color: var(--foreground);
+    }
+
+    #ubbkHealthView .ubbk-threshold-card .ubbk-threshold-desc {
+      margin-top: 0.4rem;
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: var(--foreground);
+    }
+
+    /* === 策略组合 === */
+    #ubbkHealthView .ubbk-combo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem;
+    }
+
+    @media (max-width: 1024px) {
+      #ubbkHealthView .ubbk-combo-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    #ubbkHealthView .ubbk-combo-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--ubbk-gray-line);
+      border-radius: var(--radius);
+      background: var(--card);
+      padding: 0.9rem 1.1rem 0.95rem 1.25rem;
+    }
+
+    #ubbkHealthView .ubbk-combo-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 0.22rem;
+      background: var(--ubbk-red);
+    }
+
+    #ubbkHealthView .ubbk-combo-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.45rem;
+    }
+
+    #ubbkHealthView .ubbk-combo-tag {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--ubbk-red);
+      border-radius: var(--radius);
+      background: var(--ubbk-red);
+      color: var(--primary-foreground);
+      padding: 0.18rem 0.45rem;
+      font-size: 0.7rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    #ubbkHealthView .ubbk-combo-card .ubbk-combo-desc {
+      font-size: 0.84rem;
+      font-weight: 700;
+      line-height: 1.55;
+      color: var(--foreground);
+      margin-bottom: 0.45rem;
+    }
+
+    #ubbkHealthView .ubbk-combo-card .ubbk-combo-action {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: var(--foreground);
+      padding: 0.55rem 0.7rem;
+      border-radius: var(--radius);
+      background: var(--ubbk-rose-weak);
+      border: 1px solid var(--ubbk-rose-line);
+    }
+
+    #ubbkHealthView .ubbk-combo-card .ubbk-combo-action-label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      color: var(--ubbk-red);
+      margin-bottom: 0.2rem;
+    }
+
+    /* === 策略优先级 === */
+    #ubbkHealthView .ubbk-priority-list {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.6rem;
+    }
+
+    @media (max-width: 1024px) {
+      #ubbkHealthView .ubbk-priority-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      #ubbkHealthView .ubbk-priority-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    #ubbkHealthView .ubbk-priority-item {
+      position: relative;
+      padding: 1.05rem 0.85rem 0.85rem;
+      border: 1px solid var(--ubbk-gray-line);
+      border-radius: var(--radius);
+      background: var(--card);
+    }
+
+    #ubbkHealthView .ubbk-priority-num {
+      position: absolute;
+      top: -0.55rem;
+      left: 0.65rem;
+      background: var(--ubbk-red);
+      color: var(--primary-foreground);
+      border-radius: var(--radius);
+      padding: 0.18rem 0.45rem;
+      font-size: 0.7rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    #ubbkHealthView .ubbk-priority-item .ubbk-priority-title {
+      font-size: 0.95rem;
+      font-weight: 900;
+      line-height: 1.3;
+      color: var(--foreground);
+    }
+
+    #ubbkHealthView .ubbk-priority-item .ubbk-priority-desc {
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      line-height: 1.55;
+      color: var(--foreground);
+    }
+
+    /* === 因子权重表 === */
+    #ubbkHealthView .ubbk-weight-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    #ubbkHealthView .ubbk-weight-table th {
+      background:
+        linear-gradient(135deg,
+          var(--ubbk-rose-mid) 0%,
+          var(--ubbk-rose-soft) 100%);
+      border-bottom: 1px solid var(--ubbk-rose-line);
+      padding: 0.55rem 0.7rem;
+      font-size: 0.78rem;
+      font-weight: 900;
+      text-align: left;
+      color: var(--foreground);
+    }
+
+    #ubbkHealthView .ubbk-weight-table td {
+      border-bottom: 1px solid var(--ubbk-gray-line);
+      padding: 0.55rem 0.7rem;
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: var(--foreground);
+      vertical-align: top;
+    }
+
+    #ubbkHealthView .ubbk-weight-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    #ubbkHealthView .ubbk-weight-table tbody td:first-child {
+      border-left: 0.22rem solid var(--ubbk-red);
+      font-weight: 800;
+    }
+
+    #ubbkHealthView .ubbk-weight-table tbody tr:nth-child(odd) td {
+      background: var(--ubbk-rose-weak);
+    }
+
+    /* === 跑批节奏 === */
+    #ubbkHealthView .ubbk-batch-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem;
+    }
+
+    @media (max-width: 900px) {
+      #ubbkHealthView .ubbk-batch-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    #ubbkHealthView .ubbk-batch-card {
+      border: 1px solid var(--ubbk-gray-line);
+      border-radius: var(--radius);
+      background: var(--card);
+      padding: 0.9rem 1rem;
+    }
+
+    #ubbkHealthView .ubbk-batch-card .ubbk-batch-title {
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--foreground);
+      margin-bottom: 0.4rem;
+    }
+
+    #ubbkHealthView .ubbk-batch-card .ubbk-batch-value {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--ubbk-red);
+      line-height: 1.1;
+    }
+
+    #ubbkHealthView .ubbk-batch-card .ubbk-batch-desc {
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      line-height: 1.55;
+      color: var(--foreground);
+    }
+
     #reviewPlanView {
       position: relative;
       isolation: isolate;
@@ -3093,753 +3947,929 @@
     </section>
     <section id="ubbkAnnualView" class="hidden space-y-6"></section>
     <section id="ubbkHealthView" class="hidden space-y-6">
+
+      <!-- 1. Hero: 三类独立风险因子 -->
       <section class="panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
-        <div class="grid grid-cols-1 xl:grid-cols-12 gap-6 items-stretch">
-          <div class="xl:col-span-5 flex flex-col justify-between gap-6">
+
+        <!-- 顶部标题区（全宽） -->
+        <div class="flex flex-col gap-4 max-w-5xl">
+          <div class="inline-flex self-start rounded-full border border-border bg-muted px-3 py-1 text-xs font-bold text-foreground">
+            3.3 M 层：活跃用户衰退预警
+          </div>
+          <h2 class="text-4xl md:text-5xl font-black leading-tight text-foreground">
+            针对三种类型的风险，<span class="text-[color:var(--ubbk-red)]">独立输出预测分</span>
+          </h2>
+          <p class="text-sm md:text-base leading-7 text-foreground">
+            模型把活跃用户可能变弱的原因分成三种类型，分别输出
+            <span class="font-bold text-foreground">生命周期衰退</span> /
+            <span class="font-bold text-foreground">R 分层滑落</span> /
+            <span class="font-bold text-foreground">体验风险</span>
+            的预测分和标签，让运营看到底是哪一类风险，应该走哪一类动作。
+          </p>
+        </div>
+
+        <!-- 三类独立风险 · 卡片 -->
+        <div class="mt-7">
+          <div class="flex flex-wrap items-end justify-between gap-3">
             <div>
-              <div class="inline-flex rounded-full border border-border bg-muted px-3 py-1 text-xs font-bold text-foreground">
-                3.3 M 层：活跃用户衰退预警
-              </div>
-              <h2 class="mt-4 text-4xl md:text-5xl font-black leading-tight text-foreground">
-                在用户真正流失前，先发现他正在变弱
-              </h2>
-              <p class="mt-4 text-sm md:text-base leading-7 text-foreground">
-                用户健康风险预警不是“已经不来了再召回”，而是面向当前仍处于
-                <span class="font-bold text-foreground">成长 / 成熟</span>
-                阶段的用户，提前判断未来 14 / 30 天进入衰退的风险。
-              </p>
+              <div class="text-xs font-black uppercase tracking-wider text-foreground/60">三类独立风险</div>
+              <div class="mt-1 text-xl md:text-2xl font-black text-foreground">每类独立打分 0-100 + 高/中/低标签</div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-1 gap-3">
-              <div class="rounded-xl border border-border bg-muted p-4">
-                <div class="text-xs font-bold uppercase text-foreground/60">主目标</div>
-                <div class="mt-2 text-lg font-black text-foreground">生命周期衰退风险</div>
-                <p class="mt-2 text-sm leading-6 text-foreground">预测成长 / 成熟用户未来是否进入衰退状态。</p>
-              </div>
-              <div class="rounded-xl border border-border bg-muted p-4">
-                <div class="text-xs font-bold uppercase text-foreground/60">辅助输出</div>
-                <div class="mt-2 text-lg font-black text-foreground">R 分层滑落预测</div>
-                <p class="mt-2 text-sm leading-6 text-foreground">识别 R5 / R4 等高价值用户是否正在价值下滑。</p>
-              </div>
-              <div class="rounded-xl border border-border bg-muted p-4">
-                <div class="text-xs font-bold uppercase text-foreground/60">一期原则</div>
-                <div class="mt-2 text-lg font-black text-foreground">规则先行，可解释可复盘</div>
-                <p class="mt-2 text-sm leading-6 text-foreground">先上线线性评分框架，后续用真实标签校准权重。</p>
-              </div>
+            <div class="rounded-xl border border-border bg-muted px-4 py-2 text-sm font-bold text-foreground">
+              分数越高 = 风险越高
             </div>
           </div>
 
-          <div class="xl:col-span-7 rounded-2xl border border-border bg-card p-5 md:p-6">
-            <div class="flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <div class="text-sm font-bold text-foreground/60">一期健康风险分公式</div>
-                <div class="mt-2 text-2xl md:text-3xl font-black text-foreground">
-                  health_risk_score
-                </div>
+          <div class="mt-4 ubbk-factor-overview">
+            <div class="ubbk-factor-card">
+              <span class="ubbk-factor-letter">L</span>
+              <div class="ubbk-factor-head">
+                <span class="ubbk-factor-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M4 17l4-4 4 3 7-8"></path>
+                    <path d="M15 8h4v4"></path>
+                  </svg>
+                </span>
+                <h4>生命周期衰退风险</h4>
               </div>
-              <div class="rounded-xl border border-border bg-muted px-4 py-3 text-sm leading-6 text-foreground">
-                分数越高，风险越高；运营按高分优先处理。
+              <div class="ubbk-factor-q">回答：未来 30 天是否可能进入未购衰退？</div>
+              <div class="ubbk-factor-output">
+                <span>衰退风险分</span>
+                <span>衰退风险标签</span>
               </div>
+              <div class="ubbk-factor-direction">围绕购频展开：BG/NBD 复购可能性 + 历史节奏偏离 + 衰退边界距离</div>
             </div>
 
-            <div class="mt-6 ubbk-factor-map">
-              <div class="ubbk-factor-row">
-                <div class="text-sm font-black text-foreground">购买节奏异常</div>
-                <div class="ubbk-factor-track" aria-label="购买节奏异常 35%">
-                  <div class="ubbk-factor-fill" style="--weight: 35%;"></div>
-                </div>
-                <div class="ubbk-score-pill">35%</div>
+            <div class="ubbk-factor-card">
+              <span class="ubbk-factor-letter">R</span>
+              <div class="ubbk-factor-head">
+                <span class="ubbk-factor-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M4 19V5"></path>
+                    <path d="M8 19V9"></path>
+                    <path d="M12 19v-6"></path>
+                    <path d="M16 19v-9"></path>
+                    <path d="M20 19V7"></path>
+                  </svg>
+                </span>
+                <h4>R 分层滑落风险</h4>
               </div>
-              <div class="ubbk-factor-row">
-                <div class="text-sm font-black text-foreground">R 分层滑落</div>
-                <div class="ubbk-factor-track" aria-label="R 分层滑落预测 30%">
-                  <div class="ubbk-factor-fill" style="--weight: 30%;"></div>
-                </div>
-                <div class="ubbk-score-pill">30%</div>
+              <div class="ubbk-factor-q">回答：未来是否可能从当前 R 层级下滑？</div>
+              <div class="ubbk-factor-output">
+                <span>滑落风险分</span>
+                <span>滑落风险标签</span>
               </div>
-              <div class="ubbk-factor-row">
-                <div class="text-sm font-black text-foreground">生命周期临界</div>
-                <div class="ubbk-factor-track" aria-label="生命周期临界 20%">
-                  <div class="ubbk-factor-fill" style="--weight: 20%;"></div>
-                </div>
-                <div class="ubbk-score-pill">20%</div>
-              </div>
-              <div class="ubbk-factor-row">
-                <div class="text-sm font-black text-foreground">体验风险</div>
-                <div class="ubbk-factor-track" aria-label="体验风险 15%">
-                  <div class="ubbk-factor-fill" style="--weight: 15%;"></div>
-                </div>
-                <div class="ubbk-score-pill">15%</div>
-              </div>
+              <div class="ubbk-factor-direction">沿用真实 R 分五项指标和原始权重，看边界距离 + 走弱方向</div>
             </div>
 
-            <div class="mt-6 ubbk-score-summary text-sm leading-6 text-foreground">
-              <div class="ubbk-score-formula">
-                <div class="text-xs font-black uppercase text-foreground/60">计算口径</div>
-                <div class="mt-2 font-mono text-lg md:text-xl font-black text-foreground">
-                  health_risk_score = Σ(因子分 × 权重)
-                </div>
-                <p class="mt-2">
-                  四个因子均先输出 0-100 分，再按上方权重条加权求和；分数方向统一为越高风险越高。
-                </p>
+            <div class="ubbk-factor-card">
+              <span class="ubbk-factor-letter">E</span>
+              <div class="ubbk-factor-head">
+                <span class="ubbk-factor-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 3l8 4v6c0 5-3.5 7.5-8 8-4.5-.5-8-3-8-8V7l8-4z"></path>
+                    <path d="M9 12l2 2 4-5"></path>
+                  </svg>
+                </span>
+                <h4>体验风险</h4>
               </div>
-              <div class="ubbk-score-steps">
-                <div class="ubbk-score-step">
-                  <div class="text-xs font-black text-foreground/60">STEP 1</div>
-                  <div class="mt-1 font-black text-foreground">因子打分</div>
-                  <div class="mt-1 text-foreground">每个因子独立输出 0-100。</div>
-                </div>
-                <div class="ubbk-score-step">
-                  <div class="text-xs font-black text-foreground/60">STEP 2</div>
-                  <div class="mt-1 font-black text-foreground">权重加总</div>
-                  <div class="mt-1 text-foreground">按条形图权重合成总分。</div>
-                </div>
-                <div class="ubbk-score-step">
-                  <div class="text-xs font-black text-foreground/60">STEP 3</div>
-                  <div class="mt-1 font-black text-foreground">等级输出</div>
-                  <div class="mt-1 text-foreground">映射为高 / 中 / 低风险。</div>
-                </div>
+              <div class="ubbk-factor-q">回答：是否因为品质 / 履约问题产生衰退风险？</div>
+              <div class="ubbk-factor-output">
+                <span>体验风险分</span>
+                <span>体验风险标签</span>
               </div>
+              <div class="ubbk-factor-direction">近 90 天品质履约问题次数 + 最近一次订单问题加分</div>
             </div>
+          </div>
+        </div>
 
-            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-3 text-sm leading-6 text-foreground">
-              <div class="rounded-xl border border-border bg-card p-4">
-                <div class="text-2xl font-black text-foreground">70+</div>
-                <div class="mt-1 font-bold text-foreground">高风险</div>
-                <div class="mt-2">明显变弱，进入人工关注或重点干预。</div>
-              </div>
-              <div class="rounded-xl border border-border bg-card p-4">
-                <div class="text-2xl font-black text-foreground">40-69</div>
-                <div class="mt-1 font-bold text-foreground">中风险</div>
-                <div class="mt-2">出现转弱信号，进入轻量提醒或推荐。</div>
-              </div>
-              <div class="rounded-xl border border-border bg-card p-4">
-                <div class="text-2xl font-black text-foreground">&lt;40</div>
-                <div class="mt-1 font-bold text-foreground">低风险</div>
-                <div class="mt-2">状态稳定，不干预或常规经营。</div>
-              </div>
-            </div>
+        <!-- 统一阈值 + 一期原则 -->
+        <div class="mt-7 grid grid-cols-1 xl:grid-cols-4 gap-3">
+          <div class="ubbk-threshold-card is-high">
+            <div class="ubbk-threshold-num">70 +</div>
+            <div class="ubbk-threshold-name">高风险</div>
+            <div class="ubbk-threshold-desc">明显变弱，优先进入运营名单或重点干预。</div>
+          </div>
+          <div class="ubbk-threshold-card is-mid">
+            <div class="ubbk-threshold-num">40 - 69</div>
+            <div class="ubbk-threshold-name">中风险</div>
+            <div class="ubbk-threshold-desc">出现转弱信号，轻量干预或持续观察。</div>
+          </div>
+          <div class="ubbk-threshold-card">
+            <div class="ubbk-threshold-num">&lt; 40</div>
+            <div class="ubbk-threshold-name">低风险</div>
+            <div class="ubbk-threshold-desc">状态稳定，不主动打扰或常规经营。</div>
+          </div>
+          <div class="rounded-2xl border border-[color:var(--ubbk-rose-line)] bg-[color:var(--ubbk-rose-soft)] p-4 flex flex-col gap-2">
+            <div class="text-xs font-black uppercase tracking-wider text-[color:var(--ubbk-red)]">一期原则</div>
+            <p class="text-sm leading-6 text-foreground">
+              三类风险并列输出，统一阈值。人群重合是常态，运营看三类标签组合判断动作。
+            </p>
           </div>
         </div>
       </section>
 
+      <!-- 2. 因子一 · 生命周期衰退风险 -->
       <section class="panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
-        <div class="flex flex-col gap-2">
-          <h3 class="text-3xl font-black text-foreground">四个因子算法</h3>
-          <p class="text-sm md:text-base leading-7 text-foreground">
-            一期不是黑盒模型，而是一套可解释的线性规则。每个因子先单独输出 0-100 分，再按权重汇总为健康风险分，后续可按真实衰退标签校准权重和阈值。
-          </p>
-        </div>
+        <article class="ubbk-algorithm-card p-5 md:p-6">
+          <div class="grid grid-cols-1 xl:grid-cols-12 gap-5">
+            <div class="xl:col-span-4">
+              <div class="flex items-start gap-3">
+                <span class="ubbk-factor-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M4 17l4-4 4 3 7-8"></path>
+                    <path d="M15 8h4v4"></path>
+                  </svg>
+                </span>
+                <div>
+                  <div class="flex flex-wrap items-center gap-2">
+                    <h4 class="text-2xl font-black text-foreground">生命周期衰退风险</h4>
+                    <span class="ubbk-weight-tag">因子一 · LIFE</span>
+                  </div>
+                  <p class="mt-2 text-sm leading-7 text-foreground">
+                    回答：当前仍处于成长 / 成熟阶段的用户，未来 30 天是否可能进入未购衰退。
+                  </p>
+                </div>
+              </div>
+              <div class="mt-4 rounded-xl border border-border bg-muted p-4 text-sm leading-7 text-foreground">
+                衰退 = 距离最近一次下单 &gt; 30 天且 ≤ 90 天。这一因子本质是预测用户是否会跨过 30 天未购边界。
+              </div>
 
-        <div class="mt-6 space-y-5">
-          <article class="ubbk-algorithm-card p-5 md:p-6">
-            <div class="grid grid-cols-1 xl:grid-cols-12 gap-5">
-              <div class="xl:col-span-4">
-                <div class="flex items-start gap-3">
-                  <span class="ubbk-factor-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24">
-                      <path d="M4 17l4-4 4 3 7-8"></path>
-                      <path d="M15 8h4v4"></path>
-                    </svg>
-                  </span>
-                  <div>
-                    <div class="flex flex-wrap items-center gap-2">
-                      <h4 class="text-2xl font-black text-foreground">购买节奏异常</h4>
-                      <span class="ubbk-weight-tag">权重 35%</span>
-                    </div>
-                    <p class="mt-2 text-sm leading-7 text-foreground">
-                      回答：用户当前未购时长，是否已经明显超过他自己的历史复购节奏。
-                    </p>
+              <div class="mt-4 ubbk-formula-block p-4">
+                <div class="font-black text-foreground">生命周期衰退风险分</div>
+                <div class="mt-3 ubbk-formula-strong font-mono text-xs md:text-sm leading-7">
+                  life_decay_risk_score<br>
+                  = 0.50 × BG/NBD 复购风险分<br>
+                  + 0.30 × 历史节奏偏离风险分<br>
+                  + 0.20 × 衰退边界距离风险分
+                </div>
+                <p class="mt-2 text-xs leading-6 text-foreground/80">
+                  三个子因子都围绕"购频"展开；本因子只表达生命周期衰退风险，不与其他因子合并。
+                </p>
+              </div>
+            </div>
+
+            <div class="xl:col-span-8 space-y-4 text-sm leading-7 text-foreground">
+              <div class="ubbk-formula-block p-4">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="ubbk-algo-kicker">子因子 1 · 50%</span>
+                  <div class="font-black text-foreground">BG/NBD 复购可能性</div>
+                </div>
+                <p class="mt-2">
+                  BG/NBD 不看金额、品类和体验，只用购买轨迹判断：用户现在还像不像一个会继续复购的人。输出 <span class="font-mono">P(alive)</span>，一期先用它作为复购可能性的代理指标。
+                </p>
+                <div class="mt-3 ubbk-formula-strong font-mono text-xs md:text-sm">
+                  BG/NBD 复购风险分 = 100 × (1 - P(alive))
+                </div>
+                <div class="mt-3 overflow-x-auto">
+                  <table class="ubbk-mini-table">
+                    <thead>
+                      <tr><th>字段</th><th>业务含义</th><th>计算方式</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td><span class="font-mono">x</span></td><td>复购次数</td><td>有效订单数 - 1</td></tr>
+                      <tr><td><span class="font-mono">t_x</span></td><td>首单到最后一单的活跃跨度</td><td>最后一次下单日 - 首次下单日</td></tr>
+                      <tr><td><span class="font-mono">T</span></td><td>首单到观察日的总跨度</td><td>观察截止日 - 首次下单日</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p class="mt-2 text-xs leading-6 text-foreground/80">
+                  真正沉默时长 = T - t_x。当 x = 0 时 P(alive) = 1 是数学处理，不代表只买 1 次的人一定安全，应进入低样本兜底。
+                </p>
+              </div>
+
+              <div class="grid grid-cols-1 2xl:grid-cols-2 gap-4">
+                <div class="ubbk-formula-block p-4">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span class="ubbk-algo-kicker">子因子 2 · 30%</span>
+                    <div class="font-black text-foreground">历史节奏偏离</div>
+                  </div>
+                  <p class="mt-2">
+                    同样 20 天未购，对周购用户和月购用户的含义完全不同。用用户自己的历史购买间隔做基准，判断当前未购是否异常。
+                  </p>
+                  <div class="mt-3 ubbk-formula-strong font-mono text-xs md:text-sm leading-7">
+                    loss_severity_ratio<br>
+                    = 当前未购时长 / 历史平均购买间隔<br><br>
+                    历史节奏偏离风险分<br>
+                    = 100 × min(loss_severity_ratio / 2, 1)
+                  </div>
+                  <div class="mt-3 overflow-x-auto">
+                    <table class="ubbk-mini-table">
+                      <tbody>
+                        <tr><td>&lt; 1.0</td><td>仍在自己的正常购买周期内</td></tr>
+                        <tr><td>1.0 - 1.5</td><td>轻度偏离购买节奏</td></tr>
+                        <tr><td>1.5 - 2.0</td><td>明显偏离购买节奏</td></tr>
+                        <tr><td>≥ 2.0</td><td>高度异常沉默</td></tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
-                <div class="mt-4 rounded-xl border border-border bg-muted p-4 text-sm leading-7 text-foreground">
-                  同样 20 天没买，对周购用户可能是高风险，对月购用户可能仍在正常周期内。所以这一因子不只看“几天没买”，而是看用户还像不像过去那个会继续复购的人。
+
+                <div class="ubbk-formula-block p-4">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span class="ubbk-algo-kicker">子因子 3 · 20%</span>
+                    <div class="font-black text-foreground">衰退边界距离</div>
+                  </div>
+                  <p class="mt-2">
+                    直接服务业务动作切换：用户越接近 30 天未购边界，越需要提前预警。
+                  </p>
+                  <div class="mt-3 flex items-center justify-between gap-3 text-sm font-bold text-foreground">
+                    <span>≤ 15 天</span>
+                    <span>线性抬升</span>
+                    <span>≥ 30 天</span>
+                  </div>
+                  <div class="mt-3 h-3 rounded border border-border bg-muted overflow-hidden">
+                    <div class="h-full w-1/2 bg-primary"></div>
+                  </div>
+                  <div class="mt-3 overflow-x-auto">
+                    <table class="ubbk-mini-table">
+                      <tbody>
+                        <tr><td>≤ 15 天</td><td>0</td></tr>
+                        <tr><td>16 - 30 天</td><td><span class="font-mono">100 × (当前未购时长 - 15) / 15</span></td></tr>
+                        <tr><td>≥ 30 天</td><td>100</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
 
-              <div class="xl:col-span-8 space-y-4 text-sm leading-7 text-foreground">
-                <div class="ubbk-formula-block p-4">
-                  <div class="flex flex-wrap items-center gap-2">
-                    <span class="ubbk-algo-kicker">BG/NBD</span>
-                    <div class="font-black text-foreground">先把“复购节奏是否还活着”算成概率</div>
-                  </div>
-                  <p class="mt-2">
-                    BG/NBD 不看金额、品类和体验，只用购买轨迹判断：这个用户现在还像不像一个会继续复购的人。输出结果是 <span class="font-mono">P(alive)</span>，越接近 1 越安全，越接近 0 越危险。
-                  </p>
-                </div>
-
-                <div class="grid grid-cols-1 2xl:grid-cols-2 gap-4">
-                  <div class="ubbk-formula-block p-4">
-                    <div class="font-black text-foreground">输入字段</div>
-                    <div class="mt-3 overflow-x-auto">
-                      <table class="ubbk-mini-table">
-                        <thead>
-                          <tr>
-                            <th>字段</th>
-                            <th>业务含义</th>
-                            <th>计算方式</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td><span class="font-mono">x</span></td>
-                            <td>重复购买次数</td>
-                            <td>有效订单数 - 1</td>
-                          </tr>
-                          <tr>
-                            <td><span class="font-mono">t_x</span></td>
-                            <td>首单到最后一单的活跃跨度</td>
-                            <td>最后一次下单日 - 首次下单日</td>
-                          </tr>
-                          <tr>
-                            <td><span class="font-mono">T</span></td>
-                            <td>首单到观察日的总观察跨度</td>
-                            <td>观察截止日 - 首次下单日</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div class="mt-3 ubbk-formula-strong font-mono text-xs md:text-sm">
-                      真正沉默时长 = T - t_x
-                    </div>
-                  </div>
-
-                  <div class="ubbk-formula-block p-4">
-                    <div class="font-black text-foreground">人群参数</div>
-                    <div class="mt-3 overflow-x-auto">
-                      <table class="ubbk-mini-table">
-                        <thead>
-                          <tr>
-                            <th>参数</th>
-                            <th>含义</th>
-                            <th>作用</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td><span class="font-mono">λ ~ Gamma(r, α)</span></td>
-                            <td>购买频率分布</td>
-                            <td>描述目标人群里周购、月购、低频用户的差异</td>
-                          </tr>
-                          <tr>
-                            <td><span class="font-mono">p ~ Beta(a, b)</span></td>
-                            <td>购买后流失倾向</td>
-                            <td>描述目标人群买完后还会不会继续回来的差异</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <p class="mt-3">
-                      <span class="font-mono">r / α / a / b</span> 不是人工拍脑袋，而是用目标用户群历史订单拟合出来。
-                    </p>
-                  </div>
-                </div>
-
-                <div class="grid grid-cols-1 2xl:grid-cols-2 gap-4">
-                  <div class="ubbk-formula-block p-4">
-                    <div class="font-black text-foreground">概率输出</div>
-                    <div class="mt-3 ubbk-formula-strong font-mono text-xs md:text-sm leading-7">
-                      P(alive)<br>
-                      = 1 / { 1 + [a / (b + x - 1)] × [(α + T) / (α + t_x)]^(r + x) }
-                    </div>
-                    <div class="mt-3 overflow-x-auto">
-                      <table class="ubbk-mini-table">
-                        <tbody>
-                          <tr>
-                            <td><span class="font-mono">t_x</span> 越接近 <span class="font-mono">T</span></td>
-                            <td>最近仍有购买，通常更安全</td>
-                          </tr>
-                          <tr>
-                            <td><span class="font-mono">T - t_x</span> 越大</td>
-                            <td>最后一次购买后沉默越久，风险越高</td>
-                          </tr>
-                          <tr>
-                            <td><span class="font-mono">x = 0</span></td>
-                            <td>低样本用户不单独依赖 BG/NBD，走兜底规则</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-
-                  <div class="ubbk-formula-block p-4">
-                    <div class="font-black text-foreground">最终购买节奏异常分</div>
-                    <div class="mt-3 ubbk-formula-strong font-mono text-xs md:text-sm leading-7">
-                      loss_severity_ratio<br>
-                      = 当前未购时长 / 历史平均购买间隔<br><br>
-                      rhythm_risk_score<br>
-                      = 100 × [0.6 × (1 - P(alive)) + 0.4 × min(loss_severity_ratio / 2, 1)]
-                    </div>
-                    <div class="mt-3 overflow-x-auto">
-                      <table class="ubbk-mini-table">
-                        <tbody>
-                          <tr>
-                            <td><span class="font-mono">1 - P(alive)</span></td>
-                            <td>把继续复购概率转成风险方向，占内部 60%</td>
-                          </tr>
-                          <tr>
-                            <td><span class="font-mono">loss_severity_ratio / 2</span></td>
-                            <td>超过 2 倍历史购买间隔后按满风险处理，占内部 40%</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
+              <div class="ubbk-formula-block p-4">
+                <div class="font-black text-foreground">一期标签口径</div>
+                <div class="mt-3 overflow-x-auto">
+                  <table class="ubbk-mini-table">
+                    <thead><tr><th>标签</th><th>判断逻辑</th><th>运营含义</th></tr></thead>
+                    <tbody>
+                      <tr><td>高</td><td>分数 ≥ 70</td><td>需要防衰退经营</td></tr>
+                      <tr><td>中</td><td>分数 40 - 69</td><td>进入观察 / 轻量提醒</td></tr>
+                      <tr><td>低</td><td>分数 &lt; 40</td><td>保持成长 / 成熟经营</td></tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
-          </article>
+          </div>
+        </article>
 
-          <article class="ubbk-algorithm-card p-5 md:p-6">
-            <div class="grid grid-cols-1 xl:grid-cols-12 gap-5">
-              <div class="xl:col-span-4">
-                <div class="flex items-start gap-3">
-                  <span class="ubbk-factor-icon" aria-hidden="true">
+        <!-- BG/NBD 两条人群曲线是怎么用的？ -->
+        <div class="ubbk-bgnbd">
+          <div class="ubbk-bgnbd-head">
+            <div class="ubbk-bgnbd-title">BG/NBD：两条人群曲线是怎么用的？</div>
+            <div class="ubbk-bgnbd-sub">Gamma(r, α) 和 Beta(a, b) 描述的是人群规律，不是单个用户</div>
+          </div>
+
+          <div class="ubbk-bgnbd-flow">
+
+            <!-- Step 1：看全体用户 -->
+            <div class="ubbk-bgnbd-step">
+              <span class="ubbk-bgnbd-num">1</span>
+              <div class="ubbk-bgnbd-step-title">先看全体用户</div>
+
+              <div class="ubbk-bgnbd-curve-card is-a">
+                <div class="ubbk-bgnbd-curve-label">Gamma(r, α)</div>
+                <div class="ubbk-bgnbd-curve-desc">描述：用户购买频率 λ 的分布</div>
+                <svg class="ubbk-bgnbd-curve-svg" viewBox="0 0 200 100">
+                  <line x1="22" y1="10" x2="22" y2="86" stroke="#e60012" stroke-width="1.2" />
+                  <line x1="22" y1="86" x2="192" y2="86" stroke="#9aa0a6" stroke-width="1" />
+                  <text x="26" y="18" font-size="7" fill="#6b7280">占比</text>
+                  <path d="M 22 86 C 32 14, 58 8, 80 30 C 102 56, 130 78, 192 86" fill="none" stroke="#e60012" stroke-width="2.5" stroke-linecap="round" vector-effect="non-scaling-stroke" />
+                  <text x="107" y="96" font-size="8" fill="#6b7280" text-anchor="middle">购买频率 λ (越右 = 买得越勤)</text>
+                </svg>
+                <div class="ubbk-bgnbd-curve-tag">反映平台里高频 / 中频 / 低频用户的大致分布</div>
+              </div>
+
+              <div class="ubbk-bgnbd-curve-card is-b">
+                <div class="ubbk-bgnbd-curve-label">Beta(a, b)</div>
+                <div class="ubbk-bgnbd-curve-desc">描述：用户流失概率 p 的分布</div>
+                <svg class="ubbk-bgnbd-curve-svg" viewBox="0 0 200 100">
+                  <line x1="22" y1="10" x2="22" y2="86" stroke="#e60012" stroke-width="1.2" />
+                  <line x1="22" y1="86" x2="192" y2="86" stroke="#9aa0a6" stroke-width="1" />
+                  <text x="26" y="18" font-size="7" fill="#6b7280">占比</text>
+                  <line x1="107" y1="10" x2="107" y2="86" stroke="#c2c2c2" stroke-width="1" stroke-dasharray="3,3" vector-effect="non-scaling-stroke" />
+                  <path d="M 22 86 C 52 86, 80 12, 107 12 C 134 12, 162 86, 192 86" fill="none" stroke="#e60012" stroke-width="2.5" stroke-linecap="round" vector-effect="non-scaling-stroke" />
+                  <text x="22" y="96" font-size="8" fill="#6b7280" text-anchor="middle">0</text>
+                  <text x="107" y="96" font-size="8" fill="#6b7280" text-anchor="middle">0.5</text>
+                  <text x="192" y="96" font-size="8" fill="#6b7280" text-anchor="middle">1</text>
+                </svg>
+                <div class="ubbk-bgnbd-curve-tag">反映平台里稳定复购用户 vs 容易流失用户的大致分布</div>
+              </div>
+            </div>
+
+            <div class="ubbk-bgnbd-arrow">→</div>
+
+            <!-- Step 2：看某个具体用户 -->
+            <div class="ubbk-bgnbd-step">
+              <span class="ubbk-bgnbd-num">2</span>
+              <div class="ubbk-bgnbd-step-title">再看某个具体用户</div>
+
+              <div class="ubbk-bgnbd-user-card">
+                <div class="ubbk-bgnbd-user-head">
+                  <span class="ubbk-bgnbd-user-head-avatar">A</span>
+                  <span>示例用户 A</span>
+                </div>
+
+                <div class="ubbk-bgnbd-user-stat">
+                  <span class="ubbk-bgnbd-user-stat-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24">
-                      <path d="M4 19V5"></path>
-                      <path d="M8 19V9"></path>
-                      <path d="M12 19v-6"></path>
-                      <path d="M16 19v-9"></path>
-                      <path d="M20 19V7"></path>
+                      <path d="M3 3h2l2.4 12.2a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.5L23 6H6"></path>
+                      <circle cx="9" cy="20" r="1.5"></circle>
+                      <circle cx="18" cy="20" r="1.5"></circle>
                     </svg>
                   </span>
-                  <div>
-                    <div class="flex flex-wrap items-center gap-2">
-                      <h4 class="text-2xl font-black text-foreground">R 分层滑落预测</h4>
-                      <span class="ubbk-weight-tag">权重 30%</span>
-                    </div>
-                    <p class="mt-2 text-sm leading-7 text-foreground">
-                      回答：用户未来 1 周 / 4 周是否可能从当前 R 层级下滑。
-                    </p>
+                  <div class="ubbk-bgnbd-user-stat-body">
+                    <strong>x = 4</strong>
+                    <small>复购 4 次</small>
                   </div>
+                </div>
+
+                <div class="ubbk-bgnbd-user-stat">
+                  <span class="ubbk-bgnbd-user-stat-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <rect x="3" y="4" width="18" height="17" rx="2"></rect>
+                      <path d="M3 9h18"></path>
+                      <path d="M8 2v4"></path>
+                      <path d="M16 2v4"></path>
+                    </svg>
+                  </span>
+                  <div class="ubbk-bgnbd-user-stat-body">
+                    <strong>t_x = 59 天</strong>
+                    <small>首单到最后一单活跃了 59 天</small>
+                  </div>
+                </div>
+
+                <div class="ubbk-bgnbd-user-stat">
+                  <span class="ubbk-bgnbd-user-stat-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <rect x="3" y="4" width="18" height="17" rx="2"></rect>
+                      <path d="M3 9h18"></path>
+                      <path d="M8 2v4"></path>
+                      <path d="M16 2v4"></path>
+                    </svg>
+                  </span>
+                  <div class="ubbk-bgnbd-user-stat-body">
+                    <strong>T = 90 天</strong>
+                    <small>首单到今天被观察了 90 天</small>
+                  </div>
+                </div>
+
+                <div class="ubbk-bgnbd-user-stat">
+                  <span class="ubbk-bgnbd-user-stat-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <circle cx="12" cy="13" r="8"></circle>
+                      <path d="M12 9v4l2 2"></path>
+                      <path d="M9 2h6"></path>
+                      <path d="M12 2v3"></path>
+                    </svg>
+                  </span>
+                  <div class="ubbk-bgnbd-user-stat-body">
+                    <strong>沉默时长 = T - t_x = 31 天</strong>
+                  </div>
+                </div>
+
+                <div class="ubbk-bgnbd-user-foot">这些是单个用户自己的历史轨迹</div>
+              </div>
+            </div>
+
+            <div class="ubbk-bgnbd-arrow">→</div>
+
+            <!-- Step 3：放进模型算 P(alive) -->
+            <div class="ubbk-bgnbd-step">
+              <span class="ubbk-bgnbd-num">3</span>
+              <div class="ubbk-bgnbd-step-title">放进模型，算 P(alive)</div>
+
+              <div class="ubbk-bgnbd-formula-card">
+                <div class="ubbk-bgnbd-formula">
+                  <span class="ubbk-bgnbd-formula-lhs">P(alive) =</span>
+                  <span class="ubbk-bgnbd-formula-frac">
+                    <span class="ubbk-bgnbd-formula-num">1</span>
+                    <span class="ubbk-bgnbd-formula-bar"></span>
+                    <span class="ubbk-bgnbd-formula-den">1 + [ a / (b + x - 1) ] × [ (α + T) / (α + t<sub>x</sub>) ]<sup>r + x</sup></span>
+                  </span>
                 </div>
               </div>
 
-              <div class="xl:col-span-8 space-y-4 text-sm leading-7 text-foreground">
-                <div class="ubbk-formula-block p-4">
+              <div class="ubbk-bgnbd-inputs">
+                <div class="ubbk-bgnbd-input">
+                  <span class="ubbk-bgnbd-input-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M3 17l5-5 4 3 7-9"></path>
+                      <path d="M14 6h5v5"></path>
+                    </svg>
+                  </span>
+                  <span>Gamma 曲线提供：「大家通常买得快不快」的规律</span>
+                </div>
+                <div class="ubbk-bgnbd-input">
+                  <span class="ubbk-bgnbd-input-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M3 18 C 7 18, 10 6, 12 6 C 14 6, 17 18, 21 18"></path>
+                    </svg>
+                  </span>
+                  <span>Beta 曲线提供：「大家通常容不容易流失」的规律</span>
+                </div>
+              </div>
+
+              <div class="ubbk-bgnbd-output">
+                <div class="ubbk-bgnbd-output-head">输出：P(alive)</div>
+                <div class="ubbk-bgnbd-output-desc">含义：这个用户现在还像不像一个会继续复购的人</div>
+                <div class="ubbk-bgnbd-gauge">
+                  <div class="ubbk-bgnbd-gauge-zone low">低 (危险)</div>
+                  <div class="ubbk-bgnbd-gauge-zone mid">中</div>
+                  <div class="ubbk-bgnbd-gauge-zone high">高 (安全)</div>
+                  <div class="ubbk-bgnbd-gauge-pointer"></div>
+                </div>
+                <div class="ubbk-bgnbd-output-formula">P(alive) 越高 = 越像会继续买</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. 因子二 · R 分层滑落风险 -->
+      <section class="panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <article class="ubbk-algorithm-card p-5 md:p-6">
+          <div class="grid grid-cols-1 xl:grid-cols-12 gap-5">
+            <div class="xl:col-span-4">
+              <div class="flex items-start gap-3">
+                <span class="ubbk-factor-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M4 19V5"></path>
+                    <path d="M8 19V9"></path>
+                    <path d="M12 19v-6"></path>
+                    <path d="M16 19v-9"></path>
+                    <path d="M20 19V7"></path>
+                  </svg>
+                </span>
+                <div>
                   <div class="flex flex-wrap items-center gap-2">
-                    <span class="ubbk-algo-kicker">R DROP</span>
-                    <div class="font-black text-foreground">沿用真实 R 分生成逻辑，不另起经验规则</div>
+                    <h4 class="text-2xl font-black text-foreground">R 分层滑落风险</h4>
+                    <span class="ubbk-weight-tag">因子二 · R DROP</span>
                   </div>
+                  <p class="mt-2 text-sm leading-7 text-foreground">
+                    回答：高价值用户是否可能在近期从当前 R 层级下滑。
+                  </p>
+                </div>
+              </div>
+              <div class="mt-4 rounded-xl border border-border bg-muted p-4 text-sm leading-7 text-foreground">
+                不把"已经掉层"重复计分。沿用 R 分五项指标和原始权重，先看用户离当前层级下沿有多近，再看本周相对上周是否正在走弱。
+              </div>
+
+              <div class="mt-4 ubbk-formula-block p-4">
+                <div class="font-black text-foreground">R 分层滑落风险分</div>
+                <div class="mt-3 ubbk-formula-strong font-mono text-xs md:text-sm leading-7">
+                  r_drop_risk_score<br>
+                  = 0.20 × R 分边界接近分<br>
+                  + 0.24 × F 频次走弱分<br>
+                  + 0.16 × M 金额走弱分<br>
+                  + 0.16 × 品类宽度走弱分<br>
+                  + 0.12 × 生鲜占比走弱分<br>
+                  + 0.12 × 件单价走弱分
+                </div>
+                <p class="mt-2 text-xs leading-6 text-foreground/80">
+                  既告诉运营"是否可能掉 R"，也告诉"是哪一项在走弱"，方便精准制定保级 / 价值修复策略。
+                </p>
+              </div>
+            </div>
+
+            <div class="xl:col-span-8 space-y-4 text-sm leading-7 text-foreground">
+              <div class="ubbk-formula-block p-4">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="ubbk-algo-kicker">贴近 R 分原口径</span>
+                  <div class="font-black text-foreground">真实 R 分生成逻辑</div>
+                </div>
+                <p class="mt-2">预测逻辑和真实 R 分层变动保持同口径，五项指标的周度下降率都基于周度对比计算。</p>
+                <div class="mt-3 ubbk-formula-strong font-mono text-xs md:text-sm leading-7">
+                  R 分 = 0.30 × F + 0.20 × M + 0.20 × 品类宽度 + 0.15 × 生鲜占比 + 0.15 × 件单价
+                </div>
+                <div class="mt-3 overflow-x-auto">
+                  <table class="ubbk-mini-table">
+                    <thead>
+                      <tr><th>指标</th><th>业务含义</th><th>风险解释</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>F 频次</td><td>最近 60 天消费频次</td><td>购买习惯变弱</td></tr>
+                      <tr><td>M 金额</td><td>最近 60 天消费金额</td><td>消费贡献下降</td></tr>
+                      <tr><td>品类宽度</td><td>覆盖品类丰富度</td><td>与平台连接变窄</td></tr>
+                      <tr><td>生鲜占比</td><td>对核心供给使用程度</td><td>核心需求可能转移</td></tr>
+                      <tr><td>件单价</td><td>客单质量</td><td>价值结构下移</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="ubbk-formula-block p-4">
+                <div class="font-black text-foreground">六个子因子权重</div>
+                <div class="mt-3 overflow-x-auto">
+                  <table class="ubbk-weight-table">
+                    <thead>
+                      <tr><th>子因子</th><th>权重</th><th>回答的问题</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>R 分边界接近分</td><td>20%</td><td>当前 R 分是否已接近本层级下沿？</td></tr>
+                      <tr><td>F 频次走弱分</td><td>24%</td><td>最近 60 天购买频次是否走弱？</td></tr>
+                      <tr><td>M 金额走弱分</td><td>16%</td><td>最近 60 天消费金额是否走弱？</td></tr>
+                      <tr><td>品类宽度走弱分</td><td>16%</td><td>覆盖品类是否在收缩？</td></tr>
+                      <tr><td>生鲜占比走弱分</td><td>12%</td><td>对生鲜核心供给的使用是否下降？</td></tr>
+                      <tr><td>件单价走弱分</td><td>12%</td><td>客单价 / 消费结构是否在降级？</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 2xl:grid-cols-2 gap-4">
+                <div class="ubbk-formula-block p-4">
+                  <div class="font-black text-foreground">R 分边界接近分</div>
                   <p class="mt-2">
-                    不把“已经掉层”重复计分，而是沿用 R 分五项指标和原始权重，先看用户离当前层级下沿有多近，再看本周相对上周是否正在走弱。
+                    用户越接近当前 R 层级下沿，越容易在下一期掉层。
                   </p>
                   <div class="mt-3 ubbk-formula-strong font-mono text-xs md:text-sm leading-7">
-                    R 分 = 0.30 × F + 0.20 × M + 0.20 × 品类宽度 + 0.15 × 生鲜占比 + 0.15 × 件单价
-                  </div>
-                </div>
-
-                <div class="grid grid-cols-1 2xl:grid-cols-2 gap-4">
-                  <div class="ubbk-formula-block p-4">
-                    <div class="font-black text-foreground">算法步骤</div>
-                    <div class="mt-3 overflow-x-auto">
-                      <table class="ubbk-mini-table">
-                        <thead>
-                          <tr>
-                            <th>步骤</th>
-                            <th>计算内容</th>
-                            <th>业务判断</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td>计算 R 分边界接近分</td>
-                            <td>当前 R 分越接近本层级下沿，掉层风险越高</td>
-                          </tr>
-                          <tr>
-                            <td>2</td>
-                            <td>计算五项指标周度下降率</td>
-                            <td>本周相对上周是否已经走弱</td>
-                          </tr>
-                          <tr>
-                            <td>3</td>
-                            <td>按 R 原始权重合成下行压力</td>
-                            <td>如果预估下行压力击穿层级下沿，进入高滑落风险</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-
-                  <div class="ubbk-formula-block p-4">
-                    <div class="font-black text-foreground">滑落预测分</div>
-                    <div class="mt-3 ubbk-formula-strong font-mono text-xs md:text-sm leading-7">
-                      r_drop_pred_score<br>
-                      = 0.20 × R 分边界接近分<br>
-                      + 0.24 × F 频次走弱分<br>
-                      + 0.16 × M 金额走弱分<br>
-                      + 0.16 × 品类宽度走弱分<br>
-                      + 0.12 × 生鲜占比走弱分<br>
-                      + 0.12 × 件单价走弱分
-                    </div>
+                    层级内位置<br>
+                    = (R 分 - 层级下限) / (层级上限 - 层级下限)<br><br>
+                    R 分边界接近分 = 100 × (1 - 层级内位置)
                   </div>
                 </div>
 
                 <div class="ubbk-formula-block p-4">
                   <div class="font-black text-foreground">单项走弱规则</div>
+                  <p class="mt-2">下降率 = (上一周期 - 当前周期) / 上一周期</p>
                   <div class="mt-3 overflow-x-auto">
                     <table class="ubbk-mini-table">
                       <thead>
-                        <tr>
-                          <th>指标</th>
-                          <th>下降率口径</th>
-                          <th>&lt;10%</th>
-                          <th>10%-30%</th>
-                          <th>30%-50%</th>
-                          <th>≥50%</th>
-                        </tr>
+                        <tr><th>下降率</th><th>单项走弱分</th></tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>F / M / 品类宽度 / 生鲜占比 / 件单价</td>
-                          <td>(上一周期指标 - 当前周期指标) / 上一周期指标</td>
-                          <td>0</td>
-                          <td>40</td>
-                          <td>70</td>
-                          <td>100</td>
-                        </tr>
+                        <tr><td>&lt; 10%</td><td>0</td></tr>
+                        <tr><td>10% - 30%</td><td>40</td></tr>
+                        <tr><td>30% - 50%</td><td>70</td></tr>
+                        <tr><td>≥ 50%</td><td>100</td></tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
               </div>
-            </div>
-          </article>
 
-          <article class="ubbk-algorithm-card p-5 md:p-6">
-            <div class="grid grid-cols-1 xl:grid-cols-12 gap-5">
-              <div class="xl:col-span-4">
-                <div class="flex items-start gap-3">
-                  <span class="ubbk-factor-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24">
-                      <circle cx="12" cy="12" r="8"></circle>
-                      <path d="M12 8v4l3 2"></path>
-                    </svg>
-                  </span>
-                  <div>
-                    <div class="flex flex-wrap items-center gap-2">
-                      <h4 class="text-2xl font-black text-foreground">生命周期临界</h4>
-                      <span class="ubbk-weight-tag">权重 20%</span>
-                    </div>
-                    <p class="mt-2 text-sm leading-7 text-foreground">
-                      回答：用户是否已经接近会员 2.0 的 30 天未购衰退边界。
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="xl:col-span-8 grid grid-cols-1 2xl:grid-cols-2 gap-4 text-sm leading-7 text-foreground">
-                <div class="ubbk-formula-block p-4">
-                  <div class="flex flex-wrap items-center gap-2">
-                    <span class="ubbk-algo-kicker">LIFE</span>
-                    <div class="font-black text-foreground">只看距离衰退边界还有多远</div>
-                  </div>
-                  <p class="mt-2">
-                    这一层不再重复判断频次下降，因为购买节奏异常已经覆盖“是否不像过去的自己”。生命周期临界只负责业务边界：是否快从成长 / 成熟切到衰退经营。
-                  </p>
-                  <div class="mt-3 flex items-center justify-between gap-3 text-sm font-bold text-foreground">
-                    <span>15 天</span>
-                    <span>线性抬升</span>
-                    <span>30 天</span>
-                  </div>
-                  <div class="mt-3 h-4 rounded border border-border bg-muted overflow-hidden">
-                    <div class="h-full w-2/3 bg-primary"></div>
-                  </div>
-                </div>
-                <div class="ubbk-formula-block p-4">
-                  <div class="font-black text-foreground">临界分规则</div>
-                  <div class="mt-3 overflow-x-auto">
-                    <table class="ubbk-mini-table">
-                      <thead>
-                        <tr>
-                          <th>当前未购时长</th>
-                          <th>生命周期临界分</th>
-                          <th>含义</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>≤ 15 天</td>
-                          <td>0</td>
-                          <td>还没有进入衰退边界前的后半程</td>
-                        </tr>
-                        <tr>
-                          <td>15-30 天</td>
-                          <td><span class="font-mono">100 × (当前未购时长 - 15) / 15</span></td>
-                          <td>风险线性升高，越接近 30 天越需要预警</td>
-                        </tr>
-                        <tr>
-                          <td>≥ 30 天</td>
-                          <td>100</td>
-                          <td>已经触碰会员 2.0 的衰退边界</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <p class="mt-2">
-                    这层是动作切换信号：提醒系统从成长经营，逐步切到防衰退提醒、企微触达、服务关怀或轻量激励。
-                  </p>
+              <div class="ubbk-formula-block p-4">
+                <div class="font-black text-foreground">一期标签口径</div>
+                <div class="mt-3 overflow-x-auto">
+                  <table class="ubbk-mini-table">
+                    <thead><tr><th>标签</th><th>判断逻辑</th><th>运营含义</th></tr></thead>
+                    <tbody>
+                      <tr><td>高</td><td>分数 ≥ 70，或预估下一期会击穿层级下沿</td><td>进入 R 保级 / 重点人群运营</td></tr>
+                      <tr><td>中</td><td>分数 40 - 69，且至少一个构成指标明显走弱</td><td>观察名单 / 轻量价值修复</td></tr>
+                      <tr><td>低</td><td>分数 &lt; 40，且未接近层级边界</td><td>常规经营</td></tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
-          </article>
-
-          <article class="ubbk-algorithm-card p-5 md:p-6">
-            <div class="grid grid-cols-1 xl:grid-cols-12 gap-5">
-              <div class="xl:col-span-4">
-                <div class="flex items-start gap-3">
-                  <span class="ubbk-factor-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24">
-                      <path d="M12 3l8 4v6c0 5-3.5 7.5-8 8-4.5-.5-8-3-8-8V7l8-4z"></path>
-                      <path d="M9 12l2 2 4-5"></path>
-                    </svg>
-                  </span>
-                  <div>
-                    <div class="flex flex-wrap items-center gap-2">
-                      <h4 class="text-2xl font-black text-foreground">体验风险</h4>
-                      <span class="ubbk-weight-tag">权重 15%</span>
-                    </div>
-                    <p class="mt-2 text-sm leading-7 text-foreground">
-                      回答：品质、履约问题是否正在推高用户衰退风险。
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="xl:col-span-8 space-y-4 text-sm leading-7 text-foreground">
-                <div class="ubbk-formula-block p-4">
-                  <div class="flex flex-wrap items-center gap-2">
-                    <span class="ubbk-algo-kicker">EXPERIENCE</span>
-                    <div class="font-black text-foreground">先判断是不是品质 / 履约问题导致用户变弱</div>
-                  </div>
-                  <p class="mt-2">
-                    体验风险和频次下降不同，更多指向服务修复、解释和人工关怀，不直接用普通券替代体验补救。
-                  </p>
-                </div>
-
-                <div class="grid grid-cols-1 2xl:grid-cols-2 gap-4">
-                  <div class="ubbk-formula-block p-4">
-                    <div class="font-black text-foreground">问题类型表</div>
-                    <div class="mt-3 overflow-x-auto">
-                      <table class="ubbk-mini-table">
-                        <thead>
-                          <tr>
-                            <th>风险</th>
-                            <th>示例</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>品质问题</td>
-                            <td>商品质量相关差评、质量原因退款、质量问题客诉</td>
-                          </tr>
-                          <tr>
-                            <td>履约问题</td>
-                            <td>超时送达、配送异常</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-
-                  <div class="ubbk-formula-block p-4">
-                    <div class="font-black text-foreground">体验风险分公式</div>
-                    <div class="mt-3 ubbk-formula-strong font-mono text-xs md:text-sm leading-7">
-                      experience_risk<br>
-                      = min(近 90 天问题次数基础分 + 最近一次订单问题加分, 100)
-                    </div>
-                    <p class="mt-3">
-                      最近一次订单本身也属于近 90 天记录，但它额外判断“负面体验是否刚刚发生”，因此作为加分项。
-                    </p>
-                  </div>
-                </div>
-
-                <div class="grid grid-cols-1 2xl:grid-cols-2 gap-4">
-                  <div class="ubbk-formula-block p-4">
-                    <div class="font-black text-foreground">算分规则表</div>
-                    <div class="mt-3 overflow-x-auto">
-                      <table class="ubbk-mini-table">
-                        <thead>
-                          <tr>
-                            <th>指标</th>
-                            <th>计算方式</th>
-                            <th>分值</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>近 90 天问题次数基础分</td>
-                            <td>无品质或履约问题</td>
-                            <td>0</td>
-                          </tr>
-                          <tr>
-                            <td>近 90 天问题次数基础分</td>
-                            <td>出现 1 次品质或履约问题</td>
-                            <td>40</td>
-                          </tr>
-                          <tr>
-                            <td>近 90 天问题次数基础分</td>
-                            <td>出现 2 次及以上品质或履约问题</td>
-                            <td>80</td>
-                          </tr>
-                          <tr>
-                            <td>最近一次订单问题加分</td>
-                            <td>最近一次订单出现品质或履约问题</td>
-                            <td>20</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-
-                  <div class="ubbk-formula-block p-4">
-                    <div class="font-black text-foreground">示例结果</div>
-                    <div class="mt-3 overflow-x-auto">
-                      <table class="ubbk-mini-table">
-                        <thead>
-                          <tr>
-                            <th>用户情况</th>
-                            <th>基础分</th>
-                            <th>最近订单加分</th>
-                            <th>结果</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>近 90 天无问题</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                          </tr>
-                          <tr>
-                            <td>1 次问题，非最近订单</td>
-                            <td>40</td>
-                            <td>0</td>
-                            <td>40</td>
-                          </tr>
-                          <tr>
-                            <td>1 次问题，且是最近订单</td>
-                            <td>40</td>
-                            <td>20</td>
-                            <td>60</td>
-                          </tr>
-                          <tr>
-                            <td>2 次及以上，最近订单也有问题</td>
-                            <td>80</td>
-                            <td>20</td>
-                            <td>100</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
+          </div>
+        </article>
       </section>
 
+      <!-- 4. 因子三 · 体验风险 -->
       <section class="panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
-        <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
-          <div class="xl:col-span-5">
-            <h3 class="text-3xl font-black text-foreground">从分数到运营动作</h3>
-            <p class="mt-3 text-sm md:text-base leading-7 text-foreground">
-              一期采用红黄绿风险等级。重点不是展示一个孤立分数，而是输出用户为什么变弱，以及下一步应该进入哪类运营动作。
-            </p>
-            <div class="mt-5 rounded-2xl border border-border bg-muted p-4 text-sm leading-7 text-foreground">
-              <span class="font-bold text-foreground">核心判断：</span>
-              高风险优先进入名单，中风险轻量经营，低风险不打扰。体验风险高时，先做服务修复，再考虑权益。
+        <article class="ubbk-algorithm-card p-5 md:p-6">
+          <div class="grid grid-cols-1 xl:grid-cols-12 gap-5">
+            <div class="xl:col-span-4">
+              <div class="flex items-start gap-3">
+                <span class="ubbk-factor-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 3l8 4v6c0 5-3.5 7.5-8 8-4.5-.5-8-3-8-8V7l8-4z"></path>
+                    <path d="M9 12l2 2 4-5"></path>
+                  </svg>
+                </span>
+                <div>
+                  <div class="flex flex-wrap items-center gap-2">
+                    <h4 class="text-2xl font-black text-foreground">体验风险</h4>
+                    <span class="ubbk-weight-tag">因子三 · EXPERIENCE</span>
+                  </div>
+                  <p class="mt-2 text-sm leading-7 text-foreground">
+                    回答：用户是否因为品质 / 履约问题产生衰退风险。
+                  </p>
+                </div>
+              </div>
+              <div class="mt-4 rounded-xl border border-border bg-muted p-4 text-sm leading-7 text-foreground">
+                体验风险和频次下降不同：用户因品质 / 履约问题变弱时，优先动作是服务修复、问题解释或人工关怀，不直接用普通券替代体验补救。
+              </div>
+
+              <div class="mt-4 ubbk-formula-block p-4">
+                <div class="font-black text-foreground">体验风险分</div>
+                <div class="mt-3 ubbk-formula-strong font-mono text-xs md:text-sm leading-7">
+                  experience_risk_score<br>
+                  = min(近 90 天问题次数基础分<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;+ 最近一次订单问题加分, 100)
+                </div>
+                <p class="mt-2 text-xs leading-6 text-foreground/80">
+                  最近一次订单本身也属于近 90 天记录，但额外判断"负面体验是否刚刚发生"，因此作为加分项。
+                </p>
+              </div>
+            </div>
+
+            <div class="xl:col-span-8 space-y-4 text-sm leading-7 text-foreground">
+              <div class="ubbk-formula-block p-4">
+                <div class="font-black text-foreground">风险来源</div>
+                <p class="mt-2">一期只纳入当前能明确获取的数据，聚焦品质问题和履约问题两个维度。</p>
+                <div class="mt-3 overflow-x-auto">
+                  <table class="ubbk-mini-table">
+                    <thead><tr><th>风险</th><th>示例</th></tr></thead>
+                    <tbody>
+                      <tr><td>品质问题</td><td>商品质量相关差评、质量原因退款、质量问题客诉</td></tr>
+                      <tr><td>履约问题</td><td>超时送达、配送异常</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 2xl:grid-cols-2 gap-4">
+                <div class="ubbk-formula-block p-4">
+                  <div class="font-black text-foreground">算分规则</div>
+                  <div class="mt-3 overflow-x-auto">
+                    <table class="ubbk-mini-table">
+                      <thead>
+                        <tr><th>指标</th><th>计算方式</th><th>分值</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>近 90 天问题次数基础分</td><td>无品质或履约问题</td><td>0</td></tr>
+                        <tr><td>近 90 天问题次数基础分</td><td>出现 1 次</td><td>40</td></tr>
+                        <tr><td>近 90 天问题次数基础分</td><td>出现 2 次及以上</td><td>80</td></tr>
+                        <tr><td>最近一次订单问题加分</td><td>最近一次订单有问题</td><td>+ 20</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="ubbk-formula-block p-4">
+                  <div class="font-black text-foreground">示例结果</div>
+                  <div class="mt-3 overflow-x-auto">
+                    <table class="ubbk-mini-table">
+                      <thead>
+                        <tr><th>用户情况</th><th>基础</th><th>最近订单</th><th>结果</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>近 90 天无问题</td><td>0</td><td>0</td><td>0</td></tr>
+                        <tr><td>1 次问题，非最近订单</td><td>40</td><td>0</td><td>40</td></tr>
+                        <tr><td>1 次问题，且是最近订单</td><td>40</td><td>20</td><td>60</td></tr>
+                        <tr><td>≥ 2 次，最近订单也有</td><td>80</td><td>20</td><td>100</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ubbk-formula-block p-4">
+                <div class="font-black text-foreground">一期标签口径</div>
+                <div class="mt-3 overflow-x-auto">
+                  <table class="ubbk-mini-table">
+                    <thead><tr><th>标签</th><th>判断逻辑</th><th>运营含义</th></tr></thead>
+                    <tbody>
+                      <tr><td>高</td><td>分数 ≥ 70，或最近一次订单有严重品质 / 履约问题</td><td>优先服务修复 / 人工关怀</td></tr>
+                      <tr><td>中</td><td>分数 40 - 69</td><td>解释 / 提醒 / 服务跟进</td></tr>
+                      <tr><td>低</td><td>分数 &lt; 40</td><td>常规经营</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="xl:col-span-7 overflow-x-auto rounded-2xl border border-border">
-            <table class="min-w-full text-left text-sm leading-6">
-              <thead>
-                <tr>
-                  <th class="px-4 py-3 font-black text-foreground">风险等级</th>
-                  <th class="px-4 py-3 font-black text-foreground">典型信号</th>
-                  <th class="px-4 py-3 font-black text-foreground">动作倾向</th>
-                </tr>
-              </thead>
-              <tbody class="text-foreground">
-                <tr>
-                  <td class="px-4 py-4 font-black">高风险</td>
-                  <td class="px-4 py-4">成熟用户接近 30 天未购，购买节奏异常；或 R 分连续下降；或严重品质 / 履约问题。</td>
-                  <td class="px-4 py-4">人工关注、重点干预、服务修复或防衰退权益。</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-4 font-black">中风险</td>
-                  <td class="px-4 py-4">频次下降、R 分轻微下滑、品类宽度收缩，但还未接近衰退边界。</td>
-                  <td class="px-4 py-4">轻量提醒、内容触达、品类推荐、权益提示。</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-4 font-black">低风险</td>
-                  <td class="px-4 py-4">购买节奏正常、R 分稳定、无明显体验问题。</td>
-                  <td class="px-4 py-4">不干预或常规经营，避免过度打扰。</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        </article>
       </section>
 
+      <!-- 5. 三类标签的运营策略 -->
       <section class="panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
         <div class="flex flex-col gap-2">
-          <h3 class="text-3xl font-black text-foreground">页面背后的数据闭环</h3>
+          <h3 class="text-3xl font-black text-foreground">三类标签的运营策略</h3>
           <p class="text-sm md:text-base leading-7 text-foreground">
-            这套规则上线后，每次运行都要留下风险快照，并在未来 14 / 30 天回看是否真的进入衰退。这样才能把一期规则变成可校准的数据资产。
+            三类风险标签并列输出后，运营会遇到人群重合问题。重合不是异常，而是用户风险画像的一部分。下面给单一高风险和多重高风险分别建议动作方向。
           </p>
         </div>
 
-        <div class="mt-6 grid grid-cols-1 md:grid-cols-5 gap-4 text-sm leading-7 text-foreground">
-          <div class="rounded-xl border border-border bg-muted p-4">
-            <span class="ubbk-step-number">1</span>
-            <div class="mt-3 font-black text-foreground">输入</div>
-            <div class="mt-2">有效订单、R 分构成指标、生命周期、品质履约问题。</div>
-          </div>
-          <div class="rounded-xl border border-border bg-muted p-4">
-            <span class="ubbk-step-number">2</span>
-            <div class="mt-3 font-black text-foreground">评分</div>
-            <div class="mt-2">输出四个因子分和 <span class="font-mono">health_risk_score</span>。</div>
-          </div>
-          <div class="rounded-xl border border-border bg-muted p-4">
-            <span class="ubbk-step-number">3</span>
-            <div class="mt-3 font-black text-foreground">分层</div>
-            <div class="mt-2">形成高 / 中 / 低风险清单、风险原因和建议动作。</div>
-          </div>
-          <div class="rounded-xl border border-border bg-muted p-4">
-            <span class="ubbk-step-number">4</span>
-            <div class="mt-3 font-black text-foreground">回看</div>
-            <div class="mt-2">用 <span class="font-mono">decay_14d</span> 和 <span class="font-mono">decay_30d</span> 验证预测。</div>
-          </div>
-          <div class="rounded-xl border border-border bg-muted p-4">
-            <span class="ubbk-step-number">5</span>
-            <div class="mt-3 font-black text-foreground">校准</div>
-            <div class="mt-2">按真实衰退率调整权重、阈值和人群分层。</div>
+        <div class="mt-6">
+          <div class="text-sm font-black text-foreground mb-3">① 单一高风险人群</div>
+          <div class="ubbk-combo-grid">
+            <div class="ubbk-combo-card">
+              <div class="ubbk-combo-tags">
+                <span class="ubbk-combo-tag">L 高</span>
+                <span class="ubbk-combo-tag" style="background:transparent;color:var(--ubbk-red);border:1px solid var(--ubbk-rose-line)">R / E 稳定</span>
+              </div>
+              <div class="ubbk-combo-desc">仅生命周期衰退风险高：用户接近 30 天未购边界，但 R 分层和体验暂未明显下滑。</div>
+              <div class="ubbk-combo-action">
+                <span class="ubbk-combo-action-label">建议动作</span>
+                轻触达、站内提醒、企微提醒、品类推荐、近期常购品提醒。
+              </div>
+            </div>
+
+            <div class="ubbk-combo-card">
+              <div class="ubbk-combo-tags">
+                <span class="ubbk-combo-tag">R 高</span>
+                <span class="ubbk-combo-tag" style="background:transparent;color:var(--ubbk-red);border:1px solid var(--ubbk-rose-line)">L / E 稳定</span>
+              </div>
+              <div class="ubbk-combo-desc">仅 R 分层滑落风险高：用户价值结构正在下降，但不一定接近未购衰退。</div>
+              <div class="ubbk-combo-action">
+                <span class="ubbk-combo-action-label">建议动作</span>
+                R 保级、重点品类运营、会员权益提示、价值修复策略；高 R 用户不一定要发券。
+              </div>
+            </div>
+
+            <div class="ubbk-combo-card">
+              <div class="ubbk-combo-tags">
+                <span class="ubbk-combo-tag">E 高</span>
+                <span class="ubbk-combo-tag" style="background:transparent;color:var(--ubbk-red);border:1px solid var(--ubbk-rose-line)">L / R 稳定</span>
+              </div>
+              <div class="ubbk-combo-desc">仅体验风险高：用户近期存在品质 / 履约伤害，但购买节奏和 R 分暂未明显下滑。</div>
+              <div class="ubbk-combo-action">
+                <span class="ubbk-combo-action-label">建议动作</span>
+                服务修复、问题解释、人工关怀、售后闭环，不优先发普通券。
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="mt-6 grid grid-cols-1 xl:grid-cols-2 gap-5">
-          <div class="rounded-2xl border border-border bg-card p-5">
-            <h4 class="text-xl font-black text-foreground">一期核心输出字段</h4>
-            <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3 text-sm leading-6 text-foreground">
-              <div class="rounded-xl border border-border bg-muted p-3"><span class="font-mono">health_risk_score</span><br>用户健康风险总分</div>
-              <div class="rounded-xl border border-border bg-muted p-3"><span class="font-mono">health_risk_level</span><br>高 / 中 / 低风险等级</div>
-              <div class="rounded-xl border border-border bg-muted p-3"><span class="font-mono">risk_reason</span><br>主要风险原因</div>
-              <div class="rounded-xl border border-border bg-muted p-3"><span class="font-mono">suggested_action</span><br>建议运营动作</div>
+        <div class="mt-7">
+          <div class="text-sm font-black text-foreground mb-3">② 多重高风险人群</div>
+          <div class="ubbk-combo-grid">
+            <div class="ubbk-combo-card">
+              <div class="ubbk-combo-tags">
+                <span class="ubbk-combo-tag">L 高</span>
+                <span class="ubbk-combo-tag">R 高</span>
+                <span class="ubbk-combo-tag" style="background:transparent;color:var(--ubbk-red);border:1px solid var(--ubbk-rose-line)">E 稳定</span>
+              </div>
+              <div class="ubbk-combo-desc">既可能不来，也可能价值掉层。优先级：R 保级权益 + 常购品推荐 + 轻量激励。</div>
+              <div class="ubbk-combo-action">
+                <span class="ubbk-combo-action-label">建议动作</span>
+                高优先级防衰退，结合 R 保级权益 + 常购品推荐 + 轻量激励。
+              </div>
+            </div>
+
+            <div class="ubbk-combo-card">
+              <div class="ubbk-combo-tags">
+                <span class="ubbk-combo-tag">L 高</span>
+                <span class="ubbk-combo-tag" style="background:transparent;color:var(--ubbk-red);border:1px solid var(--ubbk-rose-line)">R 稳定</span>
+                <span class="ubbk-combo-tag">E 高</span>
+              </div>
+              <div class="ubbk-combo-desc">可能因为体验问题减少购买。先做服务修复，再做防衰退触达。</div>
+              <div class="ubbk-combo-action">
+                <span class="ubbk-combo-action-label">建议动作</span>
+                先服务修复 + 解释，再做防衰退触达，避免发券掩盖体验问题。
+              </div>
+            </div>
+
+            <div class="ubbk-combo-card">
+              <div class="ubbk-combo-tags">
+                <span class="ubbk-combo-tag" style="background:transparent;color:var(--ubbk-red);border:1px solid var(--ubbk-rose-line)">L 稳定</span>
+                <span class="ubbk-combo-tag">R 高</span>
+                <span class="ubbk-combo-tag">E 高</span>
+              </div>
+              <div class="ubbk-combo-desc">高价值 / 潜力用户可能正被体验问题伤害。服务修复优先，必要时叠加定向权益。</div>
+              <div class="ubbk-combo-action">
+                <span class="ubbk-combo-action-label">建议动作</span>
+                服务修复优先 + 定向权益叠加，避免直接用券掩盖体验问题。
+              </div>
+            </div>
+
+            <div class="ubbk-combo-card">
+              <div class="ubbk-combo-tags">
+                <span class="ubbk-combo-tag">L 高</span>
+                <span class="ubbk-combo-tag">R 高</span>
+                <span class="ubbk-combo-tag">E 高</span>
+              </div>
+              <div class="ubbk-combo-desc">同时存在不购买、价值滑落、体验伤害风险。需要人工关注 / 重点干预。</div>
+              <div class="ubbk-combo-action">
+                <span class="ubbk-combo-action-label">建议动作</span>
+                建立专项名单并跟踪修复结果；不直接发券，先做服务修复 + R 保级 + 防衰退触达。
+              </div>
             </div>
           </div>
-          <div class="rounded-2xl border border-border bg-card p-5">
-            <h4 class="text-xl font-black text-foreground">上线后怎么证明它有用</h4>
-            <ul class="mt-4 space-y-3 text-sm leading-7 text-foreground">
-              <li><span class="font-bold text-foreground">分层真实衰退率：</span>高风险组应显著高于中风险组，中风险组高于低风险组。</li>
-              <li><span class="font-bold text-foreground">Top K 命中率：</span>最高分前 10% / 20% 用户能否覆盖主要衰退用户。</li>
-              <li><span class="font-bold text-foreground">精准率和召回率：</span>既不能名单过宽，也不能漏掉关键风险用户。</li>
-              <li><span class="font-bold text-foreground">未干预样本回看：</span>保留影子验证或小比例留观，避免把干预成功误判为模型不准。</li>
-            </ul>
+        </div>
+
+        <div class="mt-7">
+          <div class="text-sm font-black text-foreground mb-2">③ 策略优先级原则（同一用户命中多类风险时）</div>
+          <div class="ubbk-priority-list">
+            <div class="ubbk-priority-item">
+              <span class="ubbk-priority-num">PRIO 1</span>
+              <div class="ubbk-priority-title">体验风险高</div>
+              <div class="ubbk-priority-desc">先判断是否需要服务修复。</div>
+            </div>
+            <div class="ubbk-priority-item">
+              <span class="ubbk-priority-num">PRIO 2</span>
+              <div class="ubbk-priority-title">R 滑落风险高</div>
+              <div class="ubbk-priority-desc">判断是否进入 R 保级 / 重点人群运营。</div>
+            </div>
+            <div class="ubbk-priority-item">
+              <span class="ubbk-priority-num">PRIO 3</span>
+              <div class="ubbk-priority-title">生命周期衰退风险高</div>
+              <div class="ubbk-priority-desc">判断是否需要防衰退触达。</div>
+            </div>
+            <div class="ubbk-priority-item">
+              <span class="ubbk-priority-num">PRIO 4</span>
+              <div class="ubbk-priority-title">三项都低</div>
+              <div class="ubbk-priority-desc">不主动打扰，维持常规经营。</div>
+            </div>
           </div>
         </div>
       </section>
+
+      <!-- 6. 跑批节奏 + 验证 + 输出字段 -->
+      <section class="panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div class="flex flex-col gap-2">
+          <h3 class="text-3xl font-black text-foreground">跑批节奏 · 验证 · 输出字段</h3>
+          <p class="text-sm md:text-base leading-7 text-foreground">
+            模型不替运营直接决定"发什么券"，而是先把用户变弱的原因拆清楚，再给动作方向。数据闭环负责把这一原则落成可校准的数据资产。
+          </p>
+        </div>
+
+        <div class="mt-6">
+          <div class="text-sm font-black text-foreground mb-3">跑批节奏</div>
+          <div class="ubbk-batch-grid">
+            <div class="ubbk-batch-card">
+              <div class="ubbk-batch-title">跑批频率</div>
+              <div class="ubbk-batch-value">每日</div>
+              <div class="ubbk-batch-desc">每天输出一次用户风险快照，标签有效期 7 天。</div>
+            </div>
+            <div class="ubbk-batch-card">
+              <div class="ubbk-batch-title">R 分层相关字段</div>
+              <div class="ubbk-batch-value">每周一同步</div>
+              <div class="ubbk-batch-desc">R 分层每周一更新，R 滑落风险按周度口径对比。</div>
+            </div>
+            <div class="ubbk-batch-card">
+              <div class="ubbk-batch-title">风险标签有效期</div>
+              <div class="ubbk-batch-value">7 天</div>
+              <div class="ubbk-batch-desc">标签在 7 天内有效；过期后随下一轮跑批重算。</div>
+            </div>
+            <div class="ubbk-batch-card">
+              <div class="ubbk-batch-title">策略名单刷新</div>
+              <div class="ubbk-batch-value">每周固定 + 重点风险每日增补</div>
+              <div class="ubbk-batch-desc">基础名单按周刷新；重点风险可每日增补进运营池。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-7">
+          <div class="text-sm font-black text-foreground mb-3">三类因子的验证指标</div>
+          <div class="grid grid-cols-1 xl:grid-cols-3 gap-4">
+            <div class="rounded-2xl border border-border bg-card p-5">
+              <div class="text-sm font-black text-foreground">L · 生命周期衰退</div>
+              <div class="mt-2 text-xs leading-6 text-foreground/80">用未来 30 天真实购买行为验证。</div>
+              <div class="mt-3 overflow-x-auto">
+                <table class="ubbk-mini-table">
+                  <tbody>
+                    <tr><td>核心标签</td><td><span class="font-mono">actual_orders_30d</span> / <span class="font-mono">no_order_30d</span> / <span class="font-mono">decay_30d</span></td></tr>
+                    <tr><td>Top K 命中率</td><td>高分前 10% / 20% 中真实衰退占比</td></tr>
+                    <tr><td>分层衰退率</td><td>高 / 中 / 低三组真实衰退率递增</td></tr>
+                    <tr><td>购频误差</td><td>二期机器学习模型的预测误差基础</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="rounded-2xl border border-border bg-card p-5">
+              <div class="text-sm font-black text-foreground">R · R 分层滑落</div>
+              <div class="mt-2 text-xs leading-6 text-foreground/80">R 分层每周更新，验证按周进行。</div>
+              <div class="mt-3 overflow-x-auto">
+                <table class="ubbk-mini-table">
+                  <tbody>
+                    <tr><td>核心标签</td><td><span class="font-mono">r_drop_1w</span> / <span class="font-mono">r_drop_4w</span></td></tr>
+                    <tr><td>Top K 命中率</td><td>高分前 10% / 20% 中真实掉层占比</td></tr>
+                    <tr><td>分层掉层率</td><td>高 / 中 / 低三组真实掉层率递增</td></tr>
+                    <tr><td>原因命中</td><td>识别的走弱原因是否对应真实掉层原因</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="rounded-2xl border border-border bg-card p-5">
+              <div class="text-sm font-black text-foreground">E · 体验风险</div>
+              <div class="mt-2 text-xs leading-6 text-foreground/80">不只看是否继续购买，也要看服务修复是否有效。</div>
+              <div class="mt-3 overflow-x-auto">
+                <table class="ubbk-mini-table">
+                  <tbody>
+                    <tr><td>30 天复购率</td><td>体验高风险用户 30 天是否复购</td></tr>
+                    <tr><td>服务修复后复购率</td><td>判断人工关怀 / 售后闭环是否有效</td></tr>
+                    <tr><td>重复投诉率</td><td>判断体验问题是否持续发生</td></tr>
+                    <tr><td>交叉关系</td><td>体验风险是否放大 R 滑落 / 生命衰退</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-7">
+          <div class="text-sm font-black text-foreground mb-3">一期核心输出字段</div>
+          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 text-sm leading-6 text-foreground">
+            <div class="rounded-xl border border-border bg-muted p-3"><span class="font-mono">user_id</span><br>用户 ID</div>
+            <div class="rounded-xl border border-border bg-muted p-3"><span class="font-mono">snapshot_date</span><br>风险快照日期</div>
+            <div class="rounded-xl border border-border bg-muted p-3"><span class="font-mono">current_lifecycle</span><br>当前生命周期</div>
+            <div class="rounded-xl border border-border bg-muted p-3"><span class="font-mono">current_r_level</span><br>当前 R 分层</div>
+            <div class="rounded-xl border border-border bg-muted p-3"><span class="font-mono">life_decay_risk_score</span><br>生命周期衰退风险分（0-100）</div>
+            <div class="rounded-xl border border-border bg-muted p-3"><span class="font-mono">life_decay_risk_label</span><br>生命周期衰退风险标签（高 / 中 / 低）</div>
+            <div class="rounded-xl border border-border bg-muted p-3"><span class="font-mono">r_drop_risk_score</span><br>R 分层滑落风险分（0-100）</div>
+            <div class="rounded-xl border border-border bg-muted p-3"><span class="font-mono">r_drop_risk_label</span><br>R 分层滑落风险标签（高 / 中 / 低）</div>
+            <div class="rounded-xl border border-border bg-muted p-3"><span class="font-mono">experience_risk_score</span><br>体验风险分（0-100）</div>
+            <div class="rounded-xl border border-border bg-muted p-3"><span class="font-mono">experience_risk_label</span><br>体验风险标签（高 / 中 / 低）</div>
+            <div class="rounded-xl border border-border bg-muted p-3"><span class="font-mono">model_version</span><br>规则 / 模型版本号</div>
+          </div>
+        </div>
+      </section>
+
     </section>
     <section id="ubbkUpliftView" class="hidden space-y-6"></section>
 
@@ -7941,21 +8971,80 @@
       { key: 'alipay', label: '支付宝小程序' }
     ];
     const scopeTabs = [
-      { key: 'memberBase', num: '1.1', label: '会员 2.0 基座', group: '1. 项目背景与会员经营基座' },
-      { key: 'memberPanorama', num: '1.2', label: '会员经营全景框架', group: '1. 项目背景与会员经营基座' },
-      { key: 'global', num: '2.1', label: '全局 Markov', group: '2. MUBBK：站内转化干预' },
-      { key: 'cart', num: '2.2', label: '购物车 Markov', group: '2. MUBBK：站内转化干预' },
-      { key: 'checkout', num: '2.3', label: '结算页 Markov', group: '2. MUBBK：站内转化干预' },
-      { key: 'annualPlan', num: '2.4', label: '全年实施计划', group: '2. MUBBK：站内转化干预' },
-      { key: 'mubbk', num: '2.5', label: '一期落地方案', group: '2. MUBBK：站内转化干预' },
-      { key: 'reviewPlan', num: '2.6', label: '一期复盘方案', group: '2. MUBBK：站内转化干预' },
-      { key: 'phase2Plan', num: '2.7', label: '二期落地方案', group: '2. MUBBK：站内转化干预' },
-      { key: 'threshold', num: '2.8', label: '附录：阈值分析', group: '2. MUBBK：站内转化干预' },
-      { key: 'ubbkIntro', num: '3.1', label: '项目背景及框架', group: '3. UBBK：流失召回干预' },
-      { key: 'ubbkAnnual', num: '3.2', label: '全年实施计划', group: '3. UBBK：流失召回干预' },
-      { key: 'ubbkHealth', num: '3.3', label: '用户健康风险预警', group: '3. UBBK：流失召回干预' },
-      { key: 'ubbkUplift', num: '3.4', label: 'Uplift 召回增量模型', group: '3. UBBK：流失召回干预' }
+      { key: 'memberBase', num: '1.1', slug: 'member-base', label: '会员 2.0 基座', group: '1. 项目背景与会员经营基座' },
+      { key: 'memberPanorama', num: '1.2', slug: 'member-panorama', label: '会员经营全景框架', group: '1. 项目背景与会员经营基座' },
+      { key: 'global', num: '2.1', slug: 'markovdata', label: '全局 Markov', group: '2. MUBBK：站内转化干预' },
+      { key: 'cart', num: '2.2', slug: 'cart-markov', label: '购物车 Markov', group: '2. MUBBK：站内转化干预' },
+      { key: 'checkout', num: '2.3', slug: 'checkout-markov', label: '结算页 Markov', group: '2. MUBBK：站内转化干预' },
+      { key: 'annualPlan', num: '2.4', slug: 'annual-plan', label: '全年实施计划', group: '2. MUBBK：站内转化干预' },
+      { key: 'mubbk', num: '2.5', slug: 'mubbk', label: '一期落地方案', group: '2. MUBBK：站内转化干预' },
+      { key: 'reviewPlan', num: '2.6', slug: 'review-plan', label: '一期复盘方案', group: '2. MUBBK：站内转化干预' },
+      { key: 'phase2Plan', num: '2.7', slug: 'phase2', label: '二期落地方案', group: '2. MUBBK：站内转化干预' },
+      { key: 'threshold', num: '2.8', slug: 'threshold', label: '附录：阈值分析', group: '2. MUBBK：站内转化干预' },
+      { key: 'ubbkIntro', num: '3.1', slug: 'ubbk', label: '项目背景及框架', group: '3. UBBK：流失召回干预' },
+      { key: 'ubbkAnnual', num: '3.2', slug: 'ubbk-annual', label: '全年实施计划', group: '3. UBBK：流失召回干预' },
+      { key: 'ubbkHealth', num: '3.3', slug: 'ubbk-health', label: '用户健康风险预警', group: '3. UBBK：流失召回干预' },
+      { key: 'ubbkUplift', num: '3.4', slug: 'ubbk-uplift', label: 'Uplift 召回增量模型', group: '3. UBBK：流失召回干预' }
     ];
+
+    // === 深度链接：URL ↔ currentScope 双向同步 ===
+    function findScopeByToken(token) {
+      if (!token) return null;
+      const norm = token.replace(/-/g, '.');
+      return scopeTabs.find(t =>
+        t.key === token || t.num === token || t.slug === token ||
+        t.key === norm  || t.num === norm
+      ) || null;
+    }
+
+    function parseUrlTarget() {
+      // 1) path (vercel 静态重写后 location.pathname 会带 /xxx)
+      const parts = location.pathname.split('/').filter(Boolean);
+      const last = parts[parts.length - 1];
+      if (last && !/\.[a-z0-9]+$/i.test(last) && last.toLowerCase() !== 'index') {
+        const hit = findScopeByToken(last);
+        if (hit) return hit.key;
+      }
+      // 2) query
+      const q = new URLSearchParams(location.search);
+      const tok = q.get('p') || q.get('view') || q.get('section');
+      if (tok) {
+        const hit = findScopeByToken(tok);
+        if (hit) return hit.key;
+      }
+      // 3) hash
+      const h = location.hash.replace(/^#/, '');
+      if (h) {
+        const hit = findScopeByToken(h);
+        if (hit) return hit.key;
+      }
+      return null;
+    }
+
+    function setUrlForScope(scope) {
+      const tab = scopeTabs.find(t => t.key === scope);
+      if (!tab) return;
+      const target = tab.slug;
+      const parts = location.pathname.split('/').filter(Boolean);
+      const last = parts[parts.length - 1];
+      const isOnPathLink = last && !/\.[a-z0-9]+$/i.test(last) && last.toLowerCase() !== 'index'
+        && !!findScopeByToken(last);
+      try {
+        if (isOnPathLink) {
+          const newPath = location.pathname.replace(new RegExp(`${last}$`), target);
+          if (newPath !== location.pathname) {
+            history.replaceState(null, '', newPath + location.search + location.hash);
+          }
+        } else {
+          const newUrl = location.pathname + location.search + '#' + target;
+          if (newUrl !== location.pathname + location.search + location.hash) {
+            history.replaceState(null, '', newUrl);
+          }
+        }
+      } catch (e) {
+        // 某些环境下 history API 不可用，忽略
+      }
+    }
     const cartTabs = [
       { key: 'app', label: 'APP' },
       { key: 'wechat', label: '微信小程序' },
@@ -8270,6 +9359,7 @@
       el.querySelectorAll('.scope-tab-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           currentScope = btn.dataset.scope;
+          setUrlForScope(currentScope);
           render();
         });
       });
@@ -10358,7 +11448,28 @@
     if (cartInterventionUx && mubbkView) {
       mubbkView.appendChild(cartInterventionUx);
     }
+
+    // 深度链接：URL → 初始页签
+    const initialFromUrl = parseUrlTarget();
+    if (initialFromUrl) {
+      currentScope = initialFromUrl;
+    }
+
+    // 如果 URL 没指定 section，把默认的 slug 写上去方便分享
+    if (!parseUrlTarget()) {
+      setUrlForScope(currentScope);
+    }
+
 	    render();
+
+    // 浏览器前进/后退
+    window.addEventListener('popstate', () => {
+      const target = parseUrlTarget();
+      if (target && target !== currentScope) {
+        currentScope = target;
+        render();
+      }
+    });
 
     window.addEventListener('resize', () => {
       graphChart.resize();
