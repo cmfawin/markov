@@ -4632,6 +4632,84 @@
       line-height: 1.7;
     }
 
+    #markovTrendView .trend-hero {
+      background:
+        linear-gradient(135deg,
+          color-mix(in oklab, var(--accent) 58%, var(--card) 42%) 0%,
+          color-mix(in oklab, var(--chart-5) 12%, var(--card) 88%) 46%,
+          var(--card) 100%);
+    }
+
+    #markovTrendView .trend-kicker,
+    #markovTrendView .trend-chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid color-mix(in oklab, var(--primary) 36%, var(--border) 64%);
+      border-radius: var(--radius);
+      background: color-mix(in oklab, var(--accent) 58%, var(--card) 42%);
+      color: var(--primary);
+      font-weight: 900;
+    }
+
+    #markovTrendView .trend-kicker {
+      padding: 0.28rem 0.58rem;
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+    }
+
+    #markovTrendView .trend-chip {
+      padding: 0.32rem 0.58rem;
+      font-size: 0.74rem;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    #markovTrendView .trend-heatmap {
+      height: 34rem;
+      min-height: 30rem;
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+
+    #markovTrendView .trend-small-grid {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+
+    @media (min-width: 768px) {
+      #markovTrendView .trend-small-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 1280px) {
+      #markovTrendView .trend-small-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    #markovTrendView .trend-small-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card);
+      padding: 0.8rem;
+      min-height: 14.6rem;
+    }
+
+    #markovTrendView .trend-small-chart {
+      height: 10.2rem;
+      min-height: 10.2rem;
+    }
+
+    #markovTrendView .trend-readout {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: color-mix(in oklab, var(--muted) 72%, var(--card) 28%);
+      padding: 0.8rem;
+    }
+
   </style>
 </head>
 
@@ -7303,6 +7381,64 @@
           </div>
         </section>
       </div>
+    </section>
+
+    <section id="markovTrendView" class="hidden space-y-6">
+      <section class="panel trend-hero bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
+        <div class="flex flex-col gap-3">
+          <div class="trend-kicker">APP · MONTHLY MARKOV</div>
+          <div class="flex flex-col xl:flex-row xl:items-end xl:justify-between gap-4">
+            <div>
+              <h2 class="text-3xl md:text-4xl font-black text-foreground">Markov 吸收概率月度趋势</h2>
+              <p class="mt-3 text-sm md:text-base leading-7 text-foreground">
+                APP 端 2025.12-2026.05 核心场景吸收概率变化，用于观察站内转化链路的月度稳定性、修复节奏与风险位置。
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="trend-chip">口径：client_type = 3</span>
+              <span class="trend-chip">月份：2025.12 - 2026.05</span>
+              <span class="trend-chip">指标：cvr_pro</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel bg-card rounded-2xl border border-border p-5 md:p-6 transition-all">
+        <h3 class="text-2xl font-black text-foreground">6 个月环比涨跌热力图</h3>
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-5 mt-4">
+          <div class="xl:col-span-8">
+            <div id="markovTrendHeatmap" class="trend-heatmap"></div>
+            <div class="mt-3 flex flex-wrap items-center gap-2 text-xs font-bold text-foreground">
+              <span>颜色档位：</span>
+              <span class="px-2 py-1 rounded border border-border" style="background:#1f7a4d;color:#fff;">≤ -1.00pp</span>
+              <span class="px-2 py-1 rounded border border-border" style="background:#d7efe1;color:#1f2937;">-0.30~-1.00pp</span>
+              <span class="px-2 py-1 rounded border border-border" style="background:#e5e7eb;color:#1f2937;">首月基准</span>
+              <span class="px-2 py-1 rounded border border-border" style="background:#ffffff;color:#1f2937;">±0.05pp</span>
+              <span class="px-2 py-1 rounded border border-border" style="background:#f7d7d2;color:#1f2937;">+0.30~+1.00pp</span>
+              <span class="px-2 py-1 rounded border border-border" style="background:#b42318;color:#fff;">≥ +1.00pp</span>
+            </div>
+          </div>
+          <div class="xl:col-span-4 space-y-3 xl:pt-12">
+            <div class="trend-readout">
+              <div class="text-sm font-black text-foreground">图表说明</div>
+              <div class="mt-2 text-sm leading-7 text-foreground">
+                每个场景单独按月环比：2025.12 是该场景自己的基准，后续月份只和上一个月相比。红色代表增长，绿色代表下跌，灰色代表基准或基本持平；括号内为环比变化。
+              </div>
+            </div>
+            <div id="markovTrendNarrative" class="trend-readout text-sm leading-7 text-foreground"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel bg-card rounded-2xl border border-border p-5 md:p-6 transition-all">
+        <div class="flex flex-col gap-2">
+          <h3 class="text-2xl font-black text-foreground">场景趋势明细</h3>
+          <p class="text-sm leading-7 text-foreground">
+            各核心场景的月度吸收概率趋势，标签展示当月吸收概率，保留小数点后两位。
+          </p>
+        </div>
+        <div id="markovTrendSmallMultiples" class="mt-4 trend-small-grid"></div>
+      </section>
     </section>
 
     <section id="thresholdView"
@@ -10930,11 +11066,12 @@
       { key: 'global', num: '2.1', slug: 'markovdata', label: '全局 Markov', group: '2. MUBBK：站内转化干预' },
       { key: 'cart', num: '2.2', slug: 'cart-markov', label: '购物车 Markov', group: '2. MUBBK：站内转化干预' },
       { key: 'checkout', num: '2.3', slug: 'checkout-markov', label: '结算页 Markov', group: '2. MUBBK：站内转化干预' },
-      { key: 'annualPlan', num: '2.4', slug: 'annual-plan', label: '全年实施计划', group: '2. MUBBK：站内转化干预' },
-      { key: 'mubbk', num: '2.5', slug: 'mubbk', label: '一期落地方案', group: '2. MUBBK：站内转化干预' },
-      { key: 'reviewPlan', num: '2.6', slug: 'review-plan', label: '一期复盘方案', group: '2. MUBBK：站内转化干预' },
-      { key: 'phase2Plan', num: '2.7', slug: 'phase2', label: '二期落地方案', group: '2. MUBBK：站内转化干预' },
-      { key: 'threshold', num: '2.8', slug: 'threshold', label: '附录：阈值分析', group: '2. MUBBK：站内转化干预' },
+      { key: 'markovTrend', num: '2.4', slug: 'markov-trend', label: 'Markov 趋势数据', group: '2. MUBBK：站内转化干预' },
+      { key: 'annualPlan', num: '2.5', slug: 'annual-plan', label: '全年实施计划', group: '2. MUBBK：站内转化干预' },
+      { key: 'mubbk', num: '2.6', slug: 'mubbk', label: '一期落地方案', group: '2. MUBBK：站内转化干预' },
+      { key: 'reviewPlan', num: '2.7', slug: 'review-plan', label: '一期复盘方案', group: '2. MUBBK：站内转化干预' },
+      { key: 'phase2Plan', num: '2.8', slug: 'phase2', label: '二期落地方案', group: '2. MUBBK：站内转化干预' },
+      { key: 'threshold', num: '2.9', slug: 'threshold', label: '附录：阈值分析', group: '2. MUBBK：站内转化干预' },
       { key: 'ubbkIntro', num: '3.1', slug: 'ubbk', label: '项目背景及框架', group: '3. UBBK：流失召回干预' },
       { key: 'ubbkAnnual', num: '3.2', slug: 'ubbk-annual', label: '全年实施计划', group: '3. UBBK：流失召回干预' },
       { key: 'ubbkHealth', num: '3.3', slug: 'ubbk-health', label: '用户健康风险预警', group: '3. UBBK：流失召回干预' },
@@ -11163,6 +11300,22 @@
       wechat: 'probability',
       alipay: 'probability'
     };
+    const markovTrendMonthlyData = {
+      months: ['2025.12', '2026.01', '2026.02', '2026.03', '2026.04', '2026.05'],
+      states: [
+        { id: 'S01', name: '首页', values: [0.13696606471367487, 0.13487215160695604, 0.11970638148773598, 0.13394414274637761, 0.13795894268599604, 0.13959483136669573] },
+        { id: 'S02', name: '会员中心', values: [0.10686655260948476, 0.1055179164120378, 0.09327625113921738, 0.10424913722009756, 0.10586076864842968, 0.10726598065543083] },
+        { id: 'S03', name: '搜索页', values: [0.16441040972115073, 0.16314700633654713, 0.14758728357161127, 0.16158562505146645, 0.16670717256080606, 0.17006699465650507] },
+        { id: 'S04', name: '分类', values: [0.16258584427536676, 0.16129549311964203, 0.14489179391835486, 0.16056393394577112, 0.16574167645946944, 0.16868707495984295] },
+        { id: 'S05', name: '聚合分类', values: [0.16566523300204894, 0.16427944384085436, 0.1481371650518301, 0.16420650729395858, 0.1693642997706405, 0.17214985133640684] },
+        { id: 'S06', name: 'CMS活动页', values: [0.14821750561551306, 0.1451478606258676, 0.1274683611063745, 0.1481589618011439, 0.15460757515605852, 0.15102272034314185] },
+        { id: 'S07', name: '商详页', values: [0.1782681788745923, 0.17682987748919382, 0.1613622576490786, 0.17545540120850162, 0.1807472392530317, 0.18497382432535509] },
+        { id: 'S08', name: '个人中心', values: [0.11159630744011477, 0.10968272386931112, 0.09491120804318441, 0.10710996633137405, 0.11045275057305762, 0.10929223577364704] },
+        { id: 'S09', name: '购物车', values: [0.20847659060115145, 0.20735164122755478, 0.19150168807116794, 0.20458736449874182, 0.2097362718296567, 0.2141970656137318] },
+        { id: 'S10', name: '结算页', values: [0.6038636715572567, 0.5843625238771556, 0.5402584042163908, 0.587983920595498, 0.5903057553683965, 0.5882138855045739] },
+        { id: 'S11', name: '支付页', values: [0.9744058342460548, 0.9721934786632311, 0.9686833803832303, 0.9726215691413598, 0.9716752102415193, 0.9748004615659573] }
+      ]
+    };
 
     const graphChart = echarts.init(document.getElementById('graphChart'));
     const heatmapChart = echarts.init(document.getElementById('heatmapChart'));
@@ -11180,6 +11333,8 @@
     let checkoutTransitionChart = null;
     let checkoutAbsorptionChart = null;
     let checkoutRemovalChart = null;
+    let markovTrendHeatmapChart = null;
+    let markovTrendSmallCharts = [];
 
     const f2 = (v) => {
       const n = Number(v);
@@ -11277,6 +11432,12 @@
       }
       if (!checkoutRemovalChart) {
         checkoutRemovalChart = echarts.init(document.getElementById('checkoutRemovalChart'));
+      }
+    }
+
+    function ensureMarkovTrendCharts() {
+      if (!markovTrendHeatmapChart) {
+        markovTrendHeatmapChart = echarts.init(document.getElementById('markovTrendHeatmap'));
       }
     }
 
@@ -11430,6 +11591,7 @@
 	      const isGlobal = currentScope === 'global';
 	      const isCart = currentScope === 'cart';
 	      const isCheckout = currentScope === 'checkout';
+	      const isMarkovTrend = currentScope === 'markovTrend';
 	      const isThreshold = currentScope === 'threshold';
 	      const isMubbk = currentScope === 'mubbk';
 	      const isReviewPlan = currentScope === 'reviewPlan';
@@ -11447,6 +11609,7 @@
 	      toggleHidden('globalView', !isGlobal);
 	      toggleHidden('cartView', !isCart);
 	      toggleHidden('checkoutView', !isCheckout);
+	      toggleHidden('markovTrendView', !isMarkovTrend);
 	      toggleHidden('thresholdView', !isThreshold);
 	      toggleHidden('mubbkView', !isMubbk);
 	      toggleHidden('reviewPlanView', !isReviewPlan);
@@ -11465,11 +11628,13 @@
       const activeScopeTab = scopeTabs.find(t => t.key === currentScope);
       document.getElementById('currentScopeText').textContent = `当前模块：${activeScopeTab ? activeScopeTab.label : currentScope}`;
       document.getElementById('dataSourceText').innerHTML = isGlobal
-        ? '数据源：<code>关键场景转移矩阵_*.xlsx</code> + <code>关键场景吸收概率_*.xlsx</code> + <code>关键场景移除效应_*.xlsx</code>（APP / 微信小程序 / 支付宝小程序，共9份原始表）'
+          ? '数据源：<code>关键场景转移矩阵_*.xlsx</code> + <code>关键场景吸收概率_*.xlsx</code> + <code>关键场景移除效应_*.xlsx</code>（APP / 微信小程序 / 支付宝小程序，共9份原始表）'
         : isCart
           ? '数据源：<code>购物车转移矩阵_*.xlsx</code> + <code>购物车吸收概率_*.xlsx</code> + <code>购物车移除效应_*.xlsx</code>（APP / 微信小程序 / 支付宝小程序，共9份原始表）'
           : isCheckout
             ? '数据源：<code>结算页转移矩阵_*.xlsx</code> + <code>结算页吸收概率_*.xlsx</code> + <code>结算页移除效应_*.xlsx</code>（APP / 微信小程序 / 支付宝小程序，共9份原始表）'
+            : isMarkovTrend
+            ? '数据源：<code>马尔科夫数据 6 月/*_3吸收概率.csv</code>（APP，client_type=3，2025.12-2026.05）'
             : isThreshold
             ? '数据源：<code>购物车阈值分析概率版.csv</code> + 历史动作分布补充表（同样要求有购物车编辑行为；概率分母为每秒开始时仍留在购物车的人数）'
             : isReviewPlan
@@ -11487,6 +11652,8 @@
           ? ''
           : isThreshold
           ? '* 阈值页默认展示当秒概率，辅助视角保留历史分布；建议阈值以当秒概率和可干预样本规模共同判断'
+          : isMarkovTrend
+          ? '* 趋势页热力图按每个场景内部高低上色；折线图使用独立 Y 轴查看细节'
           : isReviewPlan
             ? '* 复盘页按最终 AB 方案展示；核心原则：并行实验、双标签记录、按增量拆分复盘'
           : isAnnualPlan
@@ -11506,6 +11673,8 @@
         document.getElementById('currentTabText').textContent = `当前端：${tab ? tab.label : currentCheckout}`;
       } else if (isThreshold) {
         document.getElementById('currentTabText').textContent = '当前分析：转化分布 + 流失分布双维度交叉';
+      } else if (isMarkovTrend) {
+        document.getElementById('currentTabText').textContent = '当前端：APP；当前指标：吸收概率月度趋势';
       } else if (isReviewPlan) {
         document.getElementById('currentTabText').textContent = '当前方案：一期上线 AB 复盘蓝图';
       } else if (isAnnualPlan) {
@@ -13319,6 +13488,258 @@
       });
     }
 
+    function ppText(value, digits = 2) {
+      const n = Number(value);
+      if (!Number.isFinite(n)) return '--';
+      const sign = n > 0 ? '+' : '';
+      return `${sign}${(n * 100).toFixed(digits)}pp`;
+    }
+
+    function getTrendRowStats(row) {
+      const values = row.values;
+      const min = Math.min(...values);
+      const max = Math.max(...values);
+      const minIndex = values.indexOf(min);
+      const maxIndex = values.indexOf(max);
+      return {
+        min,
+        max,
+        minIndex,
+        maxIndex,
+        latest: values[values.length - 1],
+        mom: values[values.length - 1] - values[values.length - 2],
+        range: max - min
+      };
+    }
+
+    function renderMarkovTrendNarrative() {
+      const { months, states } = markovTrendMonthlyData;
+      const monthAvg = months.map((month, monthIndex) => ({
+        month,
+        value: states.reduce((sum, row) => sum + row.values[monthIndex], 0) / states.length
+      }));
+      const lowMonth = monthAvg.reduce((best, item) => item.value < best.value ? item : best, monthAvg[0]);
+      const latestMovers = states
+        .map(row => ({ name: row.name, ...getTrendRowStats(row) }))
+        .sort((a, b) => b.mom - a.mom);
+      const up = latestMovers.filter(item => item.mom > 0).slice(0, 3);
+      const down = latestMovers.filter(item => item.mom < 0).slice(-3).reverse();
+      const trendText = `
+        <div class="text-sm font-black text-foreground">趋势摘要</div>
+        <div class="mt-2">
+          <span class="font-bold text-foreground">${lowMonth.month}</span> 是 6 个月里最明显的共同低点；随后多数场景在 3-5 月修复。
+        </div>
+        <div class="mt-2">
+          5 月环比改善靠前：${up.map(item => `<span class="font-bold text-foreground">${item.name} ${ppText(item.mom)}</span>`).join('、')}。
+        </div>
+        <div class="mt-2">
+          5 月环比回落：${down.map(item => `<span class="font-bold text-foreground">${item.name} ${ppText(item.mom)}</span>`).join('、') || '<span class="font-bold text-foreground">暂无明显回落</span>'}。
+        </div>
+      `;
+      document.getElementById('markovTrendNarrative').innerHTML = trendText;
+    }
+
+    function getTrendDeltaStyle(delta, isBaseMonth) {
+      if (isBaseMonth) return { color: '#e5e7eb', textTone: 'dark' };
+      if (Math.abs(delta) <= 0.0005) {
+        return { color: '#ffffff', textTone: 'dark' };
+      }
+      if (delta >= 0.01) return { color: '#b42318', textTone: 'light' };
+      if (delta >= 0.003) return { color: '#f7d7d2', textTone: 'dark' };
+      if (delta > 0.0005) return { color: '#fbebe8', textTone: 'dark' };
+      if (delta <= -0.01) return { color: '#1f7a4d', textTone: 'light' };
+      if (delta <= -0.003) return { color: '#d7efe1', textTone: 'dark' };
+      return { color: '#edf8f1', textTone: 'dark' };
+    }
+
+    function renderMarkovTrendHeatmap() {
+      ensureMarkovTrendCharts();
+      const { months, states } = markovTrendMonthlyData;
+      const heatmapData = [];
+      states.forEach((row, rowIndex) => {
+        row.values.forEach((value, monthIndex) => {
+          const delta = monthIndex === 0 ? 0 : value - row.values[monthIndex - 1];
+          const isBaseMonth = monthIndex === 0;
+          const style = getTrendDeltaStyle(delta, isBaseMonth);
+          heatmapData.push({
+            value: [monthIndex, rowIndex, delta],
+            raw: value,
+            state: row.name,
+            month: months[monthIndex],
+            delta,
+            deltaText: isBaseMonth ? '基准' : ppText(delta),
+            isBaseMonth,
+            itemStyle: { color: style.color },
+            textTone: style.textTone
+          });
+        });
+      });
+
+      markovTrendHeatmapChart.setOption({
+        animationDuration: 450,
+        grid: { left: 86, right: 24, top: 34, bottom: 22 },
+        tooltip: {
+          confine: true,
+          backgroundColor: getCssVar('--card'),
+          borderColor: getCssVar('--border'),
+          textStyle: { color: getCssVar('--foreground') },
+          formatter: (params) => {
+            const item = params.data;
+            const delta = item.isBaseMonth ? '首月基准' : `环比 ${ppText(item.delta)}`;
+            return `${item.state}<br/>${item.month}：${f2(item.raw)}<br/>${delta}`;
+          }
+        },
+        xAxis: {
+          type: 'category',
+          data: months,
+          axisLabel: { color: getCssVar('--foreground'), fontWeight: 700 },
+          axisLine: { lineStyle: { color: getCssVar('--border') } },
+          splitArea: { show: true, areaStyle: { color: ['transparent', 'rgba(0,0,0,0.02)'] } }
+        },
+        yAxis: {
+          type: 'category',
+          data: states.map(row => row.name),
+          inverse: true,
+          axisLabel: { color: '#111827', fontWeight: 1000, fontSize: 13 },
+          axisLine: { lineStyle: { color: getCssVar('--border') } },
+          splitArea: { show: true, areaStyle: { color: ['transparent', 'rgba(0,0,0,0.02)'] } }
+        },
+        series: [{
+          name: '吸收概率',
+          type: 'heatmap',
+          data: heatmapData,
+          itemStyle: {
+            borderWidth: 1,
+            borderColor: getCssVar('--card')
+          },
+          label: {
+            show: true,
+            formatter: (params) => {
+              const mainStyle = params.data.textTone === 'light' ? 'trendMainLight' : 'trendMainDark';
+              const deltaStyle = params.data.textTone === 'light' ? 'trendDeltaLight' : 'trendDeltaDark';
+              return `{${mainStyle}|${f2(params.data.raw)}} {${deltaStyle}|(${params.data.deltaText})}`;
+            },
+            rich: {
+              trendMainLight: {
+                color: '#ffffff',
+                fontSize: 13,
+                fontWeight: 900
+              },
+              trendDeltaLight: {
+                color: '#ffffff',
+                fontSize: 10,
+                fontWeight: 800
+              },
+              trendMainDark: {
+                color: '#1f2937',
+                fontSize: 13,
+                fontWeight: 900
+              },
+              trendDeltaDark: {
+                color: '#374151',
+                fontSize: 10,
+                fontWeight: 800
+              }
+            }
+          },
+          emphasis: {
+            itemStyle: {
+              borderColor: getCssVar('--foreground'),
+              borderWidth: 1.5
+            }
+          }
+        }]
+      }, true);
+    }
+
+    function renderMarkovTrendSmallMultiples() {
+      const wrap = document.getElementById('markovTrendSmallMultiples');
+      const { months, states } = markovTrendMonthlyData;
+      markovTrendSmallCharts.forEach(chart => chart.dispose());
+      markovTrendSmallCharts = [];
+      wrap.innerHTML = states.map((row, index) => {
+        const stats = getTrendRowStats(row);
+        const directionClass = stats.mom < 0 ? 'text-[color:var(--chart-5)]' : 'text-[color:var(--primary)]';
+        return `
+          <article class="trend-small-card">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <div class="text-base font-black text-foreground">${row.id} ${row.name}</div>
+                <div class="mt-1 text-xs text-foreground">6 个月吸收概率走势 · 每月标签为实际百分比</div>
+              </div>
+              <div class="text-right">
+                <div class="text-lg font-black text-foreground">${f2(stats.latest)}</div>
+                <div class="text-xs font-bold ${directionClass}">环比 ${ppText(stats.mom)}</div>
+              </div>
+            </div>
+            <div id="markovTrendSmallChart${index}" class="trend-small-chart mt-2"></div>
+          </article>
+        `;
+      }).join('');
+
+      states.forEach((row, index) => {
+        const stats = getTrendRowStats(row);
+        const chart = echarts.init(document.getElementById(`markovTrendSmallChart${index}`));
+        markovTrendSmallCharts.push(chart);
+        const mainFlowStates = new Set(['首页', '搜索页', '商详页', '购物车', '结算页']);
+        const lineColor = mainFlowStates.has(row.name)
+          ? getCssVar('--chart-1')
+          : getCssVar('--chart-2');
+        chart.setOption({
+          animationDuration: 420,
+          grid: { left: 38, right: 16, top: 32, bottom: 24 },
+          tooltip: {
+            trigger: 'axis',
+            confine: true,
+            backgroundColor: getCssVar('--card'),
+            borderColor: getCssVar('--border'),
+            textStyle: { color: getCssVar('--foreground') },
+            formatter: (params) => {
+              const item = params[0];
+              return `${row.name}<br/>${item.axisValue}：${f2(item.value)}`;
+            }
+          },
+          xAxis: {
+            type: 'category',
+            data: months,
+            boundaryGap: false,
+            axisLabel: { color: getCssVar('--foreground'), fontSize: 10 },
+            axisLine: { lineStyle: { color: getCssVar('--border') } },
+            axisTick: { show: false }
+          },
+          yAxis: {
+            type: 'value',
+            min: Math.max(0, stats.min - stats.range * 0.35),
+            max: stats.max + stats.range * 0.35,
+            axisLabel: { color: getCssVar('--foreground'), fontSize: 10, formatter: value => `${(value * 100).toFixed(0)}%` },
+            splitLine: { lineStyle: { color: getCssVar('--border'), type: 'dashed' } }
+          },
+          series: [{
+            type: 'line',
+            data: row.values,
+            label: { show: true, formatter: (params) => f2(params.value), color: getCssVar('--foreground'), fontSize: 10, fontWeight: 800, position: 'top' },
+            smooth: 0.24,
+            symbol: 'circle',
+            symbolSize: 6,
+            lineStyle: { width: 2.4, color: lineColor },
+            itemStyle: { color: lineColor },
+            areaStyle: { opacity: 0.06, color: lineColor },
+            markPoint: undefined
+          }]
+        }, true);
+      });
+    }
+
+    function renderMarkovTrend() {
+      renderMarkovTrendNarrative();
+      renderMarkovTrendHeatmap();
+      renderMarkovTrendSmallMultiples();
+      setTimeout(() => {
+        markovTrendHeatmapChart && markovTrendHeatmapChart.resize();
+        markovTrendSmallCharts.forEach(chart => chart.resize());
+      }, 0);
+    }
+
     function renderGlobal() {
       const ds = db[currentGlobal];
       renderMarkovPrimer(ds);
@@ -13385,6 +13806,8 @@
 	        renderCart();
 	      } else if (currentScope === 'checkout') {
 	        renderCheckout();
+	      } else if (currentScope === 'markovTrend') {
+	        renderMarkovTrend();
 	      } else if (currentScope === 'threshold') {
 	        renderThresholdView();
 	      }
@@ -13436,6 +13859,8 @@
       checkoutTransitionChart && checkoutTransitionChart.resize();
       checkoutAbsorptionChart && checkoutAbsorptionChart.resize();
       checkoutRemovalChart && checkoutRemovalChart.resize();
+      markovTrendHeatmapChart && markovTrendHeatmapChart.resize();
+      markovTrendSmallCharts.forEach(chart => chart.resize());
       Object.values(thresholdCharts).forEach(chart => {
         chart && chart.resize();
       });
