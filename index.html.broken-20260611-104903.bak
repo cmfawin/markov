@@ -4635,8 +4635,7 @@
       line-height: 1.7;
     }
 
-    #markovTrendView .trend-hero,
-    #markovRemovalTrendView .trend-hero {
+    #markovTrendView, #markovLossTrendView .trend-hero {
       background:
         linear-gradient(135deg,
           color-mix(in oklab, var(--accent) 58%, var(--card) 42%) 0%,
@@ -4644,10 +4643,8 @@
           var(--card) 100%);
     }
 
-    #markovTrendView .trend-kicker,
-    #markovTrendView .trend-chip,
-    #markovRemovalTrendView .trend-kicker,
-    #markovRemovalTrendView .trend-chip {
+    #markovTrendView, #markovLossTrendView .trend-kicker,
+    #markovTrendView, #markovLossTrendView .trend-chip {
       display: inline-flex;
       align-items: center;
       border: 1px solid color-mix(in oklab, var(--primary) 36%, var(--border) 64%);
@@ -4657,23 +4654,20 @@
       font-weight: 900;
     }
 
-    #markovTrendView .trend-kicker,
-    #markovRemovalTrendView .trend-kicker {
+    #markovTrendView, #markovLossTrendView .trend-kicker {
       padding: 0.28rem 0.58rem;
       font-size: 0.76rem;
       letter-spacing: 0.08em;
     }
 
-    #markovTrendView .trend-chip,
-    #markovRemovalTrendView .trend-chip {
+    #markovTrendView, #markovLossTrendView .trend-chip {
       padding: 0.32rem 0.58rem;
       font-size: 0.74rem;
       line-height: 1;
       white-space: nowrap;
     }
 
-    #markovTrendView .trend-platform-tabs,
-    #markovRemovalTrendView .trend-platform-tabs {
+    #markovTrendView, #markovLossTrendView .trend-platform-tabs {
       display: inline-flex;
       flex-wrap: wrap;
       gap: 0.4rem;
@@ -4683,8 +4677,7 @@
       padding: 0.3rem;
     }
 
-    #markovTrendView .markov-trend-platform-btn,
-    #markovRemovalTrendView .markov-trend-platform-btn {
+    #markovTrendView, #markovLossTrendView .markov-trend-platform-btn {
       border: 1px solid transparent;
       border-radius: var(--radius);
       padding: 0.42rem 0.72rem;
@@ -4694,26 +4687,22 @@
       line-height: 1;
     }
 
-    #markovTrendView .markov-trend-platform-btn:hover,
-    #markovRemovalTrendView .markov-trend-platform-btn:hover {
+    #markovTrendView, #markovLossTrendView .markov-trend-platform-btn:hover {
       border-color: color-mix(in oklab, var(--primary) 18%, var(--border) 82%);
       background: color-mix(in oklab, var(--accent) 52%, var(--card) 48%);
     }
 
-    #markovTrendView .markov-trend-platform-btn.tab-active,
-    #markovRemovalTrendView .markov-trend-platform-btn.tab-active {
+    #markovTrendView, #markovLossTrendView .markov-trend-platform-btn.tab-active {
       border-color: color-mix(in oklab, var(--primary) 28%, var(--border) 72%);
       background: color-mix(in oklab, var(--accent) 68%, var(--card) 32%);
       color: var(--primary) !important;
     }
 
-    #markovTrendView .markov-trend-platform-btn.tab-active::after,
-    #markovRemovalTrendView .markov-trend-platform-btn.tab-active::after {
+    #markovTrendView, #markovLossTrendView .markov-trend-platform-btn.tab-active::after {
       display: none;
     }
 
-    #markovTrendView .trend-heatmap,
-    #markovRemovalTrendView .trend-heatmap {
+    #markovTrendView, #markovLossTrendView .trend-heatmap {
       height: 34rem;
       min-height: 30rem;
       max-width: 100%;
@@ -4721,29 +4710,25 @@
       overflow-y: hidden;
     }
 
-    #markovTrendView .trend-small-grid,
-    #markovRemovalTrendView .trend-small-grid {
+    #markovTrendView, #markovLossTrendView .trend-small-grid {
       display: grid;
       grid-template-columns: repeat(1, minmax(0, 1fr));
       gap: 0.8rem;
     }
 
     @media (min-width: 768px) {
-      #markovTrendView .trend-small-grid,
-      #markovRemovalTrendView .trend-small-grid {
+      #markovTrendView, #markovLossTrendView .trend-small-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
     @media (min-width: 1280px) {
-      #markovTrendView .trend-small-grid,
-      #markovRemovalTrendView .trend-small-grid {
+      #markovTrendView, #markovLossTrendView .trend-small-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
     }
 
-    #markovTrendView .trend-small-card,
-    #markovRemovalTrendView .trend-small-card {
+    #markovTrendView, #markovLossTrendView .trend-small-card {
       border: 1px solid var(--border);
       border-radius: var(--radius);
       background: var(--card);
@@ -4751,14 +4736,12 @@
       min-height: 14.6rem;
     }
 
-    #markovTrendView .trend-small-chart,
-    #markovRemovalTrendView .trend-small-chart {
+    #markovTrendView, #markovLossTrendView .trend-small-chart {
       height: 10.2rem;
       min-height: 10.2rem;
     }
 
-    #markovTrendView .trend-readout,
-    #markovRemovalTrendView .trend-readout {
+    #markovTrendView, #markovLossTrendView .trend-readout {
       border: 1px solid var(--border);
       border-radius: var(--radius);
       background: color-mix(in oklab, var(--muted) 72%, var(--card) 28%);
@@ -7501,27 +7484,27 @@
       </section>
     </section>
 
-    <section id="markovRemovalTrendView" class="hidden space-y-6">
+    <section id="lossTrendView" class="hidden space-y-6">
       <section class="panel trend-hero bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
         <div class="flex flex-col gap-3">
-          <div id="markovRemovalTrendKicker" class="trend-kicker">APP · MONTHLY MARKOV</div>
+          <div id="lossTrendKicker" class="trend-kicker">APP · MONTHLY MARKOV</div>
           <div class="flex flex-col xl:flex-row xl:items-end xl:justify-between gap-4">
             <div>
-              <h2 class="text-3xl md:text-4xl font-black text-foreground">移除概率趋势</h2>
+              <h2 class="text-3xl md:text-4xl font-black text-foreground">Markov 移除概率月度趋势</h2>
               <p class="mt-3 text-sm md:text-base leading-7 text-foreground">
-                <span id="markovRemovalTrendPlatformLabel">APP</span> 端 2025.12-2026.05 核心场景移除概率变化，用于观察各场景对最终成功下单的结构影响是否放大或收敛。
+                <span id="lossTrendPlatformLabel">APP</span> 端 2025.12-2026.05 核心场景移除概率变化，用于观察站内各场景作为流失起点的月度稳定性、修复节奏与风险位置。红色代表环比上升（变差），绿色代表环比下降（变好）。
               </p>
             </div>
             <div class="flex flex-wrap gap-2">
-              <span id="markovRemovalTrendClientTypeLabel" class="trend-chip">口径：client_type = 3</span>
+              <span id="lossTrendClientTypeLabel" class="trend-chip">口径：client_type = 3</span>
               <span class="trend-chip">月份：2025.12 - 2026.05</span>
               <span class="trend-chip">指标：decline_pro</span>
             </div>
           </div>
-          <div id="markovRemovalTrendPlatformTabs" class="trend-platform-tabs mt-2" aria-label="移除概率趋势端选择">
-            <button type="button" class="markov-trend-platform-btn" data-markov-removal-trend-platform="app">APP</button>
-            <button type="button" class="markov-trend-platform-btn" data-markov-removal-trend-platform="wechat">微信小程序</button>
-            <button type="button" class="markov-trend-platform-btn" data-markov-removal-trend-platform="alipay">支付宝小程序</button>
+          <div id="lossTrendPlatformTabs" class="trend-platform-tabs mt-2" aria-label="Markov 移除概率趋势端选择">
+            <button type="button" class="markov-trend-platform-btn" data-loss-trend-platform="app">APP</button>
+            <button type="button" class="markov-trend-platform-btn" data-loss-trend-platform="wechat">微信小程序</button>
+            <button type="button" class="markov-trend-platform-btn" data-loss-trend-platform="alipay">支付宝小程序</button>
           </div>
         </div>
       </section>
@@ -7530,7 +7513,7 @@
         <h3 class="text-2xl font-black text-foreground">6 个月环比涨跌热力图</h3>
         <div class="grid grid-cols-1 xl:grid-cols-12 gap-5 mt-4">
           <div class="xl:col-span-8">
-            <div id="markovRemovalTrendHeatmap" class="trend-heatmap"></div>
+            <div id="lossTrendHeatmap" class="trend-heatmap"></div>
             <div class="mt-3 flex flex-wrap items-center gap-2 text-xs font-bold text-foreground">
               <span>颜色档位：</span>
               <span class="px-2 py-1 rounded border border-border" style="background:#1f7a4d;color:#fff;">≤ -0.50pp</span>
@@ -7545,10 +7528,10 @@
             <div class="trend-readout">
               <div class="text-sm font-black text-foreground">图表说明</div>
               <div class="mt-2 text-sm leading-7 text-foreground">
-                每个场景单独按月环比：2025.12 是该场景自己的基准，后续月份只和上一个月相比。红色代表移除概率上升，绿色代表移除概率下降，灰色代表基准或基本持平；括号内为环比变化。
+                每个场景单独按月环比：2025.12 是该场景自己的基准，后续月份只和上一个月相比。红色代表移除概率上升（变差），绿色代表移除概率下降（变好），灰色代表基准或基本持平；括号内为环比变化。
               </div>
             </div>
-            <div id="markovRemovalTrendNarrative" class="trend-readout text-sm leading-7 text-foreground"></div>
+            <div id="lossTrendNarrative" class="trend-readout text-sm leading-7 text-foreground"></div>
           </div>
         </div>
       </section>
@@ -7557,10 +7540,10 @@
         <div class="flex flex-col gap-2">
           <h3 class="text-2xl font-black text-foreground">场景趋势明细</h3>
           <p class="text-sm leading-7 text-foreground">
-            各核心场景的月度移除概率走势，标签展示当月移除概率，保留小数点后两位。
+            各核心场景的月度移除概率趋势，标签展示当月移除概率，保留小数点后两位。
           </p>
         </div>
-        <div id="markovRemovalTrendSmallMultiples" class="mt-4 trend-small-grid"></div>
+        <div id="lossTrendSmallMultiples" class="mt-4 trend-small-grid"></div>
       </section>
     </section>
 
@@ -11187,10 +11170,10 @@
       { key: 'memberBase', num: '1.1', slug: 'member-base', label: '会员 2.0 基座', group: '1. 项目背景与会员经营基座' },
       { key: 'memberPanorama', num: '1.2', slug: 'member-panorama', label: '会员经营全景框架', group: '1. 项目背景与会员经营基座' },
       { key: 'global', num: '2.1', slug: 'markovdata', label: '全局 Markov', group: '2. MUBBK：站内转化干预' },
-      { key: 'markovTrend', num: '2.2', slug: 'markov-trend', label: 'Markov 吸收概率', group: '2. MUBBK：站内转化干预' },
-      { key: 'markovRemovalTrend', num: '2.3', slug: 'markov-removal-trend', label: 'Markov 移除概率', group: '2. MUBBK：站内转化干预' },
-      { key: 'cart', num: '2.4', slug: 'cart-markov', label: '购物车 Markov', group: '2. MUBBK：站内转化干预' },
-      { key: 'checkout', num: '2.5', slug: 'checkout-markov', label: '结算页 Markov', group: '2. MUBBK：站内转化干预' },
+      { key: 'cart', num: '2.2', slug: 'cart-markov', label: '购物车 Markov', group: '2. MUBBK：站内转化干预' },
+      { key: 'checkout', num: '2.3', slug: 'checkout-markov', label: '结算页 Markov', group: '2. MUBBK：站内转化干预' },
+      { key: 'markovTrend', num: '2.4', slug: 'markov-trend', label: 'Markov 吸收概率趋势', group: '2. MUBBK：站内转化干预' },
+      { key: 'markovLossTrend', num: '2.5', slug: 'markov-loss-trend', label: 'Markov 移除概率趋势', group: '2. MUBBK：站内转化干预' },
       { key: 'annualPlan', num: '2.6', slug: 'annual-plan', label: '全年实施计划', group: '2. MUBBK：站内转化干预' },
       { key: 'mubbk', num: '2.7', slug: 'mubbk', label: '一期落地方案', group: '2. MUBBK：站内转化干预' },
       { key: 'reviewPlan', num: '2.8', slug: 'review-plan', label: '一期复盘方案', group: '2. MUBBK：站内转化干预' },
@@ -11466,8 +11449,10 @@
         { id: 'S11', name: '支付页', values: [0.9702443903930441, 0.9685652579234376, 0.9626609102870772, 0.9690255504208246, 0.9703703573424162, 0.9728534090725537] }
       ] }
     };
-    let currentMarkovRemovalTrendPlatform = 'app';
-    const markovRemovalTrendMonthlyDataByPlatform = {
+
+    // 2.5 Markov 移除概率趋势数据：来自 马尔科夫数据 6 月/*_{3,16,17}移除概率.csv 的 decline_pro 列
+    let currentLossTrendPlatform = 'app';
+    const lossTrendMonthlyDataByPlatform = {
       app: { label: 'APP', clientType: 3, months: ['2025.12', '2026.01', '2026.02', '2026.03', '2026.04', '2026.05'], states: [
         { id: 'S01', name: '首页', values: [0.13696606471367487, 0.13487215160695604, 0.11970638148773598, 0.13394414274637761, 0.13795894268599604, 0.13959483136669573] },
         { id: 'S02', name: '会员中心', values: [0.006545458149585792, 0.009210659864201692, 0.009078698115152828, 0.008873845968324662, 0.009699576301032964, 0.010194299870905976] },
@@ -11527,8 +11512,8 @@
     let checkoutRemovalChart = null;
     let markovTrendHeatmapChart = null;
     let markovTrendSmallCharts = [];
-    let markovRemovalTrendHeatmapChart = null;
-    let markovRemovalTrendSmallCharts = [];
+    let lossTrendHeatmapChart = null;
+    let lossTrendSmallCharts = [];
 
     const f2 = (v) => {
       const n = Number(v);
@@ -11635,9 +11620,9 @@
       }
     }
 
-    function ensureMarkovRemovalTrendCharts() {
-      if (!markovRemovalTrendHeatmapChart) {
-        markovRemovalTrendHeatmapChart = echarts.init(document.getElementById('markovRemovalTrendHeatmap'));
+    function ensureLossTrendCharts() {
+      if (!lossTrendHeatmapChart) {
+        lossTrendHeatmapChart = echarts.init(document.getElementById('lossTrendHeatmap'));
       }
     }
 
@@ -11777,12 +11762,6 @@
         };
         const prefix = prefixMap[activeScope.group] || 'MUBBK&UBBK';
         titleEl.textContent = `${prefix}：${activeScope.label}`;
-        const siteTitle = 'Markov 策略工作站';
-        const deepLink = parseUrlTarget();
-        const desiredTitle = deepLink
-          ? `${activeScope.num} ${activeScope.label} - ${siteTitle}`
-          : siteTitle;
-        if (document.title !== desiredTitle) document.title = desiredTitle;
       }
       document.querySelectorAll('.cart-tab-btn').forEach(btn => {
         btn.classList.toggle('tab-active', btn.dataset.key === currentCart);
@@ -11793,9 +11772,6 @@
       document.querySelectorAll('[data-markov-trend-platform]').forEach(btn => {
         btn.classList.toggle('tab-active', btn.dataset.markovTrendPlatform === currentMarkovTrendPlatform);
       });
-      document.querySelectorAll('[data-markov-removal-trend-platform]').forEach(btn => {
-        btn.classList.toggle('tab-active', btn.dataset.markovRemovalTrendPlatform === currentMarkovRemovalTrendPlatform);
-      });
       document.querySelectorAll('.threshold-mode-btn').forEach(btn => {
         btn.classList.toggle('tab-active', currentThresholdModes[btn.dataset.endpoint] === btn.dataset.mode);
       });
@@ -11804,7 +11780,6 @@
 	      const isCart = currentScope === 'cart';
 	      const isCheckout = currentScope === 'checkout';
 	      const isMarkovTrend = currentScope === 'markovTrend';
-	      const isMarkovRemovalTrend = currentScope === 'markovRemovalTrend';
 	      const isThreshold = currentScope === 'threshold';
 	      const isMubbk = currentScope === 'mubbk';
 	      const isReviewPlan = currentScope === 'reviewPlan';
@@ -11823,7 +11798,6 @@
 	      toggleHidden('cartView', !isCart);
 	      toggleHidden('checkoutView', !isCheckout);
 	      toggleHidden('markovTrendView', !isMarkovTrend);
-	      toggleHidden('markovRemovalTrendView', !isMarkovRemovalTrend);
 	      toggleHidden('thresholdView', !isThreshold);
 	      toggleHidden('mubbkView', !isMubbk);
 	      toggleHidden('reviewPlanView', !isReviewPlan);
@@ -11849,8 +11823,6 @@
             ? '数据源：<code>结算页转移矩阵_*.xlsx</code> + <code>结算页吸收概率_*.xlsx</code> + <code>结算页移除效应_*.xlsx</code>（APP / 微信小程序 / 支付宝小程序，共9份原始表）'
             : isMarkovTrend
             ? '数据源：<code>马尔科夫数据 6 月/*_{3,16,17}吸收概率.csv</code>（APP / 微信小程序 / 支付宝小程序，2025.12-2026.05）'
-            : isMarkovRemovalTrend
-            ? '数据源：<code>马尔科夫数据 6 月/*_{3,16,17}移除概率.csv</code>（APP / 微信小程序 / 支付宝小程序，2025.12-2026.05；指标：decline_pro）'
             : isThreshold
             ? '数据源：<code>购物车阈值分析概率版.csv</code> + 历史动作分布补充表（同样要求有购物车编辑行为；概率分母为每秒开始时仍留在购物车的人数）'
             : isReviewPlan
@@ -11868,11 +11840,9 @@
           ? ''
           : isThreshold
           ? '* 阈值页默认展示当秒概率，辅助视角保留历史分布；建议阈值以当秒概率和可干预样本规模共同判断'
-	          : isMarkovTrend
-	          ? '* 趋势页热力图按每个场景内部高低上色；折线图使用独立 Y 轴查看细节'
-	          : isMarkovRemovalTrend
-	          ? '* 移除概率趋势页展示 decline_pro 月度变化；红色代表环比上升，绿色代表环比下降'
-	          : isReviewPlan
+          : isMarkovTrend
+          ? '* 趋势页热力图按每个场景内部高低上色；折线图使用独立 Y 轴查看细节'
+          : isReviewPlan
             ? '* 复盘页按最终 AB 方案展示；核心原则：并行实验、双标签记录、按增量拆分复盘'
           : isAnnualPlan
             ? '* 全年计划按五期推进：先单券增量，再动态概率与长期约束，再预算控制，最后扩多券多场景'
@@ -11893,8 +11863,6 @@
         document.getElementById('currentTabText').textContent = '当前分析：转化分布 + 流失分布双维度交叉';
       } else if (isMarkovTrend) {
         document.getElementById('currentTabText').textContent = '当前端：APP；当前指标：吸收概率月度趋势';
-      } else if (isMarkovRemovalTrend) {
-        document.getElementById('currentTabText').textContent = '当前端：APP；当前指标：移除概率月度趋势';
       } else if (isReviewPlan) {
         document.getElementById('currentTabText').textContent = '当前方案：一期上线 AB 复盘蓝图';
       } else if (isAnnualPlan) {
@@ -13998,267 +13966,14 @@
       }, 0);
     }
 
-    function getCurrentMarkovRemovalTrendDataset() {
-      return markovRemovalTrendMonthlyDataByPlatform[currentMarkovRemovalTrendPlatform] || markovRemovalTrendMonthlyDataByPlatform.app;
-    }
-
-    function updateMarkovRemovalTrendPlatformTabs() {
-      document.querySelectorAll('[data-markov-removal-trend-platform]').forEach(btn => {
-        btn.classList.toggle('tab-active', btn.dataset.markovRemovalTrendPlatform === currentMarkovRemovalTrendPlatform);
-      });
-    }
-
-    function updateMarkovRemovalTrendHeader() {
-      const dataset = getCurrentMarkovRemovalTrendDataset();
-      const platformLabel = document.getElementById('markovRemovalTrendPlatformLabel');
-      const clientTypeLabel = document.getElementById('markovRemovalTrendClientTypeLabel');
-      const kicker = document.getElementById('markovRemovalTrendKicker');
-      if (platformLabel) platformLabel.textContent = dataset.label;
-      if (clientTypeLabel) clientTypeLabel.textContent = `口径：client_type = ${dataset.clientType}`;
-      if (kicker) kicker.textContent = `${dataset.label.toUpperCase()} · MONTHLY MARKOV`;
-    }
-
-    function setActiveMarkovRemovalTrendPlatform(platform) {
-      if (!markovRemovalTrendMonthlyDataByPlatform[platform] || currentMarkovRemovalTrendPlatform === platform) return;
-      currentMarkovRemovalTrendPlatform = platform;
-      renderMarkovRemovalTrend();
-    }
-
-    function bindMarkovRemovalTrendPlatformTabs() {
-      document.querySelectorAll('[data-markov-removal-trend-platform]').forEach(btn => {
-        btn.addEventListener('click', () => {
-          setActiveMarkovRemovalTrendPlatform(btn.dataset.markovRemovalTrendPlatform);
-        });
-      });
-      updateMarkovRemovalTrendPlatformTabs();
-    }
-
-    function renderMarkovRemovalTrendNarrative() {
-      const { months, states } = getCurrentMarkovRemovalTrendDataset();
-      const latestMonth = months[months.length - 1];
-      const monthAvg = months.map((month, monthIndex) => ({
-        month,
-        value: states.reduce((sum, row) => sum + row.values[monthIndex], 0) / states.length
-      }));
-      const highMonth = monthAvg.reduce((best, item) => item.value > best.value ? item : best, monthAvg[0]);
-      const latestMovers = states
-        .map(row => ({ name: row.name, ...getTrendRowStats(row) }))
-        .sort((a, b) => b.mom - a.mom);
-      const up = latestMovers.filter(item => item.mom > 0).slice(0, 3);
-      const down = latestMovers.filter(item => item.mom < 0).slice(-3).reverse();
-      const trendText = `
-        <div class="text-sm font-black text-foreground">趋势摘要</div>
-        <div class="mt-2">
-          <span class="font-bold text-foreground">${highMonth.month}</span> 是 6 个月里平均移除概率最高的月份。
-        </div>
-        <div class="mt-2">
-          ${latestMonth} 环比上升靠前：${up.map(item => `<span class="font-bold text-foreground">${item.name} ${ppText(item.mom)}</span>`).join('、') || '<span class="font-bold text-foreground">暂无明显上升</span>'}。
-        </div>
-        <div class="mt-2">
-          ${latestMonth} 环比下降：${down.map(item => `<span class="font-bold text-foreground">${item.name} ${ppText(item.mom)}</span>`).join('、') || '<span class="font-bold text-foreground">暂无明显下降</span>'}。
-        </div>
-      `;
-      document.getElementById('markovRemovalTrendNarrative').innerHTML = trendText;
-    }
-
-    function getRemovalTrendDeltaStyle(delta, isBaseMonth) {
-      if (isBaseMonth) return { color: '#e5e7eb', textTone: 'dark' };
-      if (Math.abs(delta) <= 0.0005) return { color: '#ffffff', textTone: 'dark' };
-      if (delta >= 0.005) return { color: '#b42318', textTone: 'light' };
-      if (delta >= 0.002) return { color: '#f7d7d2', textTone: 'dark' };
-      if (delta > 0.0005) return { color: '#fbebe8', textTone: 'dark' };
-      if (delta <= -0.005) return { color: '#1f7a4d', textTone: 'light' };
-      if (delta <= -0.002) return { color: '#d7efe1', textTone: 'dark' };
-      return { color: '#edf8f1', textTone: 'dark' };
-    }
-
-    function renderMarkovRemovalTrendHeatmap() {
-      ensureMarkovRemovalTrendCharts();
-      const { months, states } = getCurrentMarkovRemovalTrendDataset();
-      const heatmapData = [];
-      states.forEach((row, rowIndex) => {
-        row.values.forEach((value, monthIndex) => {
-          const delta = monthIndex === 0 ? 0 : value - row.values[monthIndex - 1];
-          const isBaseMonth = monthIndex === 0;
-          const style = getRemovalTrendDeltaStyle(delta, isBaseMonth);
-          heatmapData.push({
-            value: [monthIndex, rowIndex, delta],
-            raw: value,
-            state: row.name,
-            month: months[monthIndex],
-            delta,
-            deltaText: isBaseMonth ? '基准' : ppText(delta),
-            isBaseMonth,
-            itemStyle: { color: style.color },
-            textTone: style.textTone
-          });
-        });
-      });
-
-      markovRemovalTrendHeatmapChart.setOption({
-        animationDuration: 450,
-        grid: { left: 86, right: 24, top: 0, bottom: 22 },
-        tooltip: {
-          confine: true,
-          backgroundColor: getCssVar('--card'),
-          borderColor: getCssVar('--border'),
-          textStyle: { color: getCssVar('--foreground') },
-          formatter: (params) => {
-            const item = params.data;
-            const delta = item.isBaseMonth ? '首月基准' : `环比 ${ppText(item.delta)}`;
-            return `${item.state}<br/>${item.month}：${f2(item.raw)}<br/>${delta}`;
-          }
-        },
-        xAxis: {
-          type: 'category',
-          data: months,
-          axisLabel: { color: getCssVar('--foreground'), fontWeight: 700 },
-          axisLine: { lineStyle: { color: getCssVar('--border') } },
-          splitArea: { show: true, areaStyle: { color: ['transparent', 'rgba(0,0,0,0.02)'] } }
-        },
-        yAxis: {
-          type: 'category',
-          data: states.map(row => row.name),
-          inverse: true,
-          axisLabel: { color: '#111827', fontWeight: 1000, fontSize: 13 },
-          axisLine: { lineStyle: { color: getCssVar('--border') } },
-          splitArea: { show: true, areaStyle: { color: ['transparent', 'rgba(0,0,0,0.02)'] } }
-        },
-        series: [{
-          name: '移除概率',
-          type: 'heatmap',
-          data: heatmapData,
-          itemStyle: {
-            borderWidth: 1,
-            borderColor: getCssVar('--card')
-          },
-          label: {
-            show: true,
-            formatter: (params) => {
-              const mainStyle = params.data.textTone === 'light' ? 'trendMainLight' : 'trendMainDark';
-              const deltaStyle = params.data.textTone === 'light' ? 'trendDeltaLight' : 'trendDeltaDark';
-              return `{${mainStyle}|${f2(params.data.raw)}} {${deltaStyle}|(${params.data.deltaText})}`;
-            },
-            rich: {
-              trendMainLight: {
-                color: '#ffffff',
-                fontSize: 13,
-                fontWeight: 900
-              },
-              trendDeltaLight: {
-                color: '#ffffff',
-                fontSize: 10,
-                fontWeight: 800
-              },
-              trendMainDark: {
-                color: '#1f2937',
-                fontSize: 13,
-                fontWeight: 900
-              },
-              trendDeltaDark: {
-                color: '#374151',
-                fontSize: 10,
-                fontWeight: 800
-              }
-            }
-          },
-          emphasis: {
-            itemStyle: {
-              borderColor: getCssVar('--foreground'),
-              borderWidth: 1.5
-            }
-          }
-        }]
-      }, true);
-    }
-
-    function renderMarkovRemovalTrendSmallMultiples() {
-      const wrap = document.getElementById('markovRemovalTrendSmallMultiples');
-      const { months, states } = getCurrentMarkovRemovalTrendDataset();
-      markovRemovalTrendSmallCharts.forEach(chart => chart.dispose());
-      markovRemovalTrendSmallCharts = [];
-      wrap.innerHTML = states.map((row, index) => {
-        const stats = getTrendRowStats(row);
-        const directionClass = stats.mom < 0 ? 'text-[color:var(--chart-5)]' : 'text-[color:var(--primary)]';
-        return `
-          <article class="trend-small-card">
-            <div class="flex items-start justify-between gap-3">
-              <div>
-                <div class="text-base font-black text-foreground">${row.id} ${row.name}</div>
-                <div class="mt-1 text-xs text-foreground">6 个月移除概率走势 · 每月标签为实际百分比</div>
-              </div>
-              <div class="text-right">
-                <div class="text-lg font-black text-foreground">${f2(stats.latest)}</div>
-                <div class="text-xs font-bold ${directionClass}">环比 ${ppText(stats.mom)}</div>
-              </div>
-            </div>
-            <div id="markovRemovalTrendSmallChart${index}" class="trend-small-chart mt-2"></div>
-          </article>
-        `;
-      }).join('');
-
-      states.forEach((row, index) => {
-        const stats = getTrendRowStats(row);
-        const chart = echarts.init(document.getElementById(`markovRemovalTrendSmallChart${index}`));
-        markovRemovalTrendSmallCharts.push(chart);
-        const mainFlowStates = new Set(['首页', '搜索页', '商详页', '购物车', '结算页']);
-        const lineColor = mainFlowStates.has(row.name)
-          ? getCssVar('--chart-1')
-          : getCssVar('--chart-2');
-        chart.setOption({
-          animationDuration: 420,
-          grid: { left: 38, right: 16, top: 32, bottom: 24 },
-          tooltip: {
-            trigger: 'axis',
-            confine: true,
-            backgroundColor: getCssVar('--card'),
-            borderColor: getCssVar('--border'),
-            textStyle: { color: getCssVar('--foreground') },
-            formatter: (params) => {
-              const item = params[0];
-              return `${row.name}<br/>${item.axisValue}：${f2(item.value)}`;
-            }
-          },
-          xAxis: {
-            type: 'category',
-            data: months,
-            boundaryGap: false,
-            axisLabel: { color: getCssVar('--foreground'), fontSize: 10 },
-            axisLine: { lineStyle: { color: getCssVar('--border') } },
-            axisTick: { show: false }
-          },
-          yAxis: {
-            type: 'value',
-            min: Math.max(0, stats.min - stats.range * 0.35),
-            max: stats.max + stats.range * 0.35,
-            axisLabel: { color: getCssVar('--foreground'), fontSize: 10, formatter: value => `${(value * 100).toFixed(0)}%` },
-            splitLine: { lineStyle: { color: getCssVar('--border'), type: 'dashed' } }
-          },
-          series: [{
-            type: 'line',
-            data: row.values,
-            label: { show: true, formatter: (params) => f2(params.value), color: getCssVar('--foreground'), fontSize: 10, fontWeight: 800, position: 'top' },
-            smooth: 0.24,
-            symbol: 'circle',
-            symbolSize: 6,
-            lineStyle: { width: 2.4, color: lineColor },
-            itemStyle: { color: lineColor },
-            areaStyle: { opacity: 0.06, color: lineColor },
-            markPoint: undefined
-          }]
-        }, true);
-      });
-    }
-
-    function renderMarkovRemovalTrend() {
-      updateMarkovRemovalTrendHeader();
-      updateMarkovRemovalTrendPlatformTabs();
-      renderMarkovRemovalTrendNarrative();
-      renderMarkovRemovalTrendHeatmap();
-      renderMarkovRemovalTrendSmallMultiples();
+      updateLossTrendHeader();
+      updateLossTrendPlatformTabs();
+      renderLossTrendNarrative();
+      renderLossTrendHeatmap();
+      renderLossTrendSmallMultiples();
       setTimeout(() => {
-        markovRemovalTrendHeatmapChart && markovRemovalTrendHeatmapChart.resize();
-        markovRemovalTrendSmallCharts.forEach(chart => chart.resize());
+        lossTrendHeatmapChart && lossTrendHeatmapChart.resize();
+        lossTrendSmallCharts.forEach(chart => chart.resize());
       }, 0);
     }
 
@@ -14330,8 +14045,6 @@
 	        renderCheckout();
 	      } else if (currentScope === 'markovTrend') {
 	        renderMarkovTrend();
-	      } else if (currentScope === 'markovRemovalTrend') {
-	        renderMarkovRemovalTrend();
 	      } else if (currentScope === 'threshold') {
 	        renderThresholdView();
 	      }
@@ -14341,11 +14054,10 @@
     buildTabs();
 	    buildCartTabs();
 	    buildCheckoutTabs();
+	    bindMarkovTrendPlatformTabs();
 	    bindThresholdModeTabs();
 	    bindReviewClientTabs();
 	    bindReviewRoiTabs();
-    bindMarkovTrendPlatformTabs();
-    bindMarkovRemovalTrendPlatformTabs();
     const cartInterventionUx = document.getElementById('cartInterventionUx');
     const mubbkView = document.getElementById('mubbkView');
     if (cartInterventionUx && mubbkView) {
@@ -14387,8 +14099,6 @@
       checkoutRemovalChart && checkoutRemovalChart.resize();
       markovTrendHeatmapChart && markovTrendHeatmapChart.resize();
       markovTrendSmallCharts.forEach(chart => chart.resize());
-      markovRemovalTrendHeatmapChart && markovRemovalTrendHeatmapChart.resize();
-      markovRemovalTrendSmallCharts.forEach(chart => chart.resize());
       Object.values(thresholdCharts).forEach(chart => {
         chart && chart.resize();
       });
