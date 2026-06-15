@@ -8642,21 +8642,21 @@
 	              </div>
 	              <div class="review-timeline-item">
 	                <div class="grid grid-cols-1 md:grid-cols-[8rem_1fr_8rem] gap-3 items-center">
-	                  <div class="review-chip">5/27 - 6/2</div>
+	                  <div class="review-chip">5/28 - 6/3</div>
 	                  <div class="font-black text-foreground">购物车地址栏交互实验</div>
 	                  <div class="text-xs leading-5 text-foreground">50% 无地址栏<br>50% 有地址栏</div>
 	                </div>
 	              </div>
 	              <div class="review-timeline-item">
 	                <div class="grid grid-cols-1 md:grid-cols-[8rem_1fr_8rem] gap-3 items-center">
-	                  <div class="review-chip">6/3 - 6/9</div>
+	                  <div class="review-chip">6/5 - 6/11</div>
 	                  <div class="font-black text-foreground">购物车优惠券入口实验</div>
 	                  <div class="text-xs leading-5 text-foreground">50% 老入口<br>50% 新入口</div>
 	                </div>
 	              </div>
 	              <div class="review-timeline-item">
 	                <div class="grid grid-cols-1 md:grid-cols-[8rem_1fr_8rem] gap-3 items-center">
-	                  <div class="review-chip">6/10 - 6/16</div>
+	                  <div class="review-chip">6/12 - 6/18</div>
 	                  <div class="font-black text-foreground">购物车商品区域实验</div>
 	                  <div class="text-xs leading-5 text-foreground">50% 老商品区<br>50% 新商品区</div>
 	                </div>
@@ -9215,14 +9215,14 @@
 
       <section id="review-paid-optimization" class="panel review-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
         <div class="review-kicker">PHASE 1 OPTIMIZATION</div>
-        <h3 class="mt-3 text-3xl font-black text-foreground">一期优化方向</h3>
+        <h3 class="mt-3 text-3xl font-black text-foreground">一期优化动作</h3>
         <p class="mt-3 max-w-5xl text-sm md:text-base leading-7 text-foreground">
           7 天复盘的核心判断是：2 元券能把用户强力推到结算页，但在结算页的犹豫仍然明显；同时当前 C2/C3 后置筛选会影响 AB 公平性和模型训练完整性。因此一期后续优化分两步：先把发券样本做干净，再补齐结算页承接。
         </p>
 
         <div class="mt-6 grid grid-cols-1 xl:grid-cols-2 gap-4">
           <div class="rounded-2xl border border-border bg-muted p-5">
-            <div class="review-pill">优化方向 1</div>
+            <div class="review-pill">优化动作 1</div>
             <h4 class="mt-3 text-xl font-black text-foreground">A2 不再用 C2/C3 做硬门槛，改成命中即发券</h4>
             <p class="mt-3 text-sm leading-7 text-foreground">
               当前 A2 是随机进入，但真正收券又被 C2/C3 二次筛选，导致 A1 和“真正收券 A2”不完全均匀。后续建议 A2 覆盖 12 个 cell，随机命中 A2 就发 2 元券，12-cell 只作为模型特征和分层复盘维度。
@@ -9231,10 +9231,35 @@
               <div class="rounded-xl border border-border bg-card p-3"><span class="font-black text-foreground">AB 收益：</span>A1 和 A2 人群更公平，可以直接比较免费提醒和 2 元券。</div>
               <div class="rounded-xl border border-border bg-card p-3"><span class="font-black text-foreground">模型收益：</span>Uplift 能学习 12 个 cell 对券的完整响应，而不是只学习 C2/C3。</div>
             </div>
+            <div class="mt-4 rounded-xl border border-border bg-card p-3">
+              <div class="flex flex-wrap items-baseline gap-2">
+                <span class="text-xs font-black text-foreground">执行回顾</span>
+                <span class="text-xs text-foreground/60">2026.06.03 — 2026.06.12</span>
+              </div>
+              <div class="mt-3 grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                <div>
+                  <div class="text-xs text-foreground/60">日发放上限</div>
+                  <div class="mt-1 text-xl font-black text-foreground">3,000<span class="ml-1 text-xs font-bold text-foreground/60">张/天</span></div>
+                </div>
+                <div>
+                  <div class="text-xs text-foreground/60">实际总发放</div>
+                  <div class="mt-1 text-xl font-black text-foreground">2.2W<span class="ml-1 text-xs font-bold text-foreground/60">张</span></div>
+                </div>
+                <div>
+                  <div class="text-xs text-foreground/60">实际核销</div>
+                  <div class="mt-1 text-xl font-black text-primary">9,661<span class="ml-1 text-xs font-bold text-foreground/60">张</span></div>
+                </div>
+                <div>
+                  <div class="text-xs text-foreground/60">核销率</div>
+                  <div class="mt-1 text-xl font-black text-foreground">43.9%</div>
+                </div>
+              </div>
+              <div class="mt-3 text-xs leading-5 text-foreground/70">A2 解除 C2/C3 限制，对所有类型用户发放，作为 uplift 训练数据。</div>
+            </div>
           </div>
 
           <div class="rounded-2xl border border-border bg-muted p-5">
-            <div class="review-pill">优化方向 2</div>
+            <div class="review-pill">优化动作 2</div>
             <h4 class="mt-3 text-xl font-black text-foreground">结算页增加 2 元券倒计时提醒，补齐支付承接</h4>
             <p class="mt-3 text-sm leading-7 text-foreground">
               A2 几乎能把用户推到结算页，但结算页到提单反而低于 A0/A1，说明用户到了结算页仍然在犹豫。当前倒计时只在购物车出现，下一步应在结算页继续承接同一张 2 元券，强化“现在不用就失效”的紧迫感。
@@ -9246,14 +9271,51 @@
           </div>
         </div>
 
-        <div class="mt-5 rounded-2xl border border-border bg-card p-5">
-          <div class="text-lg font-black text-foreground">落地建议</div>
-          <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3 text-sm leading-7 text-foreground">
-            <div class="rounded-xl border border-border bg-muted p-4"><span class="font-black text-foreground">总量控制：</span>每天最多发放 X 张，超过后落回 A1 免费提醒，避免补贴预算失控。</div>
-            <div class="rounded-xl border border-border bg-muted p-4"><span class="font-black text-foreground">控制打扰：</span>只对 A2 已发券用户展示，倒计时和频控规则与购物车保持一致。</div>
-            <div class="rounded-xl border border-border bg-muted p-4"><span class="font-black text-foreground">验证指标：</span>重点看结算→提单、提单→支付、购物车→支付，以及前毛版/综合毛利版 ROI。</div>
+        <div class="mt-4 rounded-2xl border border-border bg-card p-5 md:p-6">
+          <div class="flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <div class="review-pill">优化动作 3</div>
+              <h4 class="mt-3 text-xl font-black text-foreground">6 月中旬起推 90% 免费干预方案</h4>
+              <p class="mt-3 text-sm leading-7 text-foreground text-balance">
+                一期复盘显示免费提醒（实验 2 / 实验 3 的 A1）购物车→支付 +2.30pp ~ +2.82pp，ROI 1.42 / 1.35 都已稳定超过付费 2 元券路径。下一步把免费干预设为默认方案，10% 流量留作空白对照；同时持续观察免费提醒效果是否衰减，并把触发场景和干预手段多样化、细化。
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-5">
+            <div class="text-xs font-black text-foreground/60">流量分配</div>
+            <div class="mt-2 flex h-9 overflow-hidden rounded-lg border border-border text-sm font-black">
+              <div class="bg-primary text-primary-foreground flex items-center justify-center" style="width:90%">90% 免费干预</div>
+              <div class="bg-foreground/15 text-foreground/70 flex items-center justify-center" style="width:10%">10% 空白对照</div>
+            </div>
+            <div class="mt-1.5 flex justify-between text-xs text-foreground/60">
+              <span>默认方案 / 90% 流量</span>
+              <span>空白对照 / 10% 流量</span>
+            </div>
+          </div>
+
+          <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="rounded-xl border border-border bg-muted p-4">
+              <div class="text-sm font-black text-foreground">持续观察免费提醒效果</div>
+              <ul class="mt-2 space-y-1.5 text-sm leading-6 text-foreground/85">
+                <li>· 购物车→支付成功绝对值与 MoM 走势</li>
+                <li>· 免费提醒点击率随时间的衰减曲线</li>
+                <li>· 空白对照 vs 免费干预的 lift 差值</li>
+                <li>· 各触发场景的边际收益排序</li>
+              </ul>
+            </div>
+            <div class="rounded-xl border border-border bg-muted p-4">
+              <div class="text-sm font-black text-foreground">触发场景 / 干预手段多样化、细化</div>
+              <ul class="mt-2 space-y-1.5 text-sm leading-6 text-foreground/85">
+                <li>· 触发场景：购物车停留 / 结算页犹豫 / 长路径流失</li>
+                <li>· 干预手段：倒计时 / 文案变体 / 频次分层</li>
+                <li>· 频控规则：按用户 / 页面 / 时段三维度</li>
+                <li>· 退出条件：单场景连续 N 周衰减即下线</li>
+              </ul>
+            </div>
           </div>
         </div>
+
       </section>
 
       <section id="review-ux" class="panel review-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
@@ -9307,83 +9369,6 @@
         </div>
       </section>
 
-      <section id="review-cross" class="panel review-panel bg-card rounded-2xl border border-border p-5 md:p-8 transition-all">
-        <div class="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <div class="review-kicker">CROSS ANALYSIS</div>
-            <h3 class="mt-3 text-3xl font-black text-foreground">叠加复盘：不是隔离流量，而是拆开标签</h3>
-            <p class="mt-3 max-w-4xl text-sm md:text-base leading-7 text-foreground">
-              用户可以同时进入 MUBBK 和 UX 实验。关键不是强行把流量完全分开，而是每条样本都记录两个标签：MUBBK 标签和 UX 标签，最后按标签切开看。
-            </p>
-          </div>
-          <div class="grid grid-cols-2 gap-2 text-xs text-foreground">
-            <div class="rounded-xl border border-border bg-muted p-3">
-              <div class="font-black text-foreground">MUBBK 标签</div>
-              <div class="mt-1">空白 / 免费模板 / 付费模板</div>
-            </div>
-            <div class="rounded-xl border border-border bg-muted p-3">
-              <div class="font-black text-foreground">UX 标签</div>
-              <div class="mt-1">对照组 / 实验组</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-6 grid grid-cols-1 lg:grid-cols-5 gap-4">
-          <div class="lg:col-span-2 rounded-2xl border border-border bg-muted p-4">
-            <div class="text-xl font-black text-foreground">复盘矩阵</div>
-            <div class="mt-4 grid grid-cols-2 gap-2 text-sm">
-              <div class="review-node review-node-primary">
-                <div class="font-black text-foreground">MUBBK 空白</div>
-                <div class="text-xs text-foreground">UX 老版</div>
-              </div>
-              <div class="review-node review-node-blue">
-                <div class="font-black text-foreground">MUBBK 空白</div>
-                <div class="text-xs text-foreground">UX 新版</div>
-              </div>
-              <div class="review-node review-node-primary">
-                <div class="font-black text-foreground">MUBBK 策略池</div>
-                <div class="text-xs text-foreground">UX 老版</div>
-              </div>
-              <div class="review-node review-node-green">
-                <div class="font-black text-foreground">MUBBK 策略池</div>
-                <div class="text-xs text-foreground">UX 新版</div>
-              </div>
-            </div>
-          </div>
-          <div class="lg:col-span-3 overflow-x-auto rounded-2xl border border-border">
-            <table class="min-w-full text-sm text-left">
-              <thead>
-                <tr>
-                  <th class="px-4 py-3 font-black text-foreground">分析视角</th>
-                  <th class="px-4 py-3 font-black text-foreground">目的</th>
-                </tr>
-              </thead>
-              <tbody class="text-foreground">
-                <tr>
-                  <td class="px-4 py-3 font-bold">全量新版本 UV：UX 新版 vs UX 老版</td>
-                  <td class="px-4 py-3">判断 UX 本身是否有效</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 font-bold">MUBBK 空白组：UX 新版 vs UX 老版</td>
-                  <td class="px-4 py-3">看没有 MUBBK 干预时，UX 是否仍然正向</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 font-bold">MUBBK 策略池内：UX 新版 vs UX 老版</td>
-                  <td class="px-4 py-3">看叠加 MUBBK 后，UX 是否仍然正向</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 font-bold">UX 老版内：MUBBK 实验 vs MUBBK 空白</td>
-                  <td class="px-4 py-3">看没有 UX 新版时，MUBBK 是否有效</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 font-bold">UX 新版内：MUBBK 实验 vs MUBBK 空白</td>
-                  <td class="px-4 py-3">看叠加 UX 新版后，MUBBK 是否仍然有效</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
     </section>
 
     <section id="phase2PlanView" class="hidden space-y-6">
